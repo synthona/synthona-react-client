@@ -1,5 +1,6 @@
-#Holsona
-###Intelligent Information System
+# Holsona
+
+### Associative Information System
 
 Strictly hierchical file browsers and information systems are old news! They don't pay attention to the relations between your ideas, notes, files, and data but what if they could?
 
