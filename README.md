@@ -1,9 +1,9 @@
-#Insona
+#Holsona
 ###Intelligent Information System
 
 Strictly hierchical file browsers and information systems are old news! They don't pay attention to the relations between your ideas, notes, files, and data but what if they could?
 
-That's where Insona comes in. Insona is an intelligent information system designed to be easy to spin up and deploy on various scales. Host a private instance or host one for everyone in the world! Who cares!
+That's where Holsona comes in. Holsona is an intelligent information system designed to be easy to spin up and deploy on various scales. Host a private instance or host one for everyone in the world! Who cares!
 
 I'm going to write more information here when this project is further along but for now I think it's just nice to have this simple readme file! Pretty good!
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 // custom code
-import InsonaSider from '../elements/InsonaSider';
+import HolsonaSider from '../elements/HolsonaSider';
 import IOBar from '../elements/IOBar';
 import NodeList from '../elements/NodeList';
 
@@ -18,7 +18,7 @@ class Home extends Component {
   render() {
     return (
       <Layout className='page-layout'>
-        <InsonaSider />
+        <HolsonaSider />
         <Layout>
           <Content style={{ minHeight: '100vh', marginLeft: '12.5rem' }}>
             <IOBar />
@@ -32,7 +32,7 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn };
 };
 

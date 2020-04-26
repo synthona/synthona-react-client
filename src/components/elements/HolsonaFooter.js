@@ -5,8 +5,8 @@ import './Page.less';
 // destructure antd components
 const { Footer } = Layout;
 
-const InsonaFooter = () => {
-  return <Footer className="page-footer" />;
+const HolsonaFooter = () => {
+  return <Footer className='page-footer' />;
 };
 
-export default InsonaFooter;
+export default HolsonaFooter;

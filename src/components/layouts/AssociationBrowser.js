@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import { setActiveNode, fetchAssociations, markNodeView } from '../../redux/actions';
 // import IOBar from '../elements/IOBar';
-import InsonaSider from '../elements/InsonaSider';
+import HolsonaSider from '../elements/HolsonaSider';
 import NodeCardFull from '../elements/NodeCardFull';
 // import IOBar from '../elements/IOBar';
 import Spinner from '../elements/Spinner';
@@ -79,7 +79,7 @@ class AssociationBrowser extends Component {
   render() {
     return (
       <Layout className='page-layout'>
-        <InsonaSider />
+        <HolsonaSider />
         <Layout>
           <Content
             style={{

@@ -11,12 +11,12 @@ import {
   updateUserHeader,
   updateUsername,
   updateEmail,
-  changePassword
+  changePassword,
 } from '../../redux/actions';
 import './css/EditProfile.less';
 // import IOBar from '../elements/IOBar';
 import NodeList from '../elements/NodeList';
-import InsonaSider from '../elements/InsonaSider';
+import HolsonaSider from '../elements/HolsonaSider';
 
 const { Content } = Layout;
 
@@ -31,7 +31,7 @@ class EditProfile extends Component {
       displayName: '',
       bio: '',
       avatar: '',
-      header: ''
+      header: '',
     };
   }
 
@@ -108,7 +108,7 @@ class EditProfile extends Component {
         displayName: user.displayName,
         bio: user.bio,
         avatar: user.avatar,
-        header: user.header
+        header: user.header,
       });
     } else {
       message.error('there was a problem loading your profile');
@@ -161,17 +161,17 @@ class EditProfile extends Component {
         className='EditProfile-display-name'
         placeholder='Display Name'
         value={this.state.displayName}
-        onChange={e => this.saveDisplayName(e.target.value)}
+        onChange={(e) => this.saveDisplayName(e.target.value)}
       ></input>
     );
   };
 
   // update and save the displayName
-  saveDisplayName = displayName => {
+  saveDisplayName = (displayName) => {
     if (this.state.displayName !== displayName) {
       this.props.updateUserInfo({
         username: this.props.user.username,
-        displayName: displayName
+        displayName: displayName,
       });
       document.title = displayName;
       this.setState({ displayName });
@@ -186,17 +186,17 @@ class EditProfile extends Component {
         className='EditProfile-bio'
         placeholder='Bio'
         value={this.state.bio}
-        onChange={e => this.saveBio(e.target.value)}
+        onChange={(e) => this.saveBio(e.target.value)}
       ></textarea>
     );
   };
 
   // update and save the bio
-  saveBio = bio => {
+  saveBio = (bio) => {
     if (this.state.bio !== bio) {
       this.props.updateUserInfo({
         username: this.props.user.username,
-        bio: bio
+        bio: bio,
       });
       this.setState({ bio });
     }
@@ -210,13 +210,13 @@ class EditProfile extends Component {
         className='EditProfile-standard-input'
         placeholder='username'
         value={this.state.username}
-        onChange={e => this.saveUsername(e.target.value)}
+        onChange={(e) => this.saveUsername(e.target.value)}
       ></input>
     );
   };
 
   // update and save the username
-  saveUsername = username => {
+  saveUsername = (username) => {
     if (this.state.username !== username) {
       this.props.updateUsername(username);
       this.setState({ username });
@@ -231,13 +231,13 @@ class EditProfile extends Component {
         className='EditProfile-standard-input'
         placeholder='email'
         value={this.state.email}
-        onChange={e => this.saveEmail(e.target.value)}
+        onChange={(e) => this.saveEmail(e.target.value)}
       ></input>
     );
   };
 
   // update and save the email
-  saveEmail = email => {
+  saveEmail = (email) => {
     if (this.state.email !== email) {
       this.props.updateEmail(email);
       this.setState({ email });
@@ -254,7 +254,7 @@ class EditProfile extends Component {
   render() {
     return (
       <Layout className='page-layout'>
-        <InsonaSider />
+        <HolsonaSider />
         <Layout>
           <Content className='EditProfile'>
             <button onClick={this.setHeader}>
@@ -278,9 +278,9 @@ class EditProfile extends Component {
                   width: 'auto',
                   padding: '0.5rem',
                   display: 'inline-block',
-                  textAlign: 'center'
+                  textAlign: 'center',
                 }}
-                onClick={e => this.togglePasswordModal()}
+                onClick={(e) => this.togglePasswordModal()}
               >
                 change password
               </Button>
@@ -296,9 +296,9 @@ class EditProfile extends Component {
                   backgroundColor: 'white',
                   width: '4rem',
                   display: 'inline-block',
-                  textAlign: 'center'
+                  textAlign: 'center',
                 }}
-                onClick={e => this.props.history.push(`/profile/${this.props.user.username}`)}
+                onClick={(e) => this.props.history.push(`/profile/${this.props.user.username}`)}
               >
                 done
               </Button>
@@ -329,10 +329,10 @@ const validationSchema = Yup.object().shape({
     .required('password is required'),
   confirmNewPassword: Yup.string()
     .required('please confirm new password')
-    .oneOf([Yup.ref('newPassword')], "Your passwords don't match")
+    .oneOf([Yup.ref('newPassword')], "Your passwords don't match"),
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { user: state.auth.user };
 };
 
@@ -343,5 +343,5 @@ export default connect(mapStateToProps, {
   updateUserHeader,
   updateUsername,
   updateEmail,
-  changePassword
+  changePassword,
 })(EditProfile);

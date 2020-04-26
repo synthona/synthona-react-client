@@ -6,7 +6,7 @@ import Spinner from '../elements/Spinner';
 import { fetchUserByUsername } from '../../redux/actions';
 import './css/Profile.less';
 import NodeList from '../elements/NodeList';
-import InsonaSider from '../elements/InsonaSider';
+import HolsonaSider from '../elements/HolsonaSider';
 
 const { Content } = Layout;
 
@@ -20,7 +20,7 @@ class Profile extends Component {
       bio: '',
       avatar: '',
       header: '',
-      showAvatarModal: null
+      showAvatarModal: null,
     };
   }
 
@@ -47,7 +47,7 @@ class Profile extends Component {
         displayName: user.displayName,
         bio: user.bio,
         avatar: user.avatar,
-        header: user.header
+        header: user.header,
       });
       document.title = user.displayName;
     } else {
@@ -80,7 +80,7 @@ class Profile extends Component {
 
     return (
       <Layout className='page-layout'>
-        <InsonaSider />
+        <HolsonaSider />
         <Layout>
           <Modal
             title={this.state.displayName}
@@ -131,7 +131,7 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { user: state.auth.user };
 };
 
