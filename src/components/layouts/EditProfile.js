@@ -257,62 +257,64 @@ class EditProfile extends Component {
         <HolsonaSider />
         <Layout>
           <Content className='EditProfile'>
-            <button onClick={this.setHeader}>
-              <div className='EditProfile-header'>
-                <Icon type='camera' className='EditProfile-header-edit-icon' />
-                <img src={this.state.header} alt='example' draggable='false' />
+            <div className='EditProfile-card'>
+              <button onClick={this.setHeader}>
+                <div className='EditProfile-header'>
+                  <Icon type='camera' className='EditProfile-header-edit-icon' />
+                  <img src={this.state.header} alt='example' draggable='false' />
+                </div>
+              </button>
+              <button onClick={this.setAvatar}>
+                <div className='EditProfile-avatar'>
+                  <Icon type='camera' className='EditProfile-avatar-edit-icon' />
+                  <img src={this.state.avatar} alt={'profile'} draggable='false' />
+                </div>
+              </button>
+              <div className='EditProfile-info'>
+                <Button
+                  type='default'
+                  style={{
+                    margin: '0 0 10px',
+                    backgroundColor: 'white',
+                    width: 'auto',
+                    padding: '0.5rem',
+                    display: 'inline-block',
+                    textAlign: 'center',
+                  }}
+                  onClick={(e) => this.togglePasswordModal()}
+                >
+                  change password
+                </Button>
+                <br />
+                {this.renderDisplayName()}
+                {this.renderUsername()}
+                {this.renderEmail()}
+                {this.renderBio()}
+                <Button
+                  type='default'
+                  style={{
+                    margin: '0 0 10px',
+                    backgroundColor: 'white',
+                    width: '4rem',
+                    display: 'inline-block',
+                    textAlign: 'center',
+                  }}
+                  onClick={(e) => this.props.history.push(`/profile/${this.props.user.username}`)}
+                >
+                  done
+                </Button>
+                <Modal
+                  title='change password'
+                  visible={this.state.showPasswordModal}
+                  className='password-modal'
+                  centered
+                  footer={null}
+                  closable={false}
+                  onCancel={this.togglePasswordModal}
+                >
+                  {this.passwordModal()}
+                </Modal>
               </div>
-            </button>
-            <button onClick={this.setAvatar}>
-              <div className='EditProfile-avatar'>
-                <Icon type='camera' className='EditProfile-avatar-edit-icon' />
-                <img src={this.state.avatar} alt={'profile'} draggable='false' />
-              </div>
-            </button>
-            <div className='EditProfile-info'>
-              <Button
-                type='default'
-                style={{
-                  margin: '0 0 10px',
-                  backgroundColor: 'white',
-                  width: 'auto',
-                  padding: '0.5rem',
-                  display: 'inline-block',
-                  textAlign: 'center',
-                }}
-                onClick={(e) => this.togglePasswordModal()}
-              >
-                change password
-              </Button>
-              <br />
-              {this.renderDisplayName()}
-              {this.renderUsername()}
-              {this.renderEmail()}
-              {this.renderBio()}
-              <Button
-                type='default'
-                style={{
-                  margin: '0 0 10px',
-                  backgroundColor: 'white',
-                  width: '4rem',
-                  display: 'inline-block',
-                  textAlign: 'center',
-                }}
-                onClick={(e) => this.props.history.push(`/profile/${this.props.user.username}`)}
-              >
-                done
-              </Button>
-              <Modal
-                title='change password'
-                visible={this.state.showPasswordModal}
-                className='password-modal'
-                centered
-                footer={null}
-                closable={false}
-                onCancel={this.togglePasswordModal}
-              >
-                {this.passwordModal()}
-              </Modal>
             </div>
             <NodeList />
           </Content>
