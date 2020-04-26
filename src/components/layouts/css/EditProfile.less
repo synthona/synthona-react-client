@@ -1,0 +1,180 @@
+.EditProfile {
+  margin-bottom: 0.7rem;
+  margin-left: 12.5rem;
+
+  button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  button:active,
+  button:focus {
+    outline: 0;
+  }
+}
+
+.EditProfile-avatar {
+  width: 100%;
+  text-align: center;
+  margin-top: -8rem;
+  border-radius: 50%;
+  padding-right: 0.1rem;
+}
+
+.EditProfile-avatar img {
+  position: relative;
+  z-index: 5;
+  border-radius: 50%;
+  width: 9rem;
+  height: 9rem;
+  border: 2px solid #fafafa;
+  transition-duration: 0.5s;
+  opacity: 0.8;
+}
+
+.EditProfile-avatar:hover img {
+  opacity: 0.6;
+}
+
+.EditProfile-header {
+  height: 450px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  background-color: #272727;
+}
+
+.EditProfile-header img {
+  width: 100%;
+  transition-duration: 0.5s;
+  opacity: 0.8;
+}
+
+.EditProfile-header:hover img {
+  opacity: 0.6;
+}
+
+.EditProfile-avatar:hover .EditProfile-avatar-edit-icon {
+  color: #d6d6d6;
+  transition: 0.5s;
+}
+
+.EditProfile-avatar-edit-icon {
+  color: white;
+  position: absolute;
+  width: 2rem;
+  text-align: center;
+  z-index: 6;
+  top: 24.7rem;
+  right: 37.7rem;
+}
+
+.EditProfile-header:hover .EditProfile-header-edit-icon {
+  color: #686868;
+  transition: 0.5s;
+}
+
+.EditProfile-header-edit-icon {
+  color: white;
+  position: absolute;
+  width: 2rem;
+  text-align: center;
+  z-index: 6;
+  top: 12rem;
+  right: 38rem;
+}
+
+.EditProfile-info {
+  margin-top: -2.5rem;
+  background-color: #272727;
+  width: 100%;
+  padding: 3.4rem 10rem 0.3rem;
+  text-align: center;
+}
+
+.EditProfile-display-name {
+  font-size: 1.1rem;
+  color: white;
+  width: 27%;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 0.3rem;
+}
+
+input.EditProfile-display-name {
+  background-color: transparent;
+  border: 1px solid #7c7c7c;
+}
+
+input.EditProfile-display-name:focus {
+  outline: none;
+}
+
+input.EditProfile-display-name::placeholder {
+  color: #7c7c7c;
+}
+
+.EditProfile-standard-input {
+  display: block;
+  font-size: 1.1rem;
+  color: white;
+  width: 27%;
+  margin-bottom: 0.2rem;
+  text-align: center;
+  border-radius: 0.3rem;
+}
+
+input.EditProfile-standard-input {
+  margin: 0.3rem auto;
+  background-color: transparent;
+  border: 1px solid #7c7c7c;
+}
+
+input.EditProfile-standard-input:focus {
+  outline: none;
+}
+
+input.EditProfile-standard-input::placeholder {
+  color: #7c7c7c;
+}
+
+.EditProfile-bio {
+  color: #f0f0f0;
+  margin-top: 0.15rem;
+  margin-bottom: 0.1rem;
+  width: 100%;
+  text-align: center;
+  resize: none;
+  height: 4.5rem;
+  border-radius: 0.3rem;
+}
+
+textarea.EditProfile-bio {
+  background-color: transparent;
+  border: 1px solid #7c7c7c;
+}
+
+textarea.EditProfile-bio:focus {
+  outline: none;
+}
+
+textarea.EditProfile-bio::placeholder {
+  color: #7c7c7c;
+}
+
+form.password-modal-form {
+  padding: 1rem;
+  display: inline-block;
+  text-align: center;
+}
+
+input.password-modal-field {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: inline-block;
+}

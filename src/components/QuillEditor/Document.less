@@ -1,0 +1,246 @@
+// @title-color: #5bf56d;
+@editor-header-color: #272727;
+// @toolbar-color: #f8f8f8;
+// @background-color: #eeeeee;
+// @editor-header-color: #616161;
+@title-color: #16e998;
+@background-color: #eeeeee;
+@toolbar-color: #f0ede3;
+
+// ==================================
+// Title Header CSS
+// ==================================
+
+.text-editor-content {
+  .header-nav-list {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 2.5rem;
+    background-color: @editor-header-color;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-nav-list li {
+    position: fixed;
+    width: 100%;
+    text-align: left;
+    list-style: none;
+    padding: 0.3rem;
+  }
+
+  .header-title {
+    font-size: 1.1rem;
+    color: @title-color;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 0.02rem;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+
+  input.header-title {
+    background-color: transparent;
+    border: none;
+  }
+
+  input.header-title:focus {
+    outline: none;
+  }
+
+  input.header-title::placeholder {
+    color: #7c7c7c;
+  }
+
+  // ==================================
+  // Quill Editor CSS
+  // ==================================
+
+  div.quill {
+    width: 100%;
+    background-color: @background-color;
+    padding: 0;
+    margin: 2.5rem 0 0;
+    overflow: hidden;
+    height: 100%;
+    color: #272727;
+  }
+
+  div.ql-container.ql-snow {
+    border: none;
+    padding: 2.7rem 0 0.2rem;
+    margin: 0 auto;
+  }
+
+  .ql-editor {
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+    padding: 4.2rem 7rem 10rem;
+    border: 0.01rem solid #dfdfdf;
+    font-size: 0.9rem;
+    background-color: white;
+    min-height: 1000px;
+    overscroll-behavior: none;
+
+    h1 {
+      padding: 0 0 1rem;
+    }
+
+    h2 {
+      padding: 0 0 0.5rem;
+    }
+
+    ul {
+      padding-left: 1rem;
+
+      li::before {
+        content: '\25CF';
+        padding-right: 0.2rem;
+        font-size: 0.7rem;
+      }
+
+      // ul indent 1
+      li.ql-indent-1::before {
+        content: '\25CB';
+      }
+
+      li.ql-indent-1:not(.ql-direction-rtl) {
+        padding-left: 4rem;
+      }
+
+      // ul indent 2
+      li.ql-indent-2::before {
+        content: '\25CB';
+      }
+
+      li.ql-indent-2:not(.ql-direction-rtl) {
+        padding-left: 6.5rem;
+      }
+
+      p::selection {
+        color: #ffffff;
+        background-color: #3ce458;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+
+    iframe.ql-video {
+      width: 800px;
+      height: 450px;
+    }
+  }
+}
+
+.expanded > div.quill {
+  margin: 0;
+
+  .ql-expand::before {
+    content: '\25BC';
+  }
+}
+
+// ==================================
+// Toolbar CSS
+// ==================================
+
+// prevent outlines on toolbar buttons
+.ql-expand:active,
+.ql-expand:focus {
+  outline: none;
+}
+
+// prevent outlines on toolbar buttons
+span:active,
+span:focus {
+  outline: none;
+}
+
+div.quill div.ql-toolbar {
+  display: flex;
+  justify-content: center;
+}
+
+.ql-expand::before {
+  content: '\25B2';
+  // background-color: black;
+  border-radius: 0.1rem;
+  font-size: 1.1rem;
+  // color: #ffffff;
+  color: black;
+  line-height: 2px;
+  padding: 0.2rem 0.3rem;
+  transition-duration: 0.5s;
+}
+
+.ql-expand:hover::before {
+  content: '\25B2';
+  // background-color: #45d458;
+  color: #45d458;
+}
+
+.ql-delete::before {
+  content: '\2145';
+  // background-color: black;
+  font-size: 1.1rem;
+  border-radius: 0.1rem;
+  // color: #ffffff;
+  color: black;
+  display: inline-block;
+  line-height: 2px;
+  // padding: 0.3rem 0.4rem;
+  transition-duration: 0.5s;
+}
+
+.ql-delete:hover::before {
+  // background-color: #f55656;
+  color: #f55656;
+}
+
+.ql-exit::before {
+  content: '\2715';
+  // background-color: black;
+  font-size: 1.1rem;
+  border-radius: 0.1rem;
+  line-height: 2px;
+  // color: #ffffff;
+  color: black;
+  padding: 0.2rem 0.4rem;
+  transition-duration: 0.5s;
+}
+
+.ql-exit:hover::before {
+  // background-color: #f556db;
+  color: #f556db;
+}
+
+.ql-snow .ql-picker.ql-header {
+  width: 6rem;
+}
+
+.ql-snow a {
+  color: #45d458;
+}
+
+div.ql-toolbar {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: @toolbar-color;
+}
+
+.delete-modal p {
+  text-align: center;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.delete-modal .ant-modal-content {
+  margin: 0;
+}

@@ -1,0 +1,82 @@
+@header-color: #272727;
+@header-link: white;
+@header-border: #313131;
+@avatar-border: #fff;
+// @header-color: rgb(221, 221, 221);
+// @header-link: black;
+// @header-border: #e4e4e4;
+// @avatar-border: #bebebe;
+
+.page-header {
+  background-color: @header-color;
+  border-bottom: 0.1rem solid @header-border;
+  padding: 0;
+  margin: 0;
+  height: 3rem;
+  line-height: 2.8rem;
+  vertical-align: middle;
+  width: 87%;
+  overflow: hidden;
+  text-align: center;
+  z-index: 5;
+  position: fixed;
+}
+
+ul.nav-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0 3rem 0 1.3rem;
+}
+
+li.nav-item {
+  display: inline;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+img.header-logo:hover {
+  outline: 0;
+}
+
+.mode-toggle {
+  padding-top: 0.1rem;
+}
+
+.create-node-button {
+  padding-top: 0.1rem;
+}
+
+.nav-search {
+  padding-top: 0.47rem;
+}
+
+.create-node-button button.ant-btn {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 143, 195, 1) 0%,
+    rgba(249, 247, 188, 1) 47%,
+    rgba(158, 239, 255, 1) 100%
+  );
+}
+
+.create-node-button:hover button.ant-btn,
+.create-node-button:active button.ant-btn,
+.create-node-button:focus button.ant-btn {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 143, 195, 1) 0%,
+    rgba(249, 247, 188, 1) 47%,
+    rgba(158, 239, 255, 1) 100%
+  );
+}
+
+a {
+  color: @header-link;
+}
+
+a:hover {
+  color: #41e254;
+}

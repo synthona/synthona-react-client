@@ -1,0 +1,96 @@
+.nodelist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  list-style: none;
+  margin: auto;
+  width: 100%;
+  // min-height: 100vh;
+  background-color: #f3f3f3;
+  // background-image: url('../../resources/northern-lights.jpg');
+  // background: linear-gradient(90deg, #ff8fc3 0%, #f9f7bc 47%, #9eefff 100%);
+  // background: linear-gradient(90deg, #adeeb0 0%, #9feefc 47%, #e49eff 100%);
+  padding: 0.7rem 0.3rem;
+  z-index: -15;
+}
+
+li.nodelist-item {
+  flex: 1;
+  display: block;
+  text-align: left;
+  height: 16rem;
+  width: 25rem;
+  overflow: hidden;
+  background: #fff;
+  margin: 0.25rem 0.25rem;
+  color: #757575;
+  box-shadow: 0 0 5px 0 #ccc;
+}
+
+.nodelist-options {
+  padding: 0.7rem 1.3rem 0.5rem;
+  // background-color: #f7f7f7;
+  border-bottom: 0.09rem solid #e2e2e2;
+}
+
+div.nodelist-options-buttons {
+  transition-delay: 0.1s;
+  transition-duration: 0.3s;
+  opacity: 1;
+
+  button {
+    margin-left: 0.2rem;
+    outline: #272727;
+    // background: #272727;
+    color: #272727;
+    background-color: transparent;
+    border-radius: 0.3rem;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.nodelist-item:hover {
+  div.nodelist-options-buttons {
+    opacity: 1;
+    outline: transparent;
+  }
+}
+
+.nodelist-item p:hover {
+  color: #2ada3e;
+}
+
+.nodelist-item-title {
+  width: 70%;
+  text-align: left;
+  color: #272727;
+  font-size: 1rem;
+  transition: all 0.3s;
+  overflow: hidden;
+  font-weight: normal;
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+input.nodelist-item-title {
+  outline: none;
+  color: #9e9e9e;
+  border: none;
+  font-size: 0.97rem;
+  width: 15.3rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.nodelist-item p {
+  padding: 0.3rem 1.3rem;
+  font-size: 1rem;
+  font-style: italic;
+  color: #b8b8b8;
+  min-height: 100%;
+}
