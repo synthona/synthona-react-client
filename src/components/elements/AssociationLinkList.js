@@ -22,7 +22,7 @@ class AssociationLinkList extends Component {
     // the order the nodes should appear in
     const order = this.props.order;
     if (list && order) {
-      return order.map(key => {
+      return order.map((key) => {
         const association = list[key];
         return <AssociationLink key={association.id} association={association} />;
       });
@@ -34,7 +34,7 @@ class AssociationLinkList extends Component {
   renderLoadMoreButton = () => {
     const listLength = Object.keys(this.props.associations).length;
     // if the total items is more than what is loaded show the load more button
-    if (this.props.totalItems - 1 > listLength) {
+    if (this.props.totalItems > listLength) {
       return (
         <li style={{ listStyle: 'none', marginTop: '0.5rem', textAlign: 'center' }}>
           <button
@@ -42,9 +42,9 @@ class AssociationLinkList extends Component {
               margin: '1rem 0',
               width: '90%',
               backgroundColor: '#272727',
-              color: 'white'
+              color: '#16e998',
             }}
-            onClick={e => this.loadMore()}
+            onClick={(e) => this.loadMore()}
           >
             load more
           </button>
@@ -63,16 +63,16 @@ class AssociationLinkList extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     associations: state.associations.associationLinkList,
     order: state.associations.associationLinkListOrder,
     page: state.associations.associationLinkListPage,
-    totalItems: state.associations.totalLinkListItems
+    totalItems: state.associations.totalLinkListItems,
   };
 };
 
 export default connect(mapStateToProps, {
   searchNodes,
-  fetchAssociationLinkList
+  fetchAssociationLinkList,
 })(AssociationLinkList);

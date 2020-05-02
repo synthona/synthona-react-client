@@ -9,14 +9,14 @@ import './NodeCardFull.less';
 
 class NodeCardFull extends Component {
   // render card types
-  renderCardTypes = node => {
+  renderCardTypes = (node) => {
     switch (node.type) {
       case 'text':
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
             <Link to={`/edit/text/${this.props.node.id}`} replace /*target='_blank' */>
-              <p style={{ padding: '1.7rem' }}>{this.props.node.summary}...</p>
+              <p style={{ padding: '1.7rem' }}>{this.props.node.summary}</p>
             </Link>
           </div>
         );
@@ -33,7 +33,7 @@ class NodeCardFull extends Component {
               style={{
                 objectFit: 'cover',
                 minHeight: '100%',
-                width: '100%'
+                width: '100%',
               }}
             ></img>
           </div>
@@ -47,7 +47,7 @@ class NodeCardFull extends Component {
               href={this.props.node.summary}
               target='_blank'
               rel='noopener noreferrer'
-              onClick={e => this.props.markNodeView(this.props.node.id)}
+              onClick={(e) => this.props.markNodeView(this.props.node.id)}
               style={{ width: '100%' }}
             >
               <Icon
@@ -59,7 +59,7 @@ class NodeCardFull extends Component {
                   color: '#b8b8b8',
                   display: 'block',
                   textAlign: 'center',
-                  padding: '3rem'
+                  padding: '3rem',
                 }}
               />
             </a>

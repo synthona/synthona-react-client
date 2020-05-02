@@ -85,7 +85,7 @@ class AssociationBrowser extends Component {
             style={{
               paddingTop: '0',
               backgroundColor: '#272727',
-              marginLeft: '12.5rem',
+              marginLeft: '12.3rem',
             }}
           >
             {/* <IOBar /> */}

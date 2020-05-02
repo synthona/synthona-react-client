@@ -13,7 +13,7 @@ const { Content, Footer } = Layout;
 
 class Login extends Component {
   componentDidMount() {
-    document.title = 'holsona';
+    document.title = 'sonia';
   }
 
   onSubmit = (values, { setSubmitting }) => {
@@ -34,7 +34,7 @@ class Login extends Component {
               >
                 ✨
               </span>
-              holsona
+              sonia
               <span
                 role='img'
                 aria-label='jsx-a11y/accessible-emoji'

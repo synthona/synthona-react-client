@@ -1,12 +1,15 @@
 .association-list {
-  // list-style: none;
-  padding: 0.5rem;
+  list-style: none;
+  padding: 1rem 0.1rem 0;
+  overflow: hidden;
 }
 
 .association-list-item {
-  list-style: none;
   color: black;
   padding: 0.3rem 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .association-list-item a {
@@ -15,17 +18,19 @@
   text-overflow: ellipsis;
 }
 
+.association-list-item a:hover {
+  color: #41e254;
+}
+
 .association-list-item button {
+  display: inline;
   background-color: #272727;
-  background-color: transparent;
+  color: white;
   margin-right: 0.4rem;
   cursor: pointer;
 }
+
 .association-list-item button:hover {
   color: red;
-  transition-duration: 0.1s;
-}
-
-.association-list-item a:hover {
-  color: #41e254;
+  background-color: #272727;
 }

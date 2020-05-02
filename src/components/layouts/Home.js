@@ -20,7 +20,7 @@ class Home extends Component {
       <Layout className='page-layout'>
         <HolsonaSider />
         <Layout>
-          <Content style={{ minHeight: '100vh', marginLeft: '12.5rem' }}>
+          <Content style={{ minHeight: '100vh', marginLeft: '12.3rem' }}>
             <IOBar />
             <div style={{ marginTop: '2.5rem' }}>
               <NodeList />
