@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // custom code
-import './NodeList.less';
-import { searchNodes, fetchAssociationLinkList } from '../../redux/actions';
+import '../node/NodeList.less';
+import { searchNodes, fetchAssociationLinkList } from '../../../redux/actions';
 // import NodeCard from './NodeCard';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 import AssociationLink from './AssociationLink';
 
 class AssociationLinkList extends Component {

@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 // custom code
-import './NodeList.less';
-import { searchNodes, fetchAssociations } from '../../redux/actions';
-import NodeCard from './NodeCard';
-import NodeInfoSider from './NodeInfoSider';
-import Spinner from '../elements/Spinner';
+import '../node/NodeList.less';
+import { searchNodes, fetchAssociations } from '../../../redux/actions';
+import NodeCard from '../node/NodeCard';
+import AssociationSider from './AssociationSider';
+import Spinner from '../Spinner';
 
 class AssociationList extends Component {
   componentDidMount() {
@@ -78,7 +78,7 @@ class AssociationList extends Component {
       <div>
         {/* <ul className='nodelist'>{this.renderNodes()}</ul> */}
         {this.renderList()}
-        <NodeInfoSider />
+        <AssociationSider />
       </div>
     );
   }

@@ -8,7 +8,7 @@ import {
   setActiveNode,
   updateNode,
   deleteNode,
-} from '../../redux/actions';
+} from '../../../redux/actions';
 
 class NodeCardHeaderFull extends Component {
   constructor(props) {

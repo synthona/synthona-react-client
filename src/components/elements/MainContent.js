@@ -5,7 +5,7 @@ import './Page.less';
 // destructure antd components
 const { Content } = Layout;
 
-const HolsonaContent = (props) => {
+const MainContent = (props) => {
   return (
     <Layout className='page-content'>
       <Content style={{ backgroundColor: 'white' }}>{props.children}</Content>
@@ -13,4 +13,4 @@ const HolsonaContent = (props) => {
   );
 };
 
-export default HolsonaContent;
+export default MainContent;

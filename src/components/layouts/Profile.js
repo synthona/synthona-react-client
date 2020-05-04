@@ -5,8 +5,8 @@ import { Layout, message, Modal } from 'antd';
 import Spinner from '../elements/Spinner';
 import { fetchUserByUsername } from '../../redux/actions';
 import './css/Profile.less';
-import NodeList from '../elements/NodeList';
-import HolsonaSider from '../elements/HolsonaSider';
+import NodeList from '../elements/node/NodeList';
+import MainSider from '../elements/MainSider';
 
 const { Content } = Layout;
 
@@ -80,7 +80,7 @@ class Profile extends Component {
 
     return (
       <Layout className='page-layout'>
-        <HolsonaSider />
+        <MainSider />
         <Layout>
           <Modal
             title={this.state.displayName}

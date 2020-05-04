@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 // custom code
 import '../elements/Page.less';
-import HolsonaContent from '../elements/HolsonaContent';
+import MainContent from '../elements/MainContent';
 import IOBar from '../elements/IOBar';
-import HolsonaSider from '../elements/HolsonaSider';
+import MainSider from '../elements/MainSider';
 
 class Activity extends Component {
   render() {
@@ -12,8 +12,8 @@ class Activity extends Component {
       <Layout className='page-layout'>
         <IOBar />
         <Layout>
-          <HolsonaSider />
-          <HolsonaContent />
+          <MainSider />
+          <MainContent />
         </Layout>
       </Layout>
     );

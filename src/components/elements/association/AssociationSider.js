@@ -10,14 +10,14 @@ import {
   fetchAssociationLinkList,
   fetchAssociations,
   associationAutocomplete,
-} from '../../redux/actions';
+} from '../../../redux/actions';
 // custom code
 // import Spinner from '../elements/Spinner';
 import AssociationLinkList from './AssociationLinkList';
 // destructure antd
 const { Option } = AutoComplete;
 
-class NodeInfoSider extends Component {
+class AssociationSider extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -133,4 +133,4 @@ export default connect(mapStateToProps, {
   fetchAssociationLinkList,
   fetchAssociations,
   associationAutocomplete,
-})(NodeInfoSider);
+})(AssociationSider);

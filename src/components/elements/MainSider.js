@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Layout, Menu, Avatar, Modal } from 'antd';
 import { signOut, createTextNode } from '../../redux/actions';
 // custom code
-import './HolsonaSider.less';
+import './MainSider.less';
 // destructure antd components
 // const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -12,7 +12,7 @@ const { Sider } = Layout;
 const { Item } = Menu;
 // const { Option } = Select;
 
-class HolsonaSider extends Component {
+class MainSider extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -144,4 +144,4 @@ const mapStateToProps = (state) => {
   return { user: state.auth.user };
 };
 
-export default connect(mapStateToProps, { signOut, createTextNode })(HolsonaSider);
+export default connect(mapStateToProps, { signOut, createTextNode })(MainSider);

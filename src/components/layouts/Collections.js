@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 // custom code
 import '../elements/Page.less';
-import HolsonaContent from '../elements/HolsonaContent';
+import MainContent from '../elements/MainContent';
 import IOBar from '../elements/IOBar';
-// import HolsonaSider from '../elements/HolsonaSider';
-import HolsonaFooter from '../elements/HolsonaFooter';
+// import MainSider from '../elements/MainSider';
+import MainFooter from '../elements/MainFooter';
 
 class Collections extends Component {
   render() {
@@ -13,9 +13,9 @@ class Collections extends Component {
       <Layout className='page-layout'>
         <IOBar />
         <Layout>
-          <HolsonaContent>Collections</HolsonaContent>
+          <MainContent>Collections</MainContent>
         </Layout>
-        <HolsonaFooter />
+        <MainFooter />
       </Layout>
     );
   }

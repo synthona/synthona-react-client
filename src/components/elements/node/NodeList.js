@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // custom code
 import './NodeList.less';
-import { searchNodes, fetchNodes } from '../../redux/actions';
+import { searchNodes, fetchNodes } from '../../../redux/actions';
 import NodeCard from './NodeCard';
-import NodeInfoSider from './NodeInfoSider';
-import Spinner from '../elements/Spinner';
+import AssociationSider from '../association/AssociationSider';
+import Spinner from '../Spinner';
 
 class NodeList extends Component {
   componentDidMount() {
@@ -17,13 +17,13 @@ class NodeList extends Component {
     window.removeEventListener('scroll', this.infiniteScroll);
   }
 
-  infiniteScroll = e => {
+  infiniteScroll = (e) => {
     if (this.endReached()) {
       // fetch the next page
       this.props.fetchNodes({
         page: this.props.query.page + 1,
         type: this.props.query.type,
-        searchQuery: this.props.query.searchQuery
+        searchQuery: this.props.query.searchQuery,
       });
     }
   };
@@ -55,7 +55,7 @@ class NodeList extends Component {
     // the order the nodes should appear in
     const nodeOrder = this.props.order;
     if (nodeList !== null && nodeOrder !== null) {
-      return nodeOrder.map(key => {
+      return nodeOrder.map((key) => {
         const node = nodeList[key];
         return <NodeCard key={key} node={node} />;
       });
@@ -68,18 +68,18 @@ class NodeList extends Component {
     return (
       <div>
         <ul className='nodelist'>{this.renderNodeList()}</ul>
-        <NodeInfoSider />
+        <AssociationSider />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     nodes: state.nodes.nodeList,
     order: state.nodes.nodeOrder,
     query: state.nodes.query,
-    totalNodes: state.nodes.totalItems
+    totalNodes: state.nodes.totalItems,
   };
 };
 

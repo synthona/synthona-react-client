@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
-import { markNodeView, showModal, setActiveNode, updateNode } from '../../redux/actions';
+import { markNodeView, showModal, setActiveNode, updateNode } from '../../../redux/actions';
 
 class NodeCardHeader extends Component {
   constructor(props) {

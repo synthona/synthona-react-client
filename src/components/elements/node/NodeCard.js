@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { markNodeView, hideModal } from '../../redux/actions';
+import { markNodeView, hideModal } from '../../../redux/actions';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 //custom components

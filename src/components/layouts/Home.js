@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 // custom code
-import HolsonaSider from '../elements/HolsonaSider';
+import MainSider from '../elements/MainSider';
 import IOBar from '../elements/IOBar';
-import NodeList from '../elements/NodeList';
+import NodeList from '../elements/node/NodeList';
 
 const { Content } = Layout;
 
@@ -18,7 +18,7 @@ class Home extends Component {
   render() {
     return (
       <Layout className='page-layout'>
-        <HolsonaSider />
+        <MainSider />
         <Layout>
           <Content style={{ minHeight: '100vh', marginLeft: '12.3rem' }}>
             <IOBar />

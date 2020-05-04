@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import { setActiveNode, fetchAssociations, markNodeView, updateNode } from '../../redux/actions';
 // import IOBar from '../elements/IOBar';
-import HolsonaSider from '../elements/HolsonaSider';
-import NodeCardFull from '../elements/NodeCardFull';
+import MainSider from '../elements/MainSider';
+import NodeCardFull from '../elements/node/NodeCardFull';
 // import IOBar from '../elements/IOBar';
 import Spinner from '../elements/Spinner';
-import AssociationList from '../elements/AssociationList';
+import AssociationList from '../elements/association/AssociationList';
 import { message } from 'antd';
 const { Content } = Layout;
 
@@ -109,7 +109,7 @@ class AssociationBrowser extends Component {
   render() {
     return (
       <Layout className='page-layout'>
-        <HolsonaSider />
+        <MainSider />
         <Layout>
           <Content
             style={{

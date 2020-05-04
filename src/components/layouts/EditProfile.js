@@ -15,8 +15,8 @@ import {
 } from '../../redux/actions';
 import './css/EditProfile.less';
 // import IOBar from '../elements/IOBar';
-import NodeList from '../elements/NodeList';
-import HolsonaSider from '../elements/HolsonaSider';
+import NodeList from '../elements/node/NodeList';
+import MainSider from '../elements/MainSider';
 
 const { Content } = Layout;
 
@@ -255,7 +255,7 @@ class EditProfile extends Component {
   render() {
     return (
       <Layout className='page-layout'>
-        <HolsonaSider />
+        <MainSider />
         <Layout>
           <Content className='EditProfile'>
             <div className='EditProfile-card'>
