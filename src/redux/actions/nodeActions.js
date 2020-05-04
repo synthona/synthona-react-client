@@ -68,7 +68,7 @@ export const updateNode = (node) => async (dispatch) => {
     await instance.patch('/node', {
       id: node.id,
       name: node.name,
-      preview: node.preview,
+      summary: node.summary,
     });
     dispatch({
       type: UPDATE_NODE_SUCCESS,

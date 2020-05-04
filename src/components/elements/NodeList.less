@@ -40,20 +40,6 @@ li.nodelist-item {
   // box-shadow: 0 0 5px 0 #868686;
 }
 
-li.nodelist-item-collection .node-card-icon {
-  padding: 1.7rem;
-  font-size: 3rem;
-}
-
-li.nodelist-item-collection p {
-  padding: 0.2rem;
-  font-size: 0.7rem;
-}
-
-li.nodelist-item-collection p:hover {
-  color: #b8b8b8;
-}
-
 .nodelist-options {
   padding: 0.7rem 1.3rem 0.5rem;
   // background-color: #272727;
@@ -121,4 +107,44 @@ input.nodelist-item-title {
   font-style: italic;
   color: #b8b8b8;
   min-height: 100%;
+}
+
+.nodelist-collection-grid .node-card-icon {
+  padding: 1.8rem;
+  font-size: 3rem;
+}
+
+.nodelist-collection-grid p {
+  padding: 0.2rem;
+  font-size: 0.7rem;
+}
+
+.nodelist-collection-grid p:hover {
+  color: #b8b8b8;
+}
+
+.nodelist-collection-grid {
+  display: flex;
+  border: 0.1rem solid #b8b8b8;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nodelist-collection-grid li {
+  width: 12.35rem;
+  max-height: 6.7rem;
+  overflow: hidden;
+  border: 0.1px solid #b8b8b8;
+}
+
+.nodelist-collection-grid li.nodelist-collection-grid-full-width {
+  width: 100%;
+}
+
+.nodelist-collection-item-single {
+  height: 100%;
+  border: 0.1rem solid #b8b8b8;
 }

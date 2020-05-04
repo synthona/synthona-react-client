@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
-import { setActiveNode, fetchAssociations, markNodeView } from '../../redux/actions';
+import { setActiveNode, fetchAssociations, markNodeView, updateNode } from '../../redux/actions';
 // import IOBar from '../elements/IOBar';
 import HolsonaSider from '../elements/HolsonaSider';
 import NodeCardFull from '../elements/NodeCardFull';
@@ -43,16 +43,46 @@ class AssociationBrowser extends Component {
     await this.props.setActiveNode(id);
     // fetch the user info from the server
     await this.props.fetchAssociations({ nodeId: id });
-    if (this.props.associations !== null && this.props.activeNode !== null) {
+    if (
+      this.props.associations !== null &&
+      this.props.activeNode !== null &&
+      this.props.associationOrder !== null
+    ) {
       this.setState({
         initialized: true,
         id: id,
       });
+      // update collection preview if necessary
+      // TODO: find a way to have it update even less often if possible
+      if (this.props.activeNode.type === 'collection') {
+        this.regenerateCollectionPreview(
+          this.props.activeNode,
+          this.props.associations,
+          this.props.associationOrder
+        );
+      }
       this.props.markNodeView(id);
       document.title = this.props.activeNode.name;
     } else {
       message.error('there was a problem loading the associations');
       this.props.history.push('/');
+    }
+  };
+
+  regenerateCollectionPreview = async (collectionNode, associationList, associationOrder) => {
+    if (collectionNode && associationList) {
+      var i = 0;
+      var key;
+      var preview = [];
+      while (i < associationOrder.length && preview.length < 4) {
+        key = associationOrder[i];
+        if (associationList[key].type !== 'collection') {
+          preview.push({ type: associationList[key].type, summary: associationList[key].summary });
+        }
+        i++;
+      }
+      this.props.updateNode({ id: collectionNode.id, summary: JSON.stringify(preview) });
+      console.log(preview);
     }
   };
 
@@ -98,14 +128,18 @@ class AssociationBrowser extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     associations: state.associations.associationList,
+    associationOrder: state.associations.associationOrder,
     isLoading: state.nodes.isFetching,
     activeNode: state.nodes.activeNode,
   };
 };
 
-export default connect(mapStateToProps, { setActiveNode, fetchAssociations, markNodeView })(
-  AssociationBrowser
-);
+export default connect(mapStateToProps, {
+  setActiveNode,
+  fetchAssociations,
+  markNodeView,
+  updateNode,
+})(AssociationBrowser);

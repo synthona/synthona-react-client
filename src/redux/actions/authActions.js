@@ -12,15 +12,16 @@ import {
   REFRESH_AUTH,
   REFRESH_AUTH_SUCCESS,
   REFRESH_AUTH_ERROR,
-  RESET_APP
+  RESET_APP,
 } from './types';
 import { message } from 'antd';
 
 // Create Account Action handler
-export const createAccount = formValues => async dispatch => {
+export const createAccount = (formValues) => async (dispatch) => {
   dispatch({ type: CREATE_ACCOUNT });
   try {
     const response = await instance.post('/auth/signup', formValues);
+    localStorage.setItem('displayName', response.data.displayName);
     dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: response.data });
     history.push('/');
   } catch (err) {
@@ -31,10 +32,11 @@ export const createAccount = formValues => async dispatch => {
 };
 
 // Sign In Action handler
-export const signIn = formValues => async dispatch => {
+export const signIn = (formValues) => async (dispatch) => {
   dispatch({ type: SIGN_IN });
   try {
     const response = await instance.post('/auth/login', formValues);
+    localStorage.setItem('displayName', response.data.displayName);
     dispatch({ type: SIGN_IN_SUCCESS, payload: response.data });
   } catch (err) {
     dispatch({ type: SIGN_IN_ERROR });
@@ -44,7 +46,7 @@ export const signIn = formValues => async dispatch => {
 };
 
 // Sign Out Action Handler
-export const signOut = () => async dispatch => {
+export const signOut = () => async (dispatch) => {
   dispatch({ type: SIGN_OUT });
   try {
     await instance.get('/auth/signout');
@@ -58,11 +60,11 @@ export const signOut = () => async dispatch => {
   }
 };
 
-export const changePassword = formValues => async dispatch => {
+export const changePassword = (formValues) => async (dispatch) => {
   try {
     const response = await instance.patch('/auth/password', {
       oldPassword: formValues.oldPassword,
-      newPassword: formValues.newPassword
+      newPassword: formValues.newPassword,
     });
     if (response.status === 200) {
       message.success('changed password', 1);
@@ -79,7 +81,7 @@ export const changePassword = formValues => async dispatch => {
 // have to give this more thought
 // ====================================================================================
 // Refresh Auth Action Handler
-export const refreshAuth = () => async dispatch => {
+export const refreshAuth = () => async (dispatch) => {
   try {
     dispatch({ type: REFRESH_AUTH });
     const response = await instance.get('/auth/refresh');

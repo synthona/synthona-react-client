@@ -173,6 +173,7 @@ class EditProfile extends Component {
         username: this.props.user.username,
         displayName: displayName,
       });
+      localStorage.setItem('displayName', displayName);
       document.title = displayName;
       this.setState({ displayName });
     }

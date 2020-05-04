@@ -13,8 +13,17 @@ const { Content, Footer } = Layout;
 
 class Login extends Component {
   componentDidMount() {
-    document.title = 'sonia';
+    document.title = this.getUsername();
   }
+
+  getUsername = () => {
+    const username = localStorage.getItem('displayName');
+    if (username) {
+      return username;
+    } else {
+      return 'holsona';
+    }
+  };
 
   onSubmit = (values, { setSubmitting }) => {
     setSubmitting(false);
@@ -34,7 +43,7 @@ class Login extends Component {
               >
                 ✨
               </span>
-              sonia
+              {this.getUsername()}
               <span
                 role='img'
                 aria-label='jsx-a11y/accessible-emoji'

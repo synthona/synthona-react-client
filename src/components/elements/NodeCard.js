@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { markNodeView, hideModal } from '../../redux/actions';
 import { Link } from 'react-router-dom';
-// import { Icon } from 'antd';
+import { Icon } from 'antd';
 //custom components
 import NodeCardHeader from './NodeCardHeader';
 import NodeCardPreview from './NodeCardPreview';
@@ -15,7 +15,7 @@ class NodeCard extends Component {
         return (
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />
-            <Link to={`/associations/${this.props.node.id}`} replace>
+            <Link to={`/edit/text/${this.props.node.id}`} replace>
               {/* <Link to={`/edit/text/${this.props.node.id}`} replace> */}
               <NodeCardPreview node={this.props.node} />
             </Link>
@@ -34,116 +34,76 @@ class NodeCard extends Component {
         return (
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />
-            <Link
-              to={`/associations/${this.props.node.id}`}
-              replace
-              // onClick={e => this.props.markNodeView(this.props.node.id)} /*target='_blank' */
+            <a
+              href={this.props.node.summary}
+              target='_blank'
+              rel='noopener noreferrer'
+              onClick={(e) => this.props.markNodeView(this.props.node.id)}
+              style={{ width: '100%' }}
             >
-              <NodeCardPreview node={this.props.node} />
-            </Link>
+              <Icon
+                type={'global'}
+                theme='outlined'
+                style={{
+                  fontSize: '5rem',
+                  color: '#b8b8b8',
+                  display: 'block',
+                  textAlign: 'center',
+                  padding: '3rem',
+                }}
+              />
+            </a>
           </li>
         );
       case 'collection':
+        // create the collection grid
         var previewCount = 0;
         var preview = null;
         var summary = null;
-
+        // check if the collection has a summary
         if (node.summary) {
           summary = JSON.parse(node.summary);
           previewCount = summary.length;
         }
-
+        // create the different grid types
         switch (previewCount) {
           case 0:
-            console.log('length of 0!');
             preview = (
               <li className='nodelist-item'>
                 <NodeCardHeader node={this.props.node} />
-                <Link
-                  to={`/associations/${this.props.node.id}`}
-                  replace
-                  // onClick={e => this.props.markNodeView(this.props.node.id)} /*target='_blank' */
-                >
+                <Link to={`/associations/${this.props.node.id}`} replace>
                   <NodeCardPreview node={this.props.node} />
                 </Link>
               </li>
             );
             return preview;
           case 1:
-            console.log('length of 1!');
             preview = (
-              <li className='nodelist-item nodelist-item-collection'>
+              <li className='nodelist-item nodelist-collection-item'>
                 <NodeCardHeader node={this.props.node} />
-                <Link
-                  to={`/associations/${this.props.node.id}`}
-                  replace
-                  // onClick={e => this.props.markNodeView(this.props.node.id)} /*target='_blank' */
-                >
-                  {/* <NodeCardPreview node={summary[0]} /> */}
-                  <ul
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      flexDirection: 'row',
-                      listStyle: 'none',
-                      padding: '0',
-                      margin: '0',
-                    }}
-                  >
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        maxHeight: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
-                      <NodeCardPreview node={summary[0]} />
-                    </li>
-                  </ul>
+                <Link to={`/associations/${this.props.node.id}`} replace>
+                  {/* <ul className='nodelist-collection-item-grid'> */}
+                  {/* <li className='nodelist-grid-full-width'> */}
+                  <div className='nodelist-collection-item-single'>
+                    <NodeCardPreview node={summary[0]} />
+                  </div>
+
+                  {/* </li> */}
+                  {/* </ul> */}
                 </Link>
               </li>
             );
             return preview;
           case 2:
-            console.log('length of 2!');
             preview = (
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
-                <Link
-                  to={`/associations/${this.props.node.id}`}
-                  replace
-                  // onClick={e => this.props.markNodeView(this.props.node.id)} /*target='_blank' */
-                >
-                  {/* <NodeCardPreview node={this.props.node} /> */}
-                  <ul
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      flexDirection: 'row',
-                      listStyle: 'none',
-                      padding: '0',
-                      margin: '0',
-                    }}
-                  >
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        maxHeight: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                <Link to={`/associations/${this.props.node.id}`} replace>
+                  <ul className='nodelist-collection-grid'>
+                    <li className='nodelist-collection-grid-full-width'>
                       <NodeCardPreview node={summary[0]} />
                     </li>
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        maxHeight: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                    <li className='nodelist-collection-grid-full-width'>
                       <NodeCardPreview node={summary[1]} />
                     </li>
                   </ul>
@@ -152,116 +112,42 @@ class NodeCard extends Component {
             );
             return preview;
           case 3:
-            console.log('length of 3!');
             preview = (
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
-                <Link
-                  to={`/associations/${this.props.node.id}`}
-                  replace
-                  // onClick={e => this.props.markNodeView(this.props.node.id)} /*target='_blank' */
-                >
-                  {/* <NodeCardPreview node={this.props.node} /> */}
-                  <ul
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      flexDirection: 'row',
-                      listStyle: 'none',
-                      padding: '0',
-                      margin: '0',
-                    }}
-                  >
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        maxHeight: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                <Link to={`/associations/${this.props.node.id}`} replace>
+                  <ul className='nodelist-collection-grid'>
+                    <li className='nodelist-collection-grid-full-width'>
                       <NodeCardPreview node={summary[0]} />
                     </li>
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        maxHeight: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                    <li>
                       <NodeCardPreview node={summary[1]} />
                     </li>
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        maxHeight: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                    <li>
                       <NodeCardPreview node={summary[2]} />
                     </li>
+                    <li></li>
                   </ul>
                 </Link>
               </li>
             );
             return preview;
           case 4:
-            console.log('length of 4!');
-            console.log(summary[1]);
             preview = (
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
                 <Link to={`/associations/${this.props.node.id}`} replace>
-                  <ul
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      flexDirection: 'row',
-                      listStyle: 'none',
-                      padding: '0',
-                      margin: '0',
-                    }}
-                  >
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        height: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                  <ul className='nodelist-collection-grid'>
+                    <li>
                       <NodeCardPreview node={summary[0]} />
                     </li>
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        height: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                    <li>
                       <NodeCardPreview node={summary[1]} />
                     </li>
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        height: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                    <li>
                       <NodeCardPreview node={summary[2]} />
                     </li>
-                    <li
-                      style={{
-                        width: '12.5rem',
-                        height: '6.7rem',
-                        overflow: 'hidden',
-                        border: '0.1px solid #b8b8b8',
-                      }}
-                    >
+                    <li>
                       <NodeCardPreview node={summary[3]} />
                     </li>
                   </ul>
