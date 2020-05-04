@@ -67,6 +67,7 @@ export const updateNode = (node) => async (dispatch) => {
   try {
     const result = await instance.patch('/node', {
       id: node.id,
+      hidden: node.hidden,
       name: node.name,
       summary: node.summary,
     });
@@ -139,7 +140,7 @@ export const deleteNode = (id) => async (dispatch) => {
     if (response.status === 200) {
       history.push('/');
       dispatch({ type: DELETE_NODE_SUCCESS, id: id });
-      message.success('The node was deleted', 1);
+      message.success('successfully deleted', 1);
     }
   } catch (err) {
     dispatch({ type: DELETE_NODE_ERROR });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import { Icon, Modal } from 'antd';
+import { Icon, Modal, Tooltip } from 'antd';
 import {
   markNodeView,
   showModal,
@@ -15,9 +15,19 @@ class NodeCardHeaderFull extends Component {
     super(props);
     this.state = {
       name: this.props.node.name,
+      hidden: this.props.node.hidden,
+      hiddenIcon: 'eye',
       editable: false,
       showDeleteModal: null,
     };
+  }
+
+  componentDidMount() {
+    if (this.props.node.hidden) {
+      this.setState({ hiddenIcon: 'eye-invisible' });
+    } else {
+      this.setState({ hiddenIcon: 'eye' });
+    }
   }
 
   // update and save the document name
@@ -42,6 +52,16 @@ class NodeCardHeaderFull extends Component {
     this.setState({ showDeleteModal: false });
     this.setState({ deleting: true });
     await this.props.deleteNode(this.props.node.id);
+  };
+
+  toggleHidden = () => {
+    if (this.state.hidden) {
+      this.props.updateNode({ id: this.props.node.id, hidden: false });
+      this.setState({ hidden: false, hiddenIcon: 'eye' });
+    } else {
+      this.props.updateNode({ id: this.props.node.id, hidden: true });
+      this.setState({ hidden: true, hiddenIcon: 'eye-invisible' });
+    }
   };
 
   // render the title
@@ -83,22 +103,16 @@ class NodeCardHeaderFull extends Component {
       <div className='full-card-options'>
         {this.renderTitle()}
         <ul className='full-card-buttons-list'>
-          {/* <li>
-            <button onClick={e => this.props.markNodeView(this.props.node.id)}>
-              <Icon
-                type={'bulb'}
-                // type={'heart'}
-                theme='outlined'
-                className='full-card-button'
-                style={{
-                  fontSize: '0.9rem',
-                  display: 'block',
-                  textAlign: 'center',
-                  padding: '0.1rem'
-                }}
-              />
-            </button>
-          </li> */}
+          <Tooltip
+            title='toggle whether node will show up in explore page and searches'
+            mouseEnterDelay={1}
+          >
+            <li>
+              <button onClick={(e) => this.toggleHidden()}>
+                <Icon type={this.state.hiddenIcon} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
           <li>
             <button
               onClick={(e) => {
@@ -111,23 +125,6 @@ class NodeCardHeaderFull extends Component {
               <Icon type={'bars'} theme='outlined' className='full-card-button' />
             </button>
           </li>
-
-          {/* <li>
-            <Link
-              to={`/associations/${this.props.node.id}`}
-              replace
-              // style={{ padding: '0', color: 'white', display: 'inline-block' }}
-            >
-              <Icon
-                // type={'edit'}
-                type={'apartment'}
-                // type={'heart'}
-                theme='outlined'
-                className='full-card-button'
-              />
-            </Link>
-          </li> */}
-
           <li>
             <button onClick={(e) => this.toggleDeleteModal()}>
               <Icon type={'delete'} theme='outlined' className='full-card-button delete' />

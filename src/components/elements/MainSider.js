@@ -102,9 +102,9 @@ class MainSider extends Component {
             <Item className='sider-menu-item'>
               <Link to='/'>Nodes</Link>
             </Item>
-            <Item className='sider-menu-item'>
+            {/* <Item className='sider-menu-item'>
               <Link to='/'>Collections</Link>
-            </Item>
+            </Item> */}
             <Item className='sider-menu-item'>
               <Link to='/'>Map</Link>
             </Item>
