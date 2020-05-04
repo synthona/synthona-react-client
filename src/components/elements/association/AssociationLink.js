@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   hideModal,
-  markNodeView,
   deleteAssociationLink,
   removeFromAssociationList,
+  updateLinkStrength,
 } from '../../../redux/actions';
 import { Link } from 'react-router-dom';
 import { Button, Tooltip } from 'antd';
@@ -33,6 +33,16 @@ class AssociationLink extends Component {
     }
   };
 
+  handleLinkClick = () => {
+    this.props.hideModal();
+    if (this.props.modalNodeId && this.props.association.id) {
+      const nodeId = this.props.modalNodeId;
+      const linkedNode = this.props.association.id;
+      // increment the linkStrength on the server
+      this.props.updateLinkStrength(nodeId, linkedNode);
+    }
+  };
+
   // render card types
   renderAssociationLink = (association) => {
     switch (association.type) {
@@ -48,7 +58,7 @@ class AssociationLink extends Component {
             <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
               <Link
                 to={`/edit/text/${association.id}`}
-                onClick={(e) => this.props.hideModal()}
+                onClick={(e) => this.handleLinkClick()}
                 replace
                 target='_blank'
               >
@@ -69,7 +79,7 @@ class AssociationLink extends Component {
             <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
               <Link
                 to={`/associations/${association.id}`}
-                onClick={(e) => this.props.hideModal()}
+                onClick={(e) => this.handleLinkClick()}
                 replace
                 target='_blank'
               >
@@ -92,7 +102,7 @@ class AssociationLink extends Component {
                 href={association.summary}
                 target='_blank'
                 rel='noopener noreferrer'
-                onClick={(e) => this.props.hideModal()}
+                onClick={(e) => this.handleLinkClick()}
                 style={{ wordBreak: 'break-all' }}
               >
                 {association.name}
@@ -112,10 +122,7 @@ class AssociationLink extends Component {
             <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
               <Link
                 to={`/associations/${association.id}`}
-                onClick={(e) => {
-                  this.props.markNodeView(this.props.association.id);
-                  this.props.hideModal();
-                }}
+                onClick={(e) => this.handleLinkClick()}
                 replace
                 target='_blank'
               >
@@ -143,7 +150,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   hideModal,
-  markNodeView,
   deleteAssociationLink,
   removeFromAssociationList,
+  updateLinkStrength,
 })(AssociationLink);
