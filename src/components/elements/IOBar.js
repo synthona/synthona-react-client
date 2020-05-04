@@ -190,6 +190,7 @@ class IOBar extends Component {
             <li className='nav-search'>
               <Input
                 onPressEnter={(value, event) => this.commandHandler()}
+                maxLength={500}
                 value={this.state.input}
                 onChange={(e) => this.setState({ input: e.target.value })}
                 defaultValue={this.props.query.searchQuery || ''}
