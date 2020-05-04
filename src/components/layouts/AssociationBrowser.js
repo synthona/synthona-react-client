@@ -21,7 +21,6 @@ class AssociationBrowser extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (!this.state.initialized) {
       this.initializeFromUrlParams();
     }
@@ -32,7 +31,6 @@ class AssociationBrowser extends Component {
     // re-initialize if the URL changes
     if (this.state.initialized && this.state.id !== id) {
       this.setState({ initialized: false });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       this.initializeFromUrlParams();
     }
   }
@@ -40,6 +38,8 @@ class AssociationBrowser extends Component {
   // // load the image node and set the local id state.
   initializeFromUrlParams = async () => {
     var id = parseInt(this.props.match.params.id);
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
     await this.props.setActiveNode(id);
     // fetch the user info from the server
     await this.props.fetchAssociations({ nodeId: id });

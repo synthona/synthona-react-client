@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Button, Input, Select, Icon, message } from 'antd';
 // custom code
-import { validUrl, isImageUrl } from '../../utils/nodeValidation';
+import { validUrl, isImageUrl } from '../../utils/inputValidation';
 import './IOBar.less';
 import {
   signOut,
