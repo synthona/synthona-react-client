@@ -76,7 +76,7 @@ class AssociationBrowser extends Component {
       var preview = [];
       while (i < associationOrder.length && preview.length < 4) {
         key = associationOrder[i];
-        if (associationList[key].type !== 'collection') {
+        if (associationList[key].type !== 'collection' && associationList[key].type !== 'user') {
           preview.push({ type: associationList[key].type, summary: associationList[key].summary });
         }
         i++;
