@@ -110,7 +110,6 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_NODE_ERROR:
       return { ...state, isSaving: null };
     case UPDATE_NODE_SUCCESS:
-      console.log(action.result);
       return {
         ...state,
         isSaving: null,

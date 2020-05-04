@@ -32,35 +32,6 @@ class NodeCardPreview extends Component {
           </Fragment>
         );
       case 'collection':
-        // if (node.summary) {
-        //   const summary = JSON.parse(node.summary);
-        //   console.log(summary.length);
-
-        //   switch (summary.length) {
-        //     case 1:
-        //       console.log('length of 1!');
-        //       const preview = (
-        //         <table>
-        //           <tr>
-        //             <td></td>
-        //           </tr>
-        //         </table>
-        //       );
-        //       return;
-        //     case 2:
-        //       console.log('length of 2!');
-        //       return;
-        //     case 3:
-        //       console.log('length of 3!');
-        //       return;
-        //     case 4:
-        //       console.log('length of 4!');
-        //       return;
-        //     default:
-        //       return;
-        //   }
-        // }
-
         return (
           <Fragment>
             <Icon type={'apartment'} theme='outlined' className='node-card-icon' />

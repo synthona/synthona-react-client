@@ -82,7 +82,6 @@ class AssociationBrowser extends Component {
         i++;
       }
       this.props.updateNode({ id: collectionNode.id, summary: JSON.stringify(preview) });
-      console.log(preview);
     }
   };
 

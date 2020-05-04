@@ -121,3 +121,15 @@ export const removeFromAssociationList = (id) => {
     id,
   };
 };
+
+// update the linkStrength for an association
+export const updateLinkStrength = (nodeA, nodeB) => async (dispatch) => {
+  try {
+    await instance.post('/association/linkstrength', {
+      nodeA,
+      nodeB,
+    });
+  } catch (err) {
+    message.error('There was a problem with your request', 1);
+  }
+};

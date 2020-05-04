@@ -283,7 +283,6 @@ class QuillEditor extends Component {
 
   // update and save the document name
   saveName = (name) => {
-    console.log(name);
     if (this.state.name !== name) {
       this.props.updateNode({ id: this.props.match.params.id, name });
     }

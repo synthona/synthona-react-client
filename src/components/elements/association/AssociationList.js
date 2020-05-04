@@ -54,7 +54,7 @@ class AssociationList extends Component {
     if (this.props.assocations !== null && this.props.order !== null) {
       return associationOrder.map((key) => {
         const node = associationList[key];
-        return <NodeCard key={key} node={node} />;
+        return <NodeCard key={key} node={node} activeNode={this.props.activeNode} />;
       });
     } else {
       return <Spinner></Spinner>;
