@@ -82,14 +82,9 @@ class NodeCard extends Component {
               <li className='nodelist-item nodelist-collection-item'>
                 <NodeCardHeader node={this.props.node} />
                 <Link to={`/associations/${this.props.node.id}`} replace>
-                  {/* <ul className='nodelist-collection-item-grid'> */}
-                  {/* <li className='nodelist-grid-full-width'> */}
                   <div className='nodelist-collection-item-single'>
                     <NodeCardPreview node={summary[0]} />
                   </div>
-
-                  {/* </li> */}
-                  {/* </ul> */}
                 </Link>
               </li>
             );

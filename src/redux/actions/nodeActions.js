@@ -65,7 +65,7 @@ export const searchNodes = (query) => async (dispatch) => {
 export const updateNode = (node) => async (dispatch) => {
   dispatch({ type: UPDATE_NODE });
   try {
-    await instance.patch('/node', {
+    const result = await instance.patch('/node', {
       id: node.id,
       name: node.name,
       summary: node.summary,
@@ -73,7 +73,7 @@ export const updateNode = (node) => async (dispatch) => {
     dispatch({
       type: UPDATE_NODE_SUCCESS,
       id: node.id,
-      name: node.name,
+      result: result.data.node,
     });
   } catch (err) {
     dispatch({ type: UPDATE_NODE_ERROR });
