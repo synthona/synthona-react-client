@@ -138,16 +138,19 @@ export default (state = INITIAL_STATE, action) => {
       // update the association link list
       var newAssociationLinkList = { ...state.associationLinkList };
       delete newAssociationLinkList[action.deletedId];
-      // // update the association list
+      // update the association list
       var associationLinkListOrder = [...state.associationLinkListOrder];
       var newAssociationLinkListOrder = associationLinkListOrder.filter(
         (node) => node !== parseInt(action.deletedId)
       );
+      // update total items
+      var newTotalLinkListItems = state.totalLinkListItems - 1;
       return {
         ...state,
         isSaving: null,
         associationLinkList: newAssociationLinkList,
         associationLinkListOrder: newAssociationLinkListOrder,
+        totalLinkListItems: newTotalLinkListItems,
       };
     case DELETE_ASSOCIATION_LINK_ERROR:
       return { ...state, isSaving: null };
@@ -158,11 +161,14 @@ export default (state = INITIAL_STATE, action) => {
       // update the association order
       var associationOrder = [...state.associationOrder];
       var newAssociationOrder = associationOrder.filter((node) => node !== parseInt(action.id));
+      // update total items
+      var newTotalItems = state.totalAssociationListItems - 1;
       return {
         ...state,
         isSaving: null,
         associationList: newAssociationList,
         associationOrder: newAssociationOrder,
+        totalAssociationListItems: newTotalItems,
       };
     default:
       return state;

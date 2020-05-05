@@ -86,9 +86,7 @@ class NodeCardHeader extends Component {
             style={{ padding: '0', color: '#272727', display: 'inline-block' }}
           >
             <Icon
-              // type={'edit'}
               type={'apartment'}
-              // type={'heart'}
               theme='outlined'
               style={{
                 fontSize: '0.9rem',

@@ -82,16 +82,7 @@ class AssociationSider extends Component {
             title={this.props.node.name}
             onClose={this.hideInfoSider}
             visible={this.props.modal.visible}
-            // onScroll={e => this.infiniteScroll()}
           >
-            {/* <h4 style={{ padding: '0.3rem 0 0.7rem' }}>id: {this.props.node.content.id}</h4> */}
-            {/* <p>{this.props.node.summary}</p> */}
-            {/* <h2>Associations</h2> */}
-            {/* <button
-              onClick={e => this.props.createAssociation(this.props.nodeInfo.content.id, 348)}
-            >
-              create association
-            </button> */}
             <AutoComplete
               style={{
                 width: 200,
