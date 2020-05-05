@@ -32,9 +32,9 @@ class App extends Component {
           <Route path='/profile/:username' exact component={Profile} />
           <Route path='/activity' exact component={Activity} />
           <Route path='/collections' exact component={Collections} />
-          <Route path='/edit/text/:id' exact component={QuillEditor} />
+          <Route path='/edit/text/:uuid' exact component={QuillEditor} />
           <Route path='/edit/profile' exact component={EditProfile} />
-          <Route path='/associations/:id' exact component={AssociationBrowser} />
+          <Route path='/associations/:uuid' exact component={AssociationBrowser} />
         </Switch>
       );
     } else if (this.props.isFetchingAuth) {

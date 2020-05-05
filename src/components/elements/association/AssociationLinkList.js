@@ -9,11 +9,14 @@ import AssociationLink from './AssociationLink';
 
 class AssociationLinkList extends Component {
   componentDidMount() {
-    this.props.fetchAssociationLinkList({ nodeId: this.props.nodeId });
+    this.props.fetchAssociationLinkList({ nodeUUID: this.props.nodeUUID });
   }
 
   loadMore = () => {
-    this.props.fetchAssociationLinkList({ nodeId: this.props.nodeId, page: this.props.page + 1 });
+    this.props.fetchAssociationLinkList({
+      nodeUUID: this.props.nodeUUID,
+      page: this.props.page + 1,
+    });
   };
 
   renderAssociationLinkList = () => {
@@ -24,7 +27,7 @@ class AssociationLinkList extends Component {
     if (list && order) {
       return order.map((key) => {
         const association = list[key];
-        return <AssociationLink key={association.id} association={association} />;
+        return <AssociationLink key={association.uuid} association={association} />;
       });
     } else {
       return <Spinner></Spinner>;

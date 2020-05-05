@@ -66,14 +66,14 @@ export const updateNode = (node) => async (dispatch) => {
   dispatch({ type: UPDATE_NODE });
   try {
     const result = await instance.patch('/node', {
-      id: node.id,
+      uuid: node.uuid,
       hidden: node.hidden,
       name: node.name,
       summary: node.summary,
     });
     dispatch({
       type: UPDATE_NODE_SUCCESS,
-      id: node.id,
+      uuid: node.uuid,
       result: result.data.node,
     });
   } catch (err) {
@@ -104,13 +104,13 @@ export const createNode = (node) => async (dispatch) => {
   }
 };
 
-export const markNodeView = (id) => async (dispatch) => {
+export const markNodeView = (uuid) => async (dispatch) => {
   dispatch({ type: MARK_NODE_VIEW });
   try {
     await instance.patch('/node/viewed', {
-      id,
+      uuid,
     });
-    dispatch({ type: MARK_NODE_VIEW_SUCCESS, id });
+    dispatch({ type: MARK_NODE_VIEW_SUCCESS, uuid });
   } catch (err) {
     dispatch({ type: MARK_NODE_VIEW_ERROR });
     message.error('Could not create new item', 1);
@@ -118,11 +118,11 @@ export const markNodeView = (id) => async (dispatch) => {
   }
 };
 
-export const setActiveNode = (id) => async (dispatch) => {
+export const setActiveNode = (uuid) => async (dispatch) => {
   dispatch({ type: SET_ACTIVE_NODE });
   try {
     const response = await instance.get('/node', {
-      params: { id },
+      params: { uuid },
     });
     dispatch({ type: SET_ACTIVE_NODE_SUCCESS, payload: response.data });
   } catch (err) {
@@ -133,13 +133,13 @@ export const setActiveNode = (id) => async (dispatch) => {
 };
 
 // delete text node handler
-export const deleteNode = (id) => async (dispatch) => {
+export const deleteNode = (uuid) => async (dispatch) => {
   dispatch({ type: DELETE_NODE });
   try {
-    const response = await instance.delete(`/node`, { params: { id } });
+    const response = await instance.delete(`/node`, { params: { uuid } });
     if (response.status === 200) {
       history.push('/');
-      dispatch({ type: DELETE_NODE_SUCCESS, id: id });
+      dispatch({ type: DELETE_NODE_SUCCESS, uuid: uuid });
       message.success('successfully deleted', 1);
     }
   } catch (err) {

@@ -6,11 +6,11 @@ import {
   CREATE_IMAGE_NODE_ERROR,
   FETCH_IMAGE_NODE,
   FETCH_IMAGE_NODE_SUCCESS,
-  FETCH_IMAGE_NODE_ERROR
+  FETCH_IMAGE_NODE_ERROR,
 } from './types';
 import { message } from 'antd';
 
-export const createImageNode = (file, name) => async dispatch => {
+export const createImageNode = (file, name) => async (dispatch) => {
   dispatch({ type: CREATE_IMAGE_NODE });
   try {
     // create image FormData
@@ -21,7 +21,7 @@ export const createImageNode = (file, name) => async dispatch => {
     }
     // send the request
     const response = await instance.post('/image', imageData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     // if it's sucessful dispatch the success action
     if (response.status === 200) {
@@ -38,14 +38,14 @@ export const createImageNode = (file, name) => async dispatch => {
 };
 
 // get image node handler
-export const fetchImageNode = id => async dispatch => {
+export const fetchImageNode = (uuid) => async (dispatch) => {
   dispatch({ type: FETCH_IMAGE_NODE });
   try {
-    const response = await instance.get('/image', { params: { id } });
+    const response = await instance.get('/image', { params: { uuid } });
     dispatch({
       type: FETCH_IMAGE_NODE_SUCCESS,
-      id: id,
-      payload: response.data.node
+      uuid: uuid,
+      payload: response.data.node,
     });
     return response.data.node;
   } catch (err) {

@@ -96,7 +96,7 @@ class EditProfile extends Component {
     );
   };
 
-  // load the text node and set the local id state.
+  // load the profile
   initializeFromUrlParams = async () => {
     // fetch the user info from the server
     const user = await this.props.fetchUserByUsername(this.props.user.username);

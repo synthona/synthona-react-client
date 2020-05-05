@@ -31,10 +31,11 @@ class QuillEditor extends Component {
       text: '',
       name: '',
       expanded: localStorage.getItem('expanded'),
-      id: null,
+      uuid: null,
       deleting: null,
       error: null,
       showDeleteModal: null,
+      initializing: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -52,25 +53,27 @@ class QuillEditor extends Component {
   }
 
   componentDidUpdate() {
-    var textId = parseInt(this.props.match.params.id);
-    if (this.state.id !== textId) {
+    var textUUID = this.props.match.params.uuid;
+    if (this.state.uuid !== textUUID && this.state.initializing === false) {
+      this.setState({ initializing: true });
       this.initializeFromUrlParams();
     }
   }
 
   // load the text node and set the local id state.
   initializeFromUrlParams = async () => {
-    var textId = parseInt(this.props.match.params.id);
+    var textUUID = this.props.match.params.uuid;
     // set the local state id equal to the value in the url
-    this.setState({ id: textId });
+    this.setState({ uuid: textUUID });
     // fetch the node values from the server
-    await this.props.fetchTextNode(textId);
+    await this.props.fetchTextNode(textUUID);
     if (this.props.nodeData && this.props.nodeData.content) {
       // if there is content set the local editor state equal to it
       document.title = this.props.nodeData.name || 'Untitled';
       this.setState({
         text: JSON.parse(this.props.nodeData.content),
         name: this.props.nodeData.name,
+        initializing: false,
       });
     } else {
       // if there's no content return an error message
@@ -102,9 +105,9 @@ class QuillEditor extends Component {
   // delete the node
   deleteHandler = async () => {
     this.setState({ showDeleteModal: false });
-    const { id } = this.props.match.params;
+    const { uuid } = this.props.match.params;
     this.setState({ deleting: true });
-    await this.props.deleteTextNode(id);
+    await this.props.deleteTextNode(uuid);
     this.props.history.push('/');
   };
 
@@ -120,7 +123,7 @@ class QuillEditor extends Component {
       const content = editor.getText();
       const summary = content.substring(0, summaryLength);
       // wait for summary to update before going back to homepage so it will be up to date
-      await this.props.processTextNode(this.props.match.params.id, summary);
+      await this.props.processTextNode(this.props.match.params.uuid, summary);
     }
     // this.props.history.goBack();
     this.props.history.push('/');
@@ -284,7 +287,7 @@ class QuillEditor extends Component {
   // update and save the document name
   saveName = (name) => {
     if (this.state.name !== name) {
-      this.props.updateNode({ id: this.props.match.params.id, name });
+      this.props.updateNode({ uuid: this.props.match.params.uuid, name });
     }
     document.title = name || 'Untitled';
     this.setState({ name });
@@ -295,7 +298,7 @@ class QuillEditor extends Component {
     if (content !== this.state.text) {
       const fullDelta = JSON.stringify(editor.getContents());
       this.props.editTextNode({
-        id: this.props.match.params.id,
+        uuid: this.props.match.params.uuid,
         content: fullDelta,
       });
       this.setState({ text: content });
@@ -361,7 +364,7 @@ class QuillEditor extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    nodeData: state.nodes.nodeList[ownProps.match.params.id],
+    nodeData: state.nodes.nodeList[ownProps.match.params.uuid],
     isLoading: state.nodes.isFetching,
   };
 };

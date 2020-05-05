@@ -15,7 +15,7 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            <Link to={`/edit/text/${this.props.node.id}`} replace /*target='_blank' */>
+            <Link to={`/edit/text/${this.props.node.uuid}`} replace /*target='_blank' */>
               <p style={{ padding: '1.7rem' }}>{this.props.node.summary}</p>
             </Link>
           </div>
@@ -24,7 +24,7 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <Link to={`/view/image/${this.props.node.id}`} replace >
+            {/* <Link to={`/view/image/${this.props.node.uuid}`} replace >
 
             </Link> */}
             <img
@@ -47,7 +47,7 @@ class NodeCardFull extends Component {
               href={this.props.node.summary}
               target='_blank'
               rel='noopener noreferrer'
-              onClick={(e) => this.props.markNodeView(this.props.node.id)}
+              onClick={(e) => this.props.markNodeView(this.props.node.uuid)}
               style={{ width: '100%' }}
             >
               <Icon
@@ -70,9 +70,9 @@ class NodeCardFull extends Component {
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
             {/* <Link
-              to={`/associations/${this.props.node.id}`}
+              to={`/associations/${this.props.node.uuid}`}
               replace
-              // onClick={e => this.props.markNodeView(this.props.node.id)} 
+              // onClick={e => this.props.markNodeView(this.props.node.uuid)} 
             >
               <Icon
                 type={'apartment'}

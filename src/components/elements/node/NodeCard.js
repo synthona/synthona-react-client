@@ -9,12 +9,12 @@ import NodeCardPreview from './NodeCardPreview';
 
 class NodeCard extends Component {
   handleNodeClick = () => {
-    const nodeId = this.props.node.id;
-    this.props.markNodeView(nodeId);
+    const nodeUUID = this.props.node.uuid;
+    this.props.markNodeView(nodeUUID);
     if (this.props.activeNode) {
-      const linkedNode = this.props.activeNode.id;
+      const linkedNodeUUID = this.props.activeNode.uuid;
       // increment the linkStrength on the server
-      this.props.updateLinkStrength(nodeId, linkedNode);
+      this.props.updateLinkStrength(nodeUUID, linkedNodeUUID);
     }
   };
 
@@ -26,11 +26,11 @@ class NodeCard extends Component {
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />
             <Link
-              to={`/edit/text/${this.props.node.id}`}
+              to={`/edit/text/${this.props.node.uuid}`}
               replace
               onClick={(e) => this.handleNodeClick()}
             >
-              {/* <Link to={`/edit/text/${this.props.node.id}`} replace> */}
+              {/* <Link to={`/edit/text/${this.props.node.uuid}`} replace> */}
               <NodeCardPreview node={this.props.node} />
             </Link>
           </li>
@@ -40,7 +40,7 @@ class NodeCard extends Component {
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />
             <Link
-              to={`/associations/${this.props.node.id}`}
+              to={`/associations/${this.props.node.uuid}`}
               replace
               onClick={(e) => this.handleNodeClick()}
             >
@@ -90,7 +90,7 @@ class NodeCard extends Component {
               <li className='nodelist-item'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
-                  to={`/associations/${this.props.node.id}`}
+                  to={`/associations/${this.props.node.uuid}`}
                   replace
                   onClick={(e) => this.handleNodeClick()}
                 >
@@ -104,7 +104,7 @@ class NodeCard extends Component {
               <li className='nodelist-item nodelist-collection-item'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
-                  to={`/associations/${this.props.node.id}`}
+                  to={`/associations/${this.props.node.uuid}`}
                   replace
                   onClick={(e) => this.handleNodeClick()}
                 >
@@ -120,7 +120,7 @@ class NodeCard extends Component {
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
-                  to={`/associations/${this.props.node.id}`}
+                  to={`/associations/${this.props.node.uuid}`}
                   replace
                   onClick={(e) => this.handleNodeClick()}
                 >
@@ -141,7 +141,7 @@ class NodeCard extends Component {
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
-                  to={`/associations/${this.props.node.id}`}
+                  to={`/associations/${this.props.node.uuid}`}
                   replace
                   onClick={(e) => this.handleNodeClick()}
                 >
@@ -166,7 +166,7 @@ class NodeCard extends Component {
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
-                  to={`/associations/${this.props.node.id}`}
+                  to={`/associations/${this.props.node.uuid}`}
                   replace
                   onClick={(e) => this.handleNodeClick()}
                 >

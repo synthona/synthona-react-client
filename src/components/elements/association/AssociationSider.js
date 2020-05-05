@@ -28,18 +28,18 @@ class AssociationSider extends Component {
   }
 
   createAssociationHandler = async (input) => {
-    // get the id of the node to be associated
+    // get the uuid of the node to be associated
     const nodeToAssociate = [];
     this.state.autocompleteValues.forEach((node) => {
-      if (node.id === parseInt(input)) {
-        nodeToAssociate.push(node.id);
+      if (node.uuid === input) {
+        nodeToAssociate.push(node.uuid);
       }
     });
-    const nodeIdToAssociate = nodeToAssociate[0];
-    // // get this node id
-    const nodeId = this.props.node.id;
-    // // associate the nodes
-    await this.props.createAssociation(nodeId, nodeIdToAssociate);
+    const nodeUUIDToAssociate = nodeToAssociate[0];
+    // get this node uuid
+    const nodeUUID = this.props.node.uuid;
+    // associate the nodes
+    await this.props.createAssociation(nodeUUID, nodeUUIDToAssociate);
     this.setState({ autocompleteOptions: [], autocompleteValues: null, inputText: '' });
     // re-render the autocomplete values so more can be added
     this.renderAutocompleteValues('');
@@ -49,7 +49,7 @@ class AssociationSider extends Component {
     this.setState({ inputText: input });
     const result = await this.props.associationAutocomplete({
       searchQuery: input || '',
-      id: this.props.node.id,
+      uuid: this.props.node.uuid,
     });
     if (result) {
       this.setState({
@@ -58,7 +58,7 @@ class AssociationSider extends Component {
         }),
       });
       const newValues = result.map((node) => {
-        return <Option key={node.id}>{node.name}</Option>;
+        return <Option key={node.uuid}>{node.name}</Option>;
       });
       this.setState({ autocompleteOptions: newValues });
     }
@@ -96,7 +96,7 @@ class AssociationSider extends Component {
               {this.state.autocompleteOptions}
             </AutoComplete>
             <br />
-            <AssociationLinkList nodeId={this.props.node.id} />
+            <AssociationLinkList nodeUUID={this.props.node.uuid} />
           </Drawer>
         </div>
       );

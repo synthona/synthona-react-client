@@ -16,7 +16,7 @@ class AssociationBrowser extends Component {
     super(props);
     this.state = {
       initialized: false,
-      id: null,
+      uuid: null,
     };
   }
 
@@ -27,9 +27,9 @@ class AssociationBrowser extends Component {
   }
 
   componentDidUpdate() {
-    var id = parseInt(this.props.match.params.id);
+    var uuid = this.props.match.params.uuid;
     // re-initialize if the URL changes
-    if (this.state.initialized && this.state.id !== id) {
+    if (this.state.initialized && this.state.uuid !== uuid) {
       this.setState({ initialized: false });
       this.initializeFromUrlParams();
     }
@@ -37,12 +37,12 @@ class AssociationBrowser extends Component {
 
   // // load the image node and set the local id state.
   initializeFromUrlParams = async () => {
-    var id = parseInt(this.props.match.params.id);
+    var uuid = this.props.match.params.uuid;
     // window.scrollTo({ top: 0, behavior: 'smooth' });
     window.scrollTo({ top: 0 });
-    await this.props.setActiveNode(id);
+    await this.props.setActiveNode(uuid);
     // fetch the user info from the server
-    await this.props.fetchAssociations({ nodeId: id });
+    await this.props.fetchAssociations({ nodeUUID: uuid });
     if (
       this.props.associations !== null &&
       this.props.activeNode !== null &&
@@ -50,7 +50,7 @@ class AssociationBrowser extends Component {
     ) {
       this.setState({
         initialized: true,
-        id: id,
+        uuid: uuid,
       });
       // update collection preview if necessary
       // TODO: find a way to have it update even less often if possible
@@ -61,7 +61,7 @@ class AssociationBrowser extends Component {
           this.props.associationOrder
         );
       }
-      this.props.markNodeView(id);
+      this.props.markNodeView(uuid);
       document.title = this.props.activeNode.name;
     } else {
       message.error('there was a problem loading the associations');
@@ -81,12 +81,12 @@ class AssociationBrowser extends Component {
         }
         i++;
       }
-      this.props.updateNode({ id: collectionNode.id, summary: JSON.stringify(preview) });
+      this.props.updateNode({ uuid: collectionNode.uuid, summary: JSON.stringify(preview) });
     }
   };
 
   renderNode = () => {
-    if (this.props.activeNode !== null && this.state.id === this.props.activeNode.id) {
+    if (this.props.activeNode !== null && this.state.uuid === this.props.activeNode.uuid) {
       return (
         // <h1
         //   style={{

@@ -29,12 +29,12 @@ export const fetchAssociationLinkList = (query) => async (dispatch) => {
     }
     dispatch({ type: FETCH_ASSOCIATION_LINK_LIST });
     const response = await instance.get('/association', {
-      params: { nodeId: query.nodeId, page: query.page },
+      params: { nodeUUID: query.nodeUUID, page: query.page },
     });
     dispatch({
       type: FETCH_ASSOCIATION_LINK_LIST_SUCCESS,
       payload: response.data,
-      nodeId: query.nodeId,
+      nodeUUID: query.nodeUUID,
       page: query.page,
     });
   } catch (err) {
@@ -53,12 +53,12 @@ export const fetchAssociations = (query) => async (dispatch) => {
     }
     dispatch({ type: FETCH_ASSOCIATIONS });
     const response = await instance.get('/association', {
-      params: { nodeId: query.nodeId, page: query.page },
+      params: { nodeUUID: query.nodeUUID, page: query.page },
     });
     dispatch({
       type: FETCH_ASSOCIATIONS_SUCCESS,
       payload: response.data,
-      nodeId: query.nodeId,
+      nodeUUID: query.nodeUUID,
       page: query.page,
     });
   } catch (err) {
@@ -69,12 +69,12 @@ export const fetchAssociations = (query) => async (dispatch) => {
 };
 
 // create a new association
-export const createAssociation = (nodeId, linkedNode) => async (dispatch) => {
+export const createAssociation = (nodeUUID, linkedNodeUUID) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_ASSOCIATION });
     const response = await instance.post('/association', {
-      nodeId,
-      linkedNode,
+      nodeUUID,
+      linkedNodeUUID,
     });
     dispatch({
       type: CREATE_ASSOCIATION_SUCCESS,
@@ -91,7 +91,7 @@ export const createAssociation = (nodeId, linkedNode) => async (dispatch) => {
 export const associationAutocomplete = (query) => async (dispatch) => {
   try {
     const response = await instance.get('/association/autocomplete', {
-      params: { searchQuery: query.searchQuery, nodeId: query.id },
+      params: { searchQuery: query.searchQuery, nodeUUID: query.uuid },
     });
     return response.data.nodes;
   } catch (err) {
@@ -106,7 +106,7 @@ export const deleteAssociationLink = (nodeA, nodeB) => async (dispatch) => {
   try {
     const response = await instance.delete(`/association`, { params: { nodeA, nodeB } });
     if (response.status === 200) {
-      dispatch({ type: DELETE_ASSOCIATION_LINK_SUCCESS, deletedId: response.data.deletedId });
+      dispatch({ type: DELETE_ASSOCIATION_LINK_SUCCESS, deletedUUID: response.data.deletedUUID });
     }
   } catch (err) {
     dispatch({ type: DELETE_ASSOCIATION_LINK_ERROR });
@@ -115,10 +115,10 @@ export const deleteAssociationLink = (nodeA, nodeB) => async (dispatch) => {
 };
 
 // remove from association list
-export const removeFromAssociationList = (id) => {
+export const removeFromAssociationList = (uuid) => {
   return {
     type: REMOVE_FROM_ASSOCIATION_LIST,
-    id,
+    uuid,
   };
 };
 

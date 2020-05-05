@@ -50,7 +50,7 @@ class NodeCardHeader extends Component {
   // update and save the document name
   saveName = (name) => {
     if (this.state.name !== name) {
-      this.props.updateNode({ id: this.props.node.id, name });
+      this.props.updateNode({ uuid: this.props.node.uuid, name });
     }
     this.setState({ name: name });
   };
@@ -66,7 +66,7 @@ class NodeCardHeader extends Component {
       >
         {this.renderTitle()}
         <div className='nodelist-options-buttons' style={{ marginLeft: 'auto' }}>
-          <button onClick={(e) => this.props.markNodeView(this.props.node.id)}>
+          <button onClick={(e) => this.props.markNodeView(this.props.node.uuid)}>
             <Icon
               // type={'edit'}
               type={'bulb'}
@@ -81,7 +81,7 @@ class NodeCardHeader extends Component {
             />
           </button>
           <Link
-            to={`/associations/${this.props.node.id}`}
+            to={`/associations/${this.props.node.uuid}`}
             replace
             style={{ padding: '0', color: '#272727', display: 'inline-block' }}
           >
@@ -99,7 +99,7 @@ class NodeCardHeader extends Component {
           <button
             onClick={(e) => {
               // set the active node so the modal has the node data
-              // this.props.setActiveNode(this.props.node.id);
+              // this.props.setActiveNode(this.props.node.uuid);
               // show the modal
               this.props.showModal('nodeInfo', this.props.node);
             }}

@@ -12,34 +12,34 @@ import './AssociationLinkList.less';
 
 class AssociationLink extends Component {
   handleDeleteAssociation = () => {
-    var modalNodeId = this.props.modalNodeId;
-    var linkedNode = this.props.association.id;
+    var modalNodeUUID = this.props.modalNodeUUID;
+    var linkedNodeUUID = this.props.association.uuid;
     if (this.props.activeNode) {
       // store the active node
-      var activeNode = this.props.activeNode.id;
+      var activeNode = this.props.activeNode.uuid;
     }
     // if both have values go ahead and delete the association
-    if (modalNodeId && linkedNode) {
-      this.props.deleteAssociationLink(modalNodeId, linkedNode);
+    if (modalNodeUUID && linkedNodeUUID) {
+      this.props.deleteAssociationLink(modalNodeUUID, linkedNodeUUID);
       // store pathname
       var pathname = window.location.pathname;
       // handle removal from association list page if on association page
-      if (pathname.includes('associations') && activeNode && activeNode !== modalNodeId) {
-        this.props.removeFromAssociationList(modalNodeId);
+      if (pathname.includes('associations') && activeNode && activeNode !== modalNodeUUID) {
+        this.props.removeFromAssociationList(modalNodeUUID);
         this.props.hideModal();
       } else {
-        this.props.removeFromAssociationList(linkedNode);
+        this.props.removeFromAssociationList(linkedNodeUUID);
       }
     }
   };
 
   handleLinkClick = () => {
     this.props.hideModal();
-    if (this.props.modalNodeId && this.props.association.id) {
-      const nodeId = this.props.modalNodeId;
-      const linkedNode = this.props.association.id;
+    if (this.props.modalNodeUUID && this.props.association.uuid) {
+      const nodeUUID = this.props.modalNodeUUID;
+      const linkedNodeUUID = this.props.association.uuid;
       // increment the linkStrength on the server
-      this.props.updateLinkStrength(nodeId, linkedNode);
+      this.props.updateLinkStrength(nodeUUID, linkedNodeUUID);
     }
   };
 
@@ -57,7 +57,7 @@ class AssociationLink extends Component {
             />
             <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
               <Link
-                to={`/edit/text/${association.id}`}
+                to={`/edit/text/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
                 replace
                 target='_blank'
@@ -78,7 +78,7 @@ class AssociationLink extends Component {
             />
             <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
               <Link
-                to={`/associations/${association.id}`}
+                to={`/associations/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
                 replace
                 target='_blank'
@@ -121,7 +121,7 @@ class AssociationLink extends Component {
             />
             <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
               <Link
-                to={`/associations/${association.id}`}
+                to={`/associations/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
                 replace
                 target='_blank'
@@ -143,7 +143,7 @@ class AssociationLink extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    modalNodeId: state.modals.modalInfo.content.id,
+    modalNodeUUID: state.modals.modalInfo.content.uuid,
     activeNode: state.nodes.activeNode,
   };
 };

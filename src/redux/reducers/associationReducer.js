@@ -47,10 +47,10 @@ export default (state = INITIAL_STATE, action) => {
       order = [...state.associationLinkListOrder];
       // loop through and store info
       action.payload.associations.forEach((association) => {
-        if (!order.includes(association.id)) {
-          order.push(association.id);
+        if (!order.includes(association.uuid)) {
+          order.push(association.uuid);
         }
-        associations[association.id] = association;
+        associations[association.uuid] = association;
       });
       return {
         ...state,
@@ -72,19 +72,19 @@ export default (state = INITIAL_STATE, action) => {
         isFetching: null,
         associationLinkList: {
           ...state.associationLinkList,
-          [action.associatedNode.id]: action.associatedNode,
+          [action.associatedNode.uuid]: action.associatedNode,
         },
         associationLinkListOrder: [
-          action.associatedNode.id,
-          ...state.associationLinkListOrder.filter((node) => node !== action.associatedNode.id),
+          action.associatedNode.uuid,
+          ...state.associationLinkListOrder.filter((node) => node !== action.associatedNode.uuid),
         ],
         associationList: {
           ...state.associationList,
-          [action.associatedNode.id]: action.associatedNode,
+          [action.associatedNode.uuid]: action.associatedNode,
         },
         associationOrder: [
-          action.associatedNode.id,
-          ...state.associationOrder.filter((node) => node !== action.associatedNode.id),
+          action.associatedNode.uuid,
+          ...state.associationOrder.filter((node) => node !== action.associatedNode.uuid),
         ],
       };
     case CREATE_ASSOCIATION_ERROR:
@@ -98,10 +98,10 @@ export default (state = INITIAL_STATE, action) => {
       order = [...state.associationOrder];
       // loop through and store info
       action.payload.associations.forEach((association) => {
-        if (!order.includes(association.id)) {
-          order.push(association.id);
+        if (!order.includes(association.uuid)) {
+          order.push(association.uuid);
         }
-        associations[association.id] = association;
+        associations[association.uuid] = association;
       });
       return {
         ...state,
@@ -126,8 +126,8 @@ export default (state = INITIAL_STATE, action) => {
         },
         // move the viewed node to the front of the association-order
         associationOrder: [
-          action.id,
-          ...state.associationOrder.filter((node) => node !== action.id),
+          action.uuid,
+          ...state.associationOrder.filter((node) => node !== action.uuid),
         ],
       };
     case MARK_NODE_VIEW_ERROR:
@@ -137,11 +137,11 @@ export default (state = INITIAL_STATE, action) => {
     case DELETE_ASSOCIATION_LINK_SUCCESS:
       // update the association link list
       var newAssociationLinkList = { ...state.associationLinkList };
-      delete newAssociationLinkList[action.deletedId];
+      delete newAssociationLinkList[action.deletedUUID];
       // update the association list
       var associationLinkListOrder = [...state.associationLinkListOrder];
       var newAssociationLinkListOrder = associationLinkListOrder.filter(
-        (node) => node !== parseInt(action.deletedId)
+        (node) => node !== action.deletedUUID
       );
       // update total items
       var newTotalLinkListItems = state.totalLinkListItems - 1;
@@ -157,10 +157,10 @@ export default (state = INITIAL_STATE, action) => {
     case REMOVE_FROM_ASSOCIATION_LIST:
       // update the association list
       var newAssociationList = { ...state.associationList };
-      delete newAssociationList[action.id];
+      delete newAssociationList[action.uuid];
       // update the association order
       var associationOrder = [...state.associationOrder];
-      var newAssociationOrder = associationOrder.filter((node) => node !== parseInt(action.id));
+      var newAssociationOrder = associationOrder.filter((node) => node !== action.uuid);
       // update total items
       var newTotalItems = state.totalAssociationListItems - 1;
       return {

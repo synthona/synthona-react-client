@@ -68,10 +68,10 @@ export default (state = INITIAL_STATE, action) => {
       nodes = { ...state.nodeList };
       order = [...state.nodeOrder];
       action.payload.nodes.forEach((node) => {
-        if (!order.includes(node.id)) {
-          order.push(node.id);
+        if (!order.includes(node.uuid)) {
+          order.push(node.uuid);
         }
-        nodes[node.id] = node;
+        nodes[node.uuid] = node;
       });
       return {
         ...state,
@@ -90,10 +90,10 @@ export default (state = INITIAL_STATE, action) => {
       nodes = {};
       order = [];
       action.payload.nodes.forEach((node) => {
-        if (!order.includes(node.id)) {
-          order.push(node.id);
+        if (!order.includes(node.uuid)) {
+          order.push(node.uuid);
         }
-        nodes[node.id] = node;
+        nodes[node.uuid] = node;
       });
       return {
         ...state,
@@ -115,8 +115,8 @@ export default (state = INITIAL_STATE, action) => {
         isSaving: null,
         nodeList: {
           ...state.nodeList,
-          [action.id]: {
-            ...state.nodeList[action.id],
+          [action.uuid]: {
+            ...state.nodeList[action.uuid],
             content: action.result.content,
             name: action.result.name,
             summary: action.result.summary,
@@ -140,9 +140,9 @@ export default (state = INITIAL_STATE, action) => {
         isFetching: null,
         nodeList: {
           ...state.nodeList,
-          [action.id]: action.payload,
+          [action.uuid]: action.payload,
         },
-        nodeOrder: [action.id, ...state.nodeOrder.filter((node) => node !== action.id)],
+        nodeOrder: [action.uuid, ...state.nodeOrder.filter((node) => node !== action.uuid)],
       };
     case FETCH_TEXT_NODE_ERROR:
       return { ...state, isFetching: null };
@@ -154,8 +154,8 @@ export default (state = INITIAL_STATE, action) => {
         isSaving: null,
         nodeList: {
           ...state.nodeList,
-          [action.id]: {
-            ...state.nodeList[action.id],
+          [action.uuid]: {
+            ...state.nodeList[action.uuid],
             text: {
               content: action.content,
             },
@@ -169,10 +169,10 @@ export default (state = INITIAL_STATE, action) => {
     case DELETE_TEXT_NODE_SUCCESS:
       // update the nodeList
       newNodeList = { ...state.nodeList };
-      delete newNodeList[action.id];
+      delete newNodeList[action.uuid];
       // update the nodeOrder
       order = [...state.nodeOrder];
-      newOrder = order.filter((node) => node !== parseInt(action.id));
+      newOrder = order.filter((node) => node !== action.uuid);
       return {
         ...state,
         nodeOrder: newOrder,
@@ -189,7 +189,7 @@ export default (state = INITIAL_STATE, action) => {
         isSaving: null,
         nodeList: {
           ...state.nodeList,
-          [action.id]: { ...state.nodeList[action.id], summary: action.summary },
+          [action.uuid]: { ...state.nodeList[action.uuid], summary: action.summary },
         },
       };
     case PROCESS_TEXT_NODE_ERROR:
@@ -204,11 +204,11 @@ export default (state = INITIAL_STATE, action) => {
         isFetching: null,
         nodeList: {
           ...state.nodeList,
-          [action.payload.id]: action.payload,
+          [action.payload.uuid]: action.payload,
         },
         nodeOrder: [
-          action.payload.id,
-          ...state.nodeOrder.filter((node) => node !== action.payload.id),
+          action.payload.uuid,
+          ...state.nodeOrder.filter((node) => node !== action.payload.uuid),
         ],
       };
     case CREATE_IMAGE_NODE_ERROR:
@@ -221,9 +221,9 @@ export default (state = INITIAL_STATE, action) => {
         isFetching: null,
         nodeList: {
           ...state.nodeList,
-          [action.id]: action.payload,
+          [action.uuid]: action.payload,
         },
-        nodeOrder: [action.id, ...state.nodeOrder.filter((node) => node !== action.id)],
+        nodeOrder: [action.uuid, ...state.nodeOrder.filter((node) => node !== action.uuid)],
       };
     case FETCH_IMAGE_NODE_ERROR:
       return { ...state, isFetching: null };
@@ -236,11 +236,11 @@ export default (state = INITIAL_STATE, action) => {
         isFetching: null,
         nodeList: {
           ...state.nodeList,
-          [action.payload.id]: action.payload,
+          [action.payload.uuid]: action.payload,
         },
         nodeOrder: [
-          action.payload.id,
-          ...state.nodeOrder.filter((node) => node !== action.payload.id),
+          action.payload.uuid,
+          ...state.nodeOrder.filter((node) => node !== action.payload.uuid),
         ],
       };
     case CREATE_NODE_ERROR:
@@ -255,7 +255,7 @@ export default (state = INITIAL_STATE, action) => {
           ...state.nodeList,
         },
         // move the viewed node to the front of the node-order
-        nodeOrder: [action.id, ...state.nodeOrder.filter((node) => node !== action.id)],
+        nodeOrder: [action.uuid, ...state.nodeOrder.filter((node) => node !== action.uuid)],
       };
     case MARK_NODE_VIEW_ERROR:
       return { ...state, isSaving: null };
@@ -270,10 +270,10 @@ export default (state = INITIAL_STATE, action) => {
     case DELETE_NODE_SUCCESS:
       // update the nodeList
       newNodeList = { ...state.nodeList };
-      delete newNodeList[action.id];
+      delete newNodeList[action.uuid];
       // update the nodeOrder
       order = [...state.nodeOrder];
-      newOrder = order.filter((node) => node !== parseInt(action.id));
+      newOrder = order.filter((node) => node !== action.uuid);
       return {
         ...state,
         nodeOrder: newOrder,

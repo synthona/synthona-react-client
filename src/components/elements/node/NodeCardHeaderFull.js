@@ -33,7 +33,7 @@ class NodeCardHeaderFull extends Component {
   // update and save the document name
   saveName = (name) => {
     if (this.state.name !== name) {
-      this.props.updateNode({ id: this.props.node.id, name });
+      this.props.updateNode({ uuid: this.props.node.uuid, name });
     }
     this.setState({ name: name });
   };
@@ -51,15 +51,15 @@ class NodeCardHeaderFull extends Component {
   deleteHandler = async () => {
     this.setState({ showDeleteModal: false });
     this.setState({ deleting: true });
-    await this.props.deleteNode(this.props.node.id);
+    await this.props.deleteNode(this.props.node.uuid);
   };
 
   toggleHidden = () => {
     if (this.state.hidden) {
-      this.props.updateNode({ id: this.props.node.id, hidden: false });
+      this.props.updateNode({ uuid: this.props.node.uuid, hidden: false });
       this.setState({ hidden: false, hiddenIcon: 'eye' });
     } else {
-      this.props.updateNode({ id: this.props.node.id, hidden: true });
+      this.props.updateNode({ uuid: this.props.node.uuid, hidden: true });
       this.setState({ hidden: true, hiddenIcon: 'eye-invisible' });
     }
   };
@@ -117,7 +117,7 @@ class NodeCardHeaderFull extends Component {
             <button
               onClick={(e) => {
                 // set the active node so the modal has the node data
-                // this.props.setActiveNode(this.props.node.id);
+                // this.props.setActiveNode(this.props.node.uuid);
                 // show the modal
                 this.props.showModal('nodeInfo', this.props.node);
               }}
