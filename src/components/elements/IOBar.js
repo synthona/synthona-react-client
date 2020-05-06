@@ -46,7 +46,7 @@ class IOBar extends Component {
       });
     }
   };
-
+  // handle text input
   commandHandler = () => {
     switch (this.state.inputMode) {
       case 'query':
@@ -60,7 +60,6 @@ class IOBar extends Component {
         return;
     }
   };
-
   // handle the creation of different node types
   createNodeHandler = () => {
     switch (this.state.nodeTypes) {
@@ -83,7 +82,6 @@ class IOBar extends Component {
             content: this.state.input,
           });
           this.setState({ input: '' });
-          this.toggleInputMode();
           // otherwise add a regular URL
         } else if (validUrl(this.state.input)) {
           this.props.createNode({
@@ -95,7 +93,6 @@ class IOBar extends Component {
           });
           // clear the input bar
           this.setState({ input: '' });
-          this.toggleInputMode();
         } else {
           message.error('You must enter a valid URL', 1);
         }
@@ -110,7 +107,6 @@ class IOBar extends Component {
         });
         // clear the input bar
         this.setState({ input: '' });
-        this.toggleInputMode();
         break;
       default:
         return;
@@ -132,7 +128,6 @@ class IOBar extends Component {
         await this.props.createImageNode(file, this.state.input);
         // clear the input bar
         this.setState({ input: '' });
-        this.toggleInputMode();
       } else {
         message.error('The file must be an image', 1);
       }

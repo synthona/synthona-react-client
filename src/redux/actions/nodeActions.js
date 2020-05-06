@@ -76,6 +76,10 @@ export const updateNode = (node) => async (dispatch) => {
       uuid: node.uuid,
       result: result.data.node,
     });
+    // if the node has been hidden remove it from the nodelist
+    if (node.hidden === true) {
+      dispatch({ type: DELETE_NODE_SUCCESS, uuid: node.uuid });
+    }
   } catch (err) {
     dispatch({ type: UPDATE_NODE_ERROR });
     message.error('There was a problem saving your changes', 1);
