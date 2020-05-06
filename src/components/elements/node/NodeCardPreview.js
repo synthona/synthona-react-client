@@ -34,7 +34,7 @@ class NodeCardPreview extends Component {
       case 'collection':
         return (
           <Fragment>
-            <Icon type={'apartment'} theme='outlined' className='node-card-icon' />
+            <Icon type={'branches'} theme='outlined' className='node-card-icon' />
           </Fragment>
         );
       default:

@@ -16,17 +16,27 @@ class NodeCardHeaderFull extends Component {
     this.state = {
       name: this.props.node.name,
       hidden: this.props.node.hidden,
-      hiddenIcon: 'eye',
+      hiddenIcon: null,
+      searchable: this.props.node.searchable,
+      searchableIcon: null,
       editable: false,
       showDeleteModal: null,
     };
   }
 
   componentDidMount() {
+    console.log(this.props.node);
+    // set initial hiddens state
     if (this.props.node.hidden) {
-      this.setState({ hiddenIcon: 'eye-invisible' });
+      this.setState({ hiddenIcon: 'fork' });
     } else {
       this.setState({ hiddenIcon: 'eye' });
+    }
+    // set initial searchable state
+    if (this.props.node.searchable) {
+      this.setState({ searchableIcon: 'search' });
+    } else {
+      this.setState({ searchableIcon: 'key' });
     }
   }
 
@@ -55,12 +65,22 @@ class NodeCardHeaderFull extends Component {
   };
 
   toggleHidden = () => {
-    if (this.state.hidden) {
+    if (this.state.hidden === true) {
       this.props.updateNode({ uuid: this.props.node.uuid, hidden: false });
       this.setState({ hidden: false, hiddenIcon: 'eye' });
     } else {
       this.props.updateNode({ uuid: this.props.node.uuid, hidden: true });
-      this.setState({ hidden: true, hiddenIcon: 'eye-invisible' });
+      this.setState({ hidden: true, hiddenIcon: 'fork' });
+    }
+  };
+
+  toggleSearchable = () => {
+    if (this.state.searchable === true) {
+      this.setState({ searchable: false, searchableIcon: 'key' });
+      this.props.updateNode({ uuid: this.props.node.uuid, searchable: false });
+    } else {
+      this.setState({ searchable: true, searchableIcon: 'search' });
+      this.props.updateNode({ uuid: this.props.node.uuid, searchable: true });
     }
   };
 
@@ -104,27 +124,41 @@ class NodeCardHeaderFull extends Component {
         {this.renderTitle()}
         <ul className='full-card-buttons-list'>
           <Tooltip
-            title='toggle whether node will show up in explore page and searches'
-            mouseEnterDelay={1}
+            title={this.state.hidden ? 'accessible via associations only' : 'visible in timelines'}
+            mouseEnterDelay={1.1}
           >
+            <li>
+              <button
+                onClick={(e) => {
+                  // set the active node so the modal has the node data
+                  // this.props.setActiveNode(this.props.node.uuid);
+                  // show the modal
+                  this.props.showModal('nodeInfo', this.props.node);
+                }}
+              >
+                <Icon type={'bars'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
             <li>
               <button onClick={(e) => this.toggleHidden()}>
                 <Icon type={this.state.hiddenIcon} theme='outlined' className='full-card-button' />
               </button>
             </li>
           </Tooltip>
-          <li>
-            <button
-              onClick={(e) => {
-                // set the active node so the modal has the node data
-                // this.props.setActiveNode(this.props.node.uuid);
-                // show the modal
-                this.props.showModal('nodeInfo', this.props.node);
-              }}
-            >
-              <Icon type={'bars'} theme='outlined' className='full-card-button' />
-            </button>
-          </li>
+          <Tooltip
+            title={this.state.searchable ? 'searchable' : 'hidden from search'}
+            mouseEnterDelay={1.1}
+          >
+            <li>
+              <button onClick={(e) => this.toggleSearchable()}>
+                <Icon
+                  type={this.state.searchableIcon}
+                  theme='outlined'
+                  className='full-card-button'
+                />
+              </button>
+            </li>
+          </Tooltip>
           <li>
             <button onClick={(e) => this.toggleDeleteModal()}>
               <Icon type={'delete'} theme='outlined' className='full-card-button delete' />

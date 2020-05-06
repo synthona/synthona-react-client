@@ -68,6 +68,7 @@ export const updateNode = (node) => async (dispatch) => {
     const result = await instance.patch('/node', {
       uuid: node.uuid,
       hidden: node.hidden,
+      searchable: node.searchable,
       name: node.name,
       summary: node.summary,
     });

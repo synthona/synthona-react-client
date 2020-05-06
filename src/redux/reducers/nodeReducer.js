@@ -120,6 +120,8 @@ export default (state = INITIAL_STATE, action) => {
             content: action.result.content,
             name: action.result.name,
             summary: action.result.summary,
+            hidden: action.result.hidden,
+            searchable: action.result.searchable,
           },
         },
       };
