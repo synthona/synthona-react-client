@@ -13,16 +13,17 @@ const { Content, Footer } = Layout;
 
 class Login extends Component {
   componentDidMount() {
-    document.title = this.getUsername();
+    document.title = 'synthona';
   }
 
   getUsername = () => {
-    const username = localStorage.getItem('displayName');
-    if (username) {
-      return username;
-    } else {
-      return 'holsona';
-    }
+    // const username = localStorage.getItem('displayName');
+    // if (username) {
+    //   return username;
+    // } else {
+    //   return 'synthona';
+    // }
+    return 'synthona';
   };
 
   onSubmit = (values, { setSubmitting }) => {

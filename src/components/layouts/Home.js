@@ -12,7 +12,7 @@ const { Content } = Layout;
 
 class Home extends Component {
   componentDidMount() {
-    document.title = 'Home';
+    document.title = 'home';
   }
 
   render() {
