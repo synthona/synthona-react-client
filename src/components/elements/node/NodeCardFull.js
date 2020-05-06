@@ -75,7 +75,7 @@ class NodeCardFull extends Component {
               // onClick={e => this.props.markNodeView(this.props.node.uuid)} 
             >
               <Icon
-                type={'apartment'}
+                type={'branches'}
                 theme='outlined'
                 style={{
                   fontSize: '5rem',
