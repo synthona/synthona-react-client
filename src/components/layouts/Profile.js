@@ -80,8 +80,8 @@ class Profile extends Component {
     }
 
     return (
-      <Layout className='profile-container'>
-        <MainSider showMask={false} />
+      <div className='profile-container'>
+        <MainSider showMask={false} animate={false} />
         <Layout>
           <Modal
             title={this.state.displayName}
@@ -127,7 +127,7 @@ class Profile extends Component {
             <NodeList />
           </Content>
         </Layout>
-      </Layout>
+      </div>
     );
   }
 }

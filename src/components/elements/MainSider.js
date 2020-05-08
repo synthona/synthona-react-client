@@ -30,11 +30,19 @@ class MainSider extends Component {
     }
   };
 
+  renderDrawerClasses = () => {
+    if (this.props.animate === false) {
+      return 'page-sider no-animation';
+    } else {
+      return 'page-sider';
+    }
+  };
+
   render() {
     return (
       <div className='sider-container'>
         <Drawer
-          className='page-sider'
+          className={this.renderDrawerClasses()}
           width='200px'
           mask={this.props.showMask}
           placement='left'
