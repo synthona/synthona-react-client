@@ -256,7 +256,7 @@ class EditProfile extends Component {
 
   render() {
     return (
-      <Layout className='page-layout'>
+      <Layout className='EditProfile-container'>
         <MainSider showMask={false} animate={false} />
         <Layout>
           <Content className='EditProfile'>
