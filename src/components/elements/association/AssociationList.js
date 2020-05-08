@@ -19,7 +19,6 @@ class AssociationList extends Component {
   infiniteScroll = (e) => {
     var currentListLength = Object.keys(this.props.associations).length;
     if (this.endReached() && this.props.activeNode && currentListLength < this.props.totalNodes) {
-      console.log('load more');
       // fetch the next page
       this.props.fetchAssociations({
         page: this.props.page + 1,

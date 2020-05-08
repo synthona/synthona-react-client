@@ -32,7 +32,6 @@ class NodeList extends Component {
     // window calculations to tell when the user scrolls to the bottom
     const windowHeight =
       'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
-    // console.log(window.pageYOffset);
     const body = document.body;
     const html = document.documentElement;
     const docHeight = Math.max(

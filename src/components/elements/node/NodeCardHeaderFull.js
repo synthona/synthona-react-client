@@ -25,7 +25,6 @@ class NodeCardHeaderFull extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.node);
     // set initial hiddens state
     if (this.props.node.hidden) {
       this.setState({ hiddenIcon: 'fork' });

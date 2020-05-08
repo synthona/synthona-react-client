@@ -57,7 +57,6 @@ class IOBar extends Component {
     } else {
       this.props.showComponent('mainSider');
     }
-    console.log(this.props.mainSider);
   };
 
   // handle text input
