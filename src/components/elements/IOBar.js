@@ -190,7 +190,7 @@ class IOBar extends Component {
       <div>
         <Header className='page-header'>
           <ul className='nav-list'>
-            <li className='nav-item create-node-button'>
+            <li className='nav-item io-sider-button'>
               <Button type='default' shape='circle' onClick={this.toggleMainSider}>
                 <Icon type={'bars'} theme='outlined' />
               </Button>
