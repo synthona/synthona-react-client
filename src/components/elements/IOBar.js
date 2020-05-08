@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Layout, Button, Input, Select, Icon, message } from 'antd';
 // custom code
 import { validUrl, isImageUrl } from '../../utils/inputValidation';
@@ -191,12 +192,17 @@ class IOBar extends Component {
         <Header className='page-header'>
           <ul className='nav-list'>
             <li className='nav-item io-sider-button'>
-              <Button type='default' shape='circle' onClick={this.toggleMainSider}>
+              <Link type='default' to={`/`}>
+                <Icon type={'home'} theme='outlined' />
+              </Link>
+            </li>
+            <li className='nav-item io-sider-button'>
+              <Button type='default' shape='circle' onClick={(e) => this.toggleMainSider()}>
                 <Icon type={'bars'} theme='outlined' />
               </Button>
             </li>
             <li className='nav-item create-node-button'>
-              <Button type='default' shape='circle' onClick={this.toggleInputMode}>
+              <Button type='default' shape='circle' onClick={(e) => this.toggleInputMode()}>
                 <Icon type={this.state.modeIcon} theme='outlined' />
               </Button>
             </li>
