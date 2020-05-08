@@ -5,4 +5,4 @@ export * from './imageActions';
 export * from './textActions';
 export * from './userActions';
 export * from './associationActions';
-export * from './modalActions';
+export * from './componentActions';

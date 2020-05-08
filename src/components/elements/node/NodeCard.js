@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { markNodeView, hideModal, updateLinkStrength } from '../../../redux/actions';
+import { markNodeView, updateLinkStrength } from '../../../redux/actions';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 //custom components
@@ -25,12 +25,8 @@ class NodeCard extends Component {
         return (
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />
-            <Link
-              to={`/edit/text/${this.props.node.uuid}`}
-              replace
-              onClick={(e) => this.handleNodeClick()}
-            >
-              {/* <Link to={`/edit/text/${this.props.node.uuid}`} replace> */}
+            <Link to={`/edit/text/${this.props.node.uuid}`} onClick={(e) => this.handleNodeClick()}>
+              {/* <Link to={`/edit/text/${this.props.node.uuid}`}> */}
               <NodeCardPreview node={this.props.node} />
             </Link>
           </li>
@@ -41,7 +37,6 @@ class NodeCard extends Component {
             <NodeCardHeader node={this.props.node} />
             <Link
               to={`/associations/${this.props.node.uuid}`}
-              replace
               onClick={(e) => this.handleNodeClick()}
             >
               <NodeCardPreview node={this.props.node} />
@@ -91,7 +86,6 @@ class NodeCard extends Component {
                 <NodeCardHeader node={this.props.node} />
                 <Link
                   to={`/associations/${this.props.node.uuid}`}
-                  replace
                   onClick={(e) => this.handleNodeClick()}
                 >
                   <NodeCardPreview node={this.props.node} />
@@ -105,7 +99,6 @@ class NodeCard extends Component {
                 <NodeCardHeader node={this.props.node} />
                 <Link
                   to={`/associations/${this.props.node.uuid}`}
-                  replace
                   onClick={(e) => this.handleNodeClick()}
                 >
                   <div className='nodelist-collection-item-single'>
@@ -121,7 +114,6 @@ class NodeCard extends Component {
                 <NodeCardHeader node={this.props.node} />
                 <Link
                   to={`/associations/${this.props.node.uuid}`}
-                  replace
                   onClick={(e) => this.handleNodeClick()}
                 >
                   <ul className='nodelist-collection-grid'>
@@ -142,7 +134,6 @@ class NodeCard extends Component {
                 <NodeCardHeader node={this.props.node} />
                 <Link
                   to={`/associations/${this.props.node.uuid}`}
-                  replace
                   onClick={(e) => this.handleNodeClick()}
                 >
                   <ul className='nodelist-collection-grid'>
@@ -167,7 +158,6 @@ class NodeCard extends Component {
                 <NodeCardHeader node={this.props.node} />
                 <Link
                   to={`/associations/${this.props.node.uuid}`}
-                  replace
                   onClick={(e) => this.handleNodeClick()}
                 >
                   <ul className='nodelist-collection-grid'>
@@ -207,4 +197,4 @@ class NodeCard extends Component {
   }
 }
 
-export default connect(null, { markNodeView, hideModal, updateLinkStrength })(NodeCard);
+export default connect(null, { markNodeView, updateLinkStrength })(NodeCard);

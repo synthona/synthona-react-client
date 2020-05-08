@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Menu, Avatar, Modal } from 'antd';
-import { signOut, createTextNode } from '../../redux/actions';
+import { Menu, Avatar, Modal, Drawer } from 'antd';
+import { signOut, createTextNode, hideComponent } from '../../redux/actions';
 // custom code
 import './MainSider.less';
 // destructure antd components
-// const { SubMenu } = Menu;
-const { Sider } = Layout;
-// const { Search } = Input;
 const { Item } = Menu;
-// const { Option } = Select;
 
 class MainSider extends Component {
   constructor(props) {
@@ -20,18 +16,6 @@ class MainSider extends Component {
       visible: false,
     };
   }
-
-  showDrawer = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  onClose = () => {
-    this.setState({
-      visible: false,
-    });
-  };
 
   signOutHandler = () => {
     this.props.signOut();
@@ -49,20 +33,18 @@ class MainSider extends Component {
   render() {
     return (
       <div className='sider-container'>
-        <Sider className='page-sider'>
-          {/* <Button type='primary' onClick={this.showDrawer}>
-          Open
-        </Button>
         <Drawer
           className='page-sider'
+          width='200px'
+          mask={this.props.showMask}
           placement='left'
           closable={false}
-          onClose={this.onClose}
-          visible={this.state.visible}
-        > */}
+          onClose={(e) => this.props.hideComponent('mainSider')}
+          visible={this.props.mainSider}
+        >
           <Menu mode='vertical' defaultSelectedKeys={['1']} className='sider-menu'>
             <Item>
-              <Link to={`/`}>
+              <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
                 <Avatar
                   className='nav-avatar'
                   src={this.props.user.avatar}
@@ -77,17 +59,6 @@ class MainSider extends Component {
                     objectFit: 'contain',
                   }}
                 />
-                {/* <h3
-                  style={{
-                    display: 'inline-block',
-                    fontSize: '1.1rem',
-                    padding: '0 0 0 0.6rem',
-                    verticalAlign: 'middle',
-                    margin: 0
-                  }}
-                >
-                  {this.props.user.displayName}
-                </h3> */}
               </Link>
             </Item>
             <Item className='sider-menu-item sider-title'>
@@ -97,19 +68,24 @@ class MainSider extends Component {
               </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to={`/`}>Explore</Link>
+              <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
+                Explore
+              </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to='/'>Nodes</Link>
-            </Item>
-            {/* <Item className='sider-menu-item'>
-              <Link to='/'>Collections</Link>
-            </Item> */}
-            <Item className='sider-menu-item'>
-              <Link to='/'>Map</Link>
+              <Link to='/' onClick={(e) => this.props.hideComponent('mainSider')}>
+                Nodes
+              </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to='/'>Chat</Link>
+              <Link to='/' onClick={(e) => this.props.hideComponent('mainSider')}>
+                Map
+              </Link>
+            </Item>
+            <Item className='sider-menu-item'>
+              <Link to='/' onClick={(e) => this.props.hideComponent('mainSider')}>
+                Chat
+              </Link>
             </Item>
             <Item className='sider-menu-item'>
               <Link to={`/edit/profile/`}>Settings</Link>
@@ -120,8 +96,8 @@ class MainSider extends Component {
               </Link>
             </Item>
           </Menu>
-          {/* </Drawer> */}
-        </Sider>
+        </Drawer>
+        {/* </Sider> */}
         <Modal
           title={this.props.user.displayName}
           visible={this.state.showSignoutModal}
@@ -141,7 +117,7 @@ class MainSider extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.auth.user };
+  return { user: state.auth.user, mainSider: state.components.componentList['mainSider'] };
 };
 
-export default connect(mapStateToProps, { signOut, createTextNode })(MainSider);
+export default connect(mapStateToProps, { signOut, createTextNode, hideComponent })(MainSider);

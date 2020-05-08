@@ -15,26 +15,36 @@
   height: 3rem;
   line-height: 2.8rem;
   vertical-align: middle;
-  width: 87%;
+  width: 100%;
   overflow: hidden;
-  text-align: center;
   z-index: 5;
-  position: fixed;
+  // position: fixed;
+}
+
+.nav-search {
+  padding: 0.47rem 2rem 0;
+}
+
+.nav-search-input {
+  min-width: 50rem;
+  padding: 0;
+  margin: 0;
 }
 
 ul.nav-list {
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   overflow: hidden;
-  padding: 0 3rem 0 1.3rem;
+  padding: 0;
 }
 
 li.nav-item {
   display: inline;
   overflow: hidden;
   font-size: 0.9rem;
+  padding: 0 0.3rem;
 }
 
 img.header-logo:hover {
@@ -47,10 +57,6 @@ img.header-logo:hover {
 
 .create-node-button {
   padding-top: 0.1rem;
-}
-
-.nav-search {
-  padding-top: 0.47rem;
 }
 
 .create-node-button button.ant-btn {

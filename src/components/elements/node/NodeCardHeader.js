@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
-import { markNodeView, showModal, setActiveNode, updateNode } from '../../../redux/actions';
+import { markNodeView, showComponent, setActiveNode, updateNode } from '../../../redux/actions';
 
 class NodeCardHeader extends Component {
   constructor(props) {
@@ -82,7 +82,6 @@ class NodeCardHeader extends Component {
           </button>
           <Link
             to={`/associations/${this.props.node.uuid}`}
-            replace
             style={{ padding: '0', color: '#272727', display: 'inline-block' }}
           >
             <Icon
@@ -101,7 +100,7 @@ class NodeCardHeader extends Component {
               // set the active node so the modal has the node data
               // this.props.setActiveNode(this.props.node.uuid);
               // show the modal
-              this.props.showModal('nodeInfo', this.props.node);
+              this.props.showComponent('associationSider', this.props.node);
             }}
           >
             <Icon
@@ -123,7 +122,7 @@ class NodeCardHeader extends Component {
 
 export default connect(null, {
   markNodeView,
-  showModal,
+  showComponent,
   setActiveNode,
   updateNode,
 })(NodeCardHeader);

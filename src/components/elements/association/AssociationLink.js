@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  hideModal,
+  hideComponent,
   deleteAssociationLink,
   removeFromAssociationList,
   updateLinkStrength,
@@ -12,21 +12,21 @@ import './AssociationLinkList.less';
 
 class AssociationLink extends Component {
   handleDeleteAssociation = () => {
-    var modalNodeUUID = this.props.modalNodeUUID;
+    var siderNodeUUID = this.props.siderNodeUUID;
     var linkedNodeUUID = this.props.association.uuid;
     if (this.props.activeNode) {
       // store the active node
       var activeNode = this.props.activeNode.uuid;
     }
     // if both have values go ahead and delete the association
-    if (modalNodeUUID && linkedNodeUUID) {
-      this.props.deleteAssociationLink(modalNodeUUID, linkedNodeUUID);
+    if (siderNodeUUID && linkedNodeUUID) {
+      this.props.deleteAssociationLink(siderNodeUUID, linkedNodeUUID);
       // store pathname
       var pathname = window.location.pathname;
       // handle removal from association list page if on association page
-      if (pathname.includes('associations') && activeNode && activeNode !== modalNodeUUID) {
-        this.props.removeFromAssociationList(modalNodeUUID);
-        this.props.hideModal();
+      if (pathname.includes('associations') && activeNode && activeNode !== siderNodeUUID) {
+        this.props.removeFromAssociationList(siderNodeUUID);
+        this.props.hideComponent('associationSider');
       } else {
         this.props.removeFromAssociationList(linkedNodeUUID);
       }
@@ -34,9 +34,9 @@ class AssociationLink extends Component {
   };
 
   handleLinkClick = () => {
-    this.props.hideModal();
-    if (this.props.modalNodeUUID && this.props.association.uuid) {
-      const nodeUUID = this.props.modalNodeUUID;
+    this.props.hideComponent('associationSider');
+    if (this.props.siderNodeUUID && this.props.association.uuid) {
+      const nodeUUID = this.props.siderNodeUUID;
       const linkedNodeUUID = this.props.association.uuid;
       // increment the linkStrength on the server
       this.props.updateLinkStrength(nodeUUID, linkedNodeUUID);
@@ -59,7 +59,6 @@ class AssociationLink extends Component {
               <Link
                 to={`/edit/text/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
-                replace
                 target='_blank'
               >
                 {association.name}
@@ -80,7 +79,6 @@ class AssociationLink extends Component {
               <Link
                 to={`/associations/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
-                replace
                 target='_blank'
               >
                 {association.name}
@@ -123,7 +121,6 @@ class AssociationLink extends Component {
               <Link
                 to={`/associations/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
-                replace
                 target='_blank'
               >
                 {association.name}
@@ -143,13 +140,13 @@ class AssociationLink extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    modalNodeUUID: state.modals.modalInfo.content.uuid,
+    siderNodeUUID: state.components.componentList['associationSider'].content.uuid,
     activeNode: state.nodes.activeNode,
   };
 };
 
 export default connect(mapStateToProps, {
-  hideModal,
+  hideComponent,
   deleteAssociationLink,
   removeFromAssociationList,
   updateLinkStrength,

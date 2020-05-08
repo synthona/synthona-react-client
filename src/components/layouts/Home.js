@@ -8,21 +8,25 @@ import NodeList from '../elements/node/NodeList';
 
 const { Content } = Layout;
 
-// i should really move the fetchNodes call into the nodeList component asap
-
 class Home extends Component {
   componentDidMount() {
     document.title = 'home';
   }
 
+  renderMainSider = () => {
+    if (this.props.mainSider) {
+      return <MainSider />;
+    }
+  };
+
   render() {
     return (
       <Layout className='page-layout'>
-        <MainSider />
         <Layout>
-          <Content style={{ minHeight: '100vh', marginLeft: '12.3rem' }}>
+          {this.renderMainSider()}
+          <Content style={{ minHeight: '100vh' }}>
             <IOBar />
-            <div style={{ marginTop: '2.5rem' }}>
+            <div style={{ marginTop: '0' }}>
               <NodeList />
             </div>
           </Content>
@@ -33,7 +37,10 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isSignedIn: state.auth.isSignedIn };
+  return {
+    isSignedIn: state.auth.isSignedIn,
+    mainSider: state.components.componentList['mainSider'],
+  };
 };
 
 export default connect(mapStateToProps)(Home);

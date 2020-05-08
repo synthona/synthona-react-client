@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import { setActiveNode, fetchAssociations, markNodeView, updateNode } from '../../redux/actions';
-// import IOBar from '../elements/IOBar';
 import MainSider from '../elements/MainSider';
 import NodeCardFull from '../elements/node/NodeCardFull';
-// import IOBar from '../elements/IOBar';
 import Spinner from '../elements/Spinner';
+import IOBar from '../elements/IOBar';
 import AssociationList from '../elements/association/AssociationList';
 import { message } from 'antd';
 const { Content } = Layout;
@@ -74,6 +73,7 @@ class AssociationBrowser extends Component {
       var i = 0;
       var key;
       var preview = [];
+      // get the first 4 non-collection non-user associated nodes and add them to the new preview
       while (i < associationOrder.length && preview.length < 4) {
         key = associationOrder[i];
         if (associationList[key].type !== 'collection' && associationList[key].type !== 'user') {
@@ -87,38 +87,31 @@ class AssociationBrowser extends Component {
 
   renderNode = () => {
     if (this.props.activeNode !== null && this.state.uuid === this.props.activeNode.uuid) {
-      return (
-        // <h1
-        //   style={{
-        //     textAlign: 'center',
-        //     color: 'white',
-        //     padding: '0.3rem 0 0.1rem',
-        //     fontSize: '1.2rem'
-        //   }}
-        // >
-        //   {this.props.activeNode.name}
-        // </h1>
-        <NodeCardFull node={this.props.activeNode} />
-      );
+      return <NodeCardFull node={this.props.activeNode} />;
     } else {
       return <Spinner></Spinner>;
+    }
+  };
+
+  renderMainSider = () => {
+    if (this.props.mainSider) {
+      return <MainSider />;
     }
   };
 
   render() {
     return (
       <Layout className='page-layout'>
-        <MainSider />
+        {this.renderMainSider()}
         <Layout>
           <Content
             style={{
               paddingTop: '0',
               backgroundColor: '#272727',
-              marginLeft: '12.3rem',
             }}
           >
-            {/* <IOBar /> */}
-            {this.renderNode()}
+            <IOBar />
+            <div style={{ marginTop: '0rem' }}>{this.renderNode()}</div>
             <AssociationList />
           </Content>
         </Layout>
@@ -133,6 +126,7 @@ const mapStateToProps = (state) => {
     associationOrder: state.associations.associationOrder,
     isLoading: state.nodes.isFetching,
     activeNode: state.nodes.activeNode,
+    mainSider: state.components.componentList['mainSider'],
   };
 };
 

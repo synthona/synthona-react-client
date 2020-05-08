@@ -2,7 +2,7 @@ import { RESET_APP } from '../actions/types';
 // custom code
 import authReducer from './authReducer';
 import nodeReducer from './nodeReducer';
-import modalReducer from './modalReducer';
+import componentReducer from './componentReducer';
 import associationReducer from './associationReducer';
 
 // custom combineReducers
@@ -16,7 +16,7 @@ export default (state = {}, action) => {
   return {
     auth: authReducer(state.auth, action),
     nodes: nodeReducer(state.nodes, action),
-    modals: modalReducer(state.modals, action),
-    associations: associationReducer(state.associations, action)
+    components: componentReducer(state.components, action),
+    associations: associationReducer(state.associations, action),
   };
 };

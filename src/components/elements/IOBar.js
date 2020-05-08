@@ -10,6 +10,8 @@ import {
   createImageNode,
   createNode,
   searchNodes,
+  showComponent,
+  hideComponent,
 } from '../../redux/actions';
 // destructure antd components
 const { Header } = Layout;
@@ -46,6 +48,17 @@ class IOBar extends Component {
       });
     }
   };
+
+  toggleMainSider = async () => {
+    // await this.props.showComponent('mainSider');
+    if (this.props.mainSider) {
+      this.props.hideComponent('mainSider');
+    } else {
+      this.props.showComponent('mainSider');
+    }
+    console.log(this.props.mainSider);
+  };
+
   // handle text input
   commandHandler = () => {
     switch (this.state.inputMode) {
@@ -177,11 +190,11 @@ class IOBar extends Component {
       <div>
         <Header className='page-header'>
           <ul className='nav-list'>
-            {/* <li className='nav-item create-node-button'>
-              <Button type='default' shape='circle'>
+            <li className='nav-item create-node-button'>
+              <Button type='default' shape='circle' onClick={this.toggleMainSider}>
                 <Icon type={'bars'} theme='outlined' />
               </Button>
-            </li> */}
+            </li>
             <li className='nav-item create-node-button'>
               <Button type='default' shape='circle' onClick={this.toggleInputMode}>
                 <Icon type={this.state.modeIcon} theme='outlined' />
@@ -196,9 +209,7 @@ class IOBar extends Component {
                 defaultValue={this.props.query.searchQuery || ''}
                 placeholder={this.state.placeholder}
                 addonBefore={this.renderSelectBefore()}
-                style={{
-                  width: '68rem',
-                }}
+                className='nav-search-input'
               />
             </li>
             <li className='mode-toggle nav-item'>
@@ -219,7 +230,11 @@ class IOBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.auth.user, query: state.nodes.query };
+  return {
+    user: state.auth.user,
+    query: state.nodes.query,
+    mainSider: state.components.componentList['mainSider'],
+  };
 };
 
 export default connect(mapStateToProps, {
@@ -228,4 +243,6 @@ export default connect(mapStateToProps, {
   searchNodes,
   createNode,
   createImageNode,
+  showComponent,
+  hideComponent,
 })(IOBar);

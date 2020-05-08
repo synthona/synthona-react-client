@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { markNodeView, hideModal } from '../../../redux/actions';
+import { markNodeView } from '../../../redux/actions';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 //custom components
@@ -15,7 +15,7 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            <Link to={`/edit/text/${this.props.node.uuid}`} replace /*target='_blank' */>
+            <Link to={`/edit/text/${this.props.node.uuid}`} /*target='_blank' */>
               <p style={{ padding: '1.7rem' }}>{this.props.node.summary}</p>
             </Link>
           </div>
@@ -24,7 +24,7 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <Link to={`/view/image/${this.props.node.uuid}`} replace >
+            {/* <Link to={`/view/image/${this.props.node.uuid}`} >
 
             </Link> */}
             <img
@@ -71,7 +71,6 @@ class NodeCardFull extends Component {
             <NodeCardHeaderFull node={this.props.node} />
             {/* <Link
               to={`/associations/${this.props.node.uuid}`}
-              replace
               // onClick={e => this.props.markNodeView(this.props.node.uuid)} 
             >
               <Icon
@@ -104,4 +103,4 @@ class NodeCardFull extends Component {
   }
 }
 
-export default connect(null, { markNodeView, hideModal })(NodeCardFull);
+export default connect(null, { markNodeView })(NodeCardFull);

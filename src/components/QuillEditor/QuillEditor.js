@@ -125,8 +125,7 @@ class QuillEditor extends Component {
       // wait for summary to update before going back to homepage so it will be up to date
       await this.props.processTextNode(this.props.match.params.uuid, summary);
     }
-    // this.props.history.goBack();
-    this.props.history.push('/');
+    this.props.history.goBack();
   };
 
   // select an image.

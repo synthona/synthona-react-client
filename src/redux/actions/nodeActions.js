@@ -53,6 +53,7 @@ export const searchNodes = (query) => async (dispatch) => {
       params: { page: query.page, type: query.type, searchQuery: query.searchQuery },
     });
     dispatch({ type: SEARCH_NODES_SUCCESS, payload: response.data, query });
+    history.push('/');
   } catch (err) {
     dispatch({ type: SEARCH_NODES_ERROR });
     dispatch({ type: RESET_APP });

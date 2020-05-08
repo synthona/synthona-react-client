@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Layout, message, Modal } from 'antd';
 // custom code
 import Spinner from '../elements/Spinner';
-import { fetchUserByUsername } from '../../redux/actions';
+import { fetchUserByUsername, showComponent } from '../../redux/actions';
 import './css/Profile.less';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';
@@ -25,6 +25,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    this.props.showComponent('mainSider');
     document.title = this.props.match.params.username;
     this.initializeFromUrlParams();
   }
@@ -79,8 +80,8 @@ class Profile extends Component {
     }
 
     return (
-      <Layout className='page-layout'>
-        <MainSider />
+      <Layout className='profile-container'>
+        <MainSider showMask={false} />
         <Layout>
           <Modal
             title={this.state.displayName}
@@ -135,4 +136,4 @@ const mapStateToProps = (state) => {
   return { user: state.auth.user };
 };
 
-export default connect(mapStateToProps, { fetchUserByUsername })(Profile);
+export default connect(mapStateToProps, { fetchUserByUsername, showComponent })(Profile);

@@ -66,7 +66,7 @@ class NodeList extends Component {
 
   render() {
     return (
-      <div>
+      <div className='nodelist-container'>
         <ul className='nodelist'>{this.renderNodeList()}</ul>
         <AssociationSider />
       </div>

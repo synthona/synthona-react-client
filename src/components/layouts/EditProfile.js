@@ -12,6 +12,7 @@ import {
   updateUsername,
   updateEmail,
   changePassword,
+  showComponent,
 } from '../../redux/actions';
 import './css/EditProfile.less';
 // import IOBar from '../elements/IOBar';
@@ -36,6 +37,7 @@ class EditProfile extends Component {
   }
 
   componentDidMount() {
+    this.props.showComponent('mainSider');
     document.title = `Edit Profile`;
     this.initializeFromUrlParams();
   }
@@ -255,7 +257,7 @@ class EditProfile extends Component {
   render() {
     return (
       <Layout className='page-layout'>
-        <MainSider />
+        <MainSider showMask={false} />
         <Layout>
           <Content className='EditProfile'>
             <div className='EditProfile-card'>
@@ -347,4 +349,5 @@ export default connect(mapStateToProps, {
   updateUsername,
   updateEmail,
   changePassword,
+  showComponent,
 })(EditProfile);

@@ -5,14 +5,13 @@ import { Drawer, AutoComplete } from 'antd';
 import {
   signOut,
   createTextNode,
-  hideModal,
+  hideComponent,
   createAssociation,
   fetchAssociationLinkList,
   fetchAssociations,
   associationAutocomplete,
 } from '../../../redux/actions';
 // custom code
-// import Spinner from '../elements/Spinner';
 import AssociationLinkList from './AssociationLinkList';
 // destructure antd
 const { Option } = AutoComplete;
@@ -30,6 +29,7 @@ class AssociationSider extends Component {
   createAssociationHandler = async (input) => {
     // get the uuid of the node to be associated
     const nodeToAssociate = [];
+    var siderNode = this.props.associationSiderData.content;
     this.state.autocompleteValues.forEach((node) => {
       if (node.uuid === input) {
         nodeToAssociate.push(node.uuid);
@@ -37,7 +37,7 @@ class AssociationSider extends Component {
     });
     const nodeUUIDToAssociate = nodeToAssociate[0];
     // get this node uuid
-    const nodeUUID = this.props.node.uuid;
+    const nodeUUID = siderNode.uuid;
     // associate the nodes
     await this.props.createAssociation(nodeUUID, nodeUUIDToAssociate);
     this.setState({ autocompleteOptions: [], autocompleteValues: null, inputText: '' });
@@ -46,10 +46,11 @@ class AssociationSider extends Component {
   };
 
   renderAutocompleteValues = async (input) => {
+    var siderNode = this.props.associationSiderData.content;
     this.setState({ inputText: input });
     const result = await this.props.associationAutocomplete({
       searchQuery: input || '',
-      uuid: this.props.node.uuid,
+      uuid: siderNode.uuid,
     });
     if (result) {
       this.setState({
@@ -67,21 +68,22 @@ class AssociationSider extends Component {
   hideInfoSider = () => {
     // reset state when the sider is hidden
     this.setState({ autocompleteOptions: null, autocompleteValues: null, inputText: '' });
-    // update modal state at app level
-    this.props.hideModal();
+    // hide association sider component
+    this.props.hideComponent('associationSider');
   };
 
   renderContent = () => {
-    if (this.props.modal.visible && this.props.modal.type === 'nodeInfo' && this.props.node) {
+    if (this.props.associationSiderData) {
+      var siderNode = this.props.associationSiderData.content;
       return (
         <div className='node-info-sider-container' style={{ textAlign: 'center' }}>
           <Drawer
             className='node-info-sider'
             placement='right'
             closable={false}
-            title={this.props.node.name}
+            title={siderNode.name}
             onClose={this.hideInfoSider}
-            visible={this.props.modal.visible}
+            visible={this.props.associationSiderData}
           >
             <AutoComplete
               style={{
@@ -96,7 +98,7 @@ class AssociationSider extends Component {
               {this.state.autocompleteOptions}
             </AutoComplete>
             <br />
-            <AssociationLinkList nodeUUID={this.props.node.uuid} />
+            <AssociationLinkList nodeUUID={siderNode.uuid} />
           </Drawer>
         </div>
       );
@@ -110,8 +112,7 @@ class AssociationSider extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    modal: state.modals.modalInfo,
-    node: state.modals.modalInfo.content,
+    associationSiderData: state.components.componentList['associationSider'],
     page: state.associations.associationLinkListPage,
   };
 };
@@ -119,7 +120,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   signOut,
   createTextNode,
-  hideModal,
+  hideComponent,
   createAssociation,
   fetchAssociationLinkList,
   fetchAssociations,

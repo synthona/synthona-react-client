@@ -1,7 +1,7 @@
 export const RESET_APP = 'RESET_APP';
 // modal actions
-export const SHOW_MODAL = 'SHOW_MODAL';
-export const HIDE_MODAL = 'HIDE_MODAL';
+export const SHOW_COMPONENT = 'SHOW_COMPONENT';
+export const HIDE_COMPONENT = 'HIDE_COMPONENT';
 // sign in
 export const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 export const CREATE_ACCOUNT_SUCCESS = 'CREATE_ACCOUNT_SUCCESS';

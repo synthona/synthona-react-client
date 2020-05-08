@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Icon, Modal, Tooltip } from 'antd';
 import {
   markNodeView,
-  showModal,
+  showComponent,
   setActiveNode,
   updateNode,
   deleteNode,
@@ -133,7 +133,7 @@ class NodeCardHeaderFull extends Component {
                   // set the active node so the modal has the node data
                   // this.props.setActiveNode(this.props.node.uuid);
                   // show the modal
-                  this.props.showModal('nodeInfo', this.props.node);
+                  this.props.showComponent('associationSider', this.props.node);
                 }}
               >
                 <Icon type={'bars'} theme='outlined' className='full-card-button' />
@@ -187,7 +187,7 @@ class NodeCardHeaderFull extends Component {
 
 export default connect(null, {
   markNodeView,
-  showModal,
+  showComponent,
   setActiveNode,
   updateNode,
   deleteNode,
