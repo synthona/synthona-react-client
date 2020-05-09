@@ -119,7 +119,7 @@ class AssociationBrowser extends Component {
             }}
           >
             <IOBar />
-            <div style={{ marginTop: '0rem' }}>{this.renderNode()}</div>
+            <div className='list-container'>{this.renderNode()}</div>
             <AssociationList />
           </Content>
         </Layout>

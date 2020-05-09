@@ -26,7 +26,7 @@ class Home extends Component {
           {this.renderMainSider()}
           <Content style={{ minHeight: '100vh' }}>
             <IOBar />
-            <div style={{ marginTop: '0' }}>
+            <div className='list-container'>
               <NodeList />
             </div>
           </Content>
