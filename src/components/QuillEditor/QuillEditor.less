@@ -71,6 +71,11 @@ div.quill {
   border: none;
 }
 
+.text-editor-content .full-card-options {
+  position: fixed;
+  z-index: 11;
+}
+
 .ql-toolbar {
   text-align: center;
   position: fixed;
@@ -79,11 +84,6 @@ div.quill {
   width: 100%;
   z-index: 10;
   background-color: @toolbar-color;
-}
-
-.full-card-options {
-  position: fixed;
-  z-index: 11;
 }
 
 .ql-editor {
@@ -208,7 +208,7 @@ span:focus {
     }
   }
 
-  .full-card-options {
+  .text-editor-content .full-card-options {
     h3 {
       width: 10rem;
     }
@@ -218,7 +218,7 @@ span:focus {
     margin: 2.4rem 0 0;
   }
 
-  .full-card-options {
+  .text-editor-content.full-card-options {
     position: fixed;
     z-index: 11;
   }
