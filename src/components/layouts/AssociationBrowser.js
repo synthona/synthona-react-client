@@ -53,7 +53,7 @@ class AssociationBrowser extends Component {
       });
       // update collection preview if necessary
       // TODO: find a way to have it update even less often if possible
-      if (this.props.activeNode.type === 'collection') {
+      if (this.props.activeNode.type && this.props.activeNode.type === 'collection') {
         this.regenerateCollectionPreview(
           this.props.activeNode,
           this.props.associations,
@@ -69,19 +69,26 @@ class AssociationBrowser extends Component {
   };
 
   regenerateCollectionPreview = async (collectionNode, associationList, associationOrder) => {
-    if (collectionNode && associationList) {
-      var i = 0;
-      var key;
-      var preview = [];
-      // get the first 4 non-collection non-user associated nodes and add them to the new preview
-      while (i < associationOrder.length && preview.length < 4) {
-        key = associationOrder[i];
-        if (associationList[key].type !== 'collection' && associationList[key].type !== 'user') {
-          preview.push({ type: associationList[key].type, summary: associationList[key].summary });
+    try {
+      if (collectionNode && associationList) {
+        var i = 0;
+        var key;
+        var preview = [];
+        // get the first 4 non-collection non-user associated nodes and add them to the new preview
+        while (i < associationOrder.length && preview.length < 4) {
+          key = associationOrder[i];
+          if (associationList[key].type !== 'collection' && associationList[key].type !== 'user') {
+            preview.push({
+              type: associationList[key].type,
+              summary: associationList[key].summary,
+            });
+          }
+          i++;
         }
-        i++;
+        this.props.updateNode({ uuid: collectionNode.uuid, summary: JSON.stringify(preview) });
       }
-      this.props.updateNode({ uuid: collectionNode.uuid, summary: JSON.stringify(preview) });
+    } catch (err) {
+      this.props.history.push('/');
     }
   };
 
@@ -107,7 +114,8 @@ class AssociationBrowser extends Component {
           <Content
             style={{
               paddingTop: '0',
-              backgroundColor: '#272727',
+              backgroundColor: 'black',
+              minHeight: '100vh',
             }}
           >
             <IOBar />

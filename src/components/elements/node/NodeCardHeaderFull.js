@@ -123,7 +123,7 @@ class NodeCardHeaderFull extends Component {
         {this.renderTitle()}
         <ul className='full-card-buttons-list'>
           <Tooltip
-            title={this.state.hidden ? 'accessible via associations only' : 'visible in timelines'}
+            title={this.state.hidden ? 'accessible via associations only' : 'visible on homepage'}
             mouseEnterDelay={1.1}
           >
             <li>

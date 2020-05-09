@@ -52,7 +52,7 @@ class MainSider extends Component {
         >
           <Menu mode='vertical' defaultSelectedKeys={['1']} className='sider-menu'>
             <Item>
-              <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
+              <Link to={`/profile/${this.props.user.username}`}>
                 <Avatar
                   className='nav-avatar'
                   src={this.props.user.avatar}
@@ -77,7 +77,7 @@ class MainSider extends Component {
             </Item>
             <Item className='sider-menu-item'>
               <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
-                Explore
+                Home
               </Link>
             </Item>
             <Item className='sider-menu-item'>
