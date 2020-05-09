@@ -129,8 +129,6 @@ class NodeCardHeaderFull extends Component {
             <li>
               <button
                 onClick={(e) => {
-                  // set the active node so the modal has the node data
-                  // this.props.setActiveNode(this.props.node.uuid);
                   // show the modal
                   this.props.showComponent('associationSider', this.props.node);
                 }}

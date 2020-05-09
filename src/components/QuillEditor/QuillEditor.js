@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import ReactQuill from 'react-quill';
 import Delta from 'quill-delta';
 // import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
-import { Layout, Modal, message } from 'antd';
+import { Layout, message } from 'antd';
 import 'react-quill/dist/quill.snow.css';
+import AssociationList from '../elements/association/AssociationList';
+import NodeCardHeaderFull from '../elements/node/NodeCardHeaderFull';
 // custom components
 import Spinner from '../elements/Spinner';
 // redux handlers
@@ -14,11 +16,12 @@ import {
   deleteTextNode,
   processTextNode,
   createImageNode,
+  setActiveNode,
   updateNode,
+  fetchAssociations,
 } from '../../redux/actions';
 // import custom editor css
-import './Document.less';
-// import NodeCardHeaderFull from '../elements/NodeCardHeaderFull';
+import './QuillEditor.less';
 // destructure antd components
 const { Content } = Layout;
 
@@ -32,9 +35,7 @@ class QuillEditor extends Component {
       name: '',
       expanded: localStorage.getItem('expanded'),
       uuid: null,
-      deleting: null,
       error: null,
-      showDeleteModal: null,
       initializing: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -65,6 +66,7 @@ class QuillEditor extends Component {
     var textUUID = this.props.match.params.uuid;
     // set the local state id equal to the value in the url
     this.setState({ uuid: textUUID });
+    this.props.fetchAssociations({ nodeUUID: textUUID });
     // fetch the node values from the server
     await this.props.fetchTextNode(textUUID);
     if (this.props.nodeData && this.props.nodeData.content) {
@@ -91,24 +93,6 @@ class QuillEditor extends Component {
       this.setState({ expanded: null });
       localStorage.removeItem('expanded');
     }
-  };
-
-  // show modal to confirm deletion
-  toggleDeleteModal = () => {
-    if (this.state.showDeleteModal) {
-      this.setState({ showDeleteModal: false });
-    } else {
-      this.setState({ showDeleteModal: true });
-    }
-  };
-
-  // delete the node
-  deleteHandler = async () => {
-    this.setState({ showDeleteModal: false });
-    const { uuid } = this.props.match.params;
-    this.setState({ deleting: true });
-    await this.props.deleteTextNode(uuid);
-    this.props.history.push('/');
   };
 
   // exit the editor and return to the home screen
@@ -181,7 +165,6 @@ class QuillEditor extends Component {
   modules = {
     toolbar: {
       container: [
-        ['delete'],
         [{ header: [1, 2, 3, 4, 5, false] }],
         [{ font: [] }],
         [{ indent: '-1' }, { indent: '+1' }],
@@ -224,7 +207,6 @@ class QuillEditor extends Component {
       ],
       handlers: {
         expand: this.expandHandler,
-        delete: this.toggleDeleteModal,
         exit: this.exitHandler,
         image: this.selectLocalImage,
       },
@@ -268,25 +250,8 @@ class QuillEditor extends Component {
   // render the main navbar
   renderHeader = () => {
     // Only render the header if the editor is  expanded
-    if (this.state.expanded === null) {
-      // TODO: this should be organized like the toolbar is
-      return (
-        // <NodeCardHeaderFull node={this.props.nodeData.content} />
-        <ul className='header-nav-list'>
-          <li>
-            <input
-              type='text'
-              className='header-title'
-              maxlength='250'
-              placeholder='Title'
-              value={this.state.name}
-              onChange={(e) => {
-                this.saveName(e.target.value);
-              }}
-            ></input>
-          </li>
-        </ul>
-      );
+    if (this.state.expanded === null && this.props.nodeData) {
+      return <NodeCardHeaderFull node={this.props.nodeData} />;
     }
   };
 
@@ -347,21 +312,7 @@ class QuillEditor extends Component {
             formats={this.allowedFormats}
             scrollingContainer={'body'}
           ></ReactQuill>
-          <Modal
-            title='Confirm Deletion'
-            visible={this.state.showDeleteModal}
-            className='delete-modal'
-            centered
-            onOk={this.deleteHandler}
-            okType='danger'
-            okText='Delete'
-            closable={false}
-            onCancel={this.toggleDeleteModal}
-          >
-            <p>
-              Are you sure you want to delete <b>{this.state.name || 'untitled'}</b>?
-            </p>
-          </Modal>
+          <AssociationList />
         </Content>
       </Layout>
     );
@@ -382,4 +333,6 @@ export default connect(mapStateToProps, {
   processTextNode,
   createImageNode,
   updateNode,
+  setActiveNode,
+  fetchAssociations,
 })(QuillEditor);
