@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, message, Modal } from 'antd';
+import { Layout, message } from 'antd';
 // custom code
 import Spinner from '../elements/Spinner';
 import { fetchUserByUsername, showComponent } from '../../redux/actions';
@@ -20,7 +20,6 @@ class Profile extends Component {
       bio: '',
       avatar: '',
       header: '',
-      showAvatarModal: null,
     };
   }
 
@@ -57,15 +56,6 @@ class Profile extends Component {
     }
   };
 
-  // show modal to confirm deletion
-  toggleAvatarModal = () => {
-    if (this.state.showAvatarModal) {
-      this.setState({ showAvatarModal: false });
-    } else {
-      this.setState({ showAvatarModal: true });
-    }
-  };
-
   render() {
     if (!this.state.initialized) {
       return (
@@ -83,24 +73,6 @@ class Profile extends Component {
       <div className='profile-container'>
         <MainSider showMask={false} animate={false} />
         <Layout>
-          <Modal
-            title={this.state.displayName}
-            visible={this.state.showAvatarModal}
-            centered
-            style={{ textAlign: 'center' }}
-            closable={false}
-            maskClosable
-            width={'auto'}
-            footer={null}
-            onCancel={this.toggleAvatarModal}
-          >
-            <img
-              src={this.state.avatar}
-              alt={'profile'}
-              draggable='false'
-              style={{ maxHeight: '50vh' }}
-            />
-          </Modal>
           <Content style={{ marginBottom: '0' }} className='Profile'>
             <div className='profile-card'>
               <button href={`/profile/${this.state.username}`}>
