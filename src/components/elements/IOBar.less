@@ -8,6 +8,7 @@
 @header-border: #e4e4e4;
 @avatar-border: #bebebe;
 @io-enter-button: #969696;
+@io-hover-color: #16e998;
 
 .page-header {
   background-color: @header-color;
@@ -80,7 +81,6 @@ img.header-logo:hover {
     rgba(249, 247, 188, 1) 47%,
     rgba(158, 239, 255, 1) 100%
   );
-  color: #41e254;
 }
 
 .io-enter-button {
@@ -88,12 +88,17 @@ img.header-logo:hover {
   color: @io-enter-button;
 }
 
+.io-enter-button:hover {
+  color: @io-hover-color;
+  border: 0.02rem solid @io-hover-color;
+}
+
 a {
   color: @header-link;
 }
 
 a:hover {
-  color: #41e254;
+  color: @io-hover-color;
 }
 
 .io-sider-button button.ant-btn {
@@ -106,7 +111,7 @@ a:hover {
 .io-sider-button button.ant-btn:hover {
   background-color: @header-color;
   border: none;
-  color: #41e254;
+  color: @io-hover-color;
 }
 
 @media only screen and (max-width: 1400px) {

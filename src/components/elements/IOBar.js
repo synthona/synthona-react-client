@@ -217,7 +217,7 @@ class IOBar extends Component {
                 className='nav-search-input'
               />
             </li>
-            <li className='mode-toggle nav-item'>
+            <li className='nav-item'>
               <Button
                 type='ghost'
                 shape='circle'
