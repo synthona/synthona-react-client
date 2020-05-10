@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import history from '../../../utils/history';
 // import { Link } from 'react-router-dom';
 import { Icon, Modal, Tooltip } from 'antd';
 import {
@@ -61,6 +62,7 @@ class NodeCardHeaderFull extends Component {
     this.setState({ showDeleteModal: false });
     this.setState({ deleting: true });
     await this.props.deleteNode(this.props.node.uuid);
+    history.goBack();
   };
 
   toggleHidden = () => {

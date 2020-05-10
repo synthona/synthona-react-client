@@ -37,6 +37,7 @@ class QuillEditor extends Component {
       uuid: null,
       error: null,
       initializing: false,
+      readOnly: true,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -76,7 +77,11 @@ class QuillEditor extends Component {
         text: JSON.parse(this.props.nodeData.content),
         name: this.props.nodeData.name,
         initializing: false,
+        readOnly: false,
       });
+      // clear undo history to prevent undo from deleting everything
+      const editor = this.quill.getEditor();
+      editor.history.clear();
     } else {
       // if there's no content return an error message
       this.setState({ error: true });
@@ -266,7 +271,7 @@ class QuillEditor extends Component {
 
   handleChange(content, delta, source, editor) {
     // Check to see if the document has changed before saving.
-    if (content !== this.state.text) {
+    if (content !== this.state.text && this.props.isLoading !== true) {
       const fullDelta = JSON.stringify(editor.getContents());
       this.props.editTextNode({
         uuid: this.props.match.params.uuid,
@@ -307,6 +312,7 @@ class QuillEditor extends Component {
             onChange={this.handleChange}
             modules={this.modules}
             ref={this.ref}
+            readOnly={this.state.readOnly}
             formats={this.allowedFormats}
             scrollingContainer={'body'}
           ></ReactQuill>
