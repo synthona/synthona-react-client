@@ -1,11 +1,13 @@
-@header-color: #272727;
-@header-link: white;
-@header-border: #313131;
-@avatar-border: #fff;
-// @header-color: rgb(221, 221, 221);
-// @header-link: black;
-// @header-border: #e4e4e4;
-// @avatar-border: #bebebe;
+// @header-color: #272727;
+// @header-link: white;
+// @header-border: #313131;
+// @avatar-border: #fff;
+// @io-enter-button: rgba(249, 247, 188, 1);
+@header-color: rgb(221, 221, 221);
+@header-link: black;
+@header-border: #e4e4e4;
+@avatar-border: #bebebe;
+@io-enter-button: #969696;
 
 .page-header {
   background-color: @header-color;
@@ -66,6 +68,7 @@ img.header-logo:hover {
     rgba(249, 247, 188, 1) 47%,
     rgba(158, 239, 255, 1) 100%
   );
+  border: 0.02rem solid @io-enter-button;
 }
 
 .create-node-button:hover button.ant-btn,
@@ -77,6 +80,12 @@ img.header-logo:hover {
     rgba(249, 247, 188, 1) 47%,
     rgba(158, 239, 255, 1) 100%
   );
+  color: #41e254;
+}
+
+.io-enter-button {
+  border: 0.04rem solid @header-link;
+  color: @io-enter-button;
 }
 
 a {
@@ -88,14 +97,14 @@ a:hover {
 }
 
 .io-sider-button button.ant-btn {
-  background-color: #272727;
+  background-color: @header-color;
   border: none;
-  color: white;
+  color: @header-link;
   padding-bottom: 0.1rem;
 }
 
 .io-sider-button button.ant-btn:hover {
-  background-color: #272727;
+  background-color: @header-color;
   border: none;
   color: #41e254;
 }

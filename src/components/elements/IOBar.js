@@ -222,7 +222,7 @@ class IOBar extends Component {
                 type='ghost'
                 shape='circle'
                 onClick={this.commandHandler}
-                style={{ color: 'rgba(249, 247, 188, 1) ' }}
+                className='io-enter-button'
               >
                 <Icon type={this.state.modeIcon} theme='outlined' />
               </Button>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Icon } from 'antd';
 import { markNodeView, showComponent, setActiveNode, updateNode } from '../../../redux/actions';
@@ -79,6 +80,20 @@ class NodeCardHeader extends Component {
               }}
             />
           </button>
+          <Link to={`/associations/${this.props.node.uuid}`}>
+            <Icon
+              // type={'edit'}
+              type={'apartment'}
+              // type={'heart'}
+              theme='outlined'
+              style={{
+                fontSize: '0.9rem',
+                display: 'block',
+                textAlign: 'center',
+                padding: '0',
+              }}
+            />
+          </Link>
           <button
             onClick={(e) => {
               // set the active node so the modal has the node data
