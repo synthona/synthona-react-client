@@ -16,7 +16,7 @@ class NodeCardFull extends Component {
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
             <Link to={`/edit/text/${this.props.node.uuid}`} /*target='_blank' */>
-              <p style={{ padding: '1.7rem' }}>{this.props.node.summary}</p>
+              <p>{this.props.node.summary}</p>
             </Link>
           </div>
         );
