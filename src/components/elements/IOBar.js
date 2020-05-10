@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import history from '../../utils/history';
 import { Link } from 'react-router-dom';
 import { Layout, Button, Input, Select, Icon, message } from 'antd';
 // custom code
@@ -80,6 +81,8 @@ class IOBar extends Component {
         this.props.createTextNode(this.state.input);
         // clear the input bar
         this.setState({ input: '' });
+        // redirect
+        history.push('/');
         break;
       case 'image':
         this.selectLocalImage();
@@ -109,6 +112,8 @@ class IOBar extends Component {
         } else {
           message.error('You must enter a valid URL', 1);
         }
+        // redirect
+        history.push('/');
         break;
       case 'collection':
         this.props.createNode({
@@ -120,6 +125,8 @@ class IOBar extends Component {
         });
         // clear the input bar
         this.setState({ input: '' });
+        // redirect
+        history.push('/');
         break;
       default:
         return;
@@ -141,6 +148,7 @@ class IOBar extends Component {
         await this.props.createImageNode(file, this.state.input);
         // clear the input bar
         this.setState({ input: '' });
+        history.push('/');
       } else {
         message.error('The file must be an image', 1);
       }
