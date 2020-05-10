@@ -290,10 +290,8 @@ class QuillEditor extends Component {
         <Layout className='page-layout'>
           <Layout>
             <Layout>
-              <Content className={'text-editor-content ' + this.state.expanded}>
-                {this.renderHeader()}
-                <Spinner />
-              </Content>
+              {this.renderHeader()}
+              <Spinner />
             </Layout>
           </Layout>
         </Layout>
