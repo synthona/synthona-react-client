@@ -17,9 +17,9 @@ class NodeCardHeaderFull extends Component {
     this.state = {
       name: this.props.node.name,
       hidden: this.props.node.hidden,
-      hiddenIcon: null,
+      hiddenIcon: 'eye',
       searchable: this.props.node.searchable,
-      searchableIcon: null,
+      searchableIcon: 'search',
       editable: false,
       showDeleteModal: null,
     };

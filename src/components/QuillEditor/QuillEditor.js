@@ -67,7 +67,6 @@ class QuillEditor extends Component {
     var textUUID = this.props.match.params.uuid;
     // set the local state id equal to the value in the url
     this.setState({ uuid: textUUID });
-    this.props.fetchAssociations({ nodeUUID: textUUID });
     // fetch the node values from the server
     await this.props.fetchTextNode(textUUID);
     if (this.props.nodeData && this.props.nodeData.content) {
@@ -79,6 +78,7 @@ class QuillEditor extends Component {
         initializing: false,
         readOnly: false,
       });
+      this.props.fetchAssociations({ nodeUUID: textUUID });
       // clear undo history to prevent undo from deleting everything
       const editor = this.quill.getEditor();
       editor.history.clear();

@@ -8,13 +8,6 @@ import AssociationSider from '../association/AssociationSider';
 import Spinner from '../Spinner';
 
 class NodeList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      topValue: 0,
-    };
-  }
-
   componentDidMount() {
     this.props.fetchNodes(this.props.query);
     window.addEventListener('scroll', this.infiniteScroll);
@@ -52,7 +45,7 @@ class NodeList extends Component {
     // TODO: need to find a way to calculate the "window top" as well
     // so i can decrement the page number when the user scrolls up
     // this is necessary so redux doesn't have to store everything
-    return windowBottom >= docHeight - 300;
+    return windowBottom >= docHeight - 200;
   };
 
   renderNodeList = () => {
