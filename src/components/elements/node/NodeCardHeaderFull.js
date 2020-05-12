@@ -124,20 +124,20 @@ class NodeCardHeaderFull extends Component {
       <div className='full-card-options'>
         {this.renderTitle()}
         <ul className='full-card-buttons-list'>
+          <li>
+            <button
+              onClick={(e) => {
+                // show the modal
+                this.props.showComponent('associationSider', this.props.node);
+              }}
+            >
+              <Icon type={'branches'} theme='outlined' className='full-card-button' />
+            </button>
+          </li>
           <Tooltip
             title={this.state.hidden ? 'accessible via associations only' : 'visible on homepage'}
             mouseEnterDelay={1.1}
           >
-            <li>
-              <button
-                onClick={(e) => {
-                  // show the modal
-                  this.props.showComponent('associationSider', this.props.node);
-                }}
-              >
-                <Icon type={'bars'} theme='outlined' className='full-card-button' />
-              </button>
-            </li>
             <li>
               <button onClick={(e) => this.toggleHidden()}>
                 <Icon type={this.state.hiddenIcon} theme='outlined' className='full-card-button' />

@@ -5,7 +5,8 @@ import Delta from 'quill-delta';
 // import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
 import { Layout, message } from 'antd';
 import 'react-quill/dist/quill.snow.css';
-import AssociationList from '../elements/association/AssociationList';
+// import AssociationList from '../elements/association/AssociationList';
+import AssociationSider from '../elements/association/AssociationSider';
 import NodeCardHeaderFull from '../elements/node/NodeCardHeaderFull';
 // custom components
 import Spinner from '../elements/Spinner';
@@ -316,7 +317,7 @@ class QuillEditor extends Component {
             formats={this.allowedFormats}
             scrollingContainer={'body'}
           ></ReactQuill>
-          <AssociationList />
+          <AssociationSider />
         </Content>
       </Layout>
     );
