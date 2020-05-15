@@ -178,7 +178,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: null,
         // move node to front of nodelist
-        nodeList: [action.node, ...state.nodeList.filter((node) => node.uuid !== action.uuid)],
+        nodeList: [action.node, ...state.nodeList.filter((node) => node.uuid !== action.node.uuid)],
       };
     case MARK_NODE_VIEW_ERROR:
       return { ...state, isSaving: null };
