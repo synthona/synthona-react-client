@@ -110,13 +110,13 @@ export const createNode = (node) => async (dispatch) => {
   }
 };
 
-export const markNodeView = (uuid) => async (dispatch) => {
+export const markNodeView = (node) => async (dispatch) => {
   dispatch({ type: MARK_NODE_VIEW });
   try {
     await instance.patch('/node/viewed', {
-      uuid,
+      uuid: node.uuid,
     });
-    dispatch({ type: MARK_NODE_VIEW_SUCCESS, uuid });
+    dispatch({ type: MARK_NODE_VIEW_SUCCESS, node });
   } catch (err) {
     dispatch({ type: MARK_NODE_VIEW_ERROR });
     message.error('Could not create new item', 1);

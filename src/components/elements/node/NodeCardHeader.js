@@ -66,7 +66,7 @@ class NodeCardHeader extends Component {
       >
         {this.renderTitle()}
         <div className='nodelist-options-buttons' style={{ marginLeft: 'auto' }}>
-          <button onClick={(e) => this.props.markNodeView(this.props.node.uuid)}>
+          <button onClick={(e) => this.props.markNodeView(this.props.node)}>
             <Icon
               // type={'edit'}
               type={'bulb'}

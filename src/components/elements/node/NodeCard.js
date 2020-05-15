@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { markNodeView, updateLinkStrength } from '../../../redux/actions';
+import { updateLinkStrength } from '../../../redux/actions';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 //custom components
@@ -196,4 +196,4 @@ class NodeCard extends Component {
   }
 }
 
-export default connect(null, { markNodeView, updateLinkStrength })(NodeCard);
+export default connect(null, { updateLinkStrength })(NodeCard);

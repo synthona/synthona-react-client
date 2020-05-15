@@ -41,7 +41,6 @@ class NodeList extends Component {
       html.scrollHeight,
       html.offsetHeight
     );
-    // console.log(window)
     const windowBottom = windowHeight + window.pageYOffset;
     // TODO: need to find a way to calculate the "window top" as well
     // so i can decrement the page number when the user scrolls up

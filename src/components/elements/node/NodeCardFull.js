@@ -47,7 +47,7 @@ class NodeCardFull extends Component {
               href={this.props.node.summary}
               target='_blank'
               rel='noopener noreferrer'
-              onClick={(e) => this.props.markNodeView(this.props.node.uuid)}
+              onClick={(e) => this.props.markNodeView(this.props.node)}
               style={{ width: '100%' }}
             >
               <Icon
