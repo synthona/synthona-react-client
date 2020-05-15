@@ -18,6 +18,7 @@ import {
   setActiveNode,
   updateNode,
   fetchAssociations,
+  markNodeView,
 } from '../../redux/actions';
 // import custom editor css
 import './QuillEditor.less';
@@ -76,7 +77,8 @@ class QuillEditor extends Component {
         initializing: false,
         readOnly: false,
       });
-      this.props.fetchAssociations({ nodeUUID: textUUID });
+      // this.props.fetchAssociations({ nodeUUID: textUUID });
+      this.props.markNodeView(this.props.nodeData);
       // clear undo history to prevent undo from deleting everything
       const editor = this.quill.getEditor();
       editor.history.clear();
@@ -336,4 +338,5 @@ export default connect(mapStateToProps, {
   updateNode,
   setActiveNode,
   fetchAssociations,
+  markNodeView,
 })(QuillEditor);
