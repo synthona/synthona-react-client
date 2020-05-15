@@ -2,9 +2,6 @@ import {
   CREATE_TEXT_NODE,
   CREATE_TEXT_NODE_SUCCESS,
   CREATE_TEXT_NODE_ERROR,
-  FETCH_TEXT_NODE,
-  FETCH_TEXT_NODE_SUCCESS,
-  FETCH_TEXT_NODE_ERROR,
   EDIT_TEXT_NODE,
   EDIT_TEXT_NODE_SUCCESS,
   EDIT_TEXT_NODE_ERROR,
@@ -14,18 +11,12 @@ import {
   UPDATE_NODE,
   UPDATE_NODE_ERROR,
   UPDATE_NODE_SUCCESS,
-  DELETE_TEXT_NODE,
-  DELETE_TEXT_NODE_SUCCESS,
-  DELETE_TEXT_NODE_ERROR,
   PROCESS_TEXT_NODE,
   PROCESS_TEXT_NODE_SUCCESS,
   PROCESS_TEXT_NODE_ERROR,
   CREATE_IMAGE_NODE,
   CREATE_IMAGE_NODE_SUCCESS,
   CREATE_IMAGE_NODE_ERROR,
-  FETCH_IMAGE_NODE,
-  FETCH_IMAGE_NODE_SUCCESS,
-  FETCH_IMAGE_NODE_ERROR,
   SEARCH_NODES,
   SEARCH_NODES_SUCCESS,
   SEARCH_NODES_ERROR,
@@ -47,16 +38,10 @@ const INITIAL_STATE = {
   isFetching: null,
   isSaving: null,
   nodeList: [],
-  nodeOrder: [],
   totalItems: null,
   query: { page: 1 },
   activeNode: null,
 };
-
-let nodes;
-let newNodeList;
-let order;
-let newOrder;
 
 // reducer for content nodes
 export default (state = INITIAL_STATE, action) => {
@@ -64,44 +49,50 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_NODES:
       return { ...state, isFetching: true };
     case FETCH_NODES_SUCCESS:
-      // format the nodes data object and include new values
-      nodes = { ...state.nodeList };
-      order = [...state.nodeOrder];
-      action.payload.nodes.forEach((node) => {
-        if (!order.includes(node.uuid)) {
-          order.push(node.uuid);
+      var nodesArray = [...state.nodeList];
+      // update the nodelist with the new values
+      Object.values(action.payload.nodes).forEach((node) => {
+        if (!nodesArray.some((item) => item.uuid === node.uuid)) {
+          nodesArray.push(node);
+          if (nodesArray.length > 100) {
+            // if the length gets too long free up some memory
+            // nodesArray.splice(0, 2);
+            nodesArray.splice(0, 50);
+            // nodesArray.shift();
+          }
         }
-        nodes[node.uuid] = node;
       });
       return {
         ...state,
         isFetching: null,
         query: action.query,
         totalItems: action.payload.totalItems,
-        nodeList: nodes,
-        nodeOrder: order,
+        nodeList: nodesArray,
       };
     case FETCH_NODES_ERROR:
       return { ...state, isFetching: null };
     case SEARCH_NODES:
       return { ...state, isFetching: true };
     case SEARCH_NODES_SUCCESS:
-      // format the nodes data object and include new values
-      nodes = {};
-      order = [];
-      action.payload.nodes.forEach((node) => {
-        if (!order.includes(node.uuid)) {
-          order.push(node.uuid);
+      nodesArray = [];
+      // update the nodelist with the new values
+      Object.values(action.payload.nodes).forEach((node) => {
+        if (!nodesArray.some((item) => item.uuid === node.uuid)) {
+          nodesArray.push(node);
+          if (nodesArray.length > 100) {
+            // if the length gets too long free up some memory
+            // nodesArray.splice(0, action.payload.nodes.length);
+            nodesArray.splice(0, 50);
+            // nodesArray.shift();
+          }
         }
-        nodes[node.uuid] = node;
       });
       return {
         ...state,
         isFetching: null,
         query: { page: 1, type: action.query.type, searchQuery: action.query.searchQuery },
         totalItems: action.payload.totalItems,
-        nodeList: nodes,
-        nodeOrder: order,
+        nodeList: nodesArray,
       };
     case SEARCH_NODES_ERROR:
       return { ...state, isFetching: null };
@@ -110,20 +101,13 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_NODE_ERROR:
       return { ...state, isSaving: null };
     case UPDATE_NODE_SUCCESS:
+      // update node without changing its position in nodeList
+      var newList = [...state.nodeList];
+      newList[action.result.uuid] = action.result;
       return {
         ...state,
         isSaving: null,
-        nodeList: {
-          ...state.nodeList,
-          [action.uuid]: {
-            ...state.nodeList[action.uuid],
-            content: action.result.content,
-            name: action.result.name,
-            summary: action.result.summary,
-            hidden: action.result.hidden,
-            searchable: action.result.searchable,
-          },
-        },
+        nodeList: newList,
       };
     case CREATE_TEXT_NODE:
       return { ...state, isSaving: true };
@@ -134,54 +118,19 @@ export default (state = INITIAL_STATE, action) => {
       };
     case CREATE_TEXT_NODE_ERROR:
       return { ...state, isFetching: null };
-    case FETCH_TEXT_NODE:
-      return { ...state, isFetching: true };
-    case FETCH_TEXT_NODE_SUCCESS:
-      return {
-        ...state,
-        isFetching: null,
-        nodeList: {
-          ...state.nodeList,
-          [action.uuid]: action.payload,
-        },
-        nodeOrder: [action.uuid, ...state.nodeOrder.filter((node) => node !== action.uuid)],
-      };
-    case FETCH_TEXT_NODE_ERROR:
-      return { ...state, isFetching: null };
     case EDIT_TEXT_NODE:
       return { ...state, isSaving: true };
     case EDIT_TEXT_NODE_SUCCESS:
       return {
         ...state,
         isSaving: null,
-        nodeList: {
-          ...state.nodeList,
-          [action.uuid]: {
-            ...state.nodeList[action.uuid],
-            text: {
-              content: action.content,
-            },
-          },
+        // update the content on the activeNode
+        activeNode: {
+          ...state.activeNode,
+          content: action.node.content,
         },
       };
     case EDIT_TEXT_NODE_ERROR:
-      return { ...state, isSaving: null };
-    case DELETE_TEXT_NODE:
-      return { ...state, isSaving: true };
-    case DELETE_TEXT_NODE_SUCCESS:
-      // update the nodeList
-      newNodeList = { ...state.nodeList };
-      delete newNodeList[action.uuid];
-      // update the nodeOrder
-      order = [...state.nodeOrder];
-      newOrder = order.filter((node) => node !== action.uuid);
-      return {
-        ...state,
-        nodeOrder: newOrder,
-        nodeList: newNodeList,
-        isSaving: null,
-      };
-    case DELETE_TEXT_NODE_ERROR:
       return { ...state, isSaving: null };
     case PROCESS_TEXT_NODE:
       return { ...state, isSaving: true };
@@ -189,46 +138,28 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSaving: null,
-        nodeList: {
-          ...state.nodeList,
-          [action.uuid]: { ...state.nodeList[action.uuid], summary: action.summary },
-        },
+        // update the summary in the nodelist
+        // leave everything else as-is
+        nodeList: state.nodeList.map((node) => {
+          // only update it for the processsed node
+          if (node.uuid === action.node.uuid) {
+            node.summary = action.node.summary;
+          }
+          return node;
+        }),
       };
     case PROCESS_TEXT_NODE_ERROR:
       return { ...state, isSaving: null };
     case CREATE_IMAGE_NODE:
-      // TODO! this should actually work similarly to creating a new text node
-      // it should even store the image in the same list. it's just that it will
       return { ...state, isSaving: true };
     case CREATE_IMAGE_NODE_SUCCESS:
       return {
         ...state,
         isFetching: null,
-        nodeList: {
-          ...state.nodeList,
-          [action.payload.uuid]: action.payload,
-        },
-        nodeOrder: [
-          action.payload.uuid,
-          ...state.nodeOrder.filter((node) => node !== action.payload.uuid),
-        ],
+        nodeList: [action.payload, ...state.nodeList],
       };
     case CREATE_IMAGE_NODE_ERROR:
       return { ...state, isSaving: null };
-    case FETCH_IMAGE_NODE:
-      return { ...state, isFetching: true };
-    case FETCH_IMAGE_NODE_SUCCESS:
-      return {
-        ...state,
-        isFetching: null,
-        nodeList: {
-          ...state.nodeList,
-          [action.uuid]: action.payload,
-        },
-        nodeOrder: [action.uuid, ...state.nodeOrder.filter((node) => node !== action.uuid)],
-      };
-    case FETCH_IMAGE_NODE_ERROR:
-      return { ...state, isFetching: null };
     case CREATE_NODE:
       return { ...state, isSaving: true };
     case CREATE_NODE_SUCCESS:
@@ -236,14 +167,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: null,
-        nodeList: {
-          ...state.nodeList,
-          [action.payload.uuid]: action.payload,
-        },
-        nodeOrder: [
-          action.payload.uuid,
-          ...state.nodeOrder.filter((node) => node !== action.payload.uuid),
-        ],
+        nodeList: [action.payload, ...state.nodeList],
       };
     case CREATE_NODE_ERROR:
       return { ...state, isSaving: null };
@@ -253,11 +177,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: null,
-        nodeList: {
-          ...state.nodeList,
-        },
-        // move the viewed node to the front of the node-order
-        nodeOrder: [action.uuid, ...state.nodeOrder.filter((node) => node !== action.uuid)],
+        // move node to front of nodelist
+        nodeList: [
+          ...state.nodeList.filter((node) => node.uuid === action.uuid),
+          ...state.nodeList.filter((node) => node.uuid !== action.uuid),
+        ],
       };
     case MARK_NODE_VIEW_ERROR:
       return { ...state, isSaving: null };
@@ -270,16 +194,10 @@ export default (state = INITIAL_STATE, action) => {
     case DELETE_NODE:
       return { ...state, isSaving: true };
     case DELETE_NODE_SUCCESS:
-      // update the nodeList
-      newNodeList = { ...state.nodeList };
-      delete newNodeList[action.uuid];
-      // update the nodeOrder
-      order = [...state.nodeOrder];
-      newOrder = order.filter((node) => node !== action.uuid);
       return {
         ...state,
-        nodeOrder: newOrder,
-        nodeList: newNodeList,
+        // filter the node out of the list
+        nodeList: [...state.nodeList.filter((node) => node.uuid !== action.uuid)],
         isSaving: null,
       };
     case DELETE_NODE_ERROR:

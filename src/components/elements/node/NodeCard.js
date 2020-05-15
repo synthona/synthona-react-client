@@ -10,7 +10,6 @@ import NodeCardPreview from './NodeCardPreview';
 class NodeCard extends Component {
   handleNodeClick = () => {
     const nodeUUID = this.props.node.uuid;
-    this.props.markNodeView(nodeUUID);
     if (this.props.activeNode) {
       const linkedNodeUUID = this.props.activeNode.uuid;
       // increment the linkStrength on the server

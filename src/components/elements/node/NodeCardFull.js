@@ -69,22 +69,6 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <Link
-              to={`/associations/${this.props.node.uuid}`}
-              // onClick={e => this.props.markNodeView(this.props.node.uuid)} 
-            >
-              <Icon
-                type={'branches'}
-                theme='outlined'
-                style={{
-                  fontSize: '5rem',
-                  color: '#b8b8b8',
-                  display: 'block',
-                  textAlign: 'center',
-                  padding: '3rem'
-                }}
-              />
-            </Link> */}
           </div>
         );
       default:

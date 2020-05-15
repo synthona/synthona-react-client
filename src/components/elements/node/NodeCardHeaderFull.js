@@ -28,7 +28,7 @@ class NodeCardHeaderFull extends Component {
   componentDidMount() {
     // set initial hiddens state
     if (this.props.node.hidden) {
-      this.setState({ hiddenIcon: 'fork' });
+      this.setState({ hiddenIcon: 'eye-invisible' });
     } else {
       this.setState({ hiddenIcon: 'eye' });
     }
@@ -71,7 +71,7 @@ class NodeCardHeaderFull extends Component {
       this.setState({ hidden: false, hiddenIcon: 'eye' });
     } else {
       this.props.updateNode({ uuid: this.props.node.uuid, hidden: true });
-      this.setState({ hidden: true, hiddenIcon: 'fork' });
+      this.setState({ hidden: true, hiddenIcon: 'eye-invisible' });
     }
   };
 

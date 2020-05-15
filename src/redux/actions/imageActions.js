@@ -1,13 +1,5 @@
 import instance from '../../api/instance';
-import history from '../../utils/history';
-import {
-  CREATE_IMAGE_NODE,
-  CREATE_IMAGE_NODE_SUCCESS,
-  CREATE_IMAGE_NODE_ERROR,
-  FETCH_IMAGE_NODE,
-  FETCH_IMAGE_NODE_SUCCESS,
-  FETCH_IMAGE_NODE_ERROR,
-} from './types';
+import { CREATE_IMAGE_NODE, CREATE_IMAGE_NODE_SUCCESS, CREATE_IMAGE_NODE_ERROR } from './types';
 import { message } from 'antd';
 
 export const createImageNode = (file, name) => async (dispatch) => {
@@ -34,23 +26,5 @@ export const createImageNode = (file, name) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: CREATE_IMAGE_NODE_ERROR });
     message.error('There was a problem inserting the image', 1);
-  }
-};
-
-// get image node handler
-export const fetchImageNode = (uuid) => async (dispatch) => {
-  dispatch({ type: FETCH_IMAGE_NODE });
-  try {
-    const response = await instance.get('/image', { params: { uuid } });
-    dispatch({
-      type: FETCH_IMAGE_NODE_SUCCESS,
-      uuid: uuid,
-      payload: response.data.node,
-    });
-    return response.data.node;
-  } catch (err) {
-    dispatch({ type: FETCH_IMAGE_NODE_ERROR });
-    message.error('Could not fetch item', 1);
-    history.push('/');
   }
 };

@@ -12,9 +12,7 @@ import NodeCardHeaderFull from '../elements/node/NodeCardHeaderFull';
 import Spinner from '../elements/Spinner';
 // redux handlers
 import {
-  fetchTextNode,
   editTextNode,
-  deleteTextNode,
   processTextNode,
   createImageNode,
   setActiveNode,
@@ -68,8 +66,7 @@ class QuillEditor extends Component {
     var textUUID = this.props.match.params.uuid;
     // set the local state id equal to the value in the url
     this.setState({ uuid: textUUID });
-    // fetch the node values from the server
-    await this.props.fetchTextNode(textUUID);
+    await this.props.setActiveNode(textUUID);
     if (this.props.nodeData && this.props.nodeData.content) {
       // if there is content set the local editor state equal to it
       document.title = this.props.nodeData.name || 'Untitled';
@@ -113,7 +110,7 @@ class QuillEditor extends Component {
       const content = editor.getText();
       const summary = content.substring(0, summaryLength);
       // wait for summary to update before going back to homepage so it will be up to date
-      await this.props.processTextNode(this.props.match.params.uuid, summary);
+      await this.props.processTextNode({ uuid: this.props.match.params.uuid, summary });
     }
     this.props.history.goBack();
   };
@@ -262,17 +259,18 @@ class QuillEditor extends Component {
   };
 
   // update and save the document name
-  saveName = (name) => {
-    if (this.state.name !== name) {
-      this.props.updateNode({ uuid: this.props.match.params.uuid, name });
-    }
-    document.title = name || 'Untitled';
-    this.setState({ name });
-  };
+  // saveName = (name) => {
+  //   if (this.state.name !== name) {
+  //     this.props.updateNode({ uuid: this.props.match.params.uuid, name });
+  //   }
+  //   document.title = name || 'Untitled';
+  //   this.setState({ name });
+  // };
 
   handleChange(content, delta, source, editor) {
     // Check to see if the document has changed before saving.
-    if (content !== this.state.text && this.props.isLoading !== true) {
+    // TODO: i think this comparison is broken
+    if (editor.getContents() !== this.state.text && this.state.initializing === false) {
       const fullDelta = JSON.stringify(editor.getContents());
       this.props.editTextNode({
         uuid: this.props.match.params.uuid,
@@ -324,17 +322,15 @@ class QuillEditor extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    nodeData: state.nodes.nodeList[ownProps.match.params.uuid],
+    nodeData: state.nodes.activeNode,
     isLoading: state.nodes.isFetching,
   };
 };
 
 export default connect(mapStateToProps, {
-  fetchTextNode,
   editTextNode,
-  deleteTextNode,
   processTextNode,
   createImageNode,
   updateNode,
