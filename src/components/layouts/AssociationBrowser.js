@@ -40,26 +40,20 @@ class AssociationBrowser extends Component {
     // window.scrollTo({ top: 0, behavior: 'smooth' });
     window.scrollTo({ top: 0 });
     await this.props.setActiveNode(uuid);
+    if (this.props.activeNode !== null) {
+      this.props.markNodeView(this.props.activeNode);
+    }
     // fetch the user info from the server
     await this.props.fetchAssociations({ nodeUUID: uuid });
-    if (
-      this.props.associations !== null &&
-      this.props.activeNode !== null &&
-      this.props.associationOrder !== null
-    ) {
+    if (this.props.associations !== null && this.props.activeNode !== null) {
       this.setState({
         initialized: true,
         uuid: uuid,
       });
-      this.props.markNodeView(this.props.activeNode);
       // update collection preview if necessary
       // TODO: find a way to have it update even less often if possible
       if (this.props.activeNode.type && this.props.activeNode.type === 'collection') {
-        this.regenerateCollectionPreview(
-          this.props.activeNode,
-          this.props.associations,
-          this.props.associationOrder
-        );
+        this.regenerateCollectionPreview(this.props.activeNode, this.props.associations);
       }
       document.title = this.props.activeNode.name;
     } else {
@@ -68,19 +62,19 @@ class AssociationBrowser extends Component {
     }
   };
 
-  regenerateCollectionPreview = async (collectionNode, associationList, associationOrder) => {
+  regenerateCollectionPreview = async (collectionNode, associationList) => {
     try {
       if (collectionNode && associationList) {
         var i = 0;
-        var key;
+        var node;
         var preview = [];
         // get the first 4 non-collection non-user associated nodes and add them to the new preview
-        while (i < associationOrder.length && preview.length < 4) {
-          key = associationOrder[i];
-          if (associationList[key].type !== 'collection' && associationList[key].type !== 'user') {
+        while (i < associationList.length && preview.length < 4) {
+          node = associationList[i];
+          if (node.type !== 'collection' && node.type !== 'user') {
             preview.push({
-              type: associationList[key].type,
-              summary: associationList[key].summary,
+              type: node.type,
+              summary: node.summary,
             });
           }
           i++;
@@ -131,7 +125,6 @@ class AssociationBrowser extends Component {
 const mapStateToProps = (state) => {
   return {
     associations: state.associations.associationList,
-    associationOrder: state.associations.associationOrder,
     isLoading: state.nodes.isFetching,
     activeNode: state.nodes.activeNode,
     mainSider: state.components.componentList['mainSider'],

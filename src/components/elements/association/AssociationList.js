@@ -50,12 +50,12 @@ class AssociationList extends Component {
   renderNodes = () => {
     // go through the list of nodes and render them to the page
     const associationList = this.props.associations;
-    // the order the nodes should appear in
-    const associationOrder = this.props.order;
-    if (this.props.assocations !== null && this.props.order !== null) {
-      return associationOrder.map((key) => {
-        const node = associationList[key];
-        return <NodeCard key={key} node={node} activeNode={this.props.activeNode} />;
+    // render the association list as cards
+    if (associationList !== null) {
+      return associationList.map((association) => {
+        return (
+          <NodeCard key={association.uuid} node={association} activeNode={this.props.activeNode} />
+        );
       });
     } else {
       return <Spinner></Spinner>;
@@ -63,14 +63,14 @@ class AssociationList extends Component {
   };
 
   renderList = () => {
-    if (this.props.totalNodes < 0) {
-      return <Fragment></Fragment>;
-    } else if (this.props.totalNodes > 0) {
+    if (this.props.totalNodes > 0) {
       return (
         <ul style={{ backgroundColor: 'black' }} className='nodelist'>
           {this.renderNodes()}
         </ul>
       );
+    } else if (this.props.totalNodes < 0) {
+      return <Fragment></Fragment>;
     }
   };
 
@@ -88,7 +88,6 @@ const mapStateToProps = (state) => {
   return {
     associations: state.associations.associationList,
     isFetching: state.associations.isFetching,
-    order: state.associations.associationOrder,
     activeNode: state.nodes.activeNode,
     page: state.associations.associationListPage,
     totalNodes: state.associations.totalAssociationListItems,

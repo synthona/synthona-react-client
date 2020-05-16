@@ -16,7 +16,7 @@ class AssociationLink extends Component {
     var linkedNodeUUID = this.props.association.uuid;
     if (this.props.activeNode) {
       // store the active node
-      var activeNode = this.props.activeNode.uuid;
+      var activeNodeUUID = this.props.activeNode.uuid;
     }
     // if both have values go ahead and delete the association
     if (siderNodeUUID && linkedNodeUUID) {
@@ -24,7 +24,7 @@ class AssociationLink extends Component {
       // store pathname
       var pathname = window.location.pathname;
       // handle removal from association list page if on association page
-      if (pathname.includes('associations') && activeNode && activeNode !== siderNodeUUID) {
+      if (pathname.includes('associations') && activeNodeUUID && activeNodeUUID !== siderNodeUUID) {
         this.props.removeFromAssociationList(siderNodeUUID);
         this.props.hideComponent('associationSider');
       } else {

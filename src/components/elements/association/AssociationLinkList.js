@@ -22,11 +22,9 @@ class AssociationLinkList extends Component {
   renderAssociationLinkList = () => {
     // go through the list of nodes and render them to the page
     const list = this.props.associations;
-    // the order the nodes should appear in
-    const order = this.props.order;
-    if (list && order) {
-      return order.map((key) => {
-        const association = list[key];
+    // if list exists render the links
+    if (list !== null) {
+      return list.map((association) => {
         return <AssociationLink key={association.uuid} association={association} />;
       });
     } else {
@@ -69,7 +67,6 @@ class AssociationLinkList extends Component {
 const mapStateToProps = (state) => {
   return {
     associations: state.associations.associationLinkList,
-    order: state.associations.associationLinkListOrder,
     page: state.associations.associationLinkListPage,
     totalItems: state.associations.totalLinkListItems,
   };

@@ -118,7 +118,7 @@ export const deleteAssociationLink = (nodeA, nodeB) => async (dispatch) => {
 export const removeFromAssociationList = (uuid) => {
   return {
     type: REMOVE_FROM_ASSOCIATION_LIST,
-    uuid,
+    deletedUUID: uuid,
   };
 };
 
