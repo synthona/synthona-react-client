@@ -6,6 +6,7 @@ import { searchNodes, fetchNodes } from '../../../redux/actions';
 import NodeCard from './NodeCard';
 import AssociationSider from '../association/AssociationSider';
 import Spinner from '../Spinner';
+// import NodeCardFull from '../node/NodeCardFull';
 
 class NodeList extends Component {
   componentDidMount() {
@@ -55,6 +56,7 @@ class NodeList extends Component {
     if (nodeList !== null) {
       return nodeList.map((node) => {
         if (node.uuid) {
+          // return <NodeCardFull key={node.uuid} node={node} />
           return <NodeCard key={node.uuid} node={node} />;
         } else {
           return <Fragment></Fragment>;

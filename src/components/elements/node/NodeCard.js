@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { updateLinkStrength } from '../../../redux/actions';
+import { updateLinkStrength, markNodeView } from '../../../redux/actions';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 //custom components
@@ -50,7 +50,10 @@ class NodeCard extends Component {
               href={this.props.node.summary}
               target='_blank'
               rel='noopener noreferrer'
-              onClick={(e) => this.handleNodeClick()}
+              onClick={(e) => {
+                this.props.markNodeView(this.props.node);
+                this.handleNodeClick();
+              }}
               style={{ width: '100%' }}
             >
               <Icon
@@ -196,4 +199,4 @@ class NodeCard extends Component {
   }
 }
 
-export default connect(null, { updateLinkStrength })(NodeCard);
+export default connect(null, { updateLinkStrength, markNodeView })(NodeCard);

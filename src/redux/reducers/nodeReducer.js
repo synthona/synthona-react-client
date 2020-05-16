@@ -57,7 +57,7 @@ export default (state = INITIAL_STATE, action) => {
           if (nodesArray.length > 100) {
             // if the length gets too long free up some memory
             // nodesArray.splice(0, 2);
-            nodesArray.splice(0, 50);
+            nodesArray.splice(0, 30);
             // nodesArray.shift();
           }
         }
@@ -82,7 +82,7 @@ export default (state = INITIAL_STATE, action) => {
           if (nodesArray.length > 100) {
             // if the length gets too long free up some memory
             // nodesArray.splice(0, action.payload.nodes.length);
-            nodesArray.splice(0, 50);
+            nodesArray.splice(0, 30);
             // nodesArray.shift();
           }
         }

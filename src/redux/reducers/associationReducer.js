@@ -47,7 +47,7 @@ export default (state = INITIAL_STATE, action) => {
           if (associationLinkListArray.length > 100) {
             // if the length gets too long free up some memory
             // associationLinkListArray.splice(0, 2);
-            associationLinkListArray.splice(0, 50);
+            associationLinkListArray.splice(0, 30);
             // associationLinkListArray.shift();
           }
         }
@@ -75,7 +75,8 @@ export default (state = INITIAL_STATE, action) => {
           if (associationsArray.length > 100) {
             // if the length gets too long free up some memory
             // associationLinkListArray.splice(0, 2);
-            associationsArray.splice(0, 50);
+            // picked a number that is divisible by both 2 and 3
+            associationsArray.splice(0, 30);
             // associationLinkListArray.shift();
           }
         }

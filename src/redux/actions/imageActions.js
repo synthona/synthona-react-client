@@ -19,7 +19,7 @@ export const createImageNode = (file, name) => async (dispatch) => {
     if (response.status === 200) {
       dispatch({ type: CREATE_IMAGE_NODE_SUCCESS, payload: response.data.node });
       // return the image URL for immediate use
-      return response.data.node.content;
+      return response.data.node.summary;
     } else {
       message.error('There was a problem inserting the image', 1);
     }
