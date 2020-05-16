@@ -9,8 +9,19 @@ import Spinner from '../Spinner';
 // import NodeCardFull from '../node/NodeCardFull';
 
 class NodeList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      topOfPage: false,
+    };
+  }
+
   componentDidMount() {
-    this.props.fetchNodes(this.props.query);
+    this.props.fetchNodes({
+      page: 1,
+      type: this.props.query.type,
+      searchQuery: this.props.query.searchQuery,
+    });
     window.addEventListener('scroll', this.infiniteScroll);
   }
 
@@ -19,7 +30,8 @@ class NodeList extends Component {
   }
 
   infiniteScroll = (e) => {
-    if (this.endReached()) {
+    if (this.endReached() && !this.props.isFetching) {
+      this.setState({ topOfPage: false });
       // fetch the next page
       this.props.fetchNodes({
         page: this.props.query.page + 1,
@@ -43,9 +55,17 @@ class NodeList extends Component {
       html.offsetHeight
     );
     const windowBottom = windowHeight + window.pageYOffset;
-    // TODO: need to find a way to calculate the "window top" as well
-    // so i can decrement the page number when the user scrolls up
-    // this is necessary so redux doesn't have to store everything
+    // check if the top is reached
+    if (window.pageYOffset < 1 && !this.props.isFetching && !this.state.topOfPage) {
+      this.setState({ topOfPage: true });
+      // at the top of the page, reset the nodelist
+      this.props.fetchNodes({
+        page: 1,
+        type: this.props.query.type,
+        searchQuery: this.props.query.searchQuery,
+      });
+    }
+    // if it's not the top of the page go ahead and fetch more
     return windowBottom >= docHeight - 400;
   };
 
@@ -82,6 +102,7 @@ const mapStateToProps = (state) => {
     nodes: state.nodes.nodeList,
     query: state.nodes.query,
     totalNodes: state.nodes.totalItems,
+    isFetching: state.nodes.isFetching,
   };
 };
 

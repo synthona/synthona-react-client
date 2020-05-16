@@ -49,19 +49,23 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_NODES:
       return { ...state, isFetching: true };
     case FETCH_NODES_SUCCESS:
-      var nodesArray = [...state.nodeList];
+      var nodesArray;
+      // reset nodesArray if page number has decreased
+      if (action.query.page > state.query.page) {
+        nodesArray = [...state.nodeList];
+      } else {
+        nodesArray = [];
+      }
       // update the nodelist with the new values
       Object.values(action.payload.nodes).forEach((node) => {
         if (!nodesArray.some((item) => item.uuid === node.uuid)) {
           nodesArray.push(node);
-          if (nodesArray.length > 100) {
-            // if the length gets too long free up some memory
-            // nodesArray.splice(0, 2);
-            nodesArray.splice(0, 30);
-            // nodesArray.shift();
-          }
         }
       });
+      if (nodesArray.length > 100) {
+        // if the length gets too long free up some memory
+        nodesArray.splice(0, action.payload.nodes.length);
+      }
       return {
         ...state,
         isFetching: null,
@@ -79,14 +83,12 @@ export default (state = INITIAL_STATE, action) => {
       Object.values(action.payload.nodes).forEach((node) => {
         if (!nodesArray.some((item) => item.uuid === node.uuid)) {
           nodesArray.push(node);
-          if (nodesArray.length > 100) {
-            // if the length gets too long free up some memory
-            // nodesArray.splice(0, action.payload.nodes.length);
-            nodesArray.splice(0, 30);
-            // nodesArray.shift();
-          }
         }
       });
+      if (nodesArray.length > 100) {
+        // if the length gets too long free up some memory
+        nodesArray.splice(0, action.payload.nodes.length);
+      }
       return {
         ...state,
         isFetching: null,

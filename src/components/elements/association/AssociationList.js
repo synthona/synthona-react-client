@@ -8,6 +8,13 @@ import AssociationSider from './AssociationSider';
 import Spinner from '../Spinner';
 
 class AssociationList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      topOfPage: false,
+    };
+  }
+
   componentDidMount() {
     window.addEventListener('scroll', this.infiniteScroll);
   }
@@ -18,7 +25,13 @@ class AssociationList extends Component {
 
   infiniteScroll = (e) => {
     var currentListLength = this.props.associations.length;
-    if (this.endReached() && this.props.activeNode && currentListLength < this.props.totalNodes) {
+    if (
+      this.endReached() &&
+      this.props.activeNode &&
+      currentListLength < this.props.totalNodes &&
+      !this.props.isFetching
+    ) {
+      this.setState({ topOfPage: false });
       // fetch the next page
       this.props.fetchAssociations({
         page: this.props.page + 1,
@@ -41,10 +54,19 @@ class AssociationList extends Component {
       html.offsetHeight
     );
     const windowBottom = windowHeight + window.pageYOffset;
+    // check if the top is reached
+    if (window.pageYOffset < 1 && !this.props.isFetching && !this.state.topOfPage) {
+      this.setState({ topOfPage: true });
+      // at the top of the page, reset the associationlist
+      this.props.fetchAssociations({
+        page: 1,
+        nodeUUID: this.props.activeNode.uuid,
+      });
+    }
     // TODO: need to find a way to calculate the "window top" as well
     // so i can decrement the page number when the user scrolls up
     // this is necessary so redux doesn't have to store everything
-    return windowBottom >= docHeight - 300;
+    return windowBottom >= docHeight - 400;
   };
 
   renderNodes = () => {
