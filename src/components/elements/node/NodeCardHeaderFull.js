@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import history from '../../../utils/history';
 // import { Link } from 'react-router-dom';
 import { Icon, Modal, Tooltip } from 'antd';
-import { showComponent, setActiveNode, updateNode, deleteNode } from '../../../redux/actions';
+import { showComponent, updateNode, deleteNode } from '../../../redux/actions';
 
 class NodeCardHeaderFull extends Component {
   constructor(props) {
@@ -180,7 +180,6 @@ class NodeCardHeaderFull extends Component {
 
 export default connect(null, {
   showComponent,
-  setActiveNode,
   updateNode,
   deleteNode,
 })(NodeCardHeaderFull);

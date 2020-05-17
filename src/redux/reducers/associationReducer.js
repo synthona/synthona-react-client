@@ -17,6 +17,9 @@ import {
   DELETE_ASSOCIATION_LINK_ERROR,
   DELETE_ASSOCIATION_LINK_SUCCESS,
   REMOVE_FROM_ASSOCIATION_LIST,
+  SET_ACTIVE_NODE,
+  SET_ACTIVE_NODE_ERROR,
+  SET_ACTIVE_NODE_SUCCESS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -28,6 +31,7 @@ const INITIAL_STATE = {
   totalAssociationListItems: null,
   associationListPage: 1,
   associationLinkListPage: 1,
+  activeNode: null,
 };
 
 let newAssociationList;
@@ -95,11 +99,21 @@ export default (state = INITIAL_STATE, action) => {
     case CREATE_ASSOCIATION:
       return { ...state, isSaving: true };
     case CREATE_ASSOCIATION_SUCCESS:
+      // only add the node to the association list if one of the nodes is the activeNode
+      if (
+        action.associatedNode.uuid === state.activeNode.uuid ||
+        action.nodeUUID === state.activeNode.uuid
+      ) {
+        newAssociationList = [action.associatedNode, ...state.associationList];
+      } else {
+        newAssociationList = [...state.associationList];
+      }
       return {
         ...state,
         isFetching: null,
         associationLinkList: [action.associatedNode, ...state.associationLinkList],
-        associationList: [action.associatedNode, ...state.associationList],
+        associationList: newAssociationList,
+        totalAssociationListItems: state.totalAssociationListItems + 1,
       };
     case CREATE_ASSOCIATION_ERROR:
       return { ...state, isSaving: null };
@@ -127,6 +141,12 @@ export default (state = INITIAL_STATE, action) => {
       };
     case MARK_NODE_VIEW_ERROR:
       return { ...state, isSaving: null };
+    case SET_ACTIVE_NODE:
+      return { ...state, isFetching: true };
+    case SET_ACTIVE_NODE_SUCCESS:
+      return { ...state, isFetching: null, activeNode: action.payload.node };
+    case SET_ACTIVE_NODE_ERROR:
+      return { ...state, isFetching: null };
     case DELETE_ASSOCIATION_LINK:
       return { ...state, isSaving: true };
     case DELETE_ASSOCIATION_LINK_SUCCESS:
@@ -145,6 +165,7 @@ export default (state = INITIAL_STATE, action) => {
     case REMOVE_FROM_ASSOCIATION_LIST:
       // update total items
       var newTotalItems = state.totalAssociationListItems - 1;
+      console.log(action.deletedUUID);
       return {
         ...state,
         isSaving: null,

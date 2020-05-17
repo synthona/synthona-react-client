@@ -18,16 +18,25 @@ class AssociationLink extends Component {
       // store the active node
       var activeNodeUUID = this.props.activeNode.uuid;
     }
+    console.log({ siderNodeUUID, linkedNodeUUID, activeNodeUUID });
     // if both have values go ahead and delete the association
     if (siderNodeUUID && linkedNodeUUID) {
       this.props.deleteAssociationLink(siderNodeUUID, linkedNodeUUID);
       // store pathname
       var pathname = window.location.pathname;
-      // handle removal from association list page if on association page
-      if (pathname.includes('associations') && activeNodeUUID && activeNodeUUID !== siderNodeUUID) {
+      // handle removal from association list page if on association page if an associated node was removed
+      if (
+        pathname.includes('associations') &&
+        activeNodeUUID &&
+        activeNodeUUID === linkedNodeUUID
+      ) {
         this.props.removeFromAssociationList(siderNodeUUID);
         this.props.hideComponent('associationSider');
-      } else {
+      } else if (
+        pathname.includes('associations') &&
+        activeNodeUUID &&
+        activeNodeUUID === siderNodeUUID
+      ) {
         this.props.removeFromAssociationList(linkedNodeUUID);
       }
     }

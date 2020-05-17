@@ -34,7 +34,7 @@ class AssociationBrowser extends Component {
     }
   }
 
-  // // load the image node and set the local id state.
+  // intialize the association page
   initializeFromUrlParams = async () => {
     var uuid = this.props.match.params.uuid;
     // window.scrollTo({ top: 0, behavior: 'smooth' });
