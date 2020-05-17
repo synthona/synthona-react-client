@@ -90,7 +90,7 @@ div.quill {
   font-size: 0.9rem;
   width: 70%;
   margin: 0 auto;
-  padding: 8rem 7rem 11rem 6rem;
+  padding: 8rem 9rem 11rem 10rem;
   border: 0.01rem solid #dfdfdf;
   background-color: white;
   overscroll-behavior: none;
@@ -189,6 +189,21 @@ span:focus {
 }
 
 // MEDIA QUERIES
+@media only screen and (max-width: 1200px) {
+  .ql-editor {
+    margin: 0 auto;
+    padding: 10rem 5rem 7rem 5rem;
+    width: 80%;
+  }
+
+  .ql-picker-label {
+    font-size: 0.9rem;
+  }
+
+  .ql-toolbar.ql-snow .ql-formats {
+    margin: 0 0.2rem;
+  }
+}
 
 @media only screen and (max-width: 1000px) {
   div.quill {
@@ -204,7 +219,8 @@ span:focus {
     }
 
     .ql-editor {
-      padding: 10rem 5rem 7rem 4rem;
+      padding: 7rem 5rem 7rem 4rem;
+      margin: 0 auto;
     }
   }
 
@@ -222,10 +238,14 @@ span:focus {
     position: fixed;
     z-index: 11;
   }
+}
 
-  .ql-editor {
-    padding: 10rem 5rem 7rem 4rem;
-    width: 100%;
-    margin: 0;
+@media only screen and (max-width: 700px) {
+  .expanded {
+    .ql-editor {
+      padding: 7rem 3rem 7rem 2rem;
+      margin: 0 auto;
+      width: 100%;
+    }
   }
 }
