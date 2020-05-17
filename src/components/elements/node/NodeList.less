@@ -1,3 +1,6 @@
+@node-card-title-color: #16e998;
+@node-card-paragraph-hover: #2ada3e;
+
 .nodelist {
   display: flex;
   flex-direction: row;
@@ -84,14 +87,14 @@ div.nodelist-options-buttons {
 }
 
 .nodelist-item p:hover {
-  color: #2ada3e;
+  color: @node-card-paragraph-hover;
 }
 
 .nodelist-item-title {
   width: 70%;
   text-align: left;
   color: #272727;
-  color: #16e998;
+  color: @node-card-title-color;
   font-size: 0.97rem;
   transition: all 0.3s;
   overflow: hidden;
@@ -124,13 +127,15 @@ input.nodelist-item-title {
 .nodelist-collection-grid .node-card-icon {
   padding: 2rem;
   font-size: 3rem;
+  border: 0.01rem solid #383838;
+  height: 7.7rem;
 }
 
 .nodelist-collection-grid p {
   padding: 0.2rem;
   font-size: 0.7rem;
   background-color: #272727;
-  border: 0.01rem solid #636363;
+  border: 0.01rem solid #383838;
 }
 
 .nodelist-collection-grid p:hover {
@@ -139,7 +144,7 @@ input.nodelist-item-title {
 
 .nodelist-collection-grid {
   display: flex;
-  border: 0.01rem solid #636363;
+  // border: 0.01rem solid #2b2b2b;
   flex-wrap: wrap;
   flex-direction: row;
   list-style: none;
@@ -149,10 +154,11 @@ input.nodelist-item-title {
 
 .nodelist-collection-grid li {
   width: 50%;
-  max-height: 7.2rem;
+  height: 7.2rem;
   overflow: hidden;
   // border: 0.01rem solid #636363;
-  border: 0.01rem solid #585858;
+  // border: 0.01rem dotted #2b2b2b;
+  // border: 0.001rem dotted @node-card-title-color;
 }
 
 .nodelist-collection-grid li.nodelist-collection-grid-full-width {
@@ -162,5 +168,5 @@ input.nodelist-item-title {
 .nodelist-collection-item-single {
   height: 100%;
   // border: 0.07rem solid #4b4b4b;
-  border: 0.07rem solid #585858;
+  // border: 0.07rem solid #2b2b2b;
 }
