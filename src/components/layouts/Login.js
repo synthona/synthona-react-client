@@ -35,23 +35,6 @@ class Login extends Component {
       <Layout className='login-layout'>
         <Content className='login-content'>
           <Card className='login-card'>
-            <h1 className='login-title'>
-              <span
-                role='img'
-                aria-label='jsx-a11y/accessible-emoji'
-                style={{ paddingRight: '0.5rem' }}
-              >
-                ✨
-              </span>
-              {this.getUsername()}
-              <span
-                role='img'
-                aria-label='jsx-a11y/accessible-emoji'
-                style={{ paddingLeft: '0.5rem' }}
-              >
-                ✨
-              </span>
-            </h1>
             <Formik
               initialValues={{ email: '', password: '', confirmPassword: '' }}
               validationSchema={validationSchema}
@@ -59,6 +42,15 @@ class Login extends Component {
             >
               {({ isSubmitting }) => (
                 <Form className='login-form'>
+                  <h1 className='login-title'>
+                    <span role='img' aria-label='jsx-a11y/accessible-emoji'>
+                      ✨
+                    </span>
+                    {' ' + this.getUsername() + ' '}
+                    <span role='img' aria-label='jsx-a11y/accessible-emoji'>
+                      ✨
+                    </span>
+                  </h1>
                   <Field type='email' name='email' placeholder='email' className='login-field' />
                   <ErrorMessage name='email' component='div' className='login-error' />
                   <Field
@@ -72,7 +64,7 @@ class Login extends Component {
                   <button type='submit' disabled={isSubmitting} className='login-submit'>
                     login
                   </button>
-                  <Link to='/signup' style={{ textAlign: 'center' }} className='login-signup'>
+                  <Link to='/signup' className='login-signup'>
                     create account
                   </Link>
                 </Form>

@@ -1,5 +1,6 @@
 .login-layout {
   height: 100vh;
+  margin: 0 auto;
   a {
     color: white;
   }
@@ -7,9 +8,9 @@
 
 .login-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin: 0;
-  // vertical-align: middle;
+  vertical-align: middle;
   color: #41e254;
   font-family: Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif;
 }
@@ -20,10 +21,11 @@
 }
 
 .login-card {
-  padding: 14rem 5rem;
   border: none;
   border-radius: 0;
+  padding-top: 13.7rem;
   height: 100vh;
+  width: 100%;
   // background-image: url('../../../resources/streetlights.png');
   background-image: url('../../../resources/northern-lights.jpg');
   background-size: cover;
@@ -31,17 +33,22 @@
 }
 
 .login-form {
-  display: inline-block;
-  width: 100%;
-  padding: 0 25rem;
+  display: block;
+  margin: 0 auto;
+  padding: 1.1rem;
+  background-color: #383838;
+  box-shadow: 0 0 5px 0 #585858;
+  border-radius: 1rem;
+  width: 20rem;
   text-align: center;
 }
 
 .login-field {
-  display: inline-block;
-  width: 18rem;
-  margin: 0.7rem 0 0;
   text-align: center;
+  display: block;
+  margin: 0.7rem auto;
+  width: 70%;
+  padding: 0 1rem;
   border-radius: 0.5rem;
 }
 
@@ -54,18 +61,17 @@
 }
 
 .login-submit {
-  display: inline-block;
+  display: block;
   background-color: #272727;
-  width: 18rem;
-  margin: 0.7rem 0 0;
-  padding: 0.2rem;
+  margin: 0 auto;
+  width: 70%;
+  // padding: 0.2rem 0.9rem;
   border-radius: 0.5rem;
   color: #41e254;
   border: none;
 }
 
 .login-signup {
-  display: inline-block;
-  width: 18rem;
+  display: block;
   margin: 0.7rem 0 0;
 }

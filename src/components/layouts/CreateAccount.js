@@ -26,24 +26,6 @@ class CreateAccount extends Component {
       <Layout className='login-layout'>
         <Content className='login-content'>
           <Card className='login-card'>
-            <h1 className='login-title'>
-              {' '}
-              <span
-                role='img'
-                aria-label='jsx-a11y/accessible-emoji'
-                style={{ paddingRight: '0.5rem' }}
-              >
-                ✨
-              </span>
-              create account
-              <span
-                role='img'
-                aria-label='jsx-a11y/accessible-emoji'
-                style={{ paddingLeft: '0.5rem' }}
-              >
-                ✨
-              </span>
-            </h1>
             <Formik
               initialValues={{ email: '', password: '', confirmPassword: '' }}
               validationSchema={validationSchema}
@@ -51,6 +33,23 @@ class CreateAccount extends Component {
             >
               {({ isSubmitting }) => (
                 <Form className='login-form'>
+                  <h1 className='login-title'>
+                    <span
+                      role='img'
+                      aria-label='jsx-a11y/accessible-emoji'
+                      style={{ paddingRight: '0.5rem' }}
+                    >
+                      ✨
+                    </span>
+                    create account
+                    <span
+                      role='img'
+                      aria-label='jsx-a11y/accessible-emoji'
+                      style={{ paddingLeft: '0.5rem' }}
+                    >
+                      ✨
+                    </span>
+                  </h1>
                   <Field type='email' name='email' placeholder='email' className='login-field' />
                   <ErrorMessage name='email' component='div' />
                   <Field
@@ -92,19 +91,17 @@ class CreateAccount extends Component {
 }
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('E-mail is not valid!')
-    .required('email is required'),
+  email: Yup.string().email('E-mail is not valid!').required('email is required'),
   username: Yup.string().required('username is required'),
   password: Yup.string()
     .min(5, 'Password has to be longer than 6 characters!')
     .required('password is required'),
   confirmPassword: Yup.string()
     .required('please confirm password')
-    .oneOf([Yup.ref('password')], "Your passwords don't match")
+    .oneOf([Yup.ref('password')], "Your passwords don't match"),
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn };
 };
 
