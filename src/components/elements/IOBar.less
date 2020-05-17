@@ -40,11 +40,22 @@
   // color: #000000;
   // outline: none;
   color: #ffffff;
-  border: 0.07rem solid #4d4d4d;
+  // border: 0.07rem solid #333333;
+  border: 0.07rem solid transparent;
+  border-left: 0.07rem solid #333333;
 }
 
 .nav-search-input input:hover {
-  border: 0.07rem solid transparent;
+  border: 0.07rem solid #333333;
+}
+
+.nav-search-input .ant-select-search__field__wrap input:focus-within {
+  border: none;
+  outline: none;
+}
+
+.nav-search-input input:focus-within {
+  border: 0.07rem solid #16e998;
 }
 
 .ant-input-group-addon .ant-select-no-arrow {
@@ -52,6 +63,26 @@
   color: #ffffff;
   outline: none;
   border: transparent;
+}
+
+.ant-select-dropdown-menu {
+  padding: 0;
+  border-radius: 0.1rem;
+
+  .ant-select-dropdown-menu-item {
+    background-color: #dbd1bc;
+    color: #272727;
+  }
+
+  .ant-select-dropdown-menu-item:hover {
+    background-color: #16e998;
+  }
+
+  .ant-select-dropdown-menu-item-disabled {
+    height: 0;
+    padding: 0;
+    visibility: hidden;
+  }
 }
 
 ul.nav-list {
