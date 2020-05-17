@@ -101,13 +101,15 @@ export default (state = INITIAL_STATE, action) => {
     case CREATE_ASSOCIATION_SUCCESS:
       // only add the node to the association list if one of the nodes is the activeNode
       if (
-        action.associatedNode.uuid === state.activeNode.uuid ||
-        action.nodeUUID === state.activeNode.uuid
+        state.activeNode &&
+        (action.associatedNode.uuid === state.activeNode.uuid ||
+          action.nodeUUID === state.activeNode.uuid)
       ) {
         newAssociationList = [action.associatedNode, ...state.associationList];
       } else {
         newAssociationList = [...state.associationList];
       }
+      console.log(newAssociationList);
       return {
         ...state,
         isFetching: null,
