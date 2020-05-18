@@ -144,7 +144,7 @@ export const deleteNode = (uuid) => async (dispatch) => {
   try {
     const response = await instance.delete(`/node`, { params: { uuid } });
     if (response.status === 200) {
-      history.goBack();
+      history.push('/');
       dispatch({ type: DELETE_NODE_SUCCESS, uuid: uuid });
       message.success('successfully deleted', 1);
     }

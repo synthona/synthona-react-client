@@ -27,15 +27,7 @@ class NodeCardFull extends Component {
             {/* <Link to={`/view/image/${this.props.node.uuid}`} >
 
             </Link> */}
-            <img
-              src={this.props.node.summary}
-              alt={this.props.node.name}
-              style={{
-                objectFit: 'cover',
-                minHeight: '100%',
-                width: '100%',
-              }}
-            ></img>
+            <img src={this.props.node.summary} alt={this.props.node.name}></img>
           </div>
         );
       case 'url':

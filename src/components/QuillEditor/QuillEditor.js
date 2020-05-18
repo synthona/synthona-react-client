@@ -5,7 +5,7 @@ import Delta from 'quill-delta';
 // import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
 import { Layout, message } from 'antd';
 import 'react-quill/dist/quill.snow.css';
-// import AssociationList from '../elements/association/AssociationList';
+import AssociationList from '../elements/association/AssociationList';
 import AssociationSider from '../elements/association/AssociationSider';
 import NodeCardHeaderFull from '../elements/node/NodeCardHeaderFull';
 // custom components
@@ -77,7 +77,7 @@ class QuillEditor extends Component {
         initializing: false,
         readOnly: false,
       });
-      // this.props.fetchAssociations({ nodeUUID: textUUID });
+      this.props.fetchAssociations({ nodeUUID: textUUID });
       this.props.markNodeView(this.props.nodeData);
       // clear undo history to prevent undo from deleting everything
       const editor = this.quill.getEditor();
@@ -318,6 +318,7 @@ class QuillEditor extends Component {
             scrollingContainer={'body'}
           ></ReactQuill>
           <AssociationSider />
+          <AssociationList />
         </Content>
       </Layout>
     );
