@@ -17,12 +17,13 @@ class Login extends Component {
   }
 
   getUsername = () => {
-    const username = localStorage.getItem('displayName');
-    if (username) {
-      return username;
-    } else {
-      return 'synthona';
-    }
+    // const username = localStorage.getItem('displayName');
+    // if (username) {
+    //   return username;
+    // } else {
+    //   return 'synthona';
+    // }
+    return 'synthona';
   };
 
   onSubmit = (values, { setSubmitting }) => {
