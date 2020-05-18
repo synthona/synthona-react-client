@@ -25,6 +25,8 @@ class MainSider extends Component {
   toggleSignoutModal = () => {
     if (this.state.showSignoutModal) {
       this.setState({ showSignoutModal: false });
+      // temporary fix to remove overflow property being set on body by antd
+      document.body.style.removeProperty('overflow');
     } else {
       this.setState({ showSignoutModal: true });
     }
