@@ -117,6 +117,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: null,
+        activeNode: action.payload.node,
       };
     case CREATE_TEXT_NODE_ERROR:
       return { ...state, isFetching: null };
@@ -170,6 +171,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: null,
         nodeList: [action.payload, ...state.nodeList],
+        activeNode: action.payload.node,
       };
     case CREATE_NODE_ERROR:
       return { ...state, isSaving: null };

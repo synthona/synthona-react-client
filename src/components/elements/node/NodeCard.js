@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { updateLinkStrength, markNodeView } from '../../../redux/actions';
 import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
+// import { Icon } from 'antd';
 //custom components
 import NodeCardHeader from './NodeCardHeader';
 import NodeCardPreview from './NodeCardPreview';
@@ -46,7 +46,13 @@ class NodeCard extends Component {
         return (
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />
-            <a
+            <Link
+              to={`/associations/${this.props.node.uuid}`}
+              onClick={(e) => this.handleNodeClick()}
+            >
+              <NodeCardPreview node={this.props.node} />
+            </Link>
+            {/* <a
               href={this.props.node.summary}
               target='_blank'
               rel='noopener noreferrer'
@@ -67,7 +73,7 @@ class NodeCard extends Component {
                   padding: '3rem',
                 }}
               />
-            </a>
+              </a>*/}
           </li>
         );
       case 'collection':
@@ -97,15 +103,13 @@ class NodeCard extends Component {
             return preview;
           case 1:
             preview = (
-              <li className='nodelist-item nodelist-collection-item'>
+              <li className='nodelist-item'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
                   to={`/associations/${this.props.node.uuid}`}
                   onClick={(e) => this.handleNodeClick()}
                 >
-                  <div className='nodelist-collection-item-single'>
-                    <NodeCardPreview node={summary[0]} />
-                  </div>
+                  <NodeCardPreview node={this.props.node} />
                 </Link>
               </li>
             );

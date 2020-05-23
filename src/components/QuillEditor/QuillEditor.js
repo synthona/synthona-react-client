@@ -54,13 +54,22 @@ class QuillEditor extends Component {
     this.initializeFromUrlParams();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate = async () => {
     var textUUID = this.props.match.params.uuid;
     if (this.state.uuid !== textUUID && this.state.initializing === false) {
-      this.setState({ initializing: true });
+      this.setState({
+        text: '',
+        name: '',
+        expanded: localStorage.getItem('expanded'),
+        uuid: null,
+        error: null,
+        initializing: true,
+        readOnly: true,
+      });
+      this.regeneratePreview();
       this.initializeFromUrlParams();
     }
-  }
+  };
 
   // load the text node and set the local id state.
   initializeFromUrlParams = async () => {
@@ -71,17 +80,18 @@ class QuillEditor extends Component {
     if (this.props.nodeData && this.props.nodeData.content) {
       // if there is content set the local editor state equal to it
       document.title = this.props.nodeData.name || 'Untitled';
+      var textValue = JSON.parse(this.props.nodeData.content);
       this.setState({
-        text: JSON.parse(this.props.nodeData.content),
+        text: textValue,
         name: this.props.nodeData.name,
         initializing: false,
         readOnly: false,
       });
-      this.props.fetchAssociations({ nodeUUID: textUUID });
       this.props.markNodeView(this.props.nodeData);
       // clear undo history to prevent undo from deleting everything
       const editor = this.quill.getEditor();
       editor.history.clear();
+      this.props.fetchAssociations({ nodeUUID: textUUID });
     } else {
       // if there's no content return an error message
       this.setState({ error: true });
@@ -105,16 +115,20 @@ class QuillEditor extends Component {
     // generate the summary and do whatever processing will be
     // necessary to process the node
     // TODO: alter this so it stores a condensed version of the document instead of plain text
-    if (!this.state.deleting && !this.state.error) {
+    this.regeneratePreview();
+    this.props.history.push('/');
+  };
+
+  regeneratePreview = () => {
+    if (!this.state.deleting && !this.state.error && this.state.uuid !== null) {
       const summaryLength = 500;
       const editor = this.quill.getEditor();
       // process the text node
       const content = editor.getText();
       const summary = content.substring(0, summaryLength);
       // wait for summary to update before going back to homepage so it will be up to date
-      await this.props.processTextNode({ uuid: this.props.match.params.uuid, summary });
+      this.props.processTextNode({ uuid: this.state.uuid, summary });
     }
-    this.props.history.goBack();
   };
 
   // select an image.
@@ -260,15 +274,6 @@ class QuillEditor extends Component {
     }
   };
 
-  // update and save the document name
-  // saveName = (name) => {
-  //   if (this.state.name !== name) {
-  //     this.props.updateNode({ uuid: this.props.match.params.uuid, name });
-  //   }
-  //   document.title = name || 'Untitled';
-  //   this.setState({ name });
-  // };
-
   handleChange(content, delta, source, editor) {
     // Check to see if the document has changed before saving.
     // TODO: i think this comparison is broken
@@ -283,6 +288,7 @@ class QuillEditor extends Component {
   }
 
   componentWillUnmount() {
+    // clear styles
     document.body.style.overflow = null;
     document.body.style.height = null;
     document.documentElement.style.overflow = null;
