@@ -1,6 +1,10 @@
 export const validUrl = (value) => {
-  const url = new URL(value);
-  return url.href;
+  try {
+    new URL(value);
+  } catch (_) {
+    return false;
+  }
+  return true;
 };
 
 export const isImageUrl = (url) => {

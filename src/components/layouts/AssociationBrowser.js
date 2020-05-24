@@ -87,7 +87,7 @@ class AssociationBrowser extends Component {
   };
 
   renderNode = () => {
-    if (this.props.activeNode !== null && this.state.uuid === this.props.activeNode.uuid) {
+    if (this.state.uuid !== null && this.state.uuid === this.props.activeNode.uuid) {
       return <NodeCardFull node={this.props.activeNode} />;
     } else {
       return <Spinner></Spinner>;
