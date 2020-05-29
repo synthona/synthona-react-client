@@ -8,7 +8,6 @@ import { validUrl, isImageUrl } from '../../utils/inputValidation';
 import './IOBar.less';
 import {
   signOut,
-  createTextNode,
   createImageNode,
   createNode,
   searchNodes,
@@ -76,9 +75,11 @@ class IOBar extends Component {
   };
   // handle the creation of different node types
   createNodeHandler = () => {
+    // console.log(this.props.activeNode);
     switch (this.state.nodeTypes) {
       case 'text':
-        this.props.createTextNode(this.state.input);
+        // this.props.createTextNode(this.state.input);
+        this.props.createNode({ local: true, type: 'text', name: this.state.input, summary: '' });
         // clear the input bar
         this.setState({ input: '' });
         // redirect
@@ -247,12 +248,12 @@ const mapStateToProps = (state) => {
     user: state.auth.user,
     query: state.nodes.query,
     mainSider: state.components.componentList['mainSider'],
+    activeNode: state.nodes.activeNode,
   };
 };
 
 export default connect(mapStateToProps, {
   signOut,
-  createTextNode,
   searchNodes,
   createNode,
   createImageNode,

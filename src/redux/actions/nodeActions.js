@@ -25,6 +25,7 @@ import {
   DELETE_NODE_SUCCESS,
 } from './types';
 import { message } from 'antd';
+import Delta from 'quill-delta';
 
 // fetch a list of nodes
 export const fetchNodes = (query) => async (dispatch) => {
@@ -89,8 +90,13 @@ export const updateNode = (node) => async (dispatch) => {
   }
 };
 
-export const createNode = (node) => async (dispatch) => {
+export const createNode = (node, file) => async (dispatch) => {
   dispatch({ type: CREATE_NODE });
+  // set content to empty quill delta for text node
+  if (node.type === 'text') {
+    const delta = new Delta();
+    node.content = JSON.stringify(delta);
+  }
   try {
     const response = await instance.post('/node', {
       local: node.local,
@@ -103,6 +109,10 @@ export const createNode = (node) => async (dispatch) => {
       type: CREATE_NODE_SUCCESS,
       payload: response.data.node,
     });
+    if (response.status === 200 && node.type === 'text') {
+      // if successfully created, redirect the user to the edit node page
+      history.push('/edit/text/' + response.data.node.uuid);
+    }
   } catch (err) {
     dispatch({ type: CREATE_NODE_ERROR });
     message.error('Could not create new item', 1);

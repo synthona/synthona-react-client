@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Avatar, Modal, Drawer } from 'antd';
-import { signOut, createTextNode, hideComponent } from '../../redux/actions';
+import { signOut, hideComponent } from '../../redux/actions';
 // custom code
 import './MainSider.less';
 // destructure antd components
@@ -135,4 +135,4 @@ const mapStateToProps = (state) => {
   return { user: state.auth.user, mainSider: state.components.componentList['mainSider'] };
 };
 
-export default connect(mapStateToProps, { signOut, createTextNode, hideComponent })(MainSider);
+export default connect(mapStateToProps, { signOut, hideComponent })(MainSider);

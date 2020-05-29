@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Drawer, AutoComplete } from 'antd';
 import {
   signOut,
-  createTextNode,
   hideComponent,
   createAssociation,
   fetchAssociationLinkList,
@@ -119,7 +118,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   signOut,
-  createTextNode,
   hideComponent,
   createAssociation,
   fetchAssociationLinkList,

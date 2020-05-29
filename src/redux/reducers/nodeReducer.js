@@ -1,7 +1,7 @@
 import {
-  CREATE_TEXT_NODE,
-  CREATE_TEXT_NODE_SUCCESS,
-  CREATE_TEXT_NODE_ERROR,
+  // CREATE_TEXT_NODE,
+  // CREATE_TEXT_NODE_SUCCESS,
+  // CREATE_TEXT_NODE_ERROR,
   EDIT_TEXT_NODE,
   EDIT_TEXT_NODE_SUCCESS,
   EDIT_TEXT_NODE_ERROR,
@@ -111,16 +111,16 @@ export default (state = INITIAL_STATE, action) => {
         isSaving: null,
         nodeList: newList,
       };
-    case CREATE_TEXT_NODE:
-      return { ...state, isSaving: true };
-    case CREATE_TEXT_NODE_SUCCESS:
-      return {
-        ...state,
-        isFetching: null,
-        activeNode: action.payload.node,
-      };
-    case CREATE_TEXT_NODE_ERROR:
-      return { ...state, isFetching: null };
+    // case CREATE_TEXT_NODE:
+    //   return { ...state, isSaving: true };
+    // case CREATE_TEXT_NODE_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isFetching: null,
+    //     activeNode: action.payload.node,
+    //   };
+    // case CREATE_TEXT_NODE_ERROR:
+    //   return { ...state, isFetching: null };
     case EDIT_TEXT_NODE:
       return { ...state, isSaving: true };
     case EDIT_TEXT_NODE_SUCCESS:
