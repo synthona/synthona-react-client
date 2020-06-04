@@ -288,6 +288,7 @@ class QuillEditor extends Component {
   }
 
   componentWillUnmount() {
+    this.regeneratePreview();
     // clear styles
     document.body.style.overflow = null;
     document.body.style.height = null;
