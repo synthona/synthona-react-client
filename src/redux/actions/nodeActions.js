@@ -104,6 +104,7 @@ export const createNode = (node, file) => async (dispatch) => {
       name: node.name,
       summary: node.summary,
       content: node.content,
+      linkedNode: node.linkedNode,
     });
     dispatch({
       type: CREATE_NODE_SUCCESS,

@@ -75,18 +75,28 @@ class IOBar extends Component {
   };
   // handle the creation of different node types
   createNodeHandler = () => {
-    // console.log(this.props.activeNode);
+    console.log(this.props.activeNode);
+    var linkedNode;
+    if (this.props.activeNode) {
+      linkedNode = JSON.stringify(this.props.activeNode);
+    }
     switch (this.state.nodeTypes) {
       case 'text':
         // this.props.createTextNode(this.state.input);
-        this.props.createNode({ local: true, type: 'text', name: this.state.input, summary: '' });
+        this.props.createNode({
+          local: true,
+          type: 'text',
+          name: this.state.input,
+          summary: '',
+          linkedNode,
+        });
         // clear the input bar
         this.setState({ input: '' });
         // redirect
         history.push('/');
         break;
       case 'image':
-        this.selectLocalImage();
+        this.selectLocalImage(linkedNode);
         break;
       case 'url':
         // if the URL is an image add an image node
@@ -97,6 +107,7 @@ class IOBar extends Component {
             name: this.state.input,
             summary: this.state.input,
             content: this.state.input,
+            linkedNode,
           });
           this.setState({ input: '' });
           // otherwise add a regular URL
@@ -107,6 +118,7 @@ class IOBar extends Component {
             name: this.state.input,
             summary: this.state.input,
             content: this.state.input,
+            linkedNode,
           });
           // clear the input bar
           this.setState({ input: '' });
@@ -123,6 +135,7 @@ class IOBar extends Component {
           name: this.state.input,
           summary: '',
           content: this.state.input,
+          linkedNode,
         });
         // clear the input bar
         this.setState({ input: '' });
@@ -135,7 +148,7 @@ class IOBar extends Component {
   };
 
   // select an image.
-  selectLocalImage = () => {
+  selectLocalImage = (linkedNode) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.click();
@@ -146,7 +159,7 @@ class IOBar extends Component {
       // make sure file is an image
       if (/^image\//.test(file.type)) {
         // save the image to the server
-        await this.props.createImageNode(file, this.state.input);
+        await this.props.createImageNode(file, this.state.input, linkedNode);
         // clear the input bar
         this.setState({ input: '' });
         history.push('/');

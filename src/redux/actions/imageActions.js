@@ -2,7 +2,7 @@ import instance from '../../api/instance';
 import { CREATE_IMAGE_NODE, CREATE_IMAGE_NODE_SUCCESS, CREATE_IMAGE_NODE_ERROR } from './types';
 import { message } from 'antd';
 
-export const createImageNode = (file, name) => async (dispatch) => {
+export const createImageNode = (file, name, linkedNode) => async (dispatch) => {
   dispatch({ type: CREATE_IMAGE_NODE });
   try {
     // create image FormData
@@ -10,6 +10,9 @@ export const createImageNode = (file, name) => async (dispatch) => {
     imageData.append('image', file);
     if (name) {
       imageData.append('name', name);
+    }
+    if (linkedNode) {
+      imageData.append('linkedNode', linkedNode);
     }
     // send the request
     const response = await instance.post('/image', imageData, {
