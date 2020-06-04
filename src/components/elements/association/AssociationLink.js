@@ -18,7 +18,6 @@ class AssociationLink extends Component {
       // store the active node
       var activeNodeUUID = this.props.activeNode.uuid;
     }
-    console.log({ siderNodeUUID, linkedNodeUUID, activeNodeUUID });
     // if both have values go ahead and delete the association
     if (siderNodeUUID && linkedNodeUUID) {
       this.props.deleteAssociationLink(siderNodeUUID, linkedNodeUUID);

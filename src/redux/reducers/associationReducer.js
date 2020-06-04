@@ -109,7 +109,6 @@ export default (state = INITIAL_STATE, action) => {
       } else {
         newAssociationList = [...state.associationList];
       }
-      console.log(newAssociationList);
       return {
         ...state,
         isFetching: null,
@@ -167,7 +166,6 @@ export default (state = INITIAL_STATE, action) => {
     case REMOVE_FROM_ASSOCIATION_LIST:
       // update total items
       var newTotalItems = state.totalAssociationListItems - 1;
-      console.log(action.deletedUUID);
       return {
         ...state,
         isSaving: null,

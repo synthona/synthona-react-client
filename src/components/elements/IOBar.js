@@ -75,7 +75,6 @@ class IOBar extends Component {
   };
   // handle the creation of different node types
   createNodeHandler = () => {
-    console.log(this.props.activeNode);
     var linkedNode;
     if (this.props.activeNode) {
       linkedNode = JSON.stringify(this.props.activeNode);
