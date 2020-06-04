@@ -51,8 +51,9 @@ class NodeCardHeader extends Component {
   saveName = (name) => {
     if (this.state.name !== name) {
       this.props.updateNode({ uuid: this.props.node.uuid, name });
+      this.props.node.name = name;
+      this.setState({ name: name });
     }
-    this.setState({ name: name });
   };
 
   render() {
