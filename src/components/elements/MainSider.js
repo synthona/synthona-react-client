@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Avatar, Modal, Drawer } from 'antd';
-import { signOut, hideComponent } from '../../redux/actions';
+import { signOut, hideComponent, generateInstanceExport } from '../../redux/actions';
 // custom code
 import './MainSider.less';
 // destructure antd components
@@ -103,6 +103,21 @@ class MainSider extends Component {
               </Link>
             </Item>
             <Item className='sider-menu-item'>
+              <Link
+                to='/'
+                onClick={(e) => {
+                  this.props.hideComponent('mainSider');
+                  this.props.generateInstanceExport();
+                }}
+              >
+                Export
+              </Link>
+            </Item>
+            <Item className='sider-menu-item'>
+              {/* HARD-CODED URL FOR VIEWING A SAMPLE EXPORT */}
+              <a href='http://localhost:9000/port/export.synth.zip'>View Export</a>
+            </Item>
+            <Item className='sider-menu-item'>
               <Link to={`/edit/profile/`}>Settings</Link>
             </Item>
             <Item className='sider-menu-item'>
@@ -135,4 +150,6 @@ const mapStateToProps = (state) => {
   return { user: state.auth.user, mainSider: state.components.componentList['mainSider'] };
 };
 
-export default connect(mapStateToProps, { signOut, hideComponent })(MainSider);
+export default connect(mapStateToProps, { signOut, hideComponent, generateInstanceExport })(
+  MainSider
+);

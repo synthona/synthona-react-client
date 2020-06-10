@@ -44,7 +44,7 @@ class NodeCardFull extends Component {
             >
               <Icon
                 // type={'link'}
-                type={'global'}
+                type={'star'}
                 theme='outlined'
                 style={{
                   fontSize: '5rem',

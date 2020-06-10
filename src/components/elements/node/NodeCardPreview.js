@@ -28,7 +28,7 @@ class NodeCardPreview extends Component {
       case 'url':
         return (
           <Fragment>
-            <Icon type={'global'} theme='outlined' className='node-card-icon' />
+            <Icon type={'star'} theme='outlined' className='node-card-icon' />
           </Fragment>
         );
       case 'collection':

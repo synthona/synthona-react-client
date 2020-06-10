@@ -6,3 +6,4 @@ export * from './textActions';
 export * from './userActions';
 export * from './associationActions';
 export * from './componentActions';
+export * from './portActions';

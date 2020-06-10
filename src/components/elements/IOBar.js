@@ -97,6 +97,9 @@ class IOBar extends Component {
       case 'image':
         this.selectLocalImage(linkedNode);
         break;
+      case 'file':
+        this.selectLocalFile(linkedNode);
+        break;
       case 'url':
         // if the URL is an image add an image node
         if (isImageUrl(this.state.input)) {
@@ -150,6 +153,7 @@ class IOBar extends Component {
   selectLocalImage = (linkedNode) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
+    input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
     input.click();
 
     // Listen for uploading local image, then save to server
@@ -165,6 +169,38 @@ class IOBar extends Component {
       } else {
         message.error('The file must be an image', 1);
       }
+    };
+  };
+
+  // select an image.
+  selectLocalFile = (linkedNode) => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    // input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
+    input.click();
+
+    // Listen for uploading local image, then save to server
+    input.onchange = async () => {
+      const file = input.files[0];
+      console.log(file);
+
+      if (file.name.includes('.synth.zip') && file.type === 'application/zip') {
+        console.log('this appears to be a synthona export!');
+      } else {
+        console.log('this appears to be a normal file ' + file.type);
+      }
+
+      // hmm. going to take a break to think about how imports should work
+      // make sure file is an image
+      // if (/^image\//.test(file.type)) {
+      //   // save the image to the server
+      //   await this.props.createImageNode(file, this.state.input, linkedNode);
+      //   // clear the input bar
+      //   this.setState({ input: '' });
+      //   history.push('/');
+      // } else {
+      //   message.error('The file must be an image', 1);
+      // }
     };
   };
 
@@ -200,7 +236,7 @@ class IOBar extends Component {
           <Option value='url'>url</Option>
           <Option value='image'>image</Option>
           <Option value='collection'>collection</Option>
-          {/* <Option value='file'>file</Option> */}
+          <Option value='file'>file</Option>
         </Select>
       );
     }
