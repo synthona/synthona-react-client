@@ -31,6 +31,18 @@ class NodeCardPreview extends Component {
             <Icon type={'star'} theme='outlined' className='node-card-icon' />
           </Fragment>
         );
+      case 'audio':
+        return (
+          <Fragment>
+            <Icon type={'sound'} theme='outlined' className='node-card-icon' />
+          </Fragment>
+        );
+      case 'file':
+        return (
+          <Fragment>
+            <Icon type={'file'} theme='outlined' className='node-card-icon' />
+          </Fragment>
+        );
       case 'collection':
         return (
           <Fragment>

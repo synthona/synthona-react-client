@@ -11,9 +11,9 @@ import {
   PROCESS_TEXT_NODE,
   PROCESS_TEXT_NODE_SUCCESS,
   PROCESS_TEXT_NODE_ERROR,
-  CREATE_IMAGE_NODE,
-  CREATE_IMAGE_NODE_SUCCESS,
-  CREATE_IMAGE_NODE_ERROR,
+  CREATE_FILE_NODE,
+  CREATE_FILE_NODE_SUCCESS,
+  CREATE_FILE_NODE_ERROR,
   SEARCH_NODES,
   SEARCH_NODES_SUCCESS,
   SEARCH_NODES_ERROR,
@@ -29,6 +29,7 @@ import {
   DELETE_NODE,
   DELETE_NODE_ERROR,
   DELETE_NODE_SUCCESS,
+  CLEAR_ACTIVE_NODE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -140,15 +141,15 @@ export default (state = INITIAL_STATE, action) => {
       };
     case PROCESS_TEXT_NODE_ERROR:
       return { ...state, isSaving: null };
-    case CREATE_IMAGE_NODE:
+    case CREATE_FILE_NODE:
       return { ...state, isSaving: true };
-    case CREATE_IMAGE_NODE_SUCCESS:
+    case CREATE_FILE_NODE_SUCCESS:
       return {
         ...state,
         isFetching: null,
         nodeList: [action.payload, ...state.nodeList],
       };
-    case CREATE_IMAGE_NODE_ERROR:
+    case CREATE_FILE_NODE_ERROR:
       return { ...state, isSaving: null };
     case CREATE_NODE:
       return { ...state, isSaving: true };
@@ -179,6 +180,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isFetching: null, activeNode: action.payload.node };
     case SET_ACTIVE_NODE_ERROR:
       return { ...state, isFetching: null };
+    case CLEAR_ACTIVE_NODE:
+      return { ...state, activeNode: null };
     case DELETE_NODE:
       return { ...state, isSaving: true };
     case DELETE_NODE_SUCCESS:

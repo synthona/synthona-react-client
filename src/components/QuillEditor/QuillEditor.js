@@ -14,7 +14,7 @@ import Spinner from '../elements/Spinner';
 import {
   editTextNode,
   processTextNode,
-  createImageNode,
+  createFileNode,
   setActiveNode,
   updateNode,
   fetchAssociations,
@@ -115,7 +115,7 @@ class QuillEditor extends Component {
     // generate the summary and do whatever processing will be
     // necessary to process the node
     // TODO: alter this so it stores a condensed version of the document instead of plain text
-    this.regeneratePreview();
+    await this.regeneratePreview();
     this.props.history.push('/');
   };
 
@@ -135,6 +135,7 @@ class QuillEditor extends Component {
   selectLocalImage = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
+    input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
     input.click();
 
     // Listen for uploading local image, then save to server
@@ -144,7 +145,7 @@ class QuillEditor extends Component {
       // make sure file is an image
       if (/^image\//.test(file.type)) {
         // save the image to the server
-        const url = await this.props.createImageNode(file);
+        const url = await this.props.createFileNode(file);
         // push image url to rich editor.
         const range = this.quill.getEditor().getSelection();
         this.quill.getEditor().insertEmbed(range.index, 'image', url);
@@ -288,7 +289,6 @@ class QuillEditor extends Component {
   }
 
   componentWillUnmount() {
-    this.regeneratePreview();
     // clear styles
     document.body.style.overflow = null;
     document.body.style.height = null;
@@ -342,7 +342,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   editTextNode,
   processTextNode,
-  createImageNode,
+  createFileNode,
   updateNode,
   setActiveNode,
   fetchAssociations,

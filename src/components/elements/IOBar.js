@@ -8,7 +8,7 @@ import { validUrl, isImageUrl } from '../../utils/inputValidation';
 import './IOBar.less';
 import {
   signOut,
-  createImageNode,
+  createFileNode,
   createNode,
   searchNodes,
   showComponent,
@@ -83,7 +83,7 @@ class IOBar extends Component {
       case 'text':
         // this.props.createTextNode(this.state.input);
         this.props.createNode({
-          local: true,
+          isFile: false,
           type: 'text',
           name: this.state.input,
           summary: '',
@@ -94,9 +94,9 @@ class IOBar extends Component {
         // redirect
         history.push('/');
         break;
-      case 'image':
-        this.selectLocalImage(linkedNode);
-        break;
+      // case 'image':
+      //   this.selectLocalImage(linkedNode);
+      //   break;
       case 'file':
         this.selectLocalFile(linkedNode);
         break;
@@ -104,7 +104,7 @@ class IOBar extends Component {
         // if the URL is an image add an image node
         if (isImageUrl(this.state.input)) {
           this.props.createNode({
-            local: false,
+            isFile: false,
             type: 'image',
             name: this.state.input,
             summary: this.state.input,
@@ -115,7 +115,7 @@ class IOBar extends Component {
           // otherwise add a regular URL
         } else if (validUrl(this.state.input)) {
           this.props.createNode({
-            local: false,
+            isFile: false,
             type: 'url',
             name: this.state.input,
             summary: this.state.input,
@@ -132,7 +132,7 @@ class IOBar extends Component {
         break;
       case 'collection':
         this.props.createNode({
-          local: true,
+          isFile: false,
           type: 'collection',
           name: this.state.input,
           summary: '',
@@ -150,57 +150,41 @@ class IOBar extends Component {
   };
 
   // select an image.
-  selectLocalImage = (linkedNode) => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
-    input.click();
+  // selectLocalImage = (linkedNode) => {
+  //   const input = document.createElement('input');
+  //   input.setAttribute('type', 'file');
+  //   input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
+  //   input.click();
 
-    // Listen for uploading local image, then save to server
-    input.onchange = async () => {
-      const file = input.files[0];
-      // make sure file is an image
-      if (/^image\//.test(file.type)) {
-        // save the image to the server
-        await this.props.createImageNode(file, this.state.input, linkedNode);
-        // clear the input bar
-        this.setState({ input: '' });
-        history.push('/');
-      } else {
-        message.error('The file must be an image', 1);
-      }
-    };
-  };
+  //   // Listen for uploading local image, then save to server
+  //   input.onchange = async () => {
+  //     const file = input.files[0];
+  //     // make sure file is an image
+  //     if (/^image\//.test(file.type)) {
+  //       // save the image to the server
+  //       await this.props.createImageNode(file, this.state.input, linkedNode);
+  //       // clear the input bar
+  //       this.setState({ input: '' });
+  //       history.push('/');
+  //     } else {
+  //       message.error('The file must be an image', 1);
+  //     }
+  //   };
+  // };
 
   // select an image.
   selectLocalFile = (linkedNode) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
-    // input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
     input.click();
 
-    // Listen for uploading local image, then save to server
+    // Listen for uploading local file, then save to server
     input.onchange = async () => {
       const file = input.files[0];
-      console.log(file);
-
-      if (file.name.includes('.synth.zip') && file.type === 'application/zip') {
-        console.log('this appears to be a synthona export!');
-      } else {
-        console.log('this appears to be a normal file ' + file.type);
-      }
-
-      // hmm. going to take a break to think about how imports should work
-      // make sure file is an image
-      // if (/^image\//.test(file.type)) {
-      //   // save the image to the server
-      //   await this.props.createImageNode(file, this.state.input, linkedNode);
-      //   // clear the input bar
-      //   this.setState({ input: '' });
-      //   history.push('/');
-      // } else {
-      //   message.error('The file must be an image', 1);
-      // }
+      await this.props.createFileNode(file, this.state.input, linkedNode);
+      // clear the input bar
+      this.setState({ input: '' });
+      history.push('/');
     };
   };
 
@@ -218,6 +202,7 @@ class IOBar extends Component {
           <Option value='all'>all</Option>
           <Option value='text'>text</Option>
           <Option value='image'>images</Option>
+          <Option value='audio'>audio</Option>
           <Option value='url'>urls</Option>
           <Option value='collection'>collections</Option>
         </Select>
@@ -234,7 +219,6 @@ class IOBar extends Component {
         >
           <Option value='text'>text</Option>
           <Option value='url'>url</Option>
-          <Option value='image'>image</Option>
           <Option value='collection'>collection</Option>
           <Option value='file'>file</Option>
         </Select>
@@ -304,7 +288,7 @@ export default connect(mapStateToProps, {
   signOut,
   searchNodes,
   createNode,
-  createImageNode,
+  createFileNode,
   showComponent,
   hideComponent,
 })(IOBar);

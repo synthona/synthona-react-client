@@ -115,7 +115,9 @@ class MainSider extends Component {
             </Item>
             <Item className='sider-menu-item'>
               {/* HARD-CODED URL FOR VIEWING A SAMPLE EXPORT */}
-              <a href='http://localhost:9000/port/export.synth.zip'>View Export</a>
+              <a href={`http://localhost:9000/port/${this.props.user.username}.synth.zip`}>
+                View Export
+              </a>
             </Item>
             <Item className='sider-menu-item'>
               <Link to={`/edit/profile/`}>Settings</Link>

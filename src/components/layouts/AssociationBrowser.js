@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
-import { setActiveNode, fetchAssociations, markNodeView, updateNode } from '../../redux/actions';
+import {
+  setActiveNode,
+  clearActiveNode,
+  fetchAssociations,
+  markNodeView,
+  updateNode,
+} from '../../redux/actions';
 import MainSider from '../elements/MainSider';
 import NodeCardFull from '../elements/node/NodeCardFull';
 import Spinner from '../elements/Spinner';
@@ -32,6 +38,10 @@ class AssociationBrowser extends Component {
       this.setState({ initialized: false });
       this.initializeFromUrlParams();
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearActiveNode();
   }
 
   // intialize the association page
@@ -133,6 +143,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   setActiveNode,
+  clearActiveNode,
   fetchAssociations,
   markNodeView,
   updateNode,

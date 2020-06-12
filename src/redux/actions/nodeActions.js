@@ -23,6 +23,7 @@ import {
   DELETE_NODE,
   DELETE_NODE_ERROR,
   DELETE_NODE_SUCCESS,
+  CLEAR_ACTIVE_NODE,
 } from './types';
 import { message } from 'antd';
 import Delta from 'quill-delta';
@@ -99,7 +100,7 @@ export const createNode = (node, file) => async (dispatch) => {
   }
   try {
     const response = await instance.post('/node', {
-      local: node.local,
+      isFile: node.isFile,
       type: node.type,
       name: node.name,
       summary: node.summary,
@@ -147,6 +148,12 @@ export const setActiveNode = (uuid) => async (dispatch) => {
     message.error('Could not retrieve values', 1);
     history.push('/');
   }
+};
+
+export const clearActiveNode = () => {
+  return {
+    type: CLEAR_ACTIVE_NODE,
+  };
 };
 
 // delete text node handler

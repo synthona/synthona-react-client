@@ -25,7 +25,6 @@ class NodeCard extends Component {
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />
             <Link to={`/edit/text/${this.props.node.uuid}`} onClick={(e) => this.handleNodeClick()}>
-              {/* <Link to={`/edit/text/${this.props.node.uuid}`}> */}
               <NodeCardPreview node={this.props.node} />
             </Link>
           </li>
@@ -52,28 +51,30 @@ class NodeCard extends Component {
             >
               <NodeCardPreview node={this.props.node} />
             </Link>
-            {/* <a
-              href={this.props.node.summary}
-              target='_blank'
-              rel='noopener noreferrer'
-              onClick={(e) => {
-                this.props.markNodeView(this.props.node);
-                this.handleNodeClick();
-              }}
-              style={{ width: '100%' }}
+          </li>
+        );
+      case 'file':
+        return (
+          <li className='nodelist-item'>
+            <NodeCardHeader node={this.props.node} />
+            <Link
+              to={`/associations/${this.props.node.uuid}`}
+              onClick={(e) => this.handleNodeClick()}
             >
-              <Icon
-                type={'global'}
-                theme='outlined'
-                style={{
-                  fontSize: '5rem',
-                  color: '#b8b8b8',
-                  display: 'block',
-                  textAlign: 'center',
-                  padding: '3rem',
-                }}
-              />
-              </a>*/}
+              <NodeCardPreview node={this.props.node} />
+            </Link>
+          </li>
+        );
+      case 'audio':
+        return (
+          <li className='nodelist-item'>
+            <NodeCardHeader node={this.props.node} />
+            <Link
+              to={`/associations/${this.props.node.uuid}`}
+              onClick={(e) => this.handleNodeClick()}
+            >
+              <NodeCardPreview node={this.props.node} />
+            </Link>
           </li>
         );
       case 'collection':
