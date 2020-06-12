@@ -9,7 +9,7 @@
     "customize-cra": "^0.4.1",
     "dotenv": "^8.2.0",
     "formik": "^1.5.8",
-    "less": "^3.11.1",
+    "less": "^3.11.3",
     "less-loader": "^5.0.0",
     "quill-blot-formatter": "^1.0.5",
     "react": "^16.13.1",
@@ -21,7 +21,7 @@
     "react-scripts": "^3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.9.3",
+    "typescript": "^3.9.5",
     "yup": "^0.27.0"
   },
   "scripts": {

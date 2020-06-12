@@ -166,11 +166,21 @@ export default (state = INITIAL_STATE, action) => {
     case MARK_NODE_VIEW:
       return { ...state, isSaving: true };
     case MARK_NODE_VIEW_SUCCESS:
+      var newNodeList;
+      // only send the node back to the beginning if the user is at the top of the list
+      if (state.nodeList.length < 20) {
+        newNodeList = [
+          action.node,
+          ...state.nodeList.filter((node) => node.uuid !== action.node.uuid),
+        ];
+      } else {
+        // otherwise just make it "disapear" to reappaar when they return to the top
+        newNodeList = [...state.nodeList.filter((node) => node.uuid !== action.node.uuid)];
+      }
       return {
         ...state,
-        isFetching: null,
-        // move node to front of nodelist
-        nodeList: [action.node, ...state.nodeList.filter((node) => node.uuid !== action.node.uuid)],
+        isSaving: null,
+        nodeList: newNodeList,
       };
     case MARK_NODE_VIEW_ERROR:
       return { ...state, isSaving: null };
