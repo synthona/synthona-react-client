@@ -37,6 +37,12 @@ class NodeCardPreview extends Component {
             <Icon type={'sound'} theme='outlined' className='node-card-icon' />
           </Fragment>
         );
+      case 'synthona':
+        return (
+          <Fragment>
+            <Icon type={'deployment-unit'} theme='outlined' className='node-card-icon' />
+          </Fragment>
+        );
       case 'file':
         return (
           <Fragment>

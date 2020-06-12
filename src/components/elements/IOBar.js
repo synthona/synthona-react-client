@@ -219,8 +219,8 @@ class IOBar extends Component {
         >
           <Option value='text'>text</Option>
           <Option value='url'>url</Option>
-          <Option value='collection'>collection</Option>
           <Option value='file'>file</Option>
+          <Option value='collection'>collection</Option>
         </Select>
       );
     }
