@@ -89,6 +89,18 @@ class NodeCard extends Component {
             </Link>
           </li>
         );
+      case 'zip':
+        return (
+          <li className='nodelist-item'>
+            <NodeCardHeader node={this.props.node} />
+            <Link
+              to={`/associations/${this.props.node.uuid}`}
+              onClick={(e) => this.handleNodeClick()}
+            >
+              <NodeCardPreview node={this.props.node} />
+            </Link>
+          </li>
+        );
       case 'collection':
         // create the collection grid
         var previewCount = 0;

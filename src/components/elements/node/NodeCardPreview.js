@@ -43,6 +43,12 @@ class NodeCardPreview extends Component {
             <Icon type={'deployment-unit'} theme='outlined' className='node-card-icon' />
           </Fragment>
         );
+      case 'zip':
+        return (
+          <Fragment>
+            <Icon type={'file-zip'} theme='outlined' className='node-card-icon' />
+          </Fragment>
+        );
       case 'file':
         return (
           <Fragment>

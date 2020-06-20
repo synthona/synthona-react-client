@@ -66,7 +66,7 @@ class NodeList extends Component {
       });
     }
     // if it's not the top of the page go ahead and fetch more
-    return windowBottom >= docHeight - 400;
+    return windowBottom >= docHeight - 733;
   };
 
   renderNodeList = () => {

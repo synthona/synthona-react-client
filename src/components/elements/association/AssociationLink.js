@@ -94,6 +94,66 @@ class AssociationLink extends Component {
             </Tooltip>
           </li>
         );
+      case 'file':
+        return (
+          <li className='association-list-item'>
+            <Button
+              icon='close'
+              shape='circle'
+              size='small'
+              onClick={(e) => this.handleDeleteAssociation()}
+            />
+            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
+              <Link
+                to={`/associations/${association.uuid}`}
+                onClick={(e) => this.handleLinkClick()}
+                target='_blank'
+              >
+                {association.name}
+              </Link>
+            </Tooltip>
+          </li>
+        );
+      case 'audio':
+        return (
+          <li className='association-list-item'>
+            <Button
+              icon='close'
+              shape='circle'
+              size='small'
+              onClick={(e) => this.handleDeleteAssociation()}
+            />
+            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
+              <Link
+                to={`/associations/${association.uuid}`}
+                onClick={(e) => this.handleLinkClick()}
+                target='_blank'
+              >
+                {association.name}
+              </Link>
+            </Tooltip>
+          </li>
+        );
+      case 'synthona':
+        return (
+          <li className='association-list-item'>
+            <Button
+              icon='close'
+              shape='circle'
+              size='small'
+              onClick={(e) => this.handleDeleteAssociation()}
+            />
+            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
+              <Link
+                to={`/associations/${association.uuid}`}
+                onClick={(e) => this.handleLinkClick()}
+                target='_blank'
+              >
+                {association.name}
+              </Link>
+            </Tooltip>
+          </li>
+        );
       case 'url':
         return (
           <li className='association-list-item'>

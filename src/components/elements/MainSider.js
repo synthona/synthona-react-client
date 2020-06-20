@@ -50,7 +50,7 @@ class MainSider extends Component {
           placement='left'
           closable={false}
           onClose={(e) => this.props.hideComponent('mainSider')}
-          visible={this.props.mainSider}
+          visible={this.props.mainSider.visible}
         >
           <Menu mode='vertical' defaultSelectedKeys={['1']} className='sider-menu'>
             <Item>
@@ -112,12 +112,6 @@ class MainSider extends Component {
               >
                 Export
               </Link>
-            </Item>
-            <Item className='sider-menu-item'>
-              {/* HARD-CODED URL FOR VIEWING A SAMPLE EXPORT */}
-              <a href={`http://localhost:9000/port/${this.props.user.username}.synth.zip`}>
-                View Export
-              </a>
             </Item>
             <Item className='sider-menu-item'>
               <Link to={`/edit/profile/`}>Settings</Link>

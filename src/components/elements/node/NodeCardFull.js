@@ -64,7 +64,7 @@ class NodeCardFull extends Component {
             {/* <p>{this.props.node.summary}</p> */}
             <a
               href={this.props.node.summary}
-              target='_blank'
+              // target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}
               style={{ width: '100%' }}
@@ -116,13 +116,39 @@ class NodeCardFull extends Component {
             {/* <p>{this.props.node.summary}</p> */}
             <a
               href={this.props.node.summary}
-              target='_blank'
+              // target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}
               style={{ width: '100%' }}
             >
               <Icon
                 type={'deployment-unit'}
+                theme='outlined'
+                style={{
+                  fontSize: '5rem',
+                  color: '#b8b8b8',
+                  display: 'block',
+                  textAlign: 'center',
+                  padding: '3rem',
+                }}
+              />
+            </a>
+          </div>
+        );
+      case 'zip':
+        return (
+          <div className='full-node-item'>
+            <NodeCardHeaderFull node={this.props.node} />
+            {/* <p>{this.props.node.summary}</p> */}
+            <a
+              href={this.props.node.summary}
+              // target='_blank'
+              rel='noopener noreferrer'
+              onClick={(e) => this.props.markNodeView(this.props.node)}
+              style={{ width: '100%' }}
+            >
+              <Icon
+                type={'file-zip'}
                 theme='outlined'
                 style={{
                   fontSize: '5rem',

@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { Icon, Modal, Tooltip } from 'antd';
-import { showComponent, updateNode, deleteNode, clearActiveNode } from '../../../redux/actions';
+import {
+  showComponent,
+  unpackSynthonaImport,
+  updateNode,
+  deleteNode,
+  clearActiveNode,
+} from '../../../redux/actions';
 
 class NodeCardHeaderFull extends Component {
   constructor(props) {
@@ -112,11 +118,39 @@ class NodeCardHeaderFull extends Component {
     }
   };
 
+  // render header buttons for node types which need them
+  renderContextualButtons = () => {
+    // console.log('rendering contextual buttons');
+    // console.log(this.props.node);
+    switch (this.props.node.type) {
+      case 'synthona':
+        console.log('synthona');
+        return (
+          <Tooltip title={'unpack synthona export'} mouseEnterDelay={1.1}>
+            <li>
+              <button
+                onClick={(e) => {
+                  // show the modal
+                  // this.props.showComponent('associationSider', this.props.node);
+                  this.props.unpackSynthonaImport(this.props.node.uuid);
+                }}
+              >
+                <Icon type={'appstore'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
+        );
+      default:
+        return;
+    }
+  };
+
   render() {
     return (
       <div className='full-card-options'>
         {this.renderTitle()}
         <ul className='full-card-buttons-list'>
+          {this.renderContextualButtons()}
           <li>
             <button
               onClick={(e) => {
@@ -180,6 +214,7 @@ class NodeCardHeaderFull extends Component {
 export default connect(null, {
   showComponent,
   updateNode,
+  unpackSynthonaImport,
   deleteNode,
   clearActiveNode,
 })(NodeCardHeaderFull);

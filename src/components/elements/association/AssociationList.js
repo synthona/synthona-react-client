@@ -66,7 +66,7 @@ class AssociationList extends Component {
     // TODO: need to find a way to calculate the "window top" as well
     // so i can decrement the page number when the user scrolls up
     // this is necessary so redux doesn't have to store everything
-    return windowBottom >= docHeight - 400;
+    return windowBottom >= docHeight - 733;
   };
 
   renderNodes = () => {
