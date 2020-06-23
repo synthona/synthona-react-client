@@ -11,6 +11,8 @@ const { Content } = Layout;
 class Home extends Component {
   componentDidMount() {
     document.title = 'home';
+    // temporary fix to undo whatever is setting overflow hidden on-login
+    document.body.style.removeProperty('overflow');
   }
 
   renderMainSider = () => {
