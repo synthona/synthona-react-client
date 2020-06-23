@@ -43,7 +43,7 @@ class NodeCardPreview extends Component {
             <Icon type={'user'} theme='outlined' className='node-card-icon' />
           </Fragment>
         );
-      case 'synthona':
+      case 'package':
         return (
           <Fragment>
             <Icon type={'deployment-unit'} theme='outlined' className='node-card-icon' />

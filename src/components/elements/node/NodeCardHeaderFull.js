@@ -123,8 +123,7 @@ class NodeCardHeaderFull extends Component {
     // console.log('rendering contextual buttons');
     // console.log(this.props.node);
     switch (this.props.node.type) {
-      case 'synthona':
-        console.log('synthona');
+      case 'package':
         return (
           <Tooltip title={'unpack synthona export'} mouseEnterDelay={1.1}>
             <li>

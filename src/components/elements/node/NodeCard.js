@@ -77,7 +77,7 @@ class NodeCard extends Component {
             </Link>
           </li>
         );
-      case 'synthona':
+      case 'package':
         return (
           <li className='nodelist-item'>
             <NodeCardHeader node={this.props.node} />

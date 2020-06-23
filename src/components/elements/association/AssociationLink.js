@@ -134,7 +134,7 @@ class AssociationLink extends Component {
             </Tooltip>
           </li>
         );
-      case 'synthona':
+      case 'package':
         return (
           <li className='association-list-item'>
             <Button

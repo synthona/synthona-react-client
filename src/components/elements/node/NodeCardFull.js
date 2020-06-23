@@ -118,7 +118,7 @@ class NodeCardFull extends Component {
             </a>
           </div>
         );
-      case 'synthona':
+      case 'package':
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
