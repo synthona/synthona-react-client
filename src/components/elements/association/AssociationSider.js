@@ -84,6 +84,7 @@ class AssociationSider extends Component {
             onClose={this.hideInfoSider}
             visible={this.props.associationSiderData.visible}
           >
+            {/*<p style={{ color: 'white' }}>{siderNode.preview}</p> */}
             <AutoComplete
               style={{
                 width: 200,

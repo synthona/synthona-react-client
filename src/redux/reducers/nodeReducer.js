@@ -129,12 +129,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSaving: null,
-        // update the summary in the nodelist
+        // update the preview in the nodelist
         // leave everything else as-is
         nodeList: state.nodeList.map((node) => {
           // only update it for the processsed node
           if (node.uuid === action.node.uuid) {
-            node.summary = action.node.summary;
+            node.preview = action.node.preview;
           }
           return node;
         }),

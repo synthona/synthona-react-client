@@ -8,14 +8,14 @@ class NodeCardPreview extends Component {
       case 'text':
         return (
           <Fragment>
-            <p>{this.props.node.summary}</p>
+            <p>{this.props.node.preview}</p>
           </Fragment>
         );
       case 'image':
         return (
           <Fragment>
             <img
-              src={this.props.node.summary}
+              src={this.props.node.preview}
               alt={this.props.node.name}
               style={{
                 objectFit: 'cover',
@@ -35,6 +35,12 @@ class NodeCardPreview extends Component {
         return (
           <Fragment>
             <Icon type={'sound'} theme='outlined' className='node-card-icon' />
+          </Fragment>
+        );
+      case 'user':
+        return (
+          <Fragment>
+            <Icon type={'user'} theme='outlined' className='node-card-icon' />
           </Fragment>
         );
       case 'synthona':

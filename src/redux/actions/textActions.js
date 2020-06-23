@@ -33,8 +33,8 @@ export const editTextNode = (node) => async (dispatch) => {
 export const processTextNode = (node) => async (dispatch) => {
   dispatch({ type: PROCESS_TEXT_NODE });
   try {
-    await instance.patch('/text/process', { uuid: node.uuid, summary: node.summary });
-    dispatch({ type: PROCESS_TEXT_NODE_SUCCESS, node, summary: node.summary });
+    await instance.patch('/text/process', { uuid: node.uuid, preview: node.preview });
+    dispatch({ type: PROCESS_TEXT_NODE_SUCCESS, node, preview: node.preview });
   } catch (err) {
     dispatch({ type: PROCESS_TEXT_NODE_ERROR });
   }

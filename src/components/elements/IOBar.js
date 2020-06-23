@@ -86,7 +86,7 @@ class IOBar extends Component {
           isFile: false,
           type: 'text',
           name: this.state.input,
-          summary: '',
+          preview: '',
           linkedNode,
         });
         // clear the input bar
@@ -107,7 +107,7 @@ class IOBar extends Component {
             isFile: false,
             type: 'image',
             name: this.state.input,
-            summary: this.state.input,
+            preview: this.state.input,
             content: this.state.input,
             linkedNode,
           });
@@ -118,7 +118,7 @@ class IOBar extends Component {
             isFile: false,
             type: 'url',
             name: this.state.input,
-            summary: this.state.input,
+            preview: this.state.input,
             content: this.state.input,
             linkedNode,
           });
@@ -135,7 +135,7 @@ class IOBar extends Component {
           isFile: false,
           type: 'collection',
           name: this.state.input,
-          summary: '',
+          preview: '',
           content: this.state.input,
           linkedNode,
         });

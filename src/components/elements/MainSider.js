@@ -5,6 +5,7 @@ import { Menu, Avatar, Modal, Drawer } from 'antd';
 import { signOut, hideComponent, generateInstanceExport } from '../../redux/actions';
 // custom code
 import './MainSider.less';
+import Spinner from './Spinner';
 // destructure antd components
 const { Item } = Menu;
 
@@ -41,6 +42,10 @@ class MainSider extends Component {
   };
 
   render() {
+    if (this.props.mainSider === null) {
+      return <Spinner></Spinner>;
+    }
+
     return (
       <div className='sider-container'>
         <Drawer
@@ -114,7 +119,7 @@ class MainSider extends Component {
               </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to={`/edit/profile/`}>Settings</Link>
+              <Link to={`/edit/profile/`}>Options</Link>
             </Item>
             <Item className='sider-menu-item'>
               <Link to='#' onClick={this.toggleSignoutModal}>

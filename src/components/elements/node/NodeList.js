@@ -18,7 +18,8 @@ class NodeList extends Component {
 
   componentDidMount() {
     this.props.fetchNodes({
-      page: this.props.query.page > 1 ? this.props.query.page - 1 : this.props.query.page,
+      // page: this.props.query.page > 1 ? this.props.query.page - 1 : this.props.query.page,
+      page: 1,
       type: this.props.query.type,
       searchQuery: this.props.query.searchQuery,
     });

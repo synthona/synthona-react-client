@@ -22,7 +22,7 @@ export const createFileNode = (file, name, linkedNode) => async (dispatch) => {
     if (response.status === 200) {
       dispatch({ type: CREATE_FILE_NODE_SUCCESS, payload: response.data.node });
       // return the image URL for immediate use
-      return response.data.node.summary;
+      return response.data.node.preview;
     } else {
       message.error('There was a problem inserting the file', 1);
     }

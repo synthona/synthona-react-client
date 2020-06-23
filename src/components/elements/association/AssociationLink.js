@@ -165,7 +165,7 @@ class AssociationLink extends Component {
             />
             <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
               <a
-                href={association.summary}
+                href={association.preview}
                 target='_blank'
                 rel='noopener noreferrer'
                 onClick={(e) => this.handleLinkClick()}

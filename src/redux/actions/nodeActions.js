@@ -73,7 +73,7 @@ export const updateNode = (node) => async (dispatch) => {
       hidden: node.hidden,
       searchable: node.searchable,
       name: node.name,
-      summary: node.summary,
+      preview: node.preview,
     });
     dispatch({
       type: UPDATE_NODE_SUCCESS,
@@ -103,7 +103,7 @@ export const createNode = (node, file) => async (dispatch) => {
       isFile: node.isFile,
       type: node.type,
       name: node.name,
-      summary: node.summary,
+      preview: node.preview,
       content: node.content,
       linkedNode: node.linkedNode,
     });
@@ -164,7 +164,7 @@ export const deleteNode = (uuid) => async (dispatch) => {
     if (response.status === 200) {
       history.push('/');
       dispatch({ type: DELETE_NODE_SUCCESS, uuid: uuid });
-      message.success('successfully deleted', 1);
+      // message.success('successfully deleted', 1);
     }
   } catch (err) {
     dispatch({ type: DELETE_NODE_ERROR });

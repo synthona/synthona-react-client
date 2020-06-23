@@ -104,17 +104,17 @@ class NodeCard extends Component {
       case 'collection':
         // create the collection grid
         var previewCount = 0;
+        var collectionPreview = null;
         var preview = null;
-        var summary = null;
-        // check if the collection has a summary
-        if (node.summary) {
-          summary = JSON.parse(node.summary);
-          previewCount = summary.length;
+        // check if the collection has a preview
+        if (node.preview) {
+          preview = JSON.parse(node.preview);
+          previewCount = preview.length;
         }
         // create the different grid types
         switch (previewCount) {
           case 0:
-            preview = (
+            collectionPreview = (
               <li className='nodelist-item'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
@@ -125,9 +125,9 @@ class NodeCard extends Component {
                 </Link>
               </li>
             );
-            return preview;
+            return collectionPreview;
           case 1:
-            preview = (
+            collectionPreview = (
               <li className='nodelist-item'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
@@ -138,9 +138,9 @@ class NodeCard extends Component {
                 </Link>
               </li>
             );
-            return preview;
+            return collectionPreview;
           case 2:
-            preview = (
+            collectionPreview = (
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
@@ -149,18 +149,18 @@ class NodeCard extends Component {
                 >
                   <ul className='nodelist-collection-grid'>
                     <li className='nodelist-collection-grid-full-width'>
-                      <NodeCardPreview node={summary[0]} />
+                      <NodeCardPreview node={preview[0]} />
                     </li>
                     <li className='nodelist-collection-grid-full-width'>
-                      <NodeCardPreview node={summary[1]} />
+                      <NodeCardPreview node={preview[1]} />
                     </li>
                   </ul>
                 </Link>
               </li>
             );
-            return preview;
+            return collectionPreview;
           case 3:
-            preview = (
+            collectionPreview = (
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
@@ -169,22 +169,22 @@ class NodeCard extends Component {
                 >
                   <ul className='nodelist-collection-grid'>
                     <li className='nodelist-collection-grid-full-width'>
-                      <NodeCardPreview node={summary[0]} />
+                      <NodeCardPreview node={preview[0]} />
                     </li>
                     <li>
-                      <NodeCardPreview node={summary[1]} />
+                      <NodeCardPreview node={preview[1]} />
                     </li>
                     <li>
-                      <NodeCardPreview node={summary[2]} />
+                      <NodeCardPreview node={preview[2]} />
                     </li>
                     <li></li>
                   </ul>
                 </Link>
               </li>
             );
-            return preview;
+            return collectionPreview;
           case 4:
-            preview = (
+            collectionPreview = (
               <li className='nodelist-item nodelist-item-collection'>
                 <NodeCardHeader node={this.props.node} />
                 <Link
@@ -193,22 +193,22 @@ class NodeCard extends Component {
                 >
                   <ul className='nodelist-collection-grid'>
                     <li>
-                      <NodeCardPreview node={summary[0]} />
+                      <NodeCardPreview node={preview[0]} />
                     </li>
                     <li>
-                      <NodeCardPreview node={summary[1]} />
+                      <NodeCardPreview node={preview[1]} />
                     </li>
                     <li>
-                      <NodeCardPreview node={summary[2]} />
+                      <NodeCardPreview node={preview[2]} />
                     </li>
                     <li>
-                      <NodeCardPreview node={summary[3]} />
+                      <NodeCardPreview node={preview[3]} />
                     </li>
                   </ul>
                 </Link>
               </li>
             );
-            return preview;
+            return collectionPreview;
           default:
             return;
         }

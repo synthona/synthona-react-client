@@ -16,7 +16,16 @@ class NodeCardFull extends Component {
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
             <Link to={`/edit/text/${this.props.node.uuid}`} /*target='_blank' */>
-              <p>{this.props.node.summary}</p>
+              <p>{this.props.node.preview}</p>
+            </Link>
+          </div>
+        );
+      case 'user':
+        return (
+          <div className='full-node-item'>
+            <NodeCardHeaderFull node={this.props.node} />
+            <Link to={`/profile/${this.props.node.name}`} /*target='_blank' */>
+              <p>{this.props.node.name}</p>
             </Link>
           </div>
         );
@@ -27,16 +36,16 @@ class NodeCardFull extends Component {
             {/* <Link to={`/view/image/${this.props.node.uuid}`} >
 
             </Link> */}
-            <img src={this.props.node.summary} alt={this.props.node.name}></img>
+            <img src={this.props.node.preview} alt={this.props.node.name}></img>
           </div>
         );
       case 'url':
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <p>{this.props.node.summary}</p> */}
+            {/* <p>{this.props.node.preview}</p> */}
             <a
-              href={this.props.node.summary}
+              href={this.props.node.preview}
               target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}
@@ -61,9 +70,9 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <p>{this.props.node.summary}</p> */}
+            {/* <p>{this.props.node.preview}</p> */}
             <a
-              href={this.props.node.summary}
+              href={this.props.node.preview}
               // target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}
@@ -87,9 +96,9 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <p>{this.props.node.summary}</p> */}
+            {/* <p>{this.props.node.preview}</p> */}
             <a
-              href={this.props.node.summary}
+              href={this.props.node.preview}
               target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}
@@ -113,9 +122,9 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <p>{this.props.node.summary}</p> */}
+            {/* <p>{this.props.node.preview}</p> */}
             <a
-              href={this.props.node.summary}
+              href={this.props.node.preview}
               // target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}
@@ -139,9 +148,9 @@ class NodeCardFull extends Component {
         return (
           <div className='full-node-item'>
             <NodeCardHeaderFull node={this.props.node} />
-            {/* <p>{this.props.node.summary}</p> */}
+            {/* <p>{this.props.node.preview}</p> */}
             <a
-              href={this.props.node.summary}
+              href={this.props.node.preview}
               // target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}

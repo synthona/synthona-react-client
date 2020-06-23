@@ -37,8 +37,9 @@ export const unpackSynthonaImport = (uuid) => async (dispatch) => {
     const response = await instance.post('/port/import/', { uuid });
     // dispatch({ type: GENERATE_INSTANCE_EXPORT_ERROR, payload: response.data });
     if (response.status === 200) {
-      // message.success('200 response', 2);
-      console.log('generated import data!');
+      message.success('generated import data!', 1);
+      // console.log('generated import data!');
+      history.push('/');
     }
     // window.open(response.data.url, '_blank');
   } catch (err) {

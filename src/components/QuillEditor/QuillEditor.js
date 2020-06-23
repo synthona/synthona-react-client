@@ -112,7 +112,7 @@ class QuillEditor extends Component {
 
   // exit the editor and return to the home screen
   exitHandler = async () => {
-    // generate the summary and do whatever processing will be
+    // generate the preview and do whatever processing will be
     // necessary to process the node
     // TODO: alter this so it stores a condensed version of the document instead of plain text
     await this.regeneratePreview();
@@ -121,13 +121,13 @@ class QuillEditor extends Component {
 
   regeneratePreview = () => {
     if (!this.state.deleting && !this.state.error && this.state.uuid !== null) {
-      const summaryLength = 500;
+      const previewLength = 500;
       const editor = this.quill.getEditor();
       // process the text node
       const content = editor.getText();
-      const summary = content.substring(0, summaryLength);
-      // wait for summary to update before going back to homepage so it will be up to date
-      this.props.processTextNode({ uuid: this.state.uuid, summary });
+      const preview = content.substring(0, previewLength);
+      // wait for preview to update before going back to homepage so it will be up to date
+      this.props.processTextNode({ uuid: this.state.uuid, preview });
     }
   };
 
@@ -235,7 +235,7 @@ class QuillEditor extends Component {
       matchVisual: false,
       matchers: [
         ['img', this.matcherImageHandler],
-        ['p', this.matcherLineBreakHandler],
+        // ['p', this.matcherLineBreakHandler],
       ],
     },
     // blotFormatter: {

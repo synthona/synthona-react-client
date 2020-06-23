@@ -84,12 +84,12 @@ class AssociationBrowser extends Component {
           if (node.type !== 'collection' && node.type !== 'user') {
             preview.push({
               type: node.type,
-              summary: node.summary,
+              preview: node.preview,
             });
           }
           i++;
         }
-        this.props.updateNode({ uuid: collectionNode.uuid, summary: JSON.stringify(preview) });
+        this.props.updateNode({ uuid: collectionNode.uuid, preview: JSON.stringify(preview) });
       }
     } catch (err) {
       this.props.history.push('/');
