@@ -72,6 +72,8 @@ class AssociationSider extends Component {
   };
 
   renderContent = () => {
+    // temporary fix to undo whatever is setting overflow hidden on-login
+    // document.body.style
     if (this.props.associationSiderData) {
       var siderNode = this.props.associationSiderData.content;
       return (
@@ -81,7 +83,11 @@ class AssociationSider extends Component {
             placement='right'
             closable={false}
             title={siderNode.name}
-            onClose={this.hideInfoSider}
+            onClose={() => {
+              this.hideInfoSider();
+              // temporary fix to remove overflow property being set on body by antd
+              document.documentElement.style.cssText = '';
+            }}
             visible={this.props.associationSiderData.visible}
           >
             {/*<p style={{ color: 'white' }}>{siderNode.preview}</p> */}
