@@ -49,7 +49,6 @@ class QuillEditor extends Component {
   componentDidMount() {
     document.body.style.overflow = 'auto';
     document.body.style.height = '100%';
-    document.documentElement.style.overflow = 'hidden';
     document.documentElement.style.height = '100%';
     this.initializeFromUrlParams();
   }
