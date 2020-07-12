@@ -144,7 +144,11 @@ class QuillEditor extends Component {
       // make sure file is an image
       if (/^image\//.test(file.type)) {
         // save the image to the server
-        const url = await this.props.createFileNode(file, null, this.props.nodeData);
+        const url = await this.props.createFileNode(
+          file,
+          null,
+          JSON.stringify(this.props.nodeData)
+        );
         // push image url to rich editor.
         const range = this.quill.getEditor().getSelection();
         this.quill.getEditor().insertEmbed(range.index, 'image', url);
@@ -234,7 +238,7 @@ class QuillEditor extends Component {
       matchVisual: false,
       matchers: [
         ['img', this.matcherImageHandler],
-        // ['p', this.matcherLineBreakHandler],
+        ['p', this.matcherLineBreakHandler],
       ],
     },
     // blotFormatter: {

@@ -164,7 +164,7 @@ export const deleteNode = (uuid) => async (dispatch) => {
     if (response.status === 200) {
       history.push('/');
       dispatch({ type: DELETE_NODE_SUCCESS, uuid: uuid });
-      // message.success('successfully deleted', 1);
+      message.success('successfully deleted', 1);
     }
   } catch (err) {
     dispatch({ type: DELETE_NODE_ERROR });

@@ -72,8 +72,6 @@ class AssociationSider extends Component {
   };
 
   renderContent = () => {
-    // temporary fix to undo whatever is setting overflow hidden on-login
-    // document.body.style
     if (this.props.associationSiderData) {
       var siderNode = this.props.associationSiderData.content;
       return (

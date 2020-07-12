@@ -67,7 +67,7 @@ class AssociationLink extends Component {
               <Link
                 to={`/edit/text/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
-                target='_blank'
+                // target='_blank'
               >
                 {association.name}
               </Link>
@@ -87,7 +87,7 @@ class AssociationLink extends Component {
               <Link
                 to={`/associations/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
-                target='_blank'
+                // target='_blank'
               >
                 {association.name}
               </Link>
@@ -147,7 +147,7 @@ class AssociationLink extends Component {
               <Link
                 to={`/associations/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
-                target='_blank'
+                // target='_blank'
               >
                 {association.name}
               </Link>
@@ -189,7 +189,7 @@ class AssociationLink extends Component {
               <Link
                 to={`/associations/${association.uuid}`}
                 onClick={(e) => this.handleLinkClick()}
-                target='_blank'
+                // target='_blank'
               >
                 {association.name}
               </Link>
