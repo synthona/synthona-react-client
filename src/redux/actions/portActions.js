@@ -13,7 +13,7 @@ export const generateInstanceExport = () => async (dispatch) => {
       message.success('generated export', 2);
       dispatch({ type: GENERATE_EXPORT_SUCCESS, payload: response.data });
       // redirect
-      history.push('/');
+      window.location.replace('/');
     }
   } catch (err) {
     dispatch({ type: GENERATE_EXPORT_ERROR });
@@ -27,17 +27,17 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
   message.success('generating...', 2);
   try {
     dispatch({ type: GENERATE_EXPORT });
-    const response = await instance.post('/port/export/collection', { uuid });
+    const response = await instance.post('/port/export/', { uuid });
     if (response.status === 200) {
       message.success('generated export', 2);
       dispatch({ type: GENERATE_EXPORT_SUCCESS, payload: response.data });
       // redirect
-      history.push('/');
+      window.location.replace('/');
     }
   } catch (err) {
     dispatch({ type: GENERATE_EXPORT_ERROR });
     message.error('Could not export instance data', 1);
-    history.push('/');
+    // history.push('/');
   }
 };
 
@@ -54,7 +54,7 @@ export const unpackSynthonaImport = (uuid) => async (dispatch) => {
     if (response.status === 200) {
       message.success('generated import data!', 1);
       // console.log('generated import data!');
-      history.push('/');
+      window.location.replace('/');
     }
   } catch (err) {
     // dispatch({ type: GENERATE_EXPORT_SUCCESS });
