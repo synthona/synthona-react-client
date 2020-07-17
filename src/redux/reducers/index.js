@@ -4,7 +4,6 @@ import authReducer from './authReducer';
 import nodeReducer from './nodeReducer';
 import componentReducer from './componentReducer';
 import associationReducer from './associationReducer';
-import portReducer from './portReducer';
 
 // custom combineReducers
 export default (state = {}, action) => {
@@ -19,6 +18,5 @@ export default (state = {}, action) => {
     nodes: nodeReducer(state.nodes, action),
     components: componentReducer(state.components, action),
     associations: associationReducer(state.associations, action),
-    port: portReducer(state.port, action),
   };
 };

@@ -138,24 +138,28 @@ class NodeCardHeaderFull extends Component {
             </li>
           </Tooltip>
         );
-      case 'collection':
-        return (
-          <Tooltip title={'unpack synthona export'} mouseEnterDelay={1.1}>
-            <li>
-              <button
-                onClick={(e) => {
-                  // show the modal
-                  // this.props.showComponent('associationSider', this.props.node);
-                  this.props.generateExportByUUID(this.props.node.uuid);
-                }}
-              >
-                <Icon type={'deployment-unit'} theme='outlined' className='full-card-button' />
-              </button>
-            </li>
-          </Tooltip>
-        );
       default:
         return;
+    }
+  };
+
+  renderExportButton = () => {
+    if (this.props.node.type !== 'package') {
+      return (
+        <Tooltip title={'generate export'} mouseEnterDelay={1.1}>
+          <li>
+            <button
+              onClick={(e) => {
+                // show the modal
+                // this.props.showComponent('associationSider', this.props.node);
+                this.props.generateExportByUUID(this.props.node.uuid);
+              }}
+            >
+              <Icon type={'deployment-unit'} theme='outlined' className='full-card-button' />
+            </button>
+          </li>
+        </Tooltip>
+      );
     }
   };
 
@@ -175,6 +179,7 @@ class NodeCardHeaderFull extends Component {
               <Icon type={'branches'} theme='outlined' className='full-card-button' />
             </button>
           </li>
+          {this.renderExportButton()}
           <Tooltip
             title={this.state.hidden ? 'accessible via associations only' : 'visible on homepage'}
             mouseEnterDelay={1.1}

@@ -13,6 +13,7 @@ class Home extends Component {
     document.title = 'home';
     // temporary fix to undo whatever is setting overflow hidden on-login
     document.body.style.removeProperty('overflow');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   renderMainSider = () => {

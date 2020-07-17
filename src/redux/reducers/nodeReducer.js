@@ -30,6 +30,9 @@ import {
   DELETE_NODE_ERROR,
   DELETE_NODE_SUCCESS,
   CLEAR_ACTIVE_NODE,
+  GENERATE_EXPORT,
+  GENERATE_EXPORT_ERROR,
+  GENERATE_EXPORT_SUCCESS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -203,6 +206,20 @@ export default (state = INITIAL_STATE, action) => {
       };
     case DELETE_NODE_ERROR:
       return { ...state, isSaving: null };
+    case GENERATE_EXPORT:
+      return { ...state, isFetching: true };
+    case GENERATE_EXPORT_ERROR:
+      return {
+        ...state,
+        isFetching: null,
+      };
+    case GENERATE_EXPORT_SUCCESS:
+      return {
+        ...state,
+        isFetching: null,
+        nodeList: [action.payload, ...state.nodeList],
+        // activeNode: action.payload.node,
+      };
     default:
       return state;
   }
