@@ -136,6 +136,7 @@ export const markNodeView = (node) => async (dispatch) => {
   }
 };
 
+// set active node
 export const setActiveNode = (uuid) => async (dispatch) => {
   dispatch({ type: SET_ACTIVE_NODE });
   try {

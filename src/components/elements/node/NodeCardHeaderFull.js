@@ -8,6 +8,7 @@ import {
   updateNode,
   deleteNode,
   clearActiveNode,
+  generateExportByUUID,
 } from '../../../redux/actions';
 
 class NodeCardHeaderFull extends Component {
@@ -120,8 +121,6 @@ class NodeCardHeaderFull extends Component {
 
   // render header buttons for node types which need them
   renderContextualButtons = () => {
-    // console.log('rendering contextual buttons');
-    // console.log(this.props.node);
     switch (this.props.node.type) {
       case 'package':
         return (
@@ -135,6 +134,22 @@ class NodeCardHeaderFull extends Component {
                 }}
               >
                 <Icon type={'appstore'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
+        );
+      case 'collection':
+        return (
+          <Tooltip title={'unpack synthona export'} mouseEnterDelay={1.1}>
+            <li>
+              <button
+                onClick={(e) => {
+                  // show the modal
+                  // this.props.showComponent('associationSider', this.props.node);
+                  this.props.generateExportByUUID(this.props.node.uuid);
+                }}
+              >
+                <Icon type={'deployment-unit'} theme='outlined' className='full-card-button' />
               </button>
             </li>
           </Tooltip>
@@ -216,4 +231,5 @@ export default connect(null, {
   unpackSynthonaImport,
   deleteNode,
   clearActiveNode,
+  generateExportByUUID,
 })(NodeCardHeaderFull);

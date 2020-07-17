@@ -73,7 +73,7 @@ class NodeCardFull extends Component {
             {/* <p>{this.props.node.preview}</p> */}
             <a
               href={this.props.node.preview}
-              // target='_blank'
+              target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => this.props.markNodeView(this.props.node)}
               style={{ width: '100%' }}
@@ -183,7 +183,21 @@ class NodeCardFull extends Component {
 
   renderNodeCard = () => {
     if (this.props.node) {
-      return <Fragment>{this.renderCardTypes(this.props.node)}</Fragment>;
+      return (
+        <Fragment>
+          {this.renderCardTypes(this.props.node)}
+          {/*<p
+            style={{
+              color: 'white',
+              padding: '10px 10px 10px',
+              textAlign: 'center',
+              backgroundColor: '#272727',
+            }}
+          >
+            {this.props.node.comment}
+          </p>*/}
+        </Fragment>
+      );
     }
   };
 

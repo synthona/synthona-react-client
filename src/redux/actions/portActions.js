@@ -15,12 +15,32 @@ export const generateInstanceExport = () => async (dispatch) => {
     const response = await instance.post('/port/export/all');
     dispatch({ type: GENERATE_INSTANCE_EXPORT_ERROR, payload: response.data });
     if (response.status === 200) {
-      // message.success('generated export', 2);
+      message.success('generated export', 2);
       console.log('generated export!');
     }
     // window.open(response.data.url, '_blank');
   } catch (err) {
     dispatch({ type: GENERATE_INSTANCE_EXPORT_SUCCESS });
+    message.error('Could not export instance data', 1);
+    history.push('/');
+  }
+};
+
+// generate export based on a node
+export const generateExportByUUID = (uuid, name) => async (dispatch) => {
+  console.log('calling export instance data api endpoint');
+  try {
+    // dispatch({ type: GENERATE_EXPORT_BY_UUID });
+    const response = await instance.post('/port/export/collection', { uuid });
+    // dispatch({ type: GENERATE_EXPORT_BY_UUID_ERROR, payload: response.data });
+    if (response.status === 200) {
+      message.success('generated export', 2);
+      console.log(response.data.node);
+      // console.log('generated export!');
+    }
+    // window.open(response.data.url, '_blank');
+  } catch (err) {
+    // dispatch({ type: GENERATE_EXPORT_BY_UUID_SUCCESS });
     message.error('Could not export instance data', 1);
     history.push('/');
   }
