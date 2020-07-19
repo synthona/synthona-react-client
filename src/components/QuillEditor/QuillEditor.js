@@ -238,7 +238,7 @@ class QuillEditor extends Component {
       matchVisual: false,
       matchers: [
         ['img', this.matcherImageHandler],
-        // ['p', this.matcherLineBreakHandler],
+        ['p', this.matcherLineBreakHandler],
       ],
     },
     // blotFormatter: {

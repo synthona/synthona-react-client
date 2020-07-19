@@ -99,7 +99,7 @@ export const createNode = (node, file) => async (dispatch) => {
     node.content = JSON.stringify(delta);
   }
   try {
-    const response = await instance.post('/node', {
+    const response = await instance.put('/node', {
       isFile: node.isFile,
       type: node.type,
       name: node.name,
@@ -131,7 +131,7 @@ export const markNodeView = (node) => async (dispatch) => {
     dispatch({ type: MARK_NODE_VIEW_SUCCESS, node });
   } catch (err) {
     dispatch({ type: MARK_NODE_VIEW_ERROR });
-    message.error('Could not create new item', 1);
+    message.error('Could not mark node view', 1);
     history.push('/');
   }
 };

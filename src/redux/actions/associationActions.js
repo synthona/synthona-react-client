@@ -72,7 +72,7 @@ export const fetchAssociations = (query) => async (dispatch) => {
 export const createAssociation = (nodeUUID, linkedNodeUUID) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_ASSOCIATION });
-    const response = await instance.post('/association', {
+    const response = await instance.put('/association', {
       nodeUUID,
       linkedNodeUUID,
     });
@@ -126,7 +126,7 @@ export const removeFromAssociationList = (uuid) => {
 // update the linkStrength for an association
 export const updateLinkStrength = (nodeA, nodeB) => async (dispatch) => {
   try {
-    await instance.post('/association/linkstrength', {
+    await instance.put('/association/linkstrength', {
       nodeA,
       nodeB,
     });

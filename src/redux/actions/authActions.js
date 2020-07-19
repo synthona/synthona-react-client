@@ -20,7 +20,7 @@ import { message } from 'antd';
 export const createAccount = (formValues) => async (dispatch) => {
   dispatch({ type: CREATE_ACCOUNT });
   try {
-    const response = await instance.post('/auth/signup', formValues);
+    const response = await instance.put('/auth/signup', formValues);
     localStorage.setItem('displayName', response.data.displayName);
     dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: response.data });
     history.push('/');
@@ -35,7 +35,7 @@ export const createAccount = (formValues) => async (dispatch) => {
 export const signIn = (formValues) => async (dispatch) => {
   dispatch({ type: SIGN_IN });
   try {
-    const response = await instance.post('/auth/login', formValues);
+    const response = await instance.put('/auth/login', formValues);
     localStorage.setItem('displayName', response.data.displayName);
     dispatch({ type: SIGN_IN_SUCCESS, payload: response.data });
   } catch (err) {
@@ -73,7 +73,6 @@ export const changePassword = (formValues) => async (dispatch) => {
     message.error('Could not update password', 1);
   }
 };
-
 // ====================================================================================
 // I'm...not sure if this is needed or if it is, it shouldn't be called on every
 // single page refresh. it can be called every five minutes or something via a service?

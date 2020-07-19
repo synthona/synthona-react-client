@@ -15,7 +15,7 @@ export const createFileNode = (file, name, linkedNode) => async (dispatch) => {
       fileData.append('linkedNode', linkedNode);
     }
     // send the request
-    const response = await instance.post('/file', fileData, {
+    const response = await instance.put('/file', fileData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     // if it's sucessful dispatch the success action

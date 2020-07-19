@@ -8,7 +8,7 @@ export const generateInstanceExport = () => async (dispatch) => {
   message.success('generating...', 2);
   try {
     dispatch({ type: GENERATE_EXPORT });
-    const response = await instance.post('/port/export/all');
+    const response = await instance.put('/port/export/all');
     if (response.status === 200) {
       message.success('generated export', 2);
       dispatch({ type: GENERATE_EXPORT_SUCCESS, payload: response.data });
@@ -27,7 +27,7 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
   message.success('generating...', 2);
   try {
     dispatch({ type: GENERATE_EXPORT });
-    const response = await instance.post('/port/export/', { uuid });
+    const response = await instance.put('/port/export/', { uuid });
     if (response.status === 200) {
       message.success('generated export', 2);
       dispatch({ type: GENERATE_EXPORT_SUCCESS, payload: response.data });
@@ -49,7 +49,7 @@ export const unpackSynthonaImport = (uuid) => async (dispatch) => {
   console.log('calling unpack import data api endpoint');
   try {
     // dispatch({ type: GENERATE_EXPORT });
-    const response = await instance.post('/port/import/', { uuid });
+    const response = await instance.put('/port/import/', { uuid });
     // dispatch({ type: GENERATE_EXPORT_ERROR, payload: response.data });
     if (response.status === 200) {
       message.success('generated import data!', 1);

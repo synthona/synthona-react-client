@@ -41,7 +41,7 @@ class CreateAccount extends Component {
                     >
                       ✨
                     </span>
-                    create account
+                    create user
                     <span
                       role='img'
                       aria-label='jsx-a11y/accessible-emoji'

@@ -66,7 +66,7 @@ class Login extends Component {
                     login
                   </button>
                   <Link to='/signup' className='login-signup'>
-                    create account
+                    create user
                   </Link>
                 </Form>
               )}

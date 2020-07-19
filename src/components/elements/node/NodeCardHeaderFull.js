@@ -169,16 +169,18 @@ class NodeCardHeaderFull extends Component {
         {this.renderTitle()}
         <ul className='full-card-buttons-list'>
           {this.renderContextualButtons()}
-          <li>
-            <button
-              onClick={(e) => {
-                // show the modal
-                this.props.showComponent('associationSider', this.props.node);
-              }}
-            >
-              <Icon type={'branches'} theme='outlined' className='full-card-button' />
-            </button>
-          </li>
+          <Tooltip title={'associations'} mouseEnterDelay={1.1}>
+            <li>
+              <button
+                onClick={(e) => {
+                  // show the modal
+                  this.props.showComponent('associationSider', this.props.node);
+                }}
+              >
+                <Icon type={'branches'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
           {this.renderExportButton()}
           <Tooltip
             title={this.state.hidden ? 'accessible via associations only' : 'visible on homepage'}
@@ -204,11 +206,13 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
-          <li>
-            <button onClick={(e) => this.toggleDeleteModal()}>
-              <Icon type={'delete'} theme='outlined' className='full-card-button delete' />
-            </button>
-          </li>
+          <Tooltip title={'delete'} mouseEnterDelay={1.1}>
+            <li>
+              <button onClick={(e) => this.toggleDeleteModal()}>
+                <Icon type={'delete'} theme='outlined' className='full-card-button delete' />
+              </button>
+            </li>
+          </Tooltip>
         </ul>
         <Modal
           title='Confirm Deletion'
