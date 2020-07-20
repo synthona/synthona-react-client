@@ -7,6 +7,9 @@ import { fetchUserByUsername, showComponent } from '../../redux/actions';
 import './css/Profile.less';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';
+// import default images
+import defaultHeader from '../../resources/synthona-login.png';
+import defaultAvatar from '../../resources/synthona-logo.png';
 
 const { Content } = Layout;
 
@@ -77,13 +80,13 @@ class Profile extends Component {
             <div className='profile-card'>
               <button href={`/profile/${this.state.username}`}>
                 <div className='Profile-header'>
-                  <img src={this.state.header} alt='example' draggable='false' />
+                  <img src={this.state.header || defaultHeader} alt='example' draggable='false' />
                 </div>
               </button>
               {/* <button href={`/profile/${this.state.username}`}> */}
               <div className='Profile-avatar'>
                 <img
-                  src={this.state.avatar}
+                  src={this.state.avatar || defaultAvatar}
                   alt={'profile'}
                   draggable='false'
                   onClick={this.toggleAvatarModal}

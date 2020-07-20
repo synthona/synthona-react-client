@@ -55,7 +55,7 @@ class MainSider extends Component {
           placement='left'
           closable={false}
           onClose={(e) => this.props.hideComponent('mainSider')}
-          visible={this.props.mainSider.visible}
+          visible={this.props.mainSider ? this.props.mainSider.visible : false}
         >
           <Menu mode='vertical' defaultSelectedKeys={['1']} className='sider-menu'>
             <Item>
@@ -105,17 +105,6 @@ class MainSider extends Component {
             <Item className='sider-menu-item'>
               <Link to='/' onClick={(e) => this.props.hideComponent('mainSider')}>
                 Help
-              </Link>
-            </Item>
-            <Item className='sider-menu-item'>
-              <Link
-                to='/'
-                onClick={(e) => {
-                  this.props.hideComponent('mainSider');
-                  this.props.generateInstanceExport();
-                }}
-              >
-                Export
               </Link>
             </Item>
             <Item className='sider-menu-item'>

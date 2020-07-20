@@ -13,15 +13,19 @@ import {
   updateEmail,
   changePassword,
   showComponent,
+  generateInstanceExport,
 } from '../../redux/actions';
-import './css/EditProfile.less';
+import './css/Options.less';
 // import IOBar from '../elements/IOBar';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';
+// import default images
+import defaultHeader from '../../resources/synthona-login.png';
+import defaultAvatar from '../../resources/synthona-logo.png';
 
 const { Content } = Layout;
 
-class EditProfile extends Component {
+class Options extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,6 +43,8 @@ class EditProfile extends Component {
   componentDidMount() {
     this.props.showComponent('mainSider');
     document.title = `Edit Profile`;
+    // temporary fix to undo whatever is setting overflow hidden on-login
+    document.body.style.removeProperty('overflow');
     this.initializeFromUrlParams();
   }
 
@@ -160,7 +166,7 @@ class EditProfile extends Component {
     return (
       <input
         type='text'
-        className='EditProfile-display-name'
+        className='Options-display-name'
         placeholder='Display Name'
         value={this.state.displayName}
         onChange={(e) => this.saveDisplayName(e.target.value)}
@@ -186,7 +192,7 @@ class EditProfile extends Component {
     return (
       <textarea
         type='text'
-        className='EditProfile-bio'
+        className='Options-bio'
         placeholder='Bio'
         value={this.state.bio}
         onChange={(e) => this.saveBio(e.target.value)}
@@ -210,7 +216,7 @@ class EditProfile extends Component {
     return (
       <input
         type='text'
-        className='EditProfile-standard-input'
+        className='Options-standard-input'
         placeholder='username'
         value={this.state.username}
         onChange={(e) => this.saveUsername(e.target.value)}
@@ -231,7 +237,7 @@ class EditProfile extends Component {
     return (
       <input
         type='text'
-        className='EditProfile-standard-input'
+        className='Options-standard-input'
         placeholder='email'
         value={this.state.email}
         onChange={(e) => this.saveEmail(e.target.value)}
@@ -252,34 +258,32 @@ class EditProfile extends Component {
     window.getSelection().removeAllRanges();
   }
 
-  // should i be adding formik on here
-
   render() {
     return (
-      <Layout className='EditProfile-container'>
+      <Layout className='Options-container'>
         <MainSider showMask={false} animate={false} />
         <Layout>
-          <Content className='EditProfile'>
-            <div className='EditProfile-card'>
+          <Content className='Options'>
+            <div className='Options-card'>
               <button onClick={this.setHeader}>
-                <div className='EditProfile-header'>
-                  <Icon type='camera' className='EditProfile-header-edit-icon' />
-                  <img src={this.state.header} alt='example' draggable='false' />
+                <div className='Options-header'>
+                  <Icon type='camera' className='Options-header-edit-icon' />
+                  <img src={this.state.header || defaultHeader} alt='example' draggable='false' />
                 </div>
               </button>
               <button onClick={this.setAvatar}>
-                <div className='EditProfile-avatar'>
-                  <Icon type='camera' className='EditProfile-avatar-edit-icon' />
-                  <img src={this.state.avatar} alt={'profile'} draggable='false' />
+                <div className='Options-avatar'>
+                  <Icon type='camera' className='Options-avatar-edit-icon' />
+                  <img src={this.state.avatar || defaultAvatar} alt={'profile'} draggable='false' />
                 </div>
               </button>
-              <div className='EditProfile-info'>
+              <div className='Options-info'>
                 <Button
                   type='default'
                   style={{
                     margin: '0 0 10px',
                     backgroundColor: 'white',
-                    width: 'auto',
+                    width: '10rem',
                     padding: '0.5rem',
                     display: 'inline-block',
                     textAlign: 'center',
@@ -287,6 +291,21 @@ class EditProfile extends Component {
                   onClick={(e) => this.togglePasswordModal()}
                 >
                   change password
+                </Button>
+                <br />
+                <Button
+                  type='default'
+                  style={{
+                    margin: '0 0 10px',
+                    backgroundColor: 'white',
+                    width: '10rem',
+                    padding: '0.5rem',
+                    display: 'inline-block',
+                    textAlign: 'center',
+                  }}
+                  onClick={(e) => this.props.generateInstanceExport()}
+                >
+                  export user data
                 </Button>
                 <br />
                 {this.renderDisplayName()}
@@ -350,4 +369,5 @@ export default connect(mapStateToProps, {
   updateEmail,
   changePassword,
   showComponent,
-})(EditProfile);
+  generateInstanceExport,
+})(Options);

@@ -46,7 +46,6 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
 
 // export the instance data and get the url of the file
 export const unpackSynthonaImport = (uuid) => async (dispatch) => {
-  console.log('calling unpack import data api endpoint');
   try {
     // dispatch({ type: GENERATE_EXPORT });
     const response = await instance.put('/port/import/', { uuid });

@@ -10,12 +10,12 @@ import {
   UPDATE_USER_AVATAR_ERROR,
   UPDATE_USER_HEADER,
   UPDATE_USER_HEADER_SUCCESS,
-  UPDATE_USER_HEADER_ERROR
+  UPDATE_USER_HEADER_ERROR,
 } from './types';
 import { message } from 'antd';
 
 // get user by username handler
-export const fetchUserByUsername = username => async dispatch => {
+export const fetchUserByUsername = (username) => async (dispatch) => {
   dispatch({ type: FETCH_USER_NODE });
   try {
     const response = await instance.get('/user/username', { params: { username } });
@@ -47,13 +47,13 @@ export const fetchUserByUsername = username => async dispatch => {
 // };
 
 // update user by username
-export const updateUserInfo = user => async dispatch => {
+export const updateUserInfo = (user) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_NODE });
   try {
     const response = await instance.patch('/user/info', {
       username: user.username,
       bio: user.bio,
-      displayName: user.displayName
+      displayName: user.displayName,
     });
     const updatedUser = response.data.user;
     dispatch({ type: UPDATE_USER_NODE_SUCCESS, user: updatedUser });
@@ -65,11 +65,11 @@ export const updateUserInfo = user => async dispatch => {
 };
 
 // update username
-export const updateUsername = username => async dispatch => {
+export const updateUsername = (username) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_NODE });
   try {
     const response = await instance.patch('/user/username', {
-      username: username
+      username: username,
     });
     const updatedUser = response.data.user;
     dispatch({ type: UPDATE_USER_NODE_SUCCESS, user: updatedUser });
@@ -81,11 +81,11 @@ export const updateUsername = username => async dispatch => {
 };
 
 // update user by username
-export const updateEmail = email => async dispatch => {
+export const updateEmail = (email) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_NODE });
   try {
     const response = await instance.patch('/user/email', {
-      email: email
+      email: email,
     });
     const updatedUser = response.data.user;
     dispatch({ type: UPDATE_USER_NODE_SUCCESS, user: updatedUser });
@@ -97,7 +97,7 @@ export const updateEmail = email => async dispatch => {
 };
 
 // update user avatar
-export const updateUserAvatar = file => async dispatch => {
+export const updateUserAvatar = (file) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_AVATAR });
   try {
     // create image FormData
@@ -105,7 +105,7 @@ export const updateUserAvatar = file => async dispatch => {
     imageData.append('image', file);
     // send the request
     const response = await instance.patch('/user/avatar', imageData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     // if it's sucessful dispatch the success action
     if (response.status === 200) {
@@ -121,7 +121,7 @@ export const updateUserAvatar = file => async dispatch => {
   }
 };
 
-export const updateUserHeader = file => async dispatch => {
+export const updateUserHeader = (file) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_HEADER });
   try {
     // create image FormData
@@ -129,7 +129,7 @@ export const updateUserHeader = file => async dispatch => {
     imageData.append('image', file);
     // send the request
     const response = await instance.patch('/user/header', imageData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     // if it's sucessful dispatch the success action
     if (response.status === 200) {

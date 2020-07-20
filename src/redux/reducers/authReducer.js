@@ -18,13 +18,13 @@ import {
   UPDATE_USER_AVATAR_ERROR,
   UPDATE_USER_HEADER,
   UPDATE_USER_HEADER_SUCCESS,
-  UPDATE_USER_HEADER_ERROR
+  UPDATE_USER_HEADER_ERROR,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   isAuth: null,
   isFetching: null,
-  user: null
+  user: null,
 };
 
 let updatedUser;
@@ -39,7 +39,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         user: action.payload,
-        isAuth: true
+        isAuth: true,
       };
     case CREATE_ACCOUNT_ERROR:
       return { ...state, isFetching: null, user: null, isAuth: false };
@@ -50,7 +50,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         user: action.payload,
-        isAuth: true
+        isAuth: true,
       };
     case SIGN_IN_ERROR:
       return { ...state, isFetching: null, user: null, isAuth: false };
@@ -63,7 +63,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: true,
         user: action.payload,
-        isAuth: action.isAuth
+        isAuth: action.isAuth,
       };
     case REFRESH_AUTH_SUCCESS:
       return { isFetching: null, user: action.payload, isAuth: true };

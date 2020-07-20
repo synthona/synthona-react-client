@@ -73,17 +73,11 @@ export const changePassword = (formValues) => async (dispatch) => {
     message.error('Could not update password', 1);
   }
 };
-// ====================================================================================
-// I'm...not sure if this is needed or if it is, it shouldn't be called on every
-// single page refresh. it can be called every five minutes or something via a service?
-// but, it should also be called when you first load the app...
-// have to give this more thought
-// ====================================================================================
-// Refresh Auth Action Handler
-export const refreshAuth = () => async (dispatch) => {
+
+export const isAuthenticated = () => async (dispatch) => {
   try {
     dispatch({ type: REFRESH_AUTH });
-    const response = await instance.get('/auth/refresh');
+    const response = await instance.get('/auth');
     dispatch({ type: REFRESH_AUTH_SUCCESS, payload: response.data });
   } catch (err) {
     dispatch({ type: REFRESH_AUTH_ERROR });

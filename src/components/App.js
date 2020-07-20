@@ -3,12 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 // custom code
 import '../app.less';
-import { refreshAuth } from '../redux/actions';
+import { isAuthenticated } from '../redux/actions';
 // custom components
 import Login from './layouts/Login';
 import Home from './layouts/Home';
 import Profile from './layouts/Profile';
-import EditProfile from './layouts/EditProfile';
+import Options from './layouts/Options';
 import Activity from './layouts/Activity';
 import QuillEditor from './QuillEditor/QuillEditor';
 import Collections from './layouts/Collections';
@@ -18,13 +18,12 @@ import AssociationBrowser from './layouts/AssociationBrowser';
 
 class App extends Component {
   componentDidMount() {
-    if (this.props.isAuth == null) {
-      this.props.refreshAuth();
+    if (this.props.isAuth === null) {
+      this.props.isAuthenticated();
     }
   }
   render() {
     let routes;
-
     if (this.props.isAuth) {
       routes = (
         <Switch>
@@ -33,7 +32,7 @@ class App extends Component {
           <Route path='/activity' exact component={Activity} />
           <Route path='/collections' exact component={Collections} />
           <Route path='/edit/text/:uuid' exact component={QuillEditor} />
-          <Route path='/edit/profile' exact component={EditProfile} />
+          <Route path='/edit/profile' exact component={Options} />
           <Route path='/associations/:uuid' exact component={AssociationBrowser} />
         </Switch>
       );
@@ -59,4 +58,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { refreshAuth })(App);
+export default connect(mapStateToProps, { isAuthenticated })(App);
