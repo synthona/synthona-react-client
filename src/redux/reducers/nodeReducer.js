@@ -207,16 +207,16 @@ export default (state = INITIAL_STATE, action) => {
     case DELETE_NODE_ERROR:
       return { ...state, isSaving: null };
     case GENERATE_EXPORT:
-      return { ...state, isFetching: true };
+      return { ...state, isSaving: true };
     case GENERATE_EXPORT_ERROR:
       return {
         ...state,
-        isFetching: null,
+        isSaving: null,
       };
     case GENERATE_EXPORT_SUCCESS:
       return {
         ...state,
-        isFetching: null,
+        isSaving: null,
         nodeList: [action.payload, ...state.nodeList],
         // activeNode: action.payload.node,
       };

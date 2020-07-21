@@ -37,7 +37,7 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: GENERATE_EXPORT_ERROR });
     message.error('Could not export instance data', 1);
-    // history.push('/');
+    history.push('/');
   }
 };
 
@@ -47,16 +47,13 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
 // export the instance data and get the url of the file
 export const unpackSynthonaImport = (uuid) => async (dispatch) => {
   try {
-    // dispatch({ type: GENERATE_EXPORT });
     const response = await instance.put('/port/import/', { uuid });
-    // dispatch({ type: GENERATE_EXPORT_ERROR, payload: response.data });
     if (response.status === 200) {
       message.success('generated import data!', 1);
       // console.log('generated import data!');
       window.location.replace('/');
     }
   } catch (err) {
-    // dispatch({ type: GENERATE_EXPORT_SUCCESS });
     message.error('Could not import instance data', 1);
     history.push('/');
   }
