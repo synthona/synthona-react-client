@@ -150,34 +150,10 @@ class IOBar extends Component {
   };
 
   // select an image.
-  // selectLocalImage = (linkedNode) => {
-  //   const input = document.createElement('input');
-  //   input.setAttribute('type', 'file');
-  //   input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
-  //   input.click();
-
-  //   // Listen for uploading local image, then save to server
-  //   input.onchange = async () => {
-  //     const file = input.files[0];
-  //     // make sure file is an image
-  //     if (/^image\//.test(file.type)) {
-  //       // save the image to the server
-  //       await this.props.createImageNode(file, this.state.input, linkedNode);
-  //       // clear the input bar
-  //       this.setState({ input: '' });
-  //       history.push('/');
-  //     } else {
-  //       message.error('The file must be an image', 1);
-  //     }
-  //   };
-  // };
-
-  // select an image.
   selectLocalFile = (linkedNode) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.click();
-
     // Listen for uploading local file, then save to server
     input.onchange = async () => {
       const file = input.files[0];
