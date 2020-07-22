@@ -305,7 +305,7 @@ class Options extends Component {
                   }}
                   onClick={(e) => this.props.generateInstanceExport()}
                 >
-                  export user data
+                  export all user data
                 </Button>
                 <br />
                 {this.renderDisplayName()}
