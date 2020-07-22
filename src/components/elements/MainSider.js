@@ -87,7 +87,7 @@ class MainSider extends Component {
                 Home
               </Link>
             </Item>
-            <Item className='sider-menu-item'>
+            {/*<Item className='sider-menu-item'>
               <Link to='/' onClick={(e) => this.props.hideComponent('mainSider')}>
                 Nodes
               </Link>
@@ -101,7 +101,7 @@ class MainSider extends Component {
               <Link to='/' onClick={(e) => this.props.hideComponent('mainSider')}>
                 Chat
               </Link>
-            </Item>
+                </Item>  */}
             <Item className='sider-menu-item'>
               <Link to='/' onClick={(e) => this.props.hideComponent('mainSider')}>
                 Help
