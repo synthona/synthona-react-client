@@ -120,6 +120,7 @@ class NodeCardHeaderFull extends Component {
   };
 
   // render header buttons for node types which need them
+  // at the moment it's just .synth packages
   renderContextualButtons = () => {
     switch (this.props.node.type) {
       case 'package':
@@ -143,6 +144,7 @@ class NodeCardHeaderFull extends Component {
     }
   };
 
+  // render the export button on non-package nodes
   renderExportButton = () => {
     if (this.props.node.type !== 'package') {
       return (
@@ -150,8 +152,6 @@ class NodeCardHeaderFull extends Component {
           <li>
             <button
               onClick={(e) => {
-                // show the modal
-                // this.props.showComponent('associationSider', this.props.node);
                 this.props.generateExportByUUID(this.props.node.uuid);
               }}
             >

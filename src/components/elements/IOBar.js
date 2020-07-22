@@ -81,7 +81,6 @@ class IOBar extends Component {
     }
     switch (this.state.nodeTypes) {
       case 'text':
-        // this.props.createTextNode(this.state.input);
         this.props.createNode({
           isFile: false,
           type: 'text',
