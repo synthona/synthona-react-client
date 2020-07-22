@@ -41,9 +41,6 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
   }
 };
 
-// fetch a list of data export urls for this user
-// export const fetchInstanceExports = () => async (dispatch) => {};
-
 // export the instance data and get the url of the file
 export const unpackSynthonaImport = (uuid) => async (dispatch) => {
   try {
@@ -55,6 +52,20 @@ export const unpackSynthonaImport = (uuid) => async (dispatch) => {
     }
   } catch (err) {
     message.error('Could not import instance data', 1);
+    history.push('/');
+  }
+};
+
+export const removeSynthonaImportsByPackage = (uuid) => async (dispatch) => {
+  try {
+    const response = await instance.patch('/port/export/undo/', { uuid });
+    if (response.status === 200) {
+      message.success('removed imports from this package!', 1);
+      // console.log('generated import data!');
+      window.location.replace('/');
+    }
+  } catch (err) {
+    message.error('Could not remove imports for this package', 1);
     history.push('/');
   }
 };

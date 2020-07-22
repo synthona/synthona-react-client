@@ -9,6 +9,7 @@ import {
   deleteNode,
   clearActiveNode,
   generateExportByUUID,
+  removeSynthonaImportsByPackage,
 } from '../../../api/redux/actions';
 
 class NodeCardHeaderFull extends Component {
@@ -122,23 +123,40 @@ class NodeCardHeaderFull extends Component {
   // render header buttons for node types which need them
   // at the moment it's just .synth packages
   renderContextualButtons = () => {
+    console.log(this.props.node);
     switch (this.props.node.type) {
       case 'package':
-        return (
-          <Tooltip title={'unpack synthona export'} mouseEnterDelay={1.1}>
-            <li>
-              <button
-                onClick={(e) => {
-                  // show the modal
-                  // this.props.showComponent('associationSider', this.props.node);
-                  this.props.unpackSynthonaImport(this.props.node.uuid);
-                }}
-              >
-                <Icon type={'appstore'} theme='outlined' className='full-card-button' />
-              </button>
-            </li>
-          </Tooltip>
-        );
+        if (this.props.node.metadata && this.props.node.metadata.expanded) {
+          return (
+            <Tooltip title={'undo import'} mouseEnterDelay={1.1}>
+              <li>
+                <button
+                  onClick={(e) => {
+                    // show the modal
+                    this.props.removeSynthonaImportsByPackage(this.props.node.uuid);
+                  }}
+                >
+                  <Icon type={'undo'} theme='outlined' className='full-card-button' />
+                </button>
+              </li>
+            </Tooltip>
+          );
+        } else {
+          return (
+            <Tooltip title={'unpack synthona export'} mouseEnterDelay={1.1}>
+              <li>
+                <button
+                  onClick={(e) => {
+                    // show the modal
+                    this.props.unpackSynthonaImport(this.props.node.uuid);
+                  }}
+                >
+                  <Icon type={'appstore'} theme='outlined' className='full-card-button' />
+                </button>
+              </li>
+            </Tooltip>
+          );
+        }
       default:
         return;
     }
@@ -241,4 +259,5 @@ export default connect(null, {
   deleteNode,
   clearActiveNode,
   generateExportByUUID,
+  removeSynthonaImportsByPackage,
 })(NodeCardHeaderFull);
