@@ -1,5 +1,5 @@
-import instance from '../../api/instance';
-import history from '../../utils/history';
+import instance from '../../../api/instance';
+import history from '../../../utils/history';
 import { GENERATE_EXPORT, GENERATE_EXPORT_ERROR, GENERATE_EXPORT_SUCCESS } from './types';
 import { message } from 'antd';
 

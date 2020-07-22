@@ -7,7 +7,7 @@ import {
   fetchAssociations,
   markNodeView,
   updateNode,
-} from '../../redux/actions';
+} from '../../api/redux/actions';
 import MainSider from '../elements/MainSider';
 import NodeCardFull from '../elements/node/NodeCardFull';
 import Spinner from '../elements/Spinner';

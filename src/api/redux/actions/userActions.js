@@ -1,4 +1,4 @@
-import instance from '../../api/instance';
+import instance from '../../../api/instance';
 // import history from '../history';
 import {
   FETCH_USER_NODE,

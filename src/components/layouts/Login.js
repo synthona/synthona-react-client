@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Layout, Card } from 'antd';
 // custom code
-import { signIn } from '../../redux/actions';
+import { signIn } from '../../api/redux/actions';
 import './css/Login.less';
 
 // destructure antd

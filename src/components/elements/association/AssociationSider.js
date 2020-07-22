@@ -9,7 +9,7 @@ import {
   fetchAssociationLinkList,
   fetchAssociations,
   associationAutocomplete,
-} from '../../../redux/actions';
+} from '../../../api/redux/actions';
 // custom code
 import AssociationLinkList from './AssociationLinkList';
 // destructure antd

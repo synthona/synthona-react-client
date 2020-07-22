@@ -13,7 +13,7 @@ import {
   searchNodes,
   showComponent,
   hideComponent,
-} from '../../redux/actions';
+} from '../../api/redux/actions';
 // destructure antd components
 const { Header } = Layout;
 const { Option } = Select;

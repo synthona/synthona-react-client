@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 // custom code
 import '../app.less';
-import { isAuthenticated } from '../redux/actions';
+import { isAuthenticated } from '../api/redux/actions';
 // custom components
 import Login from './layouts/Login';
 import Home from './layouts/Home';

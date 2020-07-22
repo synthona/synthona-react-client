@@ -1,5 +1,5 @@
-import instance from '../../api/instance';
-import history from '../../utils/history';
+import instance from '../../../api/instance';
+import history from '../../../utils/history';
 import {
   CREATE_ACCOUNT,
   CREATE_ACCOUNT_SUCCESS,

@@ -1,5 +1,5 @@
-import instance from '../../api/instance';
-import history from '../../utils/history';
+import instance from '../../../api/instance';
+import history from '../../../utils/history';
 import {
   EDIT_TEXT_NODE,
   EDIT_TEXT_NODE_SUCCESS,

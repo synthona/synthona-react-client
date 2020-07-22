@@ -7,7 +7,7 @@ import reduxThunk from 'redux-thunk';
 //custom code
 import history from './utils/history';
 import App from './components/App';
-import reducers from './redux/reducers';
+import reducers from './api/redux/reducers';
 
 // add redux devtools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

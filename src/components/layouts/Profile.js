@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Layout, message } from 'antd';
 // custom code
 import Spinner from '../elements/Spinner';
-import { fetchUserByUsername, showComponent } from '../../redux/actions';
+import { fetchUserByUsername, showComponent } from '../../api/redux/actions';
 import './css/Profile.less';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';

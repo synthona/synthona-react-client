@@ -5,7 +5,7 @@ import {
   deleteAssociationLink,
   removeFromAssociationList,
   updateLinkStrength,
-} from '../../../redux/actions';
+} from '../../../api/redux/actions';
 import { Link } from 'react-router-dom';
 import { Button, Tooltip } from 'antd';
 import './AssociationLinkList.less';

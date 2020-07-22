@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Avatar, Modal, Drawer } from 'antd';
-import { signOut, hideComponent, generateInstanceExport } from '../../redux/actions';
+import { signOut, hideComponent, generateInstanceExport } from '../../api/redux/actions';
 // custom code
 import './MainSider.less';
 import Spinner from './Spinner';

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 // custom code
 import '../node/NodeList.less';
-import { searchNodes, fetchAssociations } from '../../../redux/actions';
+import { searchNodes, fetchAssociations } from '../../../api/redux/actions';
 import NodeCard from '../node/NodeCard';
 import AssociationSider from './AssociationSider';
 import Spinner from '../Spinner';

@@ -1,5 +1,5 @@
-import instance from '../../api/instance';
-import history from '../../utils/history';
+import instance from '../../../api/instance';
+import history from '../../../utils/history';
 import {
   FETCH_NODES,
   FETCH_NODES_ERROR,

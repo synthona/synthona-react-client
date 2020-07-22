@@ -1,7 +1,7 @@
 // import the default node configurations
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { updateLinkStrength } from '../../redux/actions';
+import { updateLinkStrength } from '../../api/redux/actions';
 import { Text, Image, Url, File, Audio, Package, Zip, Collection, User } from './core/index';
 
 class NodeRenderer extends Component {

@@ -19,7 +19,7 @@ import {
   updateNode,
   fetchAssociations,
   markNodeView,
-} from '../../redux/actions';
+} from '../../api/redux/actions';
 // import custom editor css
 import './QuillEditor.less';
 // destructure antd components

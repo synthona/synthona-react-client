@@ -1,4 +1,4 @@
-import instance from '../../api/instance';
+import instance from '../../instance';
 import { CREATE_FILE_NODE, CREATE_FILE_NODE_SUCCESS, CREATE_FILE_NODE_ERROR } from './types';
 import { message } from 'antd';
 

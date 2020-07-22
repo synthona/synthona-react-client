@@ -9,7 +9,7 @@ import {
   deleteNode,
   clearActiveNode,
   generateExportByUUID,
-} from '../../../redux/actions';
+} from '../../../api/redux/actions';
 
 class NodeCardHeaderFull extends Component {
   constructor(props) {

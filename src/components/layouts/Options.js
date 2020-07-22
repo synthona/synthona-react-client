@@ -14,7 +14,7 @@ import {
   changePassword,
   showComponent,
   generateInstanceExport,
-} from '../../redux/actions';
+} from '../../api/redux/actions';
 import './css/Options.less';
 // import IOBar from '../elements/IOBar';
 import NodeList from '../elements/node/NodeList';
