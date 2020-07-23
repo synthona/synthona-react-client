@@ -8,7 +8,7 @@ const { Content } = Layout;
 const MainContent = (props) => {
   return (
     <Layout className='page-content'>
-      <Content style={{ backgroundColor: 'white' }}>{props.children}</Content>
+      <Content style={{ backgroundColor: '#272727' }}>{props.children}</Content>
     </Layout>
   );
 };

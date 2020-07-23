@@ -38,7 +38,6 @@ class Help extends Component {
               <IOBar />
             </div>
             <div className='help-container' style={{ padding: '5.5rem 17rem 1rem' }}>
-              <h2>Help!</h2>
               <p>
                 Hello there! Welcome to the help page! This is where you can get the help you need,
                 so you can rest easy. Allow me to explain exactly what is going on here. First

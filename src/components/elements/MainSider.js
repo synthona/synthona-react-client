@@ -103,12 +103,12 @@ class MainSider extends Component {
               </Link>
                 </Item>  */}
             <Item className='sider-menu-item'>
+              <Link to={`/edit/profile/`}>Options</Link>
+            </Item>
+            <Item className='sider-menu-item'>
               <Link to='/help' onClick={(e) => this.props.hideComponent('mainSider')}>
                 Help
               </Link>
-            </Item>
-            <Item className='sider-menu-item'>
-              <Link to={`/edit/profile/`}>Options</Link>
             </Item>
             <Item className='sider-menu-item'>
               <Link to='#' onClick={this.toggleSignoutModal}>
