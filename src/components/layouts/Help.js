@@ -35,10 +35,6 @@ class Help extends Component {
             }}
           >
             <IOBar />
-            <div
-              style={{ height: '17rem', width: '100%', overflow: 'hidden' }}
-              className='help-header'
-            ></div>
             <div className='help-container' style={{ padding: '3rem 17rem 1rem' }}>
               <h2>Help! What the heck is going on here!</h2>
               <p>
