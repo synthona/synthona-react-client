@@ -103,7 +103,11 @@ class MainSider extends Component {
               </Link>
                 </Item>  */}
             <Item className='sider-menu-item'>
-              <Link to='/help' onClick={(e) => this.props.hideComponent('mainSider')}>
+              <Link
+                to='/help'
+                onClick={(e) => this.props.hideComponent('mainSider')}
+                target='_blank'
+              >
                 Help
               </Link>
             </Item>

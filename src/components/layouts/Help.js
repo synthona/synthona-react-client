@@ -34,8 +34,10 @@ class Help extends Component {
               paddingBottom: '3rem',
             }}
           >
-            <IOBar />
-            <div className='help-container' style={{ padding: '3rem 17rem 1rem' }}>
+            <div style={{ position: 'fixed', width: '100%' }}>
+              <IOBar />
+            </div>
+            <div className='help-container' style={{ padding: '5.5rem 17rem 1rem' }}>
               <h2>Help!</h2>
               <p>
                 Hello there! Welcome to the help page! This is where you can get the help you need,
@@ -130,8 +132,8 @@ class Help extends Component {
                 5) Delete <Icon type={'delete'} theme='outlined' />
               </h3>
               <p>
-                This is the garbage can, it lets you put delete nodes from the system! Where do they
-                go after that? Nobody knows!
+                This is the garbage can, it lets you put delete nodes from the system! Not bad,
+                pretty good!
               </p>
               <Icon type={'delete'} theme='outlined' className='help-icon' />
               <h3>
