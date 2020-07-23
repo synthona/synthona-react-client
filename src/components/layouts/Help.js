@@ -76,12 +76,11 @@ class Help extends Component {
               </p>
               <h2>What are nodes and associations?</h2>
               <p>
-                That is a very specific question! I'm glad you asked it, because it cuts right to
-                the heart of what Synthona is and does. This application is premised on the idea
-                that all content is a <i>node</i> which can be associated, connected, related, to
-                any other piece of content. A connection between any two pieces of content is called
-                an <i>association</i>. If you understand these two ideas, you understand Synthona!
-                That's all there is to it, the rest is just building on these two assumptions.
+                Synthona is premised on the idea that all content is a <i>node</i> which can be
+                associated, connected, related, to any other piece of content. A connection between
+                any two pieces of content is called an <i>association</i>. If you understand these
+                two ideas, you understand Synthona! That's all there is to it, the rest is just
+                building on these two assumptions.
               </p>
               <h2>How do I edit the name of a node?</h2>
               <p>If you double click the title it should turn into an editable text field.</p>
@@ -165,17 +164,20 @@ class Help extends Component {
                 This will put all your nodes and associations into a .synth file which will be added
                 to your homepage. You can then click through to download that file. That .synth file
                 containing all your data can be imported into an updated version of the app, onto a
-                version on another computer, stored as a backup, or you could break it open to get
-                at the files themselves. If you need to get at the specific files in there, you can
-                change the file extension from .synth to .zip which should allow your computer to
-                de-compress the archive.
+                version on another computer, or stored as a backup. Also, although it's not really
+                designed for this, you could break the .synth file open to get at the files
+                themselves. If you need to get at the specific files in there, you can change the
+                file extension from .synth to .zip which should allow your computer to de-compress
+                the archive.
               </p>
               <h2>How do I bring data from an older version into the latest version of the app?</h2>
               <p>
                 As mentioned in the previous question, you can go to the options menu on the older
                 version and click the "export all user data" option to get a .synth file containing
                 all your user data. You can then import that into the latest version you've
-                downloaded by unpacking it from within the new version.
+                downloaded by unpacking it from within the new version. Once you have imported your
+                data into the new version, you can safely delete the old version of the app from
+                your computer.
               </p>
               <h2>Why are there so many concepts here!?</h2>
               <p>
@@ -205,11 +207,15 @@ class Help extends Component {
                 >
                   patreon
                 </a>{' '}
-                you can donate to if you want, and I may add more donation options in the future.
-                Anything helps, I spent quite a bit of time developing this idea and am currently
-                between jobs. I have a lot of ideas for improvements to this application including
-                things like P2P features, theme support, plugin support, and a lot of other node
-                types, but I can't really afford to work on this full-time without funding.
+                you can contribute to and I may add more donation options in the future. Anything
+                helps, I spent quite a bit of time developing this idea and am currently between
+                jobs. I have a lot of ideas for improvements to this application including things
+                like P2P features, automatic updates, theme support, plugin support, a lot of other
+                node types, maps, web-features, analytics, social features, 3D features, and so much
+                more, but I can't afford to work on this full-time without enough funding to make
+                rent. This project was originally designed to function as a distrubuted p2p social
+                network and that is not really off the table, but there is still a lot of work to be
+                done before that is possible and funding would allow me to work on it.
               </p>
               <h2>Can I contact you with a bug report, feature request, or other inquiry?</h2>
               <p>
