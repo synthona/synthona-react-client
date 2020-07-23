@@ -29,21 +29,20 @@ class Help extends Component {
           <Content
             style={{
               minHeight: '100vh',
-              backgroundColor: 'white',
+              backgroundColor: '#e0dcc7',
               textAlign: 'left',
               paddingBottom: '3rem',
             }}
           >
             <IOBar />
             <div className='help-container' style={{ padding: '3rem 17rem 1rem' }}>
-              <h2>Help! What the heck is going on here!</h2>
+              <h2>Help!</h2>
               <p>
                 Hello there! Welcome to the help page! This is where you can get the help you need,
-                so you can rest easy. Now, let me explain exactly "what the heck it is" it is which
-                is going on here. First things first, you are on the help page! You can leave
-                whenever you want or if you like you can hang out here for a while. It's a nice
-                place to hang out. There's all kinds of wonderful things you learn while you are
-                here.
+                so you can rest easy. Allow me to explain exactly what is going on here. First
+                things first, you are on the help page! You can leave whenever you want or if you
+                like you can hang out here for a while. It's a nice place to hang out. There's all
+                kinds of wonderful things you learn while you are here.
               </p>
               <h2>What is Synthona?</h2>
               <p>
@@ -179,8 +178,8 @@ class Help extends Component {
                 you can donate to if you want, and I may add more donation options in the future.
                 Anything helps, I spent quite a bit of time developing this idea and am currently
                 between jobs. I have a lot of ideas for improvements to this application including
-                things like P2P features and a lot of other node types, but I can't really afford to
-                work on this full-time without funding.
+                things like P2P features, theme support, plugin support, and a lot of other node
+                types, but I can't really afford to work on this full-time without funding.
               </p>
               <h2>Can I contact you with a bug report, feature request, or other inquiry?</h2>
               <p>
