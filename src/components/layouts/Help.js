@@ -159,6 +159,24 @@ class Help extends Component {
                 the nodes which unpacking created, which makes unpacking a reversible operation.
               </p>
               <Icon type={'appstore'} theme='outlined' className='help-icon' />
+              <h2>Can I export all my data?</h2>
+              <p>
+                Yes, if you go to the options menu there is a button labeled "export all user data".
+                This will put all your nodes and associations into a .synth file which will be added
+                to your homepage. You can then click through to download that file. That .synth file
+                containing all your data can be imported into an updated version of the app, onto a
+                version on another computer, stored as a backup, or you could break it open to get
+                at the files themselves. If you need to get at the specific files in there, you can
+                change the file extension from .synth to .zip which should allow your computer to
+                de-compress the archive.
+              </p>
+              <h2>How do I bring data from an older version into the latest version of the app?</h2>
+              <p>
+                As mentioned in the previous question, you can go to the options menu on the older
+                version and click the "export all user data" option to get a .synth file containing
+                all your user data. You can then import that into the latest version you've
+                downloaded by unpacking it from within the new version.
+              </p>
               <h2>Why are there so many concepts here!?</h2>
               <p>
                 That's a good question! I tried to explain everything as best I could but I'm
