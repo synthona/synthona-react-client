@@ -111,19 +111,7 @@ class Help extends Component {
               </p>
               <Icon type={'bulb'} theme='outlined' className='help-icon' />
               <h3>
-                3) Synthona Package <Icon type={'deployment-unit'} theme='outlined' />
-              </h3>
-              <p>
-                Synthona packages allow you to share nodes and their associations between computers
-                as <i>.synth</i> files, which can be re-imported by anyone into any synthona
-                instance on any computer. These files are represented within synthona by this icon.
-                If you click this icon, it will generate an export package based on the node you
-                clicked it from. Synthona packages contain the node in question, all the nodes
-                associated with it, and their associations with each other.
-              </p>
-              <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
-              <h3>
-                4) Visible <Icon type={'eye'} theme='outlined' />
+                3) Visible <Icon type={'eye'} theme='outlined' />
               </h3>
               <p>
                 Clicking this icon allows you to toggle whether a node is visible on the homepage or
@@ -132,7 +120,7 @@ class Help extends Component {
               </p>
               <Icon type={'eye'} theme='outlined' className='help-icon' />
               <h3>
-                5) Searchable <Icon type={'search'} theme='outlined' />
+                4) Searchable <Icon type={'search'} theme='outlined' />
               </h3>
               <p>
                 Clicking this icon allows you to toggle whether a node will appear in a search or
@@ -147,6 +135,30 @@ class Help extends Component {
                 go after that? Nobody knows!
               </p>
               <Icon type={'delete'} theme='outlined' className='help-icon' />
+              <h3>
+                6) Synthona Package <Icon type={'deployment-unit'} theme='outlined' />
+              </h3>
+              <p>
+                Synthona packages allow you to share nodes and their associations between computers
+                as <i>.synth</i> files, which can be re-imported by anyone into any synthona
+                instance on any computer. These files are represented within synthona by this icon.
+                If you click this icon, it will generate an export package based on the node you
+                clicked it from. Synthona packages contain the node in question, all the nodes
+                associated with it, and their associations with each other.
+              </p>
+              <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
+              <h3>
+                7) Unpack Synthona Package <Icon type={'appstore'} theme='outlined' />
+              </h3>
+              <p>
+                If you have created or imported a Synthona package into your Synthona instance, you
+                will see this icon on the package page. Clicking it will "unpack" the package,
+                importing all the nodes and associations it contains into your profile. Once you
+                click this, it will be replaced by an "undo" <Icon type={'undo'} theme='outlined' />{' '}
+                icon which will allow you to "repack" the package. The undo option will delete all
+                the nodes which unpacking created, which makes unpacking a reversible operation.
+              </p>
+              <Icon type={'appstore'} theme='outlined' className='help-icon' />
               <h2>Why are there so many concepts here!?</h2>
               <p>
                 That's a good question! I tried to explain everything as best I could but I'm
