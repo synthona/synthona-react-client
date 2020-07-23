@@ -23,7 +23,6 @@ class Login extends Component {
     } else {
       return 'synthona';
     }
-    // return 'synthona';
   };
 
   onSubmit = (values, { setSubmitting }) => {
@@ -37,7 +36,7 @@ class Login extends Component {
         <Content className='login-content'>
           <Card className='login-card'>
             <Formik
-              initialValues={{ username: '', password: '', confirmPassword: '' }}
+              initialValues={{ email: '', password: '', confirmPassword: '' }}
               validationSchema={validationSchema}
               onSubmit={this.onSubmit}
             >
@@ -52,13 +51,8 @@ class Login extends Component {
                       ✨
                     </span>
                   </h1>
-                  <Field
-                    type='username'
-                    name='username'
-                    placeholder='username'
-                    className='login-field'
-                  />
-                  <ErrorMessage name='username' component='div' className='login-error' />
+                  <Field type='email' name='email' placeholder='email' className='login-field' />
+                  <ErrorMessage name='email' component='div' className='login-error' />
                   <Field
                     type='password'
                     name='password'
@@ -85,7 +79,7 @@ class Login extends Component {
 }
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required('Username is required!'),
+  email: Yup.string().required().email('E-mail is not valid!'),
   password: Yup.string().required().min(5, 'Password has to be longer than 6 characters!'),
 });
 
