@@ -15,6 +15,7 @@ import Collections from './layouts/Collections';
 import Spinner from './elements/Spinner';
 import CreateAccount from './layouts/CreateAccount';
 import AssociationBrowser from './layouts/AssociationBrowser';
+import Help from './layouts/Help';
 
 class App extends Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path='/edit/text/:uuid' exact component={QuillEditor} />
           <Route path='/edit/profile' exact component={Options} />
           <Route path='/associations/:uuid' exact component={AssociationBrowser} />
+          <Route path='/help' exact component={Help} />
         </Switch>
       );
     } else if (this.props.isFetchingAuth) {
