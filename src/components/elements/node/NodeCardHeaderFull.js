@@ -123,7 +123,6 @@ class NodeCardHeaderFull extends Component {
   // render header buttons for node types which need them
   // at the moment it's just .synth packages
   renderContextualButtons = () => {
-    console.log(this.props.node);
     switch (this.props.node.type) {
       case 'package':
         if (this.props.node.metadata && this.props.node.metadata.expanded) {

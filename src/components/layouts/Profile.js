@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Layout, message } from 'antd';
 // custom code
 import Spinner from '../elements/Spinner';
-import { fetchUserByUsername, showComponent } from '../../api/redux/actions';
+import { fetchUserByUsername, showComponent, hideComponent } from '../../api/redux/actions';
 import './css/Profile.less';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';
@@ -37,6 +37,10 @@ class Profile extends Component {
       document.title = this.props.match.params.username;
       this.initializeFromUrlParams();
     }
+  }
+
+  componentWillUnmount() {
+    this.props.hideComponent('mainSider');
   }
 
   // load the text node and set the local id state.
@@ -111,4 +115,6 @@ const mapStateToProps = (state) => {
   return { user: state.auth.user };
 };
 
-export default connect(mapStateToProps, { fetchUserByUsername, showComponent })(Profile);
+export default connect(mapStateToProps, { fetchUserByUsername, showComponent, hideComponent })(
+  Profile
+);

@@ -104,13 +104,15 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_NODE_ERROR:
       return { ...state, isSaving: null };
     case UPDATE_NODE_SUCCESS:
-      // update node without changing its position in nodeList
-      var newList = [...state.nodeList];
-      newList[action.result.uuid] = action.result;
       return {
         ...state,
         isSaving: null,
-        nodeList: newList,
+        nodeList: state.nodeList.map((node) => {
+          if (node.uuid === action.result.uuid) {
+            node = action.result;
+          }
+          return node;
+        }),
       };
     case EDIT_TEXT_NODE:
       return { ...state, isSaving: true };
