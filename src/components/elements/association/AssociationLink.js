@@ -12,6 +12,7 @@ import './AssociationLinkList.less';
 
 class AssociationLink extends Component {
   handleDeleteAssociation = () => {
+    console.log('handle delete association');
     var siderNodeUUID = this.props.siderNodeUUID;
     var linkedNodeUUID = this.props.association.uuid;
     if (this.props.activeNode) {
@@ -25,14 +26,14 @@ class AssociationLink extends Component {
       var pathname = window.location.pathname;
       // handle removal from association list page if on association page if an associated node was removed
       if (
-        pathname.includes('associations') &&
+        (pathname.includes('associations') || pathname.includes('/edit/text/')) &&
         activeNodeUUID &&
         activeNodeUUID === linkedNodeUUID
       ) {
         this.props.removeFromAssociationList(siderNodeUUID);
         this.props.hideComponent('associationSider');
       } else if (
-        pathname.includes('associations') &&
+        (pathname.includes('associations') || pathname.includes('/edit/text/')) &&
         activeNodeUUID &&
         activeNodeUUID === siderNodeUUID
       ) {
