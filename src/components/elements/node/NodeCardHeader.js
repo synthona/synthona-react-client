@@ -42,6 +42,9 @@ class NodeCardHeader extends Component {
           onChange={(e) => {
             this.saveName(e.target.value);
           }}
+          onFocus={(e) => {
+            e.target.select();
+          }}
         ></input>
       );
     }
