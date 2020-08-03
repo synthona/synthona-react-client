@@ -14,6 +14,7 @@ import {
   changePassword,
   showComponent,
   generateInstanceExport,
+  hideComponent,
 } from '../../api/redux/actions';
 import './css/Options.less';
 // import IOBar from '../elements/IOBar';
@@ -256,6 +257,8 @@ class Options extends Component {
   componentWillUnmount() {
     // remove any selections on exit
     window.getSelection().removeAllRanges();
+    // hide mainsider again
+    this.props.hideComponent('mainSider');
   }
 
   render() {
@@ -370,4 +373,5 @@ export default connect(mapStateToProps, {
   changePassword,
   showComponent,
   generateInstanceExport,
+  hideComponent,
 })(Options);
