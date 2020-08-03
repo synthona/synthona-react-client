@@ -50,10 +50,26 @@ class QuillEditor extends Component {
     document.body.style.overflow = 'auto';
     document.body.style.height = '100%';
     document.documentElement.style.height = '100%';
+    // prevent quill from jumping to top
+    document.querySelectorAll('.ql-picker').forEach((tool) => {
+      tool.addEventListener('mousedown', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+    // initialize
     this.initializeFromUrlParams();
   }
 
   componentDidUpdate = async () => {
+    // prevent quill from jumping to top
+    document.querySelectorAll('.ql-picker').forEach((tool) => {
+      tool.addEventListener('mousedown', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+    // if the url has changed reload
     var textUUID = this.props.match.params.uuid;
     if (this.state.uuid !== textUUID && this.state.initializing === false) {
       this.setState({
@@ -238,7 +254,7 @@ class QuillEditor extends Component {
       matchVisual: false,
       matchers: [
         ['img', this.matcherImageHandler],
-        ['p', this.matcherLineBreakHandler],
+        // ['p', this.matcherLineBreakHandler],
       ],
     },
     // blotFormatter: {
