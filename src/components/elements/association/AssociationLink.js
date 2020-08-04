@@ -197,6 +197,22 @@ class AssociationLink extends Component {
             </Tooltip>
           </li>
         );
+      case 'user':
+        return (
+          <li className='association-list-item'>
+            <Button
+              icon='close'
+              shape='circle'
+              size='small'
+              onClick={(e) => this.handleDeleteAssociation()}
+            />
+            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
+              <Link to={`/profile/${association.path}`} onClick={(e) => this.handleLinkClick()}>
+                {association.name}
+              </Link>
+            </Tooltip>
+          </li>
+        );
       default:
         return;
     }

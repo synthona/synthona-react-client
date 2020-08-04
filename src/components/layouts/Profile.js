@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, message } from 'antd';
+import { Layout, message, Modal } from 'antd';
 // custom code
 import Spinner from '../elements/Spinner';
 import { fetchUserByUsername, showComponent, hideComponent } from '../../api/redux/actions';
@@ -23,6 +23,7 @@ class Profile extends Component {
       bio: '',
       avatar: '',
       header: '',
+      avatarModal: false,
     };
   }
 
@@ -33,6 +34,7 @@ class Profile extends Component {
   }
 
   componentDidUpdate() {
+    document.body.style.removeProperty('overflow');
     if (this.state.username !== this.props.match.params.username) {
       document.title = this.props.match.params.username;
       this.initializeFromUrlParams();
@@ -42,6 +44,14 @@ class Profile extends Component {
   componentWillUnmount() {
     this.props.hideComponent('mainSider');
   }
+
+  toggleAvatarModal = () => {
+    if (this.state.avatarModal === false) {
+      this.setState({ avatarModal: true });
+    } else {
+      this.setState({ avatarModal: false });
+    }
+  };
 
   // load the text node and set the local id state.
   initializeFromUrlParams = async () => {
@@ -103,6 +113,21 @@ class Profile extends Component {
                 <p className='Profile-bio'>{this.state.bio}</p>
               </div>
             </div>
+            <Modal
+              title={this.state.displayName}
+              visible={this.state.avatarModal}
+              className='profile-modal'
+              centered
+              onCancel={this.toggleAvatarModal}
+              closable={false}
+              footer={null}
+              afterClose={() => {
+                // temporary fix to remove overflow property being set on body by antd
+                document.body.style.removeProperty('overflow');
+              }}
+            >
+              <img src={this.state.avatar || defaultAvatar} alt={'avatar'}></img>
+            </Modal>
             <NodeList />
           </Content>
         </Layout>

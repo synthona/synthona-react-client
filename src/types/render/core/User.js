@@ -9,7 +9,7 @@ const User = (props) => {
     return (
       <li className='nodelist-item'>
         <NodeCardHeader node={props.node} />
-        <Link to={`/profile/${props.node.name}`} onClick={(e) => props.handleClick()}>
+        <Link to={`/profile/${props.node.path}`} replace onClick={(e) => props.handleClick()}>
           <img
             src={props.node.preview}
             alt={props.node.name}
@@ -45,7 +45,7 @@ const User = (props) => {
     return (
       <div className='full-node-item'>
         <NodeCardHeaderFull node={props.node} />
-        <Link to={`/profile/${props.node.name}`} /*target='_blank' */>
+        <Link to={`/profile/${props.node.path}`} /*target='_blank' */>
           <p>{props.node.name}</p>
         </Link>
       </div>
