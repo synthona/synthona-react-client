@@ -1,6 +1,6 @@
 @node-card-title-color: #16e998;
 // @node-card-title-color: #98fdc2;
-@node-card-paragraph-hover: #2ada3e;
+@node-card-paragraph-hover: #cbebce;
 
 .nodelist {
   display: flex;
@@ -110,10 +110,12 @@ div.nodelist-options-buttons {
     opacity: 1;
     outline: transparent;
   }
+  transition-duration: 1s;
 }
 
 .nodelist-item p:hover {
-  // color: @node-card-paragraph-hover;
+  color: @node-card-paragraph-hover;
+  transition-duration: 1s;
 }
 
 .nodelist-item-title {
@@ -140,6 +142,10 @@ input.nodelist-item-title {
   overflow: hidden;
   white-space: normal;
   text-overflow: ellipsis;
+}
+
+input.nodelist-item-title::selection {
+  background: #272727;
 }
 
 .nodelist-item p {

@@ -12,7 +12,6 @@ import './AssociationLinkList.less';
 
 class AssociationLink extends Component {
   handleDeleteAssociation = () => {
-    console.log('handle delete association');
     var siderNodeUUID = this.props.siderNodeUUID;
     var linkedNodeUUID = this.props.association.uuid;
     if (this.props.activeNode) {

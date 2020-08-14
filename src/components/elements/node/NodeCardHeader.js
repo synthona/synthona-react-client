@@ -39,6 +39,12 @@ class NodeCardHeader extends Component {
           autoFocus
           placeholder='name'
           value={this.state.name}
+          onKeyPress={(e) => {
+            // remove input on enter
+            if (e.key === 'Enter') {
+              this.setState({ editable: null });
+            }
+          }}
           onChange={(e) => {
             this.saveName(e.target.value);
           }}
