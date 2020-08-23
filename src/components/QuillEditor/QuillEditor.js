@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import Delta from 'quill-delta';
 // import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
 import { Layout, message } from 'antd';
@@ -26,6 +26,15 @@ import './QuillEditor.less';
 const { Content } = Layout;
 
 // Quill.register('modules/blotFormatter', BlotFormatter);
+
+// fix to prevent error on pasting from misc sources
+var Block = Quill.import('blots/block');
+class Div extends Block {}
+Div.tagName = 'div';
+Div.blotName = 'div';
+Div.allowedChildren = Block.allowedChildren;
+Div.allowedChildren.push(Block);
+Quill.register(Div);
 
 class QuillEditor extends Component {
   constructor(props) {
@@ -196,11 +205,6 @@ class QuillEditor extends Component {
     }
   };
 
-  // on pasting text, add line breaks after paragraphs
-  matcherLineBreakHandler = (node, delta) => {
-    return delta.compose(new Delta().retain(delta.length()).insert('\n'));
-  };
-
   modules = {
     toolbar: {
       container: [
@@ -252,18 +256,15 @@ class QuillEditor extends Component {
     },
     clipboard: {
       matchVisual: false,
-      matchers: [
-        ['img', this.matcherImageHandler],
-        // ['p', this.matcherLineBreakHandler],
-      ],
+      matchers: [['img', this.matcherImageHandler]],
     },
     // blotFormatter: {
     //   overlay: {
     //     style: {
-    //       border: '2px solid #41e254'
-    //     }
-    //   }
-    // }
+    //       border: '2px solid #41e254',
+    //     },
+    //   },
+    // },
   };
 
   allowedFormats = [

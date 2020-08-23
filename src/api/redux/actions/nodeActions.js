@@ -96,6 +96,7 @@ export const createNode = (node, file) => async (dispatch) => {
   // set content to empty quill delta for text node
   if (node.type === 'text') {
     const delta = new Delta();
+    delta.insert(node.name);
     node.content = JSON.stringify(delta);
   }
   try {

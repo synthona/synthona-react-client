@@ -35,7 +35,7 @@ class AssociationLinkList extends Component {
   renderLoadMoreButton = () => {
     var listLength = this.props.associations.length;
     // if the total items is more than what is loaded show the load more button
-    if (this.props.totalItems > listLength) {
+    if (this.props.totalItems > listLength + 1) {
       return (
         <li style={{ listStyle: 'none', marginTop: '0.5rem', textAlign: 'center' }}>
           <button

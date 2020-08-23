@@ -306,7 +306,10 @@ class Options extends Component {
                     display: 'inline-block',
                     textAlign: 'center',
                   }}
-                  onClick={(e) => this.props.generateInstanceExport()}
+                  onClick={(e) => {
+                    this.props.history.push(`/profile/${this.props.user.username}`);
+                    this.props.generateInstanceExport();
+                  }}
                 >
                   export all user data
                 </Button>

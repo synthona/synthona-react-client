@@ -108,7 +108,7 @@ class NodeCardHeaderFull extends Component {
           type='text'
           className='full-card-title'
           onBlur={() => this.setState({ editable: null })}
-          maxlength='250'
+          maxLength='250'
           autoFocus
           placeholder='name'
           value={this.state.name}

@@ -13,6 +13,7 @@
 
 div.quill {
   border: none;
+  word-wrap: normal;
 
   h1 {
     padding: 0 0 0.2rem;
@@ -52,6 +53,13 @@ div.quill {
     p::selection {
       color: #ffffff;
       background-color: #3ce458;
+    }
+  }
+
+  ol {
+    li:not(.ql-direction-rtl)::before {
+      // padding-right: 1.5rem;
+      margin-right: 0.75rem;
     }
   }
 
