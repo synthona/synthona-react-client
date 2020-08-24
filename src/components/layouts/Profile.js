@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { Layout, message, Modal } from 'antd';
 // custom code
 import Spinner from '../elements/Spinner';
-import { fetchUserByUsername, showComponent, hideComponent } from '../../api/redux/actions';
+import {
+  fetchUserByUsername,
+  showComponent,
+  hideComponent,
+  markNodeView,
+} from '../../api/redux/actions';
 import './css/Profile.less';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';
@@ -66,6 +71,9 @@ class Profile extends Component {
         avatar: user.avatar,
         header: user.header,
       });
+      // mark the profile as viewed
+      this.props.markNodeView({ uuid: user.nodeId });
+      // set the page title
       document.title = user.displayName;
     } else {
       message.error('there was a problem loading the user');
@@ -140,6 +148,9 @@ const mapStateToProps = (state) => {
   return { user: state.auth.user };
 };
 
-export default connect(mapStateToProps, { fetchUserByUsername, showComponent, hideComponent })(
-  Profile
-);
+export default connect(mapStateToProps, {
+  fetchUserByUsername,
+  showComponent,
+  hideComponent,
+  markNodeView,
+})(Profile);

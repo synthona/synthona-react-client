@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
+import defaultHeader from '../../../resources/synthona-login.png';
 
 const User = (props) => {
   const nodeCard = () => {
@@ -11,7 +12,7 @@ const User = (props) => {
         <NodeCardHeader node={props.node} />
         <Link to={`/profile/${props.node.path}`} replace onClick={(e) => props.handleClick()}>
           <img
-            src={props.node.preview}
+            src={props.node.preview || defaultHeader}
             alt={props.node.name}
             style={{
               objectFit: 'cover',
@@ -29,7 +30,7 @@ const User = (props) => {
     return (
       <Fragment>
         <img
-          src={props.node.preview}
+          src={props.node.preview || defaultHeader}
           alt={props.node.name}
           style={{
             objectFit: 'cover',

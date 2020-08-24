@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Avatar, Modal, Drawer } from 'antd';
 import { signOut, hideComponent, generateInstanceExport } from '../../api/redux/actions';
+// images
+import defaultAvatar from '../../resources/synthona-logo.png';
 // custom code
 import './MainSider.less';
 import Spinner from './Spinner';
@@ -62,7 +64,7 @@ class MainSider extends Component {
               <Link to={`/profile/${this.props.user.username}`}>
                 <Avatar
                   className='nav-avatar'
-                  src={this.props.user.avatar}
+                  src={this.props.user.avatar || defaultAvatar}
                   icon='user'
                   style={{
                     display: 'inline-block',
