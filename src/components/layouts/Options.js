@@ -21,7 +21,7 @@ import './css/Options.less';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';
 // import default images
-import defaultHeader from '../../resources/synthona-login.png';
+import defaultHeader from '../../resources/synthona-header.png';
 import defaultAvatar from '../../resources/synthona-logo.png';
 
 const { Content } = Layout;

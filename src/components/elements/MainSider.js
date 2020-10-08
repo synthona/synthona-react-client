@@ -80,8 +80,8 @@ class MainSider extends Component {
             </Item>
             <Item className='sider-menu-item sider-title'>
               <Link to={`/profile/${this.props.user.username}`}>
-                <b>{this.props.user.displayName}</b>
-                {/* <b>Profile</b> */}
+                {/*  <b>@{this.props.user.username}</b>*/}
+                <b>Profile</b>
               </Link>
             </Item>
             <Item className='sider-menu-item'>
@@ -104,6 +104,16 @@ class MainSider extends Component {
                 Chat
               </Link>
                 </Item>  */}
+            <Item className='sider-menu-item'>
+              <a
+                href={'https://twitter.com/synthona'}
+                replace
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Updates
+              </a>
+            </Item>
             <Item className='sider-menu-item'>
               <Link to={`/edit/profile/`}>Options</Link>
             </Item>

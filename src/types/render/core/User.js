@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
-import defaultHeader from '../../../resources/synthona-login.png';
+import defaultHeader from '../../../resources/synthona-header.png';
 
 const User = (props) => {
   const nodeCard = () => {
