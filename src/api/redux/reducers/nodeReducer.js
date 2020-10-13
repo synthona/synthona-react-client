@@ -59,9 +59,10 @@ export default (state = INITIAL_STATE, action) => {
       }
       // update the nodelist with the new values
       Object.values(action.payload.nodes).forEach((node) => {
-        if (!nodesArray.some((item) => item.uuid === node.uuid)) {
-          nodesArray.push(node);
-        }
+        // if (!nodesArray.some((item) => item.uuid === node.uuid)) {
+        //   nodesArray.push(node);
+        // }
+        nodesArray.push(node);
       });
       if (nodesArray.length > 100) {
         // if the length gets too long free up some memory
@@ -163,7 +164,10 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: null,
-        nodeList: [action.payload, ...state.nodeList],
+        nodeList: [
+          action.payload,
+          ...state.nodeList.filter((node) => node.uuid !== action.payload.uuid),
+        ],
         activeNode: action.payload.node,
       };
     case CREATE_NODE_ERROR:

@@ -107,7 +107,7 @@ class MainSider extends Component {
             <Item className='sider-menu-item'>
               <a
                 href={'https://twitter.com/synthona'}
-                replace
+                replace='true'
                 target='_blank'
                 rel='noopener noreferrer'
               >
