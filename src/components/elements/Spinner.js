@@ -13,7 +13,7 @@ const Spinner = (props) => {
           alignItems: 'center',
           backgroundColor: '#272727',
         }}
-        size='large'
+        size='medium'
       ></Spin>
     </Layout>
   );
