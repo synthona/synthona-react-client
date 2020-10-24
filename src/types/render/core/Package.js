@@ -52,6 +52,18 @@ const Package = (props) => {
     );
   };
 
+  const associationLink = () => {
+    return (
+      <Link
+        to={`/associations/${props.node.uuid}`}
+        onClick={(e) => props.handleAssociatonClick()}
+        // target='_blank'
+      >
+        {props.node.name}
+      </Link>
+    );
+  };
+
   // render the requested element
   const renderNode = () => {
     switch (props.element) {
@@ -61,6 +73,8 @@ const Package = (props) => {
         return <Fragment>{collectionPreview()}</Fragment>;
       case 'full':
         return <Fragment>{fullNode()}</Fragment>;
+      case 'association-link':
+        return <Fragment>{associationLink()}</Fragment>;
       default:
         return;
     }

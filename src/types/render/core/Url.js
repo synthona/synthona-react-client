@@ -76,6 +76,20 @@ const Url = (props) => {
     );
   };
 
+  const associationLink = () => {
+    return (
+      <a
+        href={props.node.preview}
+        target='_blank'
+        rel='noopener noreferrer'
+        onClick={(e) => this.handleLinkClick()}
+        style={{ wordBreak: 'break-all' }}
+      >
+        {props.node.name}
+      </a>
+    );
+  };
+
   // render the requested element
   const renderNode = () => {
     switch (props.element) {
@@ -85,6 +99,8 @@ const Url = (props) => {
         return <Fragment>{collectionPreview()}</Fragment>;
       case 'full':
         return <Fragment>{fullNode()}</Fragment>;
+      case 'association-link':
+        return <Fragment>{associationLink()}</Fragment>;
       default:
         return;
     }

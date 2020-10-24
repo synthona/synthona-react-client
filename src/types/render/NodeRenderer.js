@@ -1,7 +1,7 @@
 // import the default node configurations
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { updateLinkStrength } from '../../api/redux/actions';
+import { updateLinkStrength, hideComponent } from '../../api/redux/actions';
 import { Text, Image, Url, File, Audio, Package, Zip, Collection, User } from './core/index';
 
 class NodeRenderer extends Component {
@@ -15,6 +15,17 @@ class NodeRenderer extends Component {
     }
   };
 
+  // increment linkstrength on association sider clicks
+  handleAssociatonClick = () => {
+    this.props.hideComponent('associationSider');
+    if (this.props.siderNodeUUID && this.props.node.uuid) {
+      const siderUUID = this.props.siderNodeUUID;
+      const linkedNodeUUID = this.props.node.uuid;
+      // increment the linkStrength on the server
+      this.props.updateLinkStrength(siderUUID, linkedNodeUUID);
+    }
+  };
+
   renderNode = () => {
     switch (this.props.type) {
       case 'text':
@@ -23,6 +34,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'image':
@@ -31,6 +43,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'url':
@@ -39,6 +52,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'file':
@@ -47,6 +61,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'audio':
@@ -55,6 +70,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'package':
@@ -63,6 +79,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'zip':
@@ -71,6 +88,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'collection':
@@ -79,6 +97,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       case 'user':
@@ -87,6 +106,7 @@ class NodeRenderer extends Component {
             element={this.props.element}
             node={this.props.node}
             handleClick={this.handleNodeClick}
+            handleAssociatonClick={this.handleAssociatonClick}
           />
         );
       default:
@@ -99,4 +119,4 @@ class NodeRenderer extends Component {
   }
 }
 
-export default connect(null, { updateLinkStrength })(NodeRenderer);
+export default connect(null, { updateLinkStrength, hideComponent })(NodeRenderer);

@@ -114,6 +114,18 @@ const Collection = (props) => {
     );
   };
 
+  const associationLink = () => {
+    return (
+      <Link
+        to={`/associations/${props.node.uuid}`}
+        onClick={(e) => props.handleAssociatonClick()}
+        // target='_blank'
+      >
+        {props.node.name}
+      </Link>
+    );
+  };
+
   // render the requested element
   const renderNode = () => {
     switch (props.element) {
@@ -121,6 +133,8 @@ const Collection = (props) => {
         return <Fragment>{nodeCard()}</Fragment>;
       case 'full':
         return <Fragment>{fullNode()}</Fragment>;
+      case 'association-link':
+        return <Fragment>{associationLink()}</Fragment>;
       default:
         return;
     }

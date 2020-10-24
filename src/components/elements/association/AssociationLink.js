@@ -6,14 +6,18 @@ import {
   removeFromAssociationList,
   updateLinkStrength,
 } from '../../../api/redux/actions';
-import { Link } from 'react-router-dom';
 import { Button, Tooltip } from 'antd';
 import './AssociationLinkList.less';
+// node renderer
+import NodeRenderer from '../../../types/render/NodeRenderer';
 
 class AssociationLink extends Component {
   handleDeleteAssociation = () => {
+    // sider node is the the node the sider was opened from
     var siderNodeUUID = this.props.siderNodeUUID;
+    // linked node is the node from the list, to be un-linked, un-associated
     var linkedNodeUUID = this.props.association.uuid;
+    // active node is only set when viewing an /association page, the node of the page itself
     if (this.props.activeNode) {
       // store the active node
       var activeNodeUUID = this.props.activeNode.uuid;
@@ -41,180 +45,26 @@ class AssociationLink extends Component {
     }
   };
 
-  handleLinkClick = () => {
-    this.props.hideComponent('associationSider');
-    if (this.props.siderNodeUUID && this.props.association.uuid) {
-      const nodeUUID = this.props.siderNodeUUID;
-      const linkedNodeUUID = this.props.association.uuid;
-      // increment the linkStrength on the server
-      this.props.updateLinkStrength(nodeUUID, linkedNodeUUID);
-    }
-  };
-
   // render card types
   renderAssociationLink = (association) => {
-    switch (association.type) {
-      case 'text':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <Link
-                to={`/edit/text/${association.uuid}`}
-                onClick={(e) => this.handleLinkClick()}
-                // target='_blank'
-              >
-                {association.name}
-              </Link>
-            </Tooltip>
-          </li>
-        );
-      case 'image':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <Link
-                to={`/associations/${association.uuid}`}
-                onClick={(e) => this.handleLinkClick()}
-                // target='_blank'
-              >
-                {association.name}
-              </Link>
-            </Tooltip>
-          </li>
-        );
-      case 'file':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <Link
-                to={`/associations/${association.uuid}`}
-                onClick={(e) => this.handleLinkClick()}
-                target='_blank'
-              >
-                {association.name}
-              </Link>
-            </Tooltip>
-          </li>
-        );
-      case 'audio':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <Link
-                to={`/associations/${association.uuid}`}
-                onClick={(e) => this.handleLinkClick()}
-                target='_blank'
-              >
-                {association.name}
-              </Link>
-            </Tooltip>
-          </li>
-        );
-      case 'package':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <Link
-                to={`/associations/${association.uuid}`}
-                onClick={(e) => this.handleLinkClick()}
-                // target='_blank'
-              >
-                {association.name}
-              </Link>
-            </Tooltip>
-          </li>
-        );
-      case 'url':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <a
-                href={association.preview}
-                target='_blank'
-                rel='noopener noreferrer'
-                onClick={(e) => this.handleLinkClick()}
-                style={{ wordBreak: 'break-all' }}
-              >
-                {association.name}
-              </a>
-            </Tooltip>
-          </li>
-        );
-      case 'collection':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <Link
-                to={`/associations/${association.uuid}`}
-                onClick={(e) => this.handleLinkClick()}
-                // target='_blank'
-              >
-                {association.name}
-              </Link>
-            </Tooltip>
-          </li>
-        );
-      case 'user':
-        return (
-          <li className='association-list-item'>
-            <Button
-              icon='close'
-              shape='circle'
-              size='small'
-              onClick={(e) => this.handleDeleteAssociation()}
-            />
-            <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
-              <Link to={`/profile/${association.path}`} onClick={(e) => this.handleLinkClick()}>
-                {association.name}
-              </Link>
-            </Tooltip>
-          </li>
-        );
-      default:
-        return;
-    }
+    return (
+      <li className='association-list-item'>
+        <Button
+          icon='close'
+          shape='circle'
+          size='small'
+          onClick={(e) => this.handleDeleteAssociation()}
+        />
+        <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
+          <NodeRenderer
+            type={association.type}
+            element={'association-link'}
+            node={association}
+            siderNodeUUID={this.props.siderNodeUUID}
+          />
+        </Tooltip>
+      </li>
+    );
   };
 
   render() {

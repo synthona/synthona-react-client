@@ -53,6 +53,14 @@ const User = (props) => {
     );
   };
 
+  const associationLink = () => {
+    return (
+      <Link to={`/profile/${props.node.path}`} onClick={(e) => props.handleAssociatonClick()}>
+        {props.node.name}
+      </Link>
+    );
+  };
+
   // render the requested element
   const renderNode = () => {
     switch (props.element) {
@@ -62,6 +70,8 @@ const User = (props) => {
         return <Fragment>{collectionPreview()}</Fragment>;
       case 'full':
         return <Fragment>{fullNode()}</Fragment>;
+      case 'association-link':
+        return <Fragment>{associationLink()}</Fragment>;
       default:
         return;
     }
