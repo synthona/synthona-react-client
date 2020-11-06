@@ -57,7 +57,7 @@ const Audio = (props) => {
       <Link
         to={`/associations/${props.node.uuid}`}
         onClick={(e) => this.handleLinkClick()}
-        target='_blank'
+        // target='_blank'
       >
         {props.node.name}
       </Link>

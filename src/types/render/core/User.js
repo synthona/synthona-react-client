@@ -55,7 +55,11 @@ const User = (props) => {
 
   const associationLink = () => {
     return (
-      <Link to={`/profile/${props.node.path}`} onClick={(e) => props.handleAssociatonClick()}>
+      <Link
+        to={`/profile/${props.node.path}`}
+        onClick={(e) => props.handleAssociatonClick()}
+        // target='blank'
+      >
         {props.node.name}
       </Link>
     );

@@ -7,27 +7,31 @@ import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeader
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 
 const Url = (props) => {
+  const urlIcon = 'bulb';
+
   const nodeCard = () => {
     return (
       <li className='nodelist-item'>
         <NodeCardHeader node={props.node} />
         <a
-          href={props.node.preview}
-          target='_blank'
+          // href={props.node.preview}
+          href={`/associations/${props.node.uuid}`}
+          // target='_blank'
           rel='noopener noreferrer'
           onClick={(e) => history.push(`/associations/${props.node.uuid}`)}
           style={{ width: '100%' }}
         >
           <Icon
-            // type={'link'}
-            type={'star'}
+            type={urlIcon}
+            // type={'star'}
             theme='outlined'
             style={{
               fontSize: '5rem',
               color: '#b8b8b8',
               display: 'block',
               textAlign: 'center',
-              padding: '3rem',
+              padding: '3.3rem',
+              height: '100%',
             }}
           />
         </a>
@@ -42,7 +46,7 @@ const Url = (props) => {
   const collectionPreview = () => {
     return (
       <Fragment>
-        <Icon type={'star'} theme='outlined' className='node-card-icon' />
+        <Icon type={urlIcon} theme='outlined' className='node-card-icon' />
       </Fragment>
     );
   };
@@ -61,7 +65,7 @@ const Url = (props) => {
         >
           <Icon
             // type={'link'}
-            type={'star'}
+            type={urlIcon}
             theme='outlined'
             style={{
               fontSize: '5rem',
@@ -82,7 +86,7 @@ const Url = (props) => {
         href={props.node.preview}
         target='_blank'
         rel='noopener noreferrer'
-        onClick={(e) => this.handleLinkClick()}
+        onClick={(e) => props.handleAssociatonClick()}
         style={{ wordBreak: 'break-all' }}
       >
         {props.node.name}

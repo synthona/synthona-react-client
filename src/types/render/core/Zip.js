@@ -57,7 +57,7 @@ const Zip = (props) => {
       <Link
         to={`/associations/${props.node.uuid}`}
         onClick={(e) => props.handleAssociatonClick()}
-        target='_blank'
+        // target='_blank'
       >
         {props.node.name}
       </Link>
