@@ -43,6 +43,7 @@ const User = (props) => {
   };
 
   const fullNode = () => {
+    console.log(props.node);
     return (
       <div className='full-node-item'>
         <NodeCardHeaderFull node={props.node} />

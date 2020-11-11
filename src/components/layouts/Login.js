@@ -56,7 +56,7 @@ class Login extends Component {
                   <button type='submit' disabled={isSubmitting} className='login-submit'>
                     login
                   </button>
-                  <Link to='/signup' className='login-signup'>
+                  <Link to='/create-account' className='login-signup'>
                     create user
                   </Link>
                 </Form>

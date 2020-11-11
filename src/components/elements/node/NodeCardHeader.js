@@ -76,6 +76,18 @@ class NodeCardHeader extends Component {
       >
         {this.renderTitle()}
         <div className='nodelist-options-buttons' style={{ marginLeft: 'auto' }}>
+          <button onClick={(e) => window.location.replace('/graphspace')}>
+            <Icon
+              type={'deployment-unit'}
+              theme='outlined'
+              style={{
+                fontSize: '0.9rem',
+                display: 'block',
+                textAlign: 'center',
+                padding: '0',
+              }}
+            />
+          </button>
           <button onClick={(e) => this.props.markNodeView(this.props.node)}>
             <Icon
               type={'bulb'}

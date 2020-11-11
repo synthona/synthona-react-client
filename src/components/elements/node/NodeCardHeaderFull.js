@@ -181,7 +181,7 @@ class NodeCardHeaderFull extends Component {
                 this.props.generateExportByUUID(this.props.node.uuid);
               }}
             >
-              <Icon type={'deployment-unit'} theme='outlined' className='full-card-button' />
+              <Icon type={'paper-clip'} theme='outlined' className='full-card-button' />
             </button>
           </li>
         </Tooltip>
@@ -204,6 +204,13 @@ class NodeCardHeaderFull extends Component {
                 }}
               >
                 <Icon type={'branches'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
+          <Tooltip title={'graphspace'} mouseEnterDelay={1.1}>
+            <li>
+              <button onClick={(e) => window.location.replace('/graphspace')}>
+                <Icon type={'deployment-unit'} theme='outlined' className='full-card-button' />
               </button>
             </li>
           </Tooltip>

@@ -46,7 +46,8 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path='/' exact component={Login} />
-          <Route path='/signup' exact component={CreateAccount} />
+          <Route path='/create-account' exact component={CreateAccount} />
+          <Route component={Login} />
         </Switch>
       );
     }

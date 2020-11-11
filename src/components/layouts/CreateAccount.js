@@ -25,7 +25,7 @@ class CreateAccount extends Component {
     return (
       <Layout className='login-layout'>
         <Content className='login-content'>
-          <Card className='login-card'>
+          <Card>
             <Formik
               initialValues={{ email: '', password: '', confirmPassword: '' }}
               validationSchema={validationSchema}
