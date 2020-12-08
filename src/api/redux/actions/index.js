@@ -7,3 +7,4 @@ export * from './associationActions';
 export * from './componentActions';
 export * from './portActions';
 export * from './fileActions';
+export * from './graphActions';

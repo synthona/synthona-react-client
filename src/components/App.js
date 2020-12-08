@@ -15,7 +15,7 @@ import Collections from './layouts/Collections';
 import Spinner from './elements/Spinner';
 import CreateAccount from './layouts/CreateAccount';
 import AssociationBrowser from './layouts/AssociationBrowser';
-import Graphspace from './layouts/Graphspace';
+import GraphBrowser from './layouts/GraphBrowser';
 import Help from './layouts/Help';
 
 class App extends Component {
@@ -36,7 +36,7 @@ class App extends Component {
           <Route path='/edit/text/:uuid' exact component={QuillEditor} />
           <Route path='/edit/profile' exact component={Options} />
           <Route path='/associations/:uuid' exact component={AssociationBrowser} />
-          <Route path='/graphspace' exact component={Graphspace} />
+          <Route path='/graph' exact component={GraphBrowser} />
           <Route path='/help' exact component={Help} />
         </Switch>
       );

@@ -207,9 +207,9 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
-          <Tooltip title={'graphspace'} mouseEnterDelay={1.1}>
+          <Tooltip title={'graph'} mouseEnterDelay={1.1}>
             <li>
-              <button onClick={(e) => window.location.replace('/graphspace')}>
+              <button onClick={(e) => window.location.replace('/graph')}>
                 <Icon type={'deployment-unit'} theme='outlined' className='full-card-button' />
               </button>
             </li>

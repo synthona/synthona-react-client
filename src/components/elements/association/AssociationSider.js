@@ -88,7 +88,10 @@ class AssociationSider extends Component {
             }}
             visible={this.props.associationSiderData.visible}
           >
-            {/*<p style={{ color: 'white' }}>{siderNode.preview}</p> */}
+            {/*  <Link className='node-info-sider-header' to={`/associations/${siderNode.uuid}`}>
+              {siderNode.name}
+            </Link>
+            <p style={{ color: 'white' }}>{siderNode.preview}</p> */}
             <AutoComplete
               style={{
                 width: 200,

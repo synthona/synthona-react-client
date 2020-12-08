@@ -76,7 +76,7 @@ class NodeCardHeader extends Component {
       >
         {this.renderTitle()}
         <div className='nodelist-options-buttons' style={{ marginLeft: 'auto' }}>
-          <button onClick={(e) => window.location.replace('/graphspace')}>
+          <button onClick={(e) => window.location.replace('/graph')}>
             <Icon
               type={'deployment-unit'}
               theme='outlined'

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchNodes, showComponent } from '../../api/redux/actions';
+import { fetchNodes, showComponent, fetchGraphData } from '../../api/redux/actions';
 import { Layout } from 'antd';
 // import * as d3 from 'd3';
 import { select, selectAll } from 'd3-selection';
 import { drag } from 'd3-drag';
-import { forceSimulation, forceLink, forceManyBody, forceX, forceY } from 'd3-force';
+import { forceSimulation, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
 //custom components
-import './css/Graphspace.less';
+import './css/GraphBrowser.less';
 // import Spinner from '../elements/Spinner';
 import IOBar from '../elements/IOBar';
 import MainSider from '../elements/MainSider';
@@ -15,21 +15,10 @@ import AssociationSider from '../elements/association/AssociationSider';
 // destructure antd layout
 const { Content } = Layout;
 
-class Graphspace extends Component {
-  // constructor(props) {
-  //   super();
-  // }
-
+class GraphBrowser extends Component {
   componentDidMount() {
-    // if (this.props.nodeList) {
-    // this.renderGraphspace();
-    // }
-    this.renderGraphspace();
+    this.renderGraph();
   }
-
-  // componentWillUnmount() {
-  //   this.clearGraphspace();
-  // }
 
   renderMainSider = () => {
     if (this.props.mainSider) {
@@ -43,47 +32,18 @@ class Graphspace extends Component {
     }
   };
 
-  renderGraphspace = async () => {
-    if (this.props.nodeList[0] !== null) {
-      await this.props.fetchNodes({
+  renderGraph = async () => {
+    if (this.props.graphData === null) {
+      await this.props.fetchGraphData({
         page: 1,
         type: this.props.query.type,
         searchQuery: this.props.query.searchQuery,
       });
-
-      await this.props.fetchNodes({
-        page: 2,
-        type: this.props.query.type,
-        searchQuery: this.props.query.searchQuery,
-      });
     }
-
-    // await this.props.fetchNodes({
-    //   page: 2,
-    //   type: this.props.query.type,
-    //   searchQuery: this.props.query.searchQuery,
-    // });
-
-    // await this.props.fetchNodes({
-    //   page: 3,
-    //   type: this.props.query.type,
-    //   searchQuery: this.props.query.searchQuery,
-    // });
     // node data
-    const nodeData = this.props.nodeList;
-    // console.log(nodeData);
+    const nodeData = this.props.graphData.nodes;
     // link data
-    const linkData = [
-      // {
-      //   source: 'fa99a41a-eded-4911-acad-6592acc5a54b',
-      //   target: '8de5a17f-55c1-444e-ab17-e9e0a67487f2',
-      // },
-      // { source: 3, target: 7 },
-      // { source: 6, target: 2 },
-      // { source: 2, target: 5 },
-      // { source: 7, target: 2 },
-      // { source: 7, target: 4 },
-    ];
+    const linkData = this.props.graphData.associations;
     // width and height
     const height = window.innerHeight;
     const width = window.innerWidth;
@@ -92,17 +52,20 @@ class Graphspace extends Component {
     const simulation = forceSimulation(nodeData)
       .force(
         'link',
-        forceLink(linkData).id((d) => {
-          return d.id;
-        })
+        forceLink(linkData)
+          // .distance(0.7)
+          .id((d) => {
+            return d.id;
+          })
       )
-      .force('charge', forceManyBody().strength(-500))
+      .force('charge', forceManyBody().strength(-333))
       .force('x', forceX())
-      .force('y', forceY());
+      .force('y', forceY())
+      .force('center', forceCenter());
 
     const svg = select(this.node)
       .append('svg')
-      .attr('class', 'graphspace-svg')
+      .attr('class', 'graph-svg')
       .attr('viewBox', [-width / 2, -height / 2, width, height]);
 
     const link = svg
@@ -112,38 +75,45 @@ class Graphspace extends Component {
       .selectAll('line')
       .data(linkData)
       .join('line')
-      .attr('class', 'graphspace-link')
+      .attr('class', 'graph-link')
       .attr('stroke-width', (d) => Math.sqrt(d.value));
 
     const node = svg
       .append('g')
-      .attr('stroke', '#fff')
+      // .attr('stroke', '#fff')
       .selectAll('circle')
       .data(nodeData)
       .join('g')
+      .call(this.drag(simulation))
       .append('circle')
-      .on('dblclick', (e, d) => window.location.replace('/associations/' + d.uuid))
+      .on('dblclick', (e, d) => {
+        // .on('click', (e, d) => {
+        if (d.type !== 'text') {
+          window.location.replace('/associations/' + d.uuid);
+        } else {
+          window.location.replace('/edit/text/' + d.uuid);
+        }
+      })
       .on('contextmenu', (e, d) => {
         e.preventDefault();
         this.props.showComponent('associationSider', d);
       })
       .attr('r', 5)
       // .attr('cursor', 'grab')
+      .attr('cursor', 'none')
       .attr('fill', '#16e998')
-      .attr('class', 'graphspace-node')
-      .call(this.drag(simulation));
+      .attr('class', 'graph-node');
 
     const text = selectAll('g g')
       .append('text')
-      .text((d) => d.name.substring(0, 40))
-      .attr('font-size', '0.7rem')
-      // .attr('fill', 'black')
-      // .attr('fill', 'white')
-      .attr('cursor', 'grab')
-      .attr('stroke', 'white')
+      .text((d) => d.name.substring(0, 55))
+      .attr('font-size', '0.9rem')
+      // .attr('cursor', 'grab')
+      .attr('cursor', 'none')
+      // .attr('stroke', 'white')
       .attr('stroke-width', 0.1)
-      .attr('class', 'graphspace-text')
-      .call(this.drag(simulation));
+      .attr('class', 'graph-text');
+    // .call(this.drag(simulation));
 
     simulation.on('tick', () => {
       // update link location values
@@ -191,11 +161,13 @@ class Graphspace extends Component {
           <Content
             style={{
               paddingTop: '0',
-              backgroundColor: 'black',
-              minHeight: '100vh',
+              // backgroundColor: 'black',
+              // minHeight: '100vh',
             }}
           >
-            <div className='graphspace-container' ref={(node) => (this.node = node)}></div>
+            {/*  <IOBar />*/}
+            <IOBar />
+            <div className='graph-container' ref={(node) => (this.node = node)}></div>
             {/*  <svg
               width={500}
               height={500}
@@ -204,7 +176,6 @@ class Graphspace extends Component {
               <g ref={(node) => (this.node = node)}></g>
           </svg> */}
           </Content>
-          <IOBar />
         </Layout>
       </Layout>
     );
@@ -213,9 +184,10 @@ class Graphspace extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // associations: state.associations.associationList,
-    // isLoading: state.nodes.isFetching,
-    // activeNode: state.nodes.activeNode,
+    associations: state.associations.associationList,
+    graphData: state.graph.graphData,
+    loading: state.graph.isFetching,
+    activeNode: state.nodes.activeNode,
     associationSider: state.components.componentList['associationSider'],
     mainSider: state.components.componentList['mainSider'],
     nodeList: state.nodes.nodeList,
@@ -224,4 +196,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchNodes, showComponent })(Graphspace);
+export default connect(mapStateToProps, { fetchNodes, showComponent, fetchGraphData })(
+  GraphBrowser
+);

@@ -90,7 +90,7 @@ class MainSider extends Component {
               </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to={`/graphspace`} onClick={(e) => this.props.hideComponent('mainSider')}>
+              <Link to={`/graph`} onClick={(e) => this.props.hideComponent('mainSider')}>
                 Graph
               </Link>
             </Item>
