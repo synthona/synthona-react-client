@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchNodes, showComponent, fetchGraphData } from '../../api/redux/actions';
-import { Layout } from 'antd';
+import { fetchNodes, showComponent, fetchGraphData, setActiveNode } from '../../api/redux/actions';
+import { Layout, message } from 'antd';
 // import * as d3 from 'd3';
 import { select, selectAll } from 'd3-selection';
 import { drag } from 'd3-drag';
@@ -16,9 +16,51 @@ import AssociationSider from '../elements/association/AssociationSider';
 const { Content } = Layout;
 
 class GraphBrowser extends Component {
-  componentDidMount() {
-    this.renderGraph();
+  constructor(props) {
+    super(props);
+    this.state = {
+      initialized: false,
+      uuid: null,
+    };
   }
+
+  componentDidMount() {
+    if (!this.state.initialized) {
+      this.initializeFromUrlParams();
+    }
+  }
+
+  componentDidUpdate() {
+    var uuid = this.props.match.params.uuid;
+    // re-initialize if the URL changes
+    if (this.state.initialized && this.state.uuid !== uuid) {
+      this.setState({ initialized: false });
+      this.initializeFromUrlParams();
+    }
+  }
+
+  // intialize the association page
+  initializeFromUrlParams = async () => {
+    var uuid = this.props.match.params.uuid;
+    // fetch the graph data
+    await this.props.fetchGraphData({
+      anchorNode: uuid,
+      type: this.props.query.type,
+      searchQuery: this.props.query.searchQuery,
+    });
+    // if all that was successful, finish initialization
+    if (this.props.graphData !== null) {
+      this.setState({
+        initialized: true,
+        uuid: uuid,
+      });
+      // render graph
+      this.renderGraph();
+    } else {
+      message.error('there was a problem loading the data');
+      this.props.history.push('/');
+    }
+  };
 
   renderMainSider = () => {
     if (this.props.mainSider) {
@@ -33,13 +75,6 @@ class GraphBrowser extends Component {
   };
 
   renderGraph = async () => {
-    if (this.props.graphData === null) {
-      await this.props.fetchGraphData({
-        page: 1,
-        type: this.props.query.type,
-        searchQuery: this.props.query.searchQuery,
-      });
-    }
     // node data
     const nodeData = this.props.graphData.nodes;
     // link data
@@ -58,7 +93,7 @@ class GraphBrowser extends Component {
             return d.id;
           })
       )
-      .force('charge', forceManyBody().strength(-333))
+      .force('charge', forceManyBody().strength(-100000 / linkData.length))
       .force('x', forceX())
       .force('y', forceY())
       .force('center', forceCenter());
@@ -80,23 +115,25 @@ class GraphBrowser extends Component {
 
     const node = svg
       .append('g')
-      // .attr('stroke', '#fff')
       .selectAll('circle')
       .data(nodeData)
       .join('g')
       .call(this.drag(simulation))
       .append('circle')
       .on('dblclick', (e, d) => {
-        // .on('click', (e, d) => {
+        window.location.replace('/graph/' + d.uuid);
+      })
+      // .on('click', (e, d) => {
+      //   e.preventDefault();
+      //   this.props.showComponent('associationSider', d);
+      // })
+      .on('contextmenu', (e, d) => {
+        e.preventDefault();
         if (d.type !== 'text') {
           window.location.replace('/associations/' + d.uuid);
         } else {
           window.location.replace('/edit/text/' + d.uuid);
         }
-      })
-      .on('contextmenu', (e, d) => {
-        e.preventDefault();
-        this.props.showComponent('associationSider', d);
       })
       .attr('r', 5)
       // .attr('cursor', 'grab')
@@ -106,9 +143,9 @@ class GraphBrowser extends Component {
 
     const text = selectAll('g g')
       .append('text')
-      .text((d) => d.name.substring(0, 55))
+      .text((d) => d.name.substring(0, 50))
       .attr('font-size', '0.9rem')
-      // .attr('cursor', 'grab')
+      .attr('cursor', 'grab')
       .attr('cursor', 'none')
       // .attr('stroke', 'white')
       .attr('stroke-width', 0.1)
@@ -187,7 +224,6 @@ const mapStateToProps = (state) => {
     associations: state.associations.associationList,
     graphData: state.graph.graphData,
     loading: state.graph.isFetching,
-    activeNode: state.nodes.activeNode,
     associationSider: state.components.componentList['associationSider'],
     mainSider: state.components.componentList['mainSider'],
     nodeList: state.nodes.nodeList,
@@ -196,6 +232,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchNodes, showComponent, fetchGraphData })(
-  GraphBrowser
-);
+export default connect(mapStateToProps, {
+  fetchNodes,
+  showComponent,
+  fetchGraphData,
+  setActiveNode,
+})(GraphBrowser);

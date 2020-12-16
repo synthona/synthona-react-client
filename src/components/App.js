@@ -36,7 +36,7 @@ class App extends Component {
           <Route path='/edit/text/:uuid' exact component={QuillEditor} />
           <Route path='/edit/profile' exact component={Options} />
           <Route path='/associations/:uuid' exact component={AssociationBrowser} />
-          <Route path='/graph' exact component={GraphBrowser} />
+          <Route path='/graph/:uuid?' exact component={GraphBrowser} />
           <Route path='/help' exact component={Help} />
         </Switch>
       );

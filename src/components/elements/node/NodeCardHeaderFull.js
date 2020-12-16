@@ -193,6 +193,7 @@ class NodeCardHeaderFull extends Component {
     return (
       <div className='full-card-options'>
         {this.renderTitle()}
+        {/* <p className='full-card-options-date'>{this.props.node.updatedAt}</p> */}
         <ul className='full-card-buttons-list'>
           {this.renderContextualButtons()}
           <Tooltip title={'associations'} mouseEnterDelay={1.1}>
@@ -209,7 +210,7 @@ class NodeCardHeaderFull extends Component {
           </Tooltip>
           <Tooltip title={'graph'} mouseEnterDelay={1.1}>
             <li>
-              <button onClick={(e) => window.location.replace('/graph')}>
+              <button onClick={(e) => window.location.replace(`/graph/${this.props.node.uuid}`)}>
                 <Icon type={'deployment-unit'} theme='outlined' className='full-card-button' />
               </button>
             </li>

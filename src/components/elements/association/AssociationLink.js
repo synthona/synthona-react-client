@@ -49,19 +49,19 @@ class AssociationLink extends Component {
   renderAssociationLink = (association) => {
     return (
       <li className='association-list-item'>
-        <Button
-          icon='close'
-          shape='circle'
-          size='small'
-          onClick={(e) => this.handleDeleteAssociation()}
-        />
         <Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
+          <Button
+            icon='close'
+            shape='circle'
+            size='small'
+            onClick={(e) => this.handleDeleteAssociation()}
+          />
           <NodeRenderer
             type={association.type}
             element={'association-link'}
             node={association}
             siderNodeUUID={this.props.siderNodeUUID}
-          />
+          ></NodeRenderer>
         </Tooltip>
       </li>
     );

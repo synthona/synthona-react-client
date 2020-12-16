@@ -4,7 +4,7 @@
 @header-border: #313131;
 // @header-border: #0c0c0c;
 @avatar-border: #fff;
-@io-enter-button: rgba(249, 247, 188, 1);
+@io-enter-button: #fffca6;
 @io-hover-color: #16e998;
 // @header-color: rgb(221, 221, 221);
 // @header-link: black;
@@ -77,7 +77,7 @@
   border-radius: 0.1rem;
 
   .ant-select-dropdown-menu-item {
-    background-color: #dbd1bc;
+    background-color: #ffffff;
     color: #272727;
   }
 
@@ -121,29 +121,24 @@ img.header-logo:hover {
 }
 
 .create-node-button button.ant-btn {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 143, 195, 1) 0%,
-    rgba(249, 247, 188, 1) 47%,
-    rgba(158, 239, 255, 1) 100%
-  );
-  border: 0.02rem solid @io-enter-button;
+  // background: linear-gradient(90deg, #ff8fc3 0%, #f9f7bc 47%, #9eefff 100%);
+  background: linear-gradient(90deg, #b7ffcd 0%, #fcfcfc 47%, #9eefff 100%);
+  // border: 0.2rem solid @io-enter-button;
+  color: #272727;
+  transition-duration: 0.3s;
 }
 
 .create-node-button:hover button.ant-btn,
 .create-node-button:active button.ant-btn,
 .create-node-button:focus button.ant-btn {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 143, 195, 1) 0%,
-    rgba(249, 247, 188, 1) 47%,
-    rgba(158, 239, 255, 1) 100%
-  );
+  // background: linear-gradient(90deg, #ff8fc3 0%, #f9f7bc 47%, #9eefff 100%);
+  background: linear-gradient(90deg, #b7ffcd 0%, #fcfcfc 47%, #9eefff 100%);
+  color: #47d0da;
 }
 
 .io-enter-button {
   border: 0.04rem solid @header-link;
-  color: @io-enter-button;
+  color: white;
 }
 
 .io-enter-button:hover {

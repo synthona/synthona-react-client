@@ -12,7 +12,9 @@ import { message } from 'antd';
 export const fetchGraphData = (query) => async (dispatch) => {
   try {
     dispatch({ type: FETCH_GRAPH_DATA });
-    const response = await instance.get('/node/graph');
+    const response = await instance.get('/node/graph', {
+      params: { anchorNode: query.anchorNode, type: query.type, searchQuery: query.searchQuery },
+    });
     dispatch({ type: FETCH_GRAPH_DATA_SUCCESS, payload: response.data, query });
   } catch (err) {
     dispatch({ type: FETCH_GRAPH_DATA_ERROR });
