@@ -10,7 +10,7 @@ import { zoom } from 'd3-zoom';
 //custom components
 import './css/GraphBrowser.less';
 // import Spinner from '../elements/Spinner';
-import IOBar from '../elements/IOBar';
+// import IOBar from '../elements/IOBar';
 import MainSider from '../elements/MainSider';
 import AssociationSider from '../elements/association/AssociationSider';
 // destructure antd layout
@@ -330,7 +330,6 @@ class GraphBrowser extends Component {
             }}
           >
             {/*  <IOBar />*/}
-            <IOBar />
             <div className='graph-container' ref={(node) => (this.node = node)}></div>
           </Content>
         </Layout>
