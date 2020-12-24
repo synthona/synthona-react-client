@@ -1,32 +1,55 @@
+// @graph-background: linear-gradient(90deg, #b7ffcd 0%, #fcfcfc 47%, #9eefff 100%);
+// @graph-edge-color: #272727;
+// @node-fill-color: #000000;
+// @node-hover-fill-color: black;
+// @node-hover-border-color: #272727;
+// @node-border-color: #e7e7e7;
+// @node-text-color: #1b1b1b;
+// @node-hover-text-color: #56df44;
+// graph container
+@graph-background: linear-gradient(90deg, #000000 0%, #161616 47%, #06161a 100%);
+// @graph-background: linear-gradient(#f3f3f3 0%, #2e0c33 47%, #ffffff 100%);
+// @graph-edge-color: #272727;
+@graph-edge-color: #000000;
+// node dots
+@node-fill-color: #ffffff;
+@node-hover-fill-color: rgb(240, 255, 153);
+@node-hover-border-color: #272727;
+@node-border-color: #fff019;
+// text
+@node-text-color: #dbdbdb;
+// @node-text-color: none;
+@node-hover-text-color: #b4ffbe;
+
 .graph-container {
   height: 100vh;
-  background-color: #e7e7e7;
-  // border: 20px solid #272727;
-  border: 10px solid #272727;
+  background: @graph-background;
+  border: 10px solid @graph-edge-color;
 }
 
-.graph-text {
+text.graph-text {
   text-align: left;
-  color: #8f0000;
-  text-shadow: 1px 1px #f3f3f3;
+  fill: @node-text-color;
+  // text-shadow: 1px 1px #f3f3f3;
   stroke: none;
   transition: 1s;
 }
 
 text.graph-text:hover {
-  fill: #464646;
+  fill: @node-hover-text-color;
   transition-duration: 0.1s;
 }
 
 .graph-node {
   color: black;
   // stroke: white;
-  stroke: #e7e7e7;
-  fill: #000000;
+  stroke: @node-border-color;
+  fill: @node-fill-color;
 }
 
 .graph-node:hover {
-  stroke: black;
-  stroke-width: 3px;
+  // stroke: @node-hover-fill-color;
+  fill: @node-hover-fill-color;
+  stroke-width: 2px;
   transition-duration: 0.1s;
 }

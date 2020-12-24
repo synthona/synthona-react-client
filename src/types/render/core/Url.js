@@ -9,6 +9,46 @@ import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 const Url = (props) => {
   const urlIcon = 'bulb';
 
+  const renderPreview = () => {
+    if (props.node.preview) {
+      return (
+        <a
+          href={props.node.path}
+          target='_blank'
+          rel='noopener noreferrer'
+          // onClick={(e) => props.markNodeView(props.node)}
+          style={{ width: '100%' }}
+        >
+          <img
+            src={props.node.preview}
+            alt={props.node.name}
+            style={{
+              objectFit: 'cover',
+              minHeight: '100%',
+              width: '100%',
+            }}
+          ></img>
+        </a>
+      );
+    } else {
+      return (
+        <Icon
+          type={urlIcon}
+          // type={'star'}
+          theme='outlined'
+          style={{
+            fontSize: '5rem',
+            color: '#b8b8b8',
+            display: 'block',
+            textAlign: 'center',
+            padding: '3.3rem',
+            height: '100%',
+          }}
+        />
+      );
+    }
+  };
+
   const nodeCard = () => {
     return (
       <li className='nodelist-item'>
@@ -21,19 +61,7 @@ const Url = (props) => {
           onClick={(e) => history.push(`/associations/${props.node.uuid}`)}
           style={{ width: '100%' }}
         >
-          <Icon
-            type={urlIcon}
-            // type={'star'}
-            theme='outlined'
-            style={{
-              fontSize: '5rem',
-              color: '#b8b8b8',
-              display: 'block',
-              textAlign: 'center',
-              padding: '3.3rem',
-              height: '100%',
-            }}
-          />
+          {renderPreview()}
         </a>
         {/*   <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
           <Icon type={'star'} theme='outlined' className='node-card-icon' />
@@ -57,7 +85,7 @@ const Url = (props) => {
         <NodeCardHeaderFull node={props.node} />
         {/* <p>{props.node.preview}</p> */}
         <a
-          href={props.node.preview}
+          href={props.node.path}
           target='_blank'
           rel='noopener noreferrer'
           // onClick={(e) => props.markNodeView(props.node)}
@@ -83,7 +111,7 @@ const Url = (props) => {
   const associationLink = () => {
     return (
       <a
-        href={props.node.preview}
+        href={props.node.path}
         target='_blank'
         rel='noopener noreferrer'
         onClick={(e) => props.handleAssociatonClick()}

@@ -9,6 +9,7 @@ import './IOBar.less';
 import {
   signOut,
   createFileNode,
+  createUrlNode,
   createNode,
   searchNodes,
   showComponent,
@@ -113,11 +114,12 @@ class IOBar extends Component {
           this.setState({ input: '' });
           // otherwise add a regular URL
         } else if (validUrl(this.state.input)) {
-          this.props.createNode({
+          this.props.createUrlNode({
             isFile: false,
             type: 'url',
             name: this.state.input,
             preview: this.state.input,
+            path: this.state.input,
             content: this.state.input,
             linkedNode,
           });
@@ -264,6 +266,7 @@ export default connect(mapStateToProps, {
   searchNodes,
   createNode,
   createFileNode,
+  createUrlNode,
   showComponent,
   hideComponent,
 })(IOBar);

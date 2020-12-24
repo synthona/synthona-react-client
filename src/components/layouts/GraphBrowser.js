@@ -80,127 +80,11 @@ class GraphBrowser extends Component {
     const nodeData = this.props.graphData.nodes;
     // link data
     const linkData = this.props.graphData.associations;
-
-    // ================================
-    // ATTEMPT 2
-    // ================================
-    // // // width and height
-    // const height = window.innerHeight;
-    // const width = window.innerWidth;
-
-    // const simulation = forceSimulation(nodeData)
-    //   .force(
-    //     'link',
-    //     forceLink(linkData).id((d) => d.id)
-    //   )
-    //   .force('charge', forceManyBody().strength(-400))
-    //   .force('x', forceX())
-    //   .force('y', forceY());
-
-    // const zoomData = zoom().scaleExtent([1, 40]).on('zoom', zoomed);
-
-    // const svg = select(this.node)
-    //   .attr('viewBox', [-width / 2, -height / 2, width, height])
-    //   .style('font', '12px sans-serif');
-
-    // const g = svg.append('g');
-
-    // // Per-type markers, as they don't inherit styles.
-    // g.append('defs')
-    //   .selectAll('marker')
-    //   // .data(types)
-    //   .join('marker')
-    //   // .attr('id', (d) => `arrow-${d}`)
-    //   .attr('viewBox', '0 -5 10 10')
-    //   .attr('refX', 15)
-    //   .attr('refY', -0.5)
-    //   .attr('markerWidth', 6)
-    //   .attr('markerHeight', 6)
-    //   .attr('orient', 'auto')
-    //   .append('path')
-    //   // .attr('fill', color)
-    //   .attr('d', 'M0,-5L10,0L0,5');
-
-    // const link = g
-    //   .append('g')
-    //   .attr('stroke', 'grey')
-    //   .attr('stroke-opacity', 0.6)
-    //   .selectAll('line')
-    //   .data(linkData)
-    //   .join('line')
-    //   .attr('class', 'graph-link')
-    //   .attr('stroke-width', (d) => Math.sqrt(d.value));
-
-    // const node = g
-    //   .append('g')
-    //   .selectAll('circle')
-    //   .data(nodeData)
-    //   .join('g')
-    //   .call(this.drag(simulation))
-    //   .append('circle')
-    //   .on('dblclick', (e, d) => {
-    //     window.location.replace('/graph/' + d.uuid);
-    //   })
-    //   // .on('click', (e, d) => {
-    //   //   e.preventDefault();
-    //   //   this.props.showComponent('associationSider', d);
-    //   // })
-    //   .on('contextmenu', (e, d) => {
-    //     e.preventDefault();
-    //     if (d.type !== 'text') {
-    //       window.location.replace('/associations/' + d.uuid);
-    //     } else {
-    //       window.location.replace('/edit/text/' + d.uuid);
-    //     }
-    //   })
-    //   .attr('r', 5)
-    //   // .attr('cursor', 'grab')
-    //   .attr('cursor', 'none')
-    //   .attr('fill', '#16e998')
-    //   .attr('class', 'graph-node');
-
-    // // const text = selectAll('g g')
-    // //   .append('text')
-    // //   .text((d) => d.name.substring(0, 50))
-    // //   .attr('font-size', '0.9rem')
-    // //   .attr('cursor', 'grab')
-    // //   .attr('cursor', 'none')
-    // //   // .attr('stroke', 'white')
-    // //   .attr('stroke-width', 0.1)
-    // //   .attr('class', 'graph-text');
-    // // // .call(this.drag(simulation));
-
-    // svg.call(zoomData);
-
-    // function zoomed({ transform }) {
-    //   g.attr('transform', transform);
-    // }
-
-    // simulation.on('tick', () => {
-    //   // link.attr('d', linkArc);
-    //   node.attr('transform', (d) => `translate(${d.x},${d.y})`);
-    //   //   // update link location values
-    //   link
-    //     .attr('x1', (d) => d.source.x)
-    //     .attr('y1', (d) => d.source.y)
-    //     .attr('x2', (d) => d.target.x)
-    //     .attr('y2', (d) => d.target.y);
-    //   // update node location values
-    //   node.attr('cx', (d) => d.x).attr('cy', (d) => d.y);
-    //   // update text location values
-    //   text.attr('x', (d) => d.x + 7).attr('y', (d) => d.y - 7);
-    // });
-
-    // // invalidation.then(() => simulation.stop());
-
-    // return svg.node();
-
-    // ================================
-    // ATTEMPT 1
-    // ================================
     // width and height
     const height = window.innerHeight;
     const width = window.innerWidth;
+
+    console.log(nodeData[0]);
 
     // simulation
     const simulation = forceSimulation(nodeData)
@@ -212,12 +96,12 @@ class GraphBrowser extends Component {
             return d.id;
           })
       )
-      .force('charge', forceManyBody().strength(-100000 / linkData.length))
+      .force('charge', forceManyBody().strength(-100000 / nodeData.length))
       .force('x', forceX())
       .force('y', forceY())
       .force('center', forceCenter());
 
-    const zoomData = zoom().scaleExtent([1, 40]).on('zoom', zoomed);
+    const zoomData = zoom().scaleExtent([0.5, 1.4]).on('zoom', zoomed);
 
     const svg = select(this.node)
       .append('svg')
@@ -258,7 +142,7 @@ class GraphBrowser extends Component {
           window.location.replace('/edit/text/' + d.uuid);
         }
       })
-      .attr('r', 5)
+      .attr('r', 7)
       // .attr('cursor', 'grab')
       .attr('cursor', 'none')
       .attr('fill', '#16e998')
@@ -266,12 +150,12 @@ class GraphBrowser extends Component {
 
     const text = selectAll('g g g')
       .append('text')
-      .text((d) => d.name.substring(0, 50))
-      .attr('font-size', '0.9rem')
+      .text((d) => d.name.substring(0, 100))
+      .attr('font-size', '0.8rem')
       .attr('cursor', 'grab')
       // .attr('cursor', 'none')
       // .attr('stroke', 'white')
-      .attr('stroke-width', 0.1)
+      // .attr('stroke-width', 0.1)
       .attr('class', 'graph-text');
     // .call(this.drag(simulation));
 

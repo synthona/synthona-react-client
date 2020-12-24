@@ -123,6 +123,31 @@ export const createNode = (node, file) => async (dispatch) => {
   }
 };
 
+export const createUrlNode = (node) => async (dispatch) => {
+  console.log('create url node');
+  dispatch({ type: CREATE_NODE });
+  try {
+    const response = await instance.put('/url', {
+      isFile: node.isFile,
+      type: node.type,
+      name: node.name,
+      preview: node.preview,
+      path: node.path,
+      content: node.content,
+      linkedNode: node.linkedNode,
+    });
+    console.log(response.data);
+    dispatch({
+      type: CREATE_NODE_SUCCESS,
+      payload: response.data.node,
+    });
+  } catch (err) {
+    dispatch({ type: CREATE_NODE_ERROR });
+    message.error('Could not create new item', 1);
+    history.push('/');
+  }
+};
+
 export const markNodeView = (node) => async (dispatch) => {
   dispatch({ type: MARK_NODE_VIEW });
   try {
