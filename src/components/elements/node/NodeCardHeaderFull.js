@@ -217,7 +217,7 @@ class NodeCardHeaderFull extends Component {
           </Tooltip>
           {this.renderExportButton()}
           <Tooltip
-            title={this.state.hidden ? 'accessible via associations only' : 'visible on homepage'}
+            title={this.state.hidden ? 'hidden from feed' : 'visible in feed'}
             mouseEnterDelay={1.1}
           >
             <li>

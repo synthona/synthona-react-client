@@ -177,10 +177,9 @@ class IOBar extends Component {
           onChange={(value) => this.setState({ nodeTypes: value })}
         >
           <Option value='all'>all</Option>
+          <Option value='url'>urls</Option>
           <Option value='text'>text</Option>
           <Option value='image'>images</Option>
-          <Option value='audio'>audio</Option>
-          <Option value='url'>urls</Option>
           <Option value='collection'>collections</Option>
         </Select>
       );

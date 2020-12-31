@@ -12,23 +12,15 @@ const Url = (props) => {
   const renderPreview = () => {
     if (props.node.preview) {
       return (
-        <a
-          href={props.node.path}
-          target='_blank'
-          rel='noopener noreferrer'
-          // onClick={(e) => props.markNodeView(props.node)}
-          style={{ width: '100%' }}
-        >
-          <img
-            src={props.node.preview}
-            alt={props.node.name}
-            style={{
-              objectFit: 'cover',
-              minHeight: '100%',
-              width: '100%',
-            }}
-          ></img>
-        </a>
+        <img
+          src={props.node.preview}
+          alt={props.node.name}
+          style={{
+            objectFit: 'cover',
+            // minHeight: '100%',
+            width: '100%',
+          }}
+        ></img>
       );
     } else {
       return (
@@ -72,11 +64,26 @@ const Url = (props) => {
 
   // how the node will appear in collections
   const collectionPreview = () => {
-    return (
-      <Fragment>
-        <Icon type={urlIcon} theme='outlined' className='node-card-icon' />
-      </Fragment>
-    );
+    if (props.node.preview) {
+      return (
+        <Fragment>
+          <img
+            src={props.node.preview}
+            alt={props.node.name}
+            style={{
+              objectFit: 'cover',
+              width: '100%',
+            }}
+          ></img>
+        </Fragment>
+      );
+    } else {
+      return (
+        <Fragment>
+          <Icon type={urlIcon} theme='outlined' className='node-card-icon' />
+        </Fragment>
+      );
+    }
   };
 
   const fullNode = () => {
@@ -91,18 +98,7 @@ const Url = (props) => {
           // onClick={(e) => props.markNodeView(props.node)}
           style={{ width: '100%' }}
         >
-          <Icon
-            // type={'link'}
-            type={urlIcon}
-            theme='outlined'
-            style={{
-              fontSize: '5rem',
-              color: '#b8b8b8',
-              display: 'block',
-              textAlign: 'center',
-              padding: '3rem',
-            }}
-          />
+          {renderPreview()}
         </a>
       </div>
     );
