@@ -97,6 +97,9 @@ class QuillEditor extends Component {
 
   // load the text node and set the local id state.
   initializeFromUrlParams = async () => {
+    // scroll to top
+    window.scrollTo({ top: 0 });
+    // check url params
     var textUUID = this.props.match.params.uuid;
     // set the local state id equal to the value in the url
     this.setState({ uuid: textUUID });
