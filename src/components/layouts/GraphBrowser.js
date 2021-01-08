@@ -213,9 +213,9 @@ class GraphBrowser extends Component {
               paddingTop: '0',
             }}
           >
+            <IOBar />
             <div className='graph-container' ref={(node) => (this.node = node)}></div>
             {/*  <IOBar />*/}
-            <IOBar />
           </Content>
         </Layout>
       </Layout>
