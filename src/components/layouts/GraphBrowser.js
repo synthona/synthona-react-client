@@ -6,7 +6,7 @@ import { Layout, message } from 'antd';
 import { select, selectAll } from 'd3-selection';
 import { drag } from 'd3-drag';
 import { forceSimulation, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
-import { zoom } from 'd3-zoom';
+import { zoom, zoomIdentity } from 'd3-zoom';
 //custom components
 import './css/GraphBrowser.less';
 // import Spinner from '../elements/Spinner';
@@ -84,8 +84,6 @@ class GraphBrowser extends Component {
     const height = window.innerHeight;
     const width = window.innerWidth;
 
-    console.log(nodeData[0]);
-
     // simulation
     const simulation = forceSimulation(nodeData)
       .force(
@@ -100,7 +98,8 @@ class GraphBrowser extends Component {
       .force('x', forceX())
       .force('y', forceY())
       .force('center', forceCenter());
-
+    // initial zoom
+    var initialZoom = zoomIdentity.scale(0.55).translate(0, -70);
     const zoomData = zoom().scaleExtent([0.5, 1.4]).on('zoom', zoomed);
 
     const svg = select(this.node)
@@ -159,7 +158,7 @@ class GraphBrowser extends Component {
       .attr('class', 'graph-text');
     // .call(this.drag(simulation));
 
-    svg.call(zoomData);
+    svg.call(zoomData).call(zoomData.transform, initialZoom);
 
     function zoomed({ transform }) {
       g.attr('transform', transform);
