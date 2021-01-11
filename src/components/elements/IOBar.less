@@ -169,15 +169,7 @@ a:hover {
 
 @media only screen and (max-width: 1400px) {
   .nav-search-input {
-    min-width: 70rem;
-    padding: 0;
-    margin: 0;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .nav-search-input {
-    min-width: 45rem;
+    min-width: 70vw;
     padding: 0;
     margin: 0;
   }
@@ -185,8 +177,20 @@ a:hover {
 
 @media only screen and (max-width: 800px) {
   .nav-search-input {
-    min-width: 10rem;
+    max-width: 70vw;
     padding: 0;
     margin: 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-search-input {
+    min-width: 40vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .nav-search-input {
+    min-width: 30vw;
   }
 }

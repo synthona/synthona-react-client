@@ -99,7 +99,7 @@ class GraphBrowser extends Component {
       .force('y', forceY())
       .force('center', forceCenter());
     // initial zoom
-    var initialZoom = zoomIdentity.scale(0.55).translate(0, -70);
+    var initialZoom = zoomIdentity.scale(0.55).translate(0, -15);
     const zoomData = zoom().scaleExtent([0.5, 1.4]).on('zoom', zoomed);
 
     const svg = select(this.node)

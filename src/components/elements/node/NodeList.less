@@ -41,7 +41,7 @@ li.nodelist-item {
   // height: 16rem;
   height: 17rem;
   // width: 25rem;
-  width: (100vw/3)-0.9rem;
+  width: 32.5vw;
   overflow: hidden;
   // background: #fff;
   background-color: @node-card-background-color;
@@ -131,7 +131,7 @@ div.nodelist-options-buttons {
 }
 
 .nodelist-item-title {
-  width: 73%;
+  // width: 73%;
   text-align: left;
   color: #272727;
   color: @node-card-title-color;
@@ -226,6 +226,50 @@ input.nodelist-item-title::selection {
 
 @media only screen and (max-width: 1400px) {
   li.nodelist-item {
-    width: 29.3rem;
+    width: 32.5vw;
+  }
+
+  .nodelist-item-title {
+    width: 20vw;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  li.nodelist-item {
+    width: 32vw;
+  }
+
+  .nodelist-item-title {
+    width: 20vw;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  li.nodelist-item {
+    width: 48vw;
+  }
+
+  .nodelist-item-title {
+    width: 32.5vw;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  li.nodelist-item {
+    width: 48vw;
+  }
+
+  .nodelist-item-title {
+    width: 30vw;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  li.nodelist-item {
+    width: 98vw;
+  }
+
+  .nodelist-item-title {
+    width: 60vw;
   }
 }
