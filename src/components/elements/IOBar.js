@@ -173,7 +173,6 @@ class IOBar extends Component {
           showSearch
           showArrow={false}
           value={this.state.nodeTypes}
-          style={{ width: '7rem' }}
           onChange={(value) => this.setState({ nodeTypes: value })}
         >
           <Option value='all'>all</Option>
@@ -190,7 +189,6 @@ class IOBar extends Component {
           showSearch
           showArrow={false}
           value={this.state.nodeTypes}
-          style={{ width: '7rem' }}
           onChange={(value) => this.setState({ nodeTypes: value })}
         >
           <Option value='text'>text</Option>
