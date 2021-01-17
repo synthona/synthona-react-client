@@ -86,7 +86,7 @@ class MainSider extends Component {
             </Item>
             <Item className='sider-menu-item'>
               <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
-                Home
+                Present
               </Link>
             </Item>
             <Item className='sider-menu-item'>
@@ -110,12 +110,7 @@ class MainSider extends Component {
               </Link>
                 </Item>  */}
             <Item className='sider-menu-item'>
-              <a
-                href={'https://twitter.com/synthona'}
-                replace='true'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
+              <a href={'https://twitter.com/synthona'} target='_blank' rel='noopener noreferrer'>
                 Updates
               </a>
             </Item>

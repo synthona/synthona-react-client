@@ -7,7 +7,7 @@
 // @node-text-color: #1b1b1b;
 // @node-hover-text-color: #56df44;
 // graph container
-@graph-background: linear-gradient(90deg, #000000 0%, #161616 47%, #06161a 100%);
+@graph-background: linear-gradient(90deg, #000000 0%, #3a3a3a 47%, #06161a 100%);
 // @graph-background: linear-gradient(#f3f3f3 0%, #2e0c33 47%, #ffffff 100%);
 // @graph-edge-color: #272727;
 @graph-edge-color: #131313;
@@ -23,7 +23,9 @@
 
 .graph-container {
   height: 100vh;
-  background: @graph-background;
+  // background: @graph-background;
+  background-image: url('../../../resources/stars4.jpg');
+  background-size: cover;
   border: 10px solid @graph-edge-color;
 }
 
