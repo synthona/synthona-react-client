@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import Delta from 'quill-delta';
 // import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
 import { Layout, message } from 'antd';
@@ -35,6 +35,40 @@ const { Content } = Layout;
 // Div.allowedChildren = Block.allowedChildren;
 // Div.allowedChildren.push(Block);
 // Quill.register(Div);
+const Clipboard = Quill.import('modules/clipboard');
+// https://github.com/quilljs/quill/issues/1374
+class CustomClipboard extends Clipboard {
+  onPaste(e) {
+    // get current page offset before paste
+    const top = window.pageYOffset;
+    const left = window.pageXOffset;
+
+    if (e.defaultPrevented || !this.quill.isEnabled()) return;
+    let range = this.quill.getSelection();
+    let delta = new Delta().retain(range.index);
+    this.container.style.top =
+      (
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0
+      ).toString() + 'px';
+    this.container.focus();
+    setTimeout(() => {
+      this.quill.selection.update(Quill.sources.SILENT);
+      delta = delta.concat(this.convert()).delete(range.length);
+      this.quill.updateContents(delta, Quill.sources.USER);
+      this.quill.setSelection(delta.length() - range.length, Quill.sources.SILENT);
+      let bounds = this.quill.getBounds(delta.length() - range.length, Quill.sources.SILENT);
+      this.quill.scrollingContainer.scrollTop = bounds.top;
+
+      // scroll window to previous position after paste
+      window.scrollTo({ top, left });
+    }, 1);
+  }
+}
+
+Quill.register('modules/clipboard', CustomClipboard, true);
 
 class QuillEditor extends Component {
   constructor(props) {
@@ -345,7 +379,7 @@ class QuillEditor extends Component {
             ref={this.ref}
             readOnly={this.state.readOnly}
             formats={this.allowedFormats}
-            scrollingContainer={document.documentElement}
+            scrollingContainer={'body'}
           ></ReactQuill>
           <AssociationSider />
           <AssociationList />
