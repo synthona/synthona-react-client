@@ -135,10 +135,12 @@ class GraphBrowser extends Component {
       // })
       .on('contextmenu', (e, d) => {
         e.preventDefault();
-        if (d.type !== 'text') {
-          window.location.replace('/associations/' + d.uuid);
-        } else {
+        if (d.type === 'text') {
           window.location.replace('/edit/text/' + d.uuid);
+        } else if (d.type === 'user') {
+          window.location.replace(`/profile/${this.props.user.username}`);
+        } else {
+          window.location.replace('/associations/' + d.uuid);
         }
       })
       .attr('r', 7)
@@ -225,6 +227,7 @@ class GraphBrowser extends Component {
 const mapStateToProps = (state) => {
   return {
     associations: state.associations.associationList,
+    user: state.auth.user,
     graphData: state.graph.graphData,
     loading: state.graph.isFetching,
     associationSider: state.components.componentList['associationSider'],

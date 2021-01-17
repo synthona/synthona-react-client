@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactQuill, { Quill } from 'react-quill';
+import ReactQuill from 'react-quill';
 import Delta from 'quill-delta';
 // import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
 import { Layout, message } from 'antd';
@@ -28,13 +28,13 @@ const { Content } = Layout;
 // Quill.register('modules/blotFormatter', BlotFormatter);
 
 // fix to prevent error on pasting from misc sources
-var Block = Quill.import('blots/block');
-class Div extends Block {}
-Div.tagName = 'div';
-Div.blotName = 'div';
-Div.allowedChildren = Block.allowedChildren;
-Div.allowedChildren.push(Block);
-Quill.register(Div);
+// var Block = Quill.import('blots/block');
+// class Div extends Block {}
+// Div.tagName = 'div';
+// Div.blotName = 'div';
+// Div.allowedChildren = Block.allowedChildren;
+// Div.allowedChildren.push(Block);
+// Quill.register(Div);
 
 class QuillEditor extends Component {
   constructor(props) {
@@ -345,7 +345,7 @@ class QuillEditor extends Component {
             ref={this.ref}
             readOnly={this.state.readOnly}
             formats={this.allowedFormats}
-            scrollingContainer={'body'}
+            scrollingContainer={document.documentElement}
           ></ReactQuill>
           <AssociationSider />
           <AssociationList />
