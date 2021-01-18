@@ -27,6 +27,8 @@
   background-image: url('../../../resources/stars4.jpg');
   background-size: cover;
   border: 10px solid @graph-edge-color;
+  border-top: none;
+  border-bottom: none;
 }
 
 text.graph-text {
@@ -35,6 +37,10 @@ text.graph-text {
   // text-shadow: 1px 1px #f3f3f3;
   stroke: none;
   transition: 1s;
+  fill: white;
+  font-size: 1rem;
+  color: black;
+  text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
 }
 
 text.graph-text:hover {

@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchNodes, showComponent, fetchGraphData, setActiveNode } from '../../api/redux/actions';
+import {
+  fetchNodes,
+  fetchAssociations,
+  showComponent,
+  fetchGraphData,
+  setActiveNode,
+} from '../../api/redux/actions';
 import { Layout, message } from 'antd';
 // import * as d3 from 'd3';
 import { select, selectAll } from 'd3-selection';
@@ -10,9 +16,11 @@ import { zoom, zoomIdentity } from 'd3-zoom';
 //custom components
 import './css/GraphBrowser.less';
 // import Spinner from '../elements/Spinner';
-import IOBar from '../elements/IOBar';
+// import IOBar from '../elements/IOBar';
+// import NodeCardFull from '../elements/node/NodeCardFull';
 import MainSider from '../elements/MainSider';
 import AssociationSider from '../elements/association/AssociationSider';
+import AssociationList from '../elements/association/AssociationList';
 // destructure antd layout
 const { Content } = Layout;
 
@@ -57,6 +65,10 @@ class GraphBrowser extends Component {
       });
       // render graph
       this.renderGraph();
+      if (uuid) {
+        await this.props.setActiveNode(uuid);
+        await this.props.fetchAssociations({ nodeUUID: uuid });
+      }
     } else {
       message.error('there was a problem loading the data');
       this.props.history.push('/');
@@ -69,9 +81,36 @@ class GraphBrowser extends Component {
     }
   };
 
+  // renderBackgroundImage = () => {
+  //   if (this.props.graphData) {
+  //     const graphData = this.props.graphData.nodes;
+  //     for (let item of graphData) {
+  //       if (item.type === 'image') {
+  //         // const imageUrl = item.path || item.preview;
+  //         // return { backgroundImage: `url(${imageUrl})` };
+  //         return null;
+  //       }
+  //     }
+  //     // return { backgroundImage: `url(${})` };
+  //     return null;
+  //   }
+  // };
+
   renderAssociationSider = () => {
     if (this.props.associationSider) {
       return <AssociationSider />;
+    }
+  };
+
+  renderAssociationList = () => {
+    if (this.props.associations && this.props.associations.length > 0) {
+      // let graphData = this.props.graphData;
+      // return (
+      //   <div>
+      //   <NodeCardFull node={this.props.graphData.nodes[0]} />
+      //   <div>
+      // )
+      return <AssociationList />;
     }
   };
 
@@ -99,8 +138,9 @@ class GraphBrowser extends Component {
       .force('y', forceY())
       .force('center', forceCenter());
     // initial zoom
-    var initialZoom = zoomIdentity.scale(0.55).translate(0, -15);
-    const zoomData = zoom().scaleExtent([0.5, 1.4]).on('zoom', zoomed);
+    // var initialZoom = zoomIdentity.scale(0.55).translate(0, -15);
+    var initialZoom = zoomIdentity.scale(0.77).translate(0, -15);
+    const zoomData = zoom().scaleExtent([0.3, 3.7]).on('zoom', zoomed);
 
     const svg = select(this.node)
       .append('svg')
@@ -214,9 +254,13 @@ class GraphBrowser extends Component {
               paddingTop: '0',
             }}
           >
-            <IOBar />
-            <div className='graph-container' ref={(node) => (this.node = node)}></div>
             {/*  <IOBar />*/}
+            <div
+              className='graph-container'
+              // style={this.renderBackgroundImage()}
+              ref={(node) => (this.node = node)}
+            ></div>
+            {this.renderAssociationList()}
           </Content>
         </Layout>
       </Layout>
@@ -228,6 +272,7 @@ const mapStateToProps = (state) => {
   return {
     associations: state.associations.associationList,
     user: state.auth.user,
+    activeNode: state.nodes.activeNode,
     graphData: state.graph.graphData,
     loading: state.graph.isFetching,
     associationSider: state.components.componentList['associationSider'],
@@ -242,5 +287,6 @@ export default connect(mapStateToProps, {
   fetchNodes,
   showComponent,
   fetchGraphData,
+  fetchAssociations,
   setActiveNode,
 })(GraphBrowser);
