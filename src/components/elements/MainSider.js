@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Avatar, Modal, Drawer } from 'antd';
-import { signOut, hideComponent, generateInstanceExport } from '../../api/redux/actions';
+import {
+  signOut,
+  hideComponent,
+  generateInstanceExport,
+  clearActiveNode,
+} from '../../api/redux/actions';
 // images
 import defaultAvatar from '../../resources/synthona-logo.png';
 // custom code
@@ -90,7 +95,13 @@ class MainSider extends Component {
               </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to={`/graph`} onClick={(e) => this.props.hideComponent('mainSider')}>
+              <Link
+                to={`/graph`}
+                onClick={(e) => {
+                  this.props.clearActiveNode();
+                  this.props.hideComponent('mainSider');
+                }}
+              >
                 Graph
               </Link>
             </Item>
@@ -152,6 +163,9 @@ const mapStateToProps = (state) => {
   return { user: state.auth.user, mainSider: state.components.componentList['mainSider'] };
 };
 
-export default connect(mapStateToProps, { signOut, hideComponent, generateInstanceExport })(
-  MainSider
-);
+export default connect(mapStateToProps, {
+  signOut,
+  hideComponent,
+  generateInstanceExport,
+  clearActiveNode,
+})(MainSider);

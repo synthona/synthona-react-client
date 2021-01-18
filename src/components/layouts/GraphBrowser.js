@@ -103,7 +103,7 @@ class GraphBrowser extends Component {
   };
 
   renderAssociationList = () => {
-    if (this.props.associations && this.props.associations.length > 0) {
+    if (this.props.associations && this.props.associations.length > 0 && this.props.activeNode) {
       // let graphData = this.props.graphData;
       // return (
       //   <div>
