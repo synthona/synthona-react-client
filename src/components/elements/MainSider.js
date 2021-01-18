@@ -121,7 +121,7 @@ class MainSider extends Component {
               </Link>
                 </Item>  */}
             <Item className='sider-menu-item'>
-              <a href={'https://twitter.com/synthona'} target='_blank' rel='noopener noreferrer'>
+              <a href={'https://patreon.com/synthona'} target='_blank' rel='noopener noreferrer'>
                 Updates
               </a>
             </Item>
