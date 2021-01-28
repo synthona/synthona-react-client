@@ -122,7 +122,7 @@
 
 .Profile-bio {
   color: #353535;
-  padding: 0.2rem 23rem 1rem;
+  padding: 0.2rem 3rem 1rem;
   margin-bottom: 0.1rem;
 }
 
@@ -137,4 +137,66 @@ svg.verified-sign {
   height: 21px;
   // fill: #1da1f2;
   fill: #3bcc43;
+}
+
+// media queries for nodelist width
+
+@media only screen and (max-width: 1500px) {
+  .profile-container {
+    li.nodelist-item {
+      width: 27.3vw;
+    }
+
+    .nodelist-item-title {
+      width: 60%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .profile-container {
+    li.nodelist-item {
+      width: 26.5vw;
+    }
+
+    .nodelist-item-title {
+      width: 60%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .profile-container {
+    li.nodelist-item {
+      width: 37.5vw;
+    }
+
+    .nodelist-item-title {
+      width: 60%;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .profile-container {
+    li.nodelist-item {
+      width: 34vw;
+    }
+
+    .nodelist-item-title {
+      width: 40%;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .profile-container {
+    li.nodelist-item {
+      width: 97%;
+    }
+
+    .nodelist-item-title {
+      width: 60%;
+    }
+  }
 }

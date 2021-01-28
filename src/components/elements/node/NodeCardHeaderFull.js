@@ -215,6 +215,15 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
+          <Tooltip title={'open in browser'} mouseEnterDelay={1.1}>
+            <li>
+              <button
+                onClick={(e) => window.open(`/associations/${this.props.node.uuid}`, '_blank')}
+              >
+                <Icon type={'global'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
           {this.renderExportButton()}
           <Tooltip
             title={this.state.hidden ? 'hidden from feed' : 'visible in feed'}

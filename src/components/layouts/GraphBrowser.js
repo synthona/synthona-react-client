@@ -16,7 +16,7 @@ import { zoom, zoomIdentity } from 'd3-zoom';
 //custom components
 import './css/GraphBrowser.less';
 // import Spinner from '../elements/Spinner';
-// import IOBar from '../elements/IOBar';
+import IOBar from '../elements/IOBar';
 // import NodeCardFull from '../elements/node/NodeCardFull';
 import MainSider from '../elements/MainSider';
 import AssociationSider from '../elements/association/AssociationSider';
@@ -139,7 +139,7 @@ class GraphBrowser extends Component {
       .force('center', forceCenter());
     // initial zoom
     // var initialZoom = zoomIdentity.scale(0.55).translate(0, -15);
-    var initialZoom = zoomIdentity.scale(0.6).translate(0, -15);
+    var initialZoom = zoomIdentity.scale(0.4).translate(0, -15);
     const zoomData = zoom().scaleExtent([0.3, 3.7]).on('zoom', zoomed);
 
     const svg = select(this.node)
@@ -260,6 +260,7 @@ class GraphBrowser extends Component {
               // style={this.renderBackgroundImage()}
               ref={(node) => (this.node = node)}
             ></div>
+            <IOBar />
             {this.renderAssociationList()}
           </Content>
         </Layout>
