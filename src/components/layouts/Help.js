@@ -46,7 +46,10 @@ class Help extends Component {
                 kinds of wonderful things you learn while you are here.
               </p>
               <h2>Keyboard Shortcuts</h2>
-              <p>For now the main keyboard shortcuts are as follows:</p>
+              <p>
+                For now the main keyboard shortcuts, which currently only work in the core app (not
+                in tabs you open in your web browser) are as follows:
+              </p>
               <ul>
                 <li>CMD/CTRL+G - jump to the graph browser</li>
                 <li>CMD/CTRL+H - jump to the home page</li>
