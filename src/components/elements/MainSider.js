@@ -91,7 +91,7 @@ class MainSider extends Component {
             </Item>
             <Item className='sider-menu-item'>
               <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
-                Present
+                Home
               </Link>
             </Item>
             <Item className='sider-menu-item'>
@@ -120,11 +120,6 @@ class MainSider extends Component {
                 Chat
               </Link>
                 </Item>  */}
-            <Item className='sider-menu-item'>
-              <a href={'https://patreon.com/synthona'} target='_blank' rel='noopener noreferrer'>
-                Updates
-              </a>
-            </Item>
             <Item className='sider-menu-item'>
               <Link to={`/edit/profile/`}>Options</Link>
             </Item>
