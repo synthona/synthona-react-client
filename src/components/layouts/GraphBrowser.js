@@ -16,7 +16,7 @@ import { zoom, zoomIdentity } from 'd3-zoom';
 //custom components
 import './css/GraphBrowser.less';
 // import Spinner from '../elements/Spinner';
-import IOBar from '../elements/IOBar';
+// import IOBar from '../elements/IOBar';
 // import NodeCardFull from '../elements/node/NodeCardFull';
 import MainSider from '../elements/MainSider';
 import AssociationSider from '../elements/association/AssociationSider';
@@ -260,7 +260,6 @@ class GraphBrowser extends Component {
               // style={this.renderBackgroundImage()}
               ref={(node) => (this.node = node)}
             ></div>
-            <IOBar />
             {this.renderAssociationList()}
           </Content>
         </Layout>
