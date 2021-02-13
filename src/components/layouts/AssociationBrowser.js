@@ -41,6 +41,10 @@ class AssociationBrowser extends Component {
   }
 
   componentWillUnmount() {
+    // update collection preview if necessary
+    if (this.props.activeNode.type && this.props.activeNode.type === 'collection') {
+      this.regenerateCollectionPreview(this.props.activeNode, this.props.associations);
+    }
     this.props.clearActiveNode();
   }
 
@@ -60,11 +64,6 @@ class AssociationBrowser extends Component {
         initialized: true,
         uuid: uuid,
       });
-      // update collection preview if necessary
-      // TODO: find a way to have it update even less often if possible
-      if (this.props.activeNode.type && this.props.activeNode.type === 'collection') {
-        this.regenerateCollectionPreview(this.props.activeNode, this.props.associations);
-      }
       document.title = this.props.activeNode.name;
     } else {
       message.error('there was a problem loading the associations');
