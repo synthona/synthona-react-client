@@ -5,9 +5,19 @@ import { Icon } from 'antd';
 import NodeRenderer from '../NodeRenderer';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 
 const Collection = (props) => {
+  const onCollectionContextMenu = (e) => {
+    e.preventDefault();
+    props.toggleHeader();
+  };
+
+  const onCollectionClick = (e) => {
+    e.preventDefault();
+    props.handleClick();
+    window.location.replace(`/associations/${props.node.uuid}`);
+  };
+
   const nodeCard = () => {
     // create the collection grid
     var previewCount = 0;
@@ -23,8 +33,19 @@ const Collection = (props) => {
       case 0:
         collectionPreview = (
           <li className='nodelist-item'>
-            <NodeCardHeader node={props.node} />
-            <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+            {props.renderHeader()}
+            <Link
+              to={`/associations/${props.node.uuid}`}
+              onClick={(e) => {
+                e.preventDefault();
+                props.toggleHeader();
+              }}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                props.handleClick();
+                window.location.replace(`/associations/${props.node.uuid}`);
+              }}
+            >
               <Icon type={'branches'} theme='outlined' className='node-card-icon' />
             </Link>
           </li>
@@ -33,8 +54,12 @@ const Collection = (props) => {
       case 1:
         collectionPreview = (
           <li className='nodelist-item'>
-            <NodeCardHeader node={props.node} />
-            <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+            {props.renderHeader()}
+            <Link
+              to={`/associations/${props.node.uuid}`}
+              onClick={(e) => onCollectionClick(e)}
+              onContextMenu={(e) => onCollectionContextMenu(e)}
+            >
               <Icon type={'branches'} theme='outlined' className='node-card-icon' />
             </Link>
           </li>
@@ -43,8 +68,12 @@ const Collection = (props) => {
       case 2:
         collectionPreview = (
           <li className='nodelist-item nodelist-item-collection'>
-            <NodeCardHeader node={props.node} />
-            <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+            {props.renderHeader()}
+            <Link
+              to={`/associations/${props.node.uuid}`}
+              onClick={(e) => onCollectionClick(e)}
+              onContextMenu={(e) => onCollectionContextMenu(e)}
+            >
               <ul className='nodelist-collection-grid'>
                 <li className='nodelist-collection-grid-full-width'>
                   <NodeRenderer type={preview[0].type} element={'preview'} node={preview[0]} />
@@ -60,8 +89,12 @@ const Collection = (props) => {
       case 3:
         collectionPreview = (
           <li className='nodelist-item nodelist-item-collection'>
-            <NodeCardHeader node={props.node} />
-            <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+            {props.renderHeader()}
+            <Link
+              to={`/associations/${props.node.uuid}`}
+              onClick={(e) => onCollectionClick(e)}
+              onContextMenu={(e) => onCollectionContextMenu(e)}
+            >
               <ul className='nodelist-collection-grid'>
                 <li className='nodelist-collection-grid-full-width'>
                   <NodeRenderer type={preview[0].type} element={'preview'} node={preview[0]} />
@@ -81,8 +114,12 @@ const Collection = (props) => {
       case 4:
         collectionPreview = (
           <li className='nodelist-item nodelist-item-collection'>
-            <NodeCardHeader node={props.node} />
-            <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+            {props.renderHeader()}
+            <Link
+              to={`/associations/${props.node.uuid}`}
+              onClick={(e) => onCollectionClick(e)}
+              onContextMenu={(e) => onCollectionContextMenu(e)}
+            >
               <ul className='nodelist-collection-grid'>
                 <li>
                   <NodeRenderer type={preview[0].type} element={'preview'} node={preview[0]} />

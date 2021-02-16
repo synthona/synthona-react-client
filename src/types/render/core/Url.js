@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
-// import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
-import history from '../../../utils/history';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 
 const Url = (props) => {
   const urlIcon = 'bulb';
@@ -33,7 +30,7 @@ const Url = (props) => {
             color: '#b8b8b8',
             display: 'block',
             textAlign: 'center',
-            padding: '3.3rem',
+            padding: '4.3rem 3.3rem 3.3rem',
             height: '100%',
           }}
         />
@@ -44,20 +41,25 @@ const Url = (props) => {
   const nodeCard = () => {
     return (
       <li className='nodelist-item'>
-        <NodeCardHeader node={props.node} />
+        {props.renderHeader()}
         <a
-          // href={props.node.preview}
           href={`/associations/${props.node.uuid}`}
           // target='_blank'
           rel='noopener noreferrer'
-          onClick={(e) => history.push(`/associations/${props.node.uuid}`)}
+          // onClick={(e) => history.push(`/associations/${props.node.uuid}`)}
+          onClick={(e) => {
+            e.preventDefault();
+            props.handleClick();
+            window.location.replace(`/associations/${props.node.uuid}`);
+          }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.toggleHeader();
+          }}
           style={{ width: '100%' }}
         >
           {renderPreview()}
         </a>
-        {/*   <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
-          <Icon type={'star'} theme='outlined' className='node-card-icon' />
-    </Link> */}
       </li>
     );
   };

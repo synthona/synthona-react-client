@@ -2,14 +2,24 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 
 const Image = (props) => {
   const nodeCard = () => {
     return (
       <li className='nodelist-item'>
-        <NodeCardHeader node={props.node} />
-        <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+        {props.renderHeader()}
+        <Link
+          to={`/associations/${props.node.uuid}`}
+          onClick={(e) => {
+            e.preventDefault();
+            props.handleClick();
+            window.location.replace(`/associations/${props.node.uuid}`);
+          }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.toggleHeader();
+          }}
+        >
           <Fragment>
             <img
               src={props.node.preview}

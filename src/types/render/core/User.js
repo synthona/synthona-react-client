@@ -2,15 +2,26 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 import defaultHeader from '../../../resources/synthona-header.png';
 
 const User = (props) => {
   const nodeCard = () => {
     return (
       <li className='nodelist-item'>
-        <NodeCardHeader node={props.node} />
-        <Link to={`/profile/${props.node.path}`} replace onClick={(e) => props.handleClick()}>
+        {props.renderHeader()}
+        <Link
+          to={`/profile/${props.node.path}`}
+          replace
+          onClick={(e) => {
+            e.preventDefault();
+            props.handleClick();
+            window.location.replace(`/profile/${props.node.path}`);
+          }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.toggleHeader();
+          }}
+        >
           <img
             src={props.node.preview || defaultHeader}
             alt={props.node.name}

@@ -3,8 +3,15 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { updateLinkStrength, hideComponent } from '../../api/redux/actions';
 import { Text, Image, Url, File, Audio, Package, Zip, Collection, User } from './core/index';
+import NodeCardHeader from '../../components/elements/node/NodeCardHeader';
 
 class NodeRenderer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showHeader: false,
+    };
+  }
   // increment linkstrength if there is an activeNode
   handleNodeClick = () => {
     const nodeUUID = this.props.node.uuid;
@@ -26,6 +33,22 @@ class NodeRenderer extends Component {
     }
   };
 
+  toggleHeader = () => {
+    if (this.state.showHeader) {
+      this.setState({ showHeader: false });
+    } else {
+      this.setState({ showHeader: true });
+    }
+  };
+
+  renderHeader = () => {
+    if (this.state.showHeader) {
+      return <NodeCardHeader node={this.props.node} />;
+    } else {
+      return;
+    }
+  };
+
   renderNode = () => {
     switch (this.props.type) {
       case 'text':
@@ -44,6 +67,8 @@ class NodeRenderer extends Component {
             node={this.props.node}
             handleClick={this.handleNodeClick}
             handleAssociatonClick={this.handleAssociatonClick}
+            toggleHeader={this.toggleHeader}
+            renderHeader={this.renderHeader}
           />
         );
       case 'url':
@@ -53,6 +78,8 @@ class NodeRenderer extends Component {
             node={this.props.node}
             handleClick={this.handleNodeClick}
             handleAssociatonClick={this.handleAssociatonClick}
+            toggleHeader={this.toggleHeader}
+            renderHeader={this.renderHeader}
           />
         );
       case 'file':
@@ -98,6 +125,8 @@ class NodeRenderer extends Component {
             node={this.props.node}
             handleClick={this.handleNodeClick}
             handleAssociatonClick={this.handleAssociatonClick}
+            toggleHeader={this.toggleHeader}
+            renderHeader={this.renderHeader}
           />
         );
       case 'user':
@@ -107,6 +136,8 @@ class NodeRenderer extends Component {
             node={this.props.node}
             handleClick={this.handleNodeClick}
             handleAssociatonClick={this.handleAssociatonClick}
+            toggleHeader={this.toggleHeader}
+            renderHeader={this.renderHeader}
           />
         );
       default:
