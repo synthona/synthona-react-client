@@ -9,7 +9,7 @@ class NodeRenderer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHeader: false,
+      showHeader: true,
     };
   }
   // increment linkstrength if there is an activeNode
