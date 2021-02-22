@@ -211,15 +211,6 @@ class Help extends Component {
                 in there, you can change the file extension from .synth to .zip which should allow
                 your computer to de-compress the archive.
               </p>
-              <h2>How do I bring data from an older version into the latest version of the app?</h2>
-              <p>
-                As mentioned in the previous question, you can go to the options menu on the older
-                version and click the "export all user data" option to get a .synth file containing
-                all your user data. You can then import that into the latest version you've
-                downloaded by unpacking it from within the new version. Once you have imported your
-                data into the new version, you can safely delete the old version of the app from
-                your computer.
-              </p>
               <h2>What if I have an idea for a change to the app?</h2>
               <p>
                 Synthona is an open-source project and is licensed under GPLv3 which means if you
