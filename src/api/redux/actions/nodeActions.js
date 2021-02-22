@@ -198,3 +198,12 @@ export const deleteNode = (uuid) => async (dispatch) => {
     message.error('There was a problem deleting the node', 1);
   }
 };
+
+//regenerate collection previews
+export const regenerateCollectionPreviews = () => async (dispatch) => {
+  try {
+    await instance.patch(`/collection/regenerate`);
+  } catch (err) {
+    message.error('There was a problem regenerating the collection previews', 1);
+  }
+};

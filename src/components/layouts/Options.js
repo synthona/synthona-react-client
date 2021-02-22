@@ -14,6 +14,7 @@ import {
   changePassword,
   showComponent,
   generateInstanceExport,
+  regenerateCollectionPreviews,
   hideComponent,
 } from '../../api/redux/actions';
 import './css/Options.less';
@@ -307,11 +308,29 @@ class Options extends Component {
                     textAlign: 'center',
                   }}
                   onClick={(e) => {
-                    this.props.history.push(`/profile/${this.props.user.username}`);
+                    window.location.replace(`/profile/${this.props.user.username}`);
                     this.props.generateInstanceExport();
                   }}
                 >
                   export all user data
+                </Button>
+                <br />
+                <Button
+                  type='default'
+                  style={{
+                    margin: '0 0 10px',
+                    backgroundColor: 'white',
+                    width: '10rem',
+                    padding: '0.5rem',
+                    display: 'inline-block',
+                    textAlign: 'center',
+                  }}
+                  onClick={(e) => {
+                    window.location.replace(`/profile/${this.props.user.username}`);
+                    this.props.regenerateCollectionPreviews();
+                  }}
+                >
+                  regenerate previews
                 </Button>
                 <br />
                 {this.renderDisplayName()}
@@ -376,5 +395,6 @@ export default connect(mapStateToProps, {
   changePassword,
   showComponent,
   generateInstanceExport,
+  regenerateCollectionPreviews,
   hideComponent,
 })(Options);
