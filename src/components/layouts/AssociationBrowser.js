@@ -42,7 +42,11 @@ class AssociationBrowser extends Component {
 
   componentWillUnmount() {
     // update collection preview if necessary
-    if (this.props.activeNode.type && this.props.activeNode.type === 'collection') {
+    if (
+      this.props.activeNode.type &&
+      this.props.activeNode.type === 'collection' &&
+      !this.props.isDeleting
+    ) {
       this.regenerateCollectionPreview(this.props.activeNode, this.props.associations);
     }
     this.props.clearActiveNode();
@@ -137,6 +141,7 @@ const mapStateToProps = (state) => {
     isLoading: state.nodes.isFetching,
     activeNode: state.nodes.activeNode,
     mainSider: state.components.componentList['mainSider'],
+    isDeleting: state.nodes.isDeleting,
   };
 };
 

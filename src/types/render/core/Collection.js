@@ -36,15 +36,8 @@ const Collection = (props) => {
             {props.renderHeader()}
             <Link
               to={`/associations/${props.node.uuid}`}
-              onClick={(e) => {
-                e.preventDefault();
-                props.toggleHeader();
-              }}
-              onContextMenu={(e) => {
-                e.preventDefault();
-                props.handleClick();
-                window.location.replace(`/associations/${props.node.uuid}`);
-              }}
+              onClick={(e) => onCollectionClick(e)}
+              onContextMenu={(e) => onCollectionContextMenu(e)}
             >
               <Icon type={'branches'} theme='outlined' className='node-card-icon' />
             </Link>

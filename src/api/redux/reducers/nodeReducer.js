@@ -38,6 +38,7 @@ import {
 const INITIAL_STATE = {
   isFetching: null,
   isSaving: null,
+  isDeleting: null,
   nodeList: [],
   totalItems: null,
   query: { page: 1 },
@@ -202,16 +203,16 @@ export default (state = INITIAL_STATE, action) => {
     case CLEAR_ACTIVE_NODE:
       return { ...state, activeNode: null };
     case DELETE_NODE:
-      return { ...state, isSaving: true };
+      return { ...state, isDeleting: true };
     case DELETE_NODE_SUCCESS:
       return {
         ...state,
         // filter the node out of the list
         nodeList: [...state.nodeList.filter((node) => node.uuid !== action.uuid)],
-        isSaving: null,
+        isDeleting: null,
       };
     case DELETE_NODE_ERROR:
-      return { ...state, isSaving: null };
+      return { ...state, isDeleting: null };
     case GENERATE_EXPORT:
       return { ...state, isSaving: true };
     case GENERATE_EXPORT_ERROR:
