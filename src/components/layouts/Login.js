@@ -43,7 +43,24 @@ class Login extends Component {
             >
               {({ isSubmitting }) => (
                 <Form className='login-form'>
-                  <h1 className='login-title'>{this.getUsername()} </h1>
+                  <h1 className='login-title'>
+                    <span
+                      role='img'
+                      aria-label='jsx-a11y/accessible-emoji'
+                      style={{ paddingRight: '0.5rem' }}
+                    >
+                      {' '}
+                      ✨
+                    </span>
+                    synthona
+                    <span
+                      role='img'
+                      aria-label='jsx-a11y/accessible-emoji'
+                      style={{ paddingRight: '0.5rem' }}
+                    >
+                      {'  '}✨
+                    </span>
+                  </h1>
                   <Field type='email' name='email' placeholder='email' className='login-field' />
                   <ErrorMessage name='email' component='div' className='login-error' />
                   <Field
