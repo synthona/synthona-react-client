@@ -243,15 +243,15 @@ class Help extends Component {
                 >
                   patreon
                 </a>{' '}
-                you can contribute to and I may add more donation options in the future. Anything
-                helps, I spent quite a bit of time developing this idea and am currently between
-                jobs. I have a lot of ideas for improvements to this application including things
-                like P2P features, automatic updates, theme support, plugin support, a lot of other
-                node types, maps, web-features, analytics, social features, 3D features, and so much
-                more, but I can't afford to work on this full-time without enough funding to make
-                rent. This project was originally designed to function as a distrubuted p2p social
-                network and that is not really off the table, but there is still a lot of work to be
-                done before that is possible and funding would allow me to work on it.
+                you can contribute to and I may add more donation options in the future. I have a
+                lot of ideas for improvements to this application including things like P2P
+                features, automatic updates, theme support, plugin support, a lot of other node
+                types, maps, web-features, analytics, social features, 3D features, and so much
+                more, but I can't afford to work on features full time at the moment. This project
+                was originally designed to function as a distrubuted P2P social network and that is
+                not really off the table, but there is still a lot of work to be done before that is
+                possible and funding would allow me to work on that and other features including a
+                phone application.
               </p>
               <h2>I have a bug report, feature request, or other inquiry?</h2>
               <p>

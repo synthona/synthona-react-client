@@ -1,5 +1,4 @@
 import instance from '../../../api/instance';
-import history from '../../../utils/history';
 import { GENERATE_EXPORT, GENERATE_EXPORT_ERROR, GENERATE_EXPORT_SUCCESS } from './types';
 import { message } from 'antd';
 
@@ -18,7 +17,7 @@ export const generateInstanceExport = () => async (dispatch) => {
   } catch (err) {
     dispatch({ type: GENERATE_EXPORT_ERROR });
     message.error('Could not export instance data', 1);
-    history.push('/');
+    window.location.replace('/');
   }
 };
 
@@ -37,7 +36,7 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: GENERATE_EXPORT_ERROR });
     message.error('Could not export instance data', 1);
-    history.push('/');
+    window.location.replace('/');
   }
 };
 
@@ -54,7 +53,7 @@ export const unpackSynthonaImport = (uuid) => async (dispatch) => {
     }
   } catch (err) {
     message.error('Could not import instance data', 1);
-    history.push('/');
+    window.location.replace('/');
   }
 };
 
@@ -69,6 +68,6 @@ export const removeSynthonaImportsByPackage = (uuid) => async (dispatch) => {
     }
   } catch (err) {
     message.error('Could not remove imports for this package', 1);
-    history.push('/');
+    window.location.replace('/');
   }
 };
