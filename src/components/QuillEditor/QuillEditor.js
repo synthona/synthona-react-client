@@ -230,16 +230,9 @@ class QuillEditor extends Component {
   // these could potentially be stored in a special database table? I'm not sure if
   // externally linked images would be a node type? I don't see why not. i think they're urls
   matcherImageHandler = (node, delta) => {
-    // check to see if the image is a URL
-    if (this.isImageUrl(node.src)) {
-      // if it is, insert the image
-      const url = node.src;
-      const delta = new Delta();
-      return delta.insert({ image: url });
-    } else {
-      // otherwise, don't paste it
-      return new Delta();
-    }
+    const url = node.src;
+    const newDelta = new Delta();
+    return newDelta.insert({ image: url });
   };
 
   modules = {
