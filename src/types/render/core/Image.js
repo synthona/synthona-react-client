@@ -16,8 +16,8 @@ const Image = (props) => {
             window.location.replace(`/associations/${props.node.uuid}`);
           }}
           onContextMenu={(e) => {
-            e.preventDefault();
-            props.toggleHeader();
+            // e.preventDefault();
+            // props.toggleHeader();
           }}
         >
           <Fragment>

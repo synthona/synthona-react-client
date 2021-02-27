@@ -13,7 +13,7 @@ import './css/Profile.less';
 import NodeList from '../elements/node/NodeList';
 import MainSider from '../elements/MainSider';
 // import default images
-import defaultHeader from '../../resources/synthona-header.png';
+import defaultHeader from '../../resources/cloud11.png';
 import defaultAvatar from '../../resources/synthona-logo.png';
 
 const { Content } = Layout;

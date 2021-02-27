@@ -5,6 +5,7 @@ import { Layout, Icon } from 'antd';
 import './css/Help.less';
 import MainSider from '../elements/MainSider';
 import IOBar from '../elements/IOBar';
+import defaultHeader from '../../resources/help.png';
 
 const { Content } = Layout;
 
@@ -31,19 +32,19 @@ class Help extends Component {
               minHeight: '100vh',
               backgroundColor: '#e0dcc7',
               textAlign: 'left',
-              paddingBottom: '3rem',
             }}
           >
             <div style={{ position: 'fixed', width: '100%' }}>
               <IOBar />
             </div>
-            <div className='help-container' style={{ padding: '5.5rem 17rem 1rem' }}>
+            <img style={{ width: '100%' }} src={defaultHeader} alt='stars'></img>
+            <div className='help-container' style={{ padding: '1.3rem 17rem 1rem' }}>
               <h2 style={{ fontSize: '2rem' }}>Help Page</h2>
               <p>
                 Hello there! Welcome to the help page! This is where you can get the help you need,
                 so you can rest easy. Allow me to explain exactly what is going on here. First
                 things first, you are on the help page! It's a nice place to hang out. There's all
-                kinds of wonderful things you learn while you are here.
+                kinds of wonderful things you learn while you are here!
               </p>
               <h2>Keyboard Shortcuts</h2>
               <p>
@@ -51,7 +52,7 @@ class Help extends Component {
                 in tabs you open in your web browser) are as follows:
               </p>
               <ul>
-                <li>CMD/CTRL+G - jump to the graph browser</li>
+                <li>CMD/CTRL+G - jump to the graph constellation browser</li>
                 <li>CMD/CTRL+H - jump to the home page</li>
                 <li>CMD/CTRL+OPTION/ALT+1 - save the current node to the quick menu</li>
                 <li>CMD/CTRL+1 - jump to #1 on the quick menu if you have saved something there</li>
@@ -146,21 +147,20 @@ class Help extends Component {
               <h3>
                 Graph Icon <Icon type={'deployment-unit'} theme='outlined' />
               </h3>
-              <p>This icon will take you to the graph browser from that node.</p>
+              <p>This icon will take you to the graph constellation browser from that node.</p>
               <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
               <h2>What is Synthona?</h2>
               <p>
                 Synthona allows you to create, explore, and share networks made out of content! That
-                might sound confusing but it's really not so bad once you get familiar. It's like
-                learning to read, once you understand Synthona interactions with the interface
-                become second nature.
+                might sound confusing but it's really not so bad once you get familiar.
                 <b>
-                  The good news is that you cannot mess anything up, Synthona will not make any
-                  changes to any content outside itself.
+                  The good news is that you cannot really mess anything up, Synthona will not make
+                  any changes to any content outside itself{' '}
                 </b>
-                Even if you upload a file, Synthona will only make a copy, the original file will
-                still exist on your computer. The worst thing you can do is delete something from
-                Synthona, but that action is clearly marked by a garbage can.
+                (at least not in this version). Even if you upload a file, Synthona will only make a
+                copy, the original file will still exist on your computer. The worst thing you can
+                do is delete something from Synthona, but that action is clearly marked by a garbage
+                can.
               </p>
               <h2>What should I do first?</h2>
               <p>
@@ -188,14 +188,15 @@ class Help extends Component {
               </p>
               <h2>How do I edit the name of a node?</h2>
               <p>If you double click the title it should turn into an editable text field.</p>
-              <h2>The Graph Browser</h2>
+              <h2>The Graph Constellation Browser</h2>
               <p>
-                The graph browser is an alternate way of viewing all your data! You can get there
-                clicking the "graph" icon <Icon type={'deployment-unit'} theme='outlined' /> on any
-                node or clicking the "graph" option from the options menu. If you click it from a
-                specific node, you'll see the associations for that node and their relationships to
-                each other displayed. Accessing it from the options menu instead, or via ctrl+G
-                (cmd+G on mac) will instead show a list of the most recently accessed nodes!
+                The graph constellation browser is an alternate way of viewing all your data! You
+                can get there clicking the "graph" icon{' '}
+                <Icon type={'deployment-unit'} theme='outlined' /> on any node or clicking the
+                "graph" option from the options menu. If you click it from a specific node, you'll
+                see the associations for that node and their relationships to each other displayed.
+                Accessing it from the options menu instead, or via ctrl+G (cmd+G on mac) will
+                instead show a list of the most recently accessed nodes!
               </p>
               <h2>Is my data being backed up anywhere?</h2>
               <p>
@@ -204,21 +205,32 @@ class Help extends Component {
                 through the export functionality. If you go to the options menu there is a button
                 labeled "export all user data". This will put all your nodes and associations into a
                 .synth file which will be added to your homepage. You can then click through to
-                download that file. That .synth file containing all your data can be imported into
-                an updated version of the app, onto a version on another computer, or stored as a
-                backup. Also, although it's not really designed for this, you could break the .synth
-                file open to get at the files themselves. If you need to get at the specific files
-                in there, you can change the file extension from .synth to .zip which should allow
-                your computer to de-compress the archive.
+                download that file. That .synth file containing all your data can be imported back
+                in later, onto a version on another computer, or stored as a backup. Also, although
+                it's not really designed for this, you could break the .synth file open to get at
+                the files themselves. If you need to get at the specific files in there, you can
+                change the file extension from .synth to .zip which should allow your computer to
+                de-compress the archive although some of the files might have...computery...names.
+              </p>
+              <h2>Where is the data stored on my computer?</h2>
+              <p>
+                Your data is stored in your user data folder. This will be different depending on
+                your operating system, but you can see the specific folder by click 'advanced' in
+                the top menu bar and 'view config file'. The folder containing the config file also
+                contains some core app files along with the core 'data' folder and sqlite database.
+                You shouldn't have to ever mess with any of this unless you are a developer or you
+                really know what you are doing, as it is possible to break the app if you start to
+                mess with stuff in there!
               </p>
               <h2>What if I have an idea for a change to the app?</h2>
               <p>
                 Synthona is an open-source project and is licensed under GPLv3 which means if you
                 want to take things into your own hands you're free to fork the project, but I am
                 also more than willing to hear out your concerns and try to implement changes myself
-                if I can! The goal here is to make something which benefits as many people as
-                possible. If you're interested in taking a look at the code feel free to check out
-                the project on{' '}
+                if I can or accept pull requests if they fit the project roadmap! There is a very
+                clear vision for where the app is headed, but suggestions are still welcome. The
+                goal here is to make something which benefits as many people as possible. If you're
+                interested in taking a look at the code feel free to check out the project on{' '}
                 <a href='https://www.github.com/synthona' target='_blank' rel='noopener noreferrer'>
                   github
                 </a>
@@ -234,15 +246,25 @@ class Help extends Component {
                 >
                   patreon
                 </a>{' '}
-                you can contribute to and I may add more donation options in the future. I have a
-                lot of ideas for improvements to this application including things like P2P
-                features, automatic updates, theme support, plugin support, a lot of other node
-                types, maps, web-features, analytics, social features, 3D features, and so much
-                more, but I can't afford to work on features full time at the moment. This project
-                was originally designed to function as a distrubuted P2P social network and that is
-                not really off the table, but there is still a lot of work to be done before that is
-                possible and funding would allow me to work on that and other features including a
-                phone application.
+                you can contribute to, a{' '}
+                <a href='https://ko-fi.com/hyperpoints' target='_blank' rel='noopener noreferrer'>
+                  ko-fi
+                </a>{' '}
+                linked to my personal twitter, and I may add more options in the future, for example
+                I am considering creating an account on{' '}
+                <a href='https://opencollective.com/' target='_blank' rel='noopener noreferrer'>
+                  open-collective
+                </a>{' '}
+                or similar. I have a lot of ideas for improvements to this application including
+                things like P2P features, automatic updates, theme support, plugin support, a lot of
+                other node types, maps, web-features, analytics, social features, 3D features, LAN
+                connections between instances, and so much more, but I can't afford to work on
+                features full time at the moment. This project was originally designed to function
+                as a distrubuted P2P social network and that is not really off the table, but there
+                is still a lot of work to be done before that is possible and funding would allow me
+                to work on that and other features including a phone application. These things are
+                still in the works of course, it's just that with funding we could speed things
+                along!
               </p>
               <h2>I have a bug report, feature request, or other inquiry?</h2>
               <p>

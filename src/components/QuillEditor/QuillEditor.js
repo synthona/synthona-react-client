@@ -176,7 +176,7 @@ class QuillEditor extends Component {
     // generate the preview and do whatever processing will be
     // necessary to process the node
     // TODO: alter this so it stores a condensed version of the document instead of plain text
-    await this.regeneratePreview();
+    this.regeneratePreview();
     this.props.history.push('/');
   };
 

@@ -139,7 +139,7 @@ class GraphBrowser extends Component {
       .force('center', forceCenter());
     // initial zoom
     // var initialZoom = zoomIdentity.scale(0.55).translate(0, -15);
-    var initialZoom = zoomIdentity.scale(0.4).translate(0, -15);
+    var initialZoom = zoomIdentity.scale(0.4).translate(0, -23);
     const zoomData = zoom().scaleExtent([0.3, 1.7]).on('zoom', zoomed);
 
     const svg = select(this.node)
@@ -183,7 +183,7 @@ class GraphBrowser extends Component {
           window.location.replace('/associations/' + d.uuid);
         }
       })
-      .attr('r', 7)
+      .attr('r', 10)
       // .attr('cursor', 'grab')
       .attr('cursor', 'none')
       .attr('fill', '#16e998')
@@ -224,6 +224,10 @@ class GraphBrowser extends Component {
 
   drag = (simulation) => {
     function dragstarted(event, d) {
+      // move the dragged item to the top
+      var sel = select(this);
+      sel.raise();
+      // handle updating of coords
       if (!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
       d.fy = d.y;

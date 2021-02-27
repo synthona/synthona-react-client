@@ -172,8 +172,8 @@ export const setActiveNode = (uuid) => async (dispatch) => {
     dispatch({ type: SET_ACTIVE_NODE_SUCCESS, payload: response.data });
   } catch (err) {
     dispatch({ type: SET_ACTIVE_NODE_ERROR });
+    window.location.replace('/');
     message.error('Could not retrieve values', 1);
-    history.push('/');
   }
 };
 
