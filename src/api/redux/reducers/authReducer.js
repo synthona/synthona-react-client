@@ -27,8 +27,6 @@ const INITIAL_STATE = {
   user: null,
 };
 
-let updatedUser;
-
 // reducer for authentication state and user object
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -78,17 +76,15 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_USER_AVATAR:
       return { ...state, isFetching: true };
     case UPDATE_USER_AVATAR_SUCCESS:
-      updatedUser = { ...state.user };
-      updatedUser.avatar = action.url;
-      return { ...state, isFetching: null, user: updatedUser };
+      window.location.reload();
+      return { ...state, isFetching: null, user: { ...state.user, avatar: action.url } };
     case UPDATE_USER_AVATAR_ERROR:
       return { ...state, isFetching: null };
     case UPDATE_USER_HEADER:
       return { ...state, isFetching: true };
     case UPDATE_USER_HEADER_SUCCESS:
-      updatedUser = { ...state.user };
-      updatedUser.header = action.url;
-      return { ...state, isFetching: null, user: updatedUser };
+      window.location.reload();
+      return { ...state, isFetching: null, user: { ...state.user, header: action.url } };
     case UPDATE_USER_HEADER_ERROR:
       return { ...state, isFetching: null };
     default:
