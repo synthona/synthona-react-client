@@ -8,16 +8,12 @@ import {
   setActiveNode,
 } from '../../api/redux/actions';
 import { Layout, message } from 'antd';
-// import * as d3 from 'd3';
 import { select, selectAll } from 'd3-selection';
 import { drag } from 'd3-drag';
 import { forceSimulation, forceLink, forceManyBody, forceCenter, forceX, forceY } from 'd3-force';
 import { zoom, zoomIdentity } from 'd3-zoom';
 //custom components
 import './css/GraphBrowser.less';
-// import Spinner from '../elements/Spinner';
-// import IOBar from '../elements/IOBar';
-// import NodeCardFull from '../elements/node/NodeCardFull';
 import MainSider from '../elements/MainSider';
 import AssociationSider from '../elements/association/AssociationSider';
 import AssociationList from '../elements/association/AssociationList';
@@ -216,7 +212,7 @@ class GraphBrowser extends Component {
       // update node location values
       node.attr('cx', (d) => d.x).attr('cy', (d) => d.y);
       // update text location values
-      text.attr('x', (d) => d.x + 7).attr('y', (d) => d.y - 7);
+      text.attr('x', (d) => d.x + 10).attr('y', (d) => d.y - 10);
     });
 
     return svg.node();

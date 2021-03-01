@@ -29,7 +29,7 @@ const Package = (props) => {
   const fullNode = () => {
     return (
       <div className='full-node-item'>
-        <NodeCardHeaderFull node={props.node} />
+        <NodeCardHeaderFull />
         <a
           href={props.node.preview}
           // target='_blank'

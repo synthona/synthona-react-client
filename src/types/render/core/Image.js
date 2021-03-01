@@ -56,7 +56,7 @@ const Image = (props) => {
   const fullNode = () => {
     return (
       <div className='full-node-item'>
-        <NodeCardHeaderFull node={props.node} />
+        <NodeCardHeaderFull />
         <img src={props.node.preview} alt={props.node.name}></img>
       </div>
     );

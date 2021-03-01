@@ -28,7 +28,7 @@ const Text = (props) => {
   const fullNode = () => {
     return (
       <div className='full-node-item'>
-        <NodeCardHeaderFull node={props.node} />
+        <NodeCardHeaderFull />
         <Link to={`/edit/text/${props.node.uuid}`} /*target='_blank' */>
           <p>{props.node.preview}</p>
         </Link>

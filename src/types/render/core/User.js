@@ -57,7 +57,7 @@ const User = (props) => {
     console.log(props.node);
     return (
       <div className='full-node-item'>
-        <NodeCardHeaderFull node={props.node} />
+        <NodeCardHeaderFull />
         <Link to={`/profile/${props.node.path}`} /*target='_blank' */>
           <p>{props.node.name}</p>
         </Link>

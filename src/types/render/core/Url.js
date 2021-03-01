@@ -91,7 +91,7 @@ const Url = (props) => {
   const fullNode = () => {
     return (
       <div className='full-node-item'>
-        <NodeCardHeaderFull node={props.node} />
+        <NodeCardHeaderFull />
         {/* <p>{props.node.preview}</p> */}
         <a
           href={props.node.path}

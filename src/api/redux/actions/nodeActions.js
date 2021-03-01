@@ -7,6 +7,9 @@ import {
   UPDATE_NODE,
   UPDATE_NODE_SUCCESS,
   UPDATE_NODE_ERROR,
+  UPDATE_ACTIVE_NODE,
+  UPDATE_ACTIVE_NODE_ERROR,
+  UPDATE_ACTIVE_NODE_SUCCESS,
   SEARCH_NODES,
   SEARCH_NODES_ERROR,
   SEARCH_NODES_SUCCESS,
@@ -64,7 +67,7 @@ export const searchNodes = (query) => async (dispatch) => {
   }
 };
 
-// edit text node handler
+// edit node handler
 export const updateNode = (node) => async (dispatch) => {
   dispatch({ type: UPDATE_NODE });
   try {
@@ -85,7 +88,36 @@ export const updateNode = (node) => async (dispatch) => {
       dispatch({ type: DELETE_NODE_SUCCESS, uuid: node.uuid });
     }
   } catch (err) {
+    console.log(err);
     dispatch({ type: UPDATE_NODE_ERROR });
+    message.error('There was a problem saving your changes', 1);
+    history.push('/');
+  }
+};
+
+// special handler for updating the active node
+export const updateActiveNode = (node) => async (dispatch) => {
+  dispatch({ type: UPDATE_ACTIVE_NODE });
+  try {
+    const result = await instance.patch('/node', {
+      uuid: node.uuid,
+      hidden: node.hidden,
+      searchable: node.searchable,
+      name: node.name,
+      preview: node.preview,
+    });
+    dispatch({
+      type: UPDATE_ACTIVE_NODE_SUCCESS,
+      uuid: node.uuid,
+      result: result.data.node,
+    });
+    // if the node has been hidden remove it from the nodelist
+    if (node.hidden === true) {
+      dispatch({ type: DELETE_NODE_SUCCESS, uuid: node.uuid });
+    }
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: UPDATE_ACTIVE_NODE_ERROR });
     message.error('There was a problem saving your changes', 1);
     history.push('/');
   }

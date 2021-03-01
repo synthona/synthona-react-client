@@ -8,6 +8,9 @@ import {
   UPDATE_NODE,
   UPDATE_NODE_ERROR,
   UPDATE_NODE_SUCCESS,
+  UPDATE_ACTIVE_NODE,
+  UPDATE_ACTIVE_NODE_ERROR,
+  UPDATE_ACTIVE_NODE_SUCCESS,
   PROCESS_TEXT_NODE,
   PROCESS_TEXT_NODE_SUCCESS,
   PROCESS_TEXT_NODE_ERROR,
@@ -109,6 +112,22 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSaving: null,
+        nodeList: state.nodeList.map((node) => {
+          if (node.uuid === action.result.uuid) {
+            node = action.result;
+          }
+          return node;
+        }),
+      };
+    case UPDATE_ACTIVE_NODE:
+      return { ...state, isSaving: true };
+    case UPDATE_ACTIVE_NODE_ERROR:
+      return { ...state, isSaving: null };
+    case UPDATE_ACTIVE_NODE_SUCCESS:
+      return {
+        ...state,
+        isSaving: null,
+        activeNode: action.result.uuid === state.activeNode.uuid ? action.result : state.activeNode,
         nodeList: state.nodeList.map((node) => {
           if (node.uuid === action.result.uuid) {
             node = action.result;

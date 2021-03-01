@@ -139,7 +139,7 @@ const Collection = (props) => {
   const fullNode = () => {
     return (
       <div className='full-node-item'>
-        <NodeCardHeaderFull node={props.node} />
+        <NodeCardHeaderFull />
       </div>
     );
   };

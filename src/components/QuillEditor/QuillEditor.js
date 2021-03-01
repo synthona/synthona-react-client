@@ -25,16 +25,7 @@ import './QuillEditor.less';
 // destructure antd components
 const { Content } = Layout;
 
-// Quill.register('modules/blotFormatter', BlotFormatter);
-
-// fix to prevent error on pasting from misc sources
-// var Block = Quill.import('blots/block');
-// class Div extends Block {}
-// Div.tagName = 'div';
-// Div.blotName = 'div';
-// Div.allowedChildren = Block.allowedChildren;
-// Div.allowedChildren.push(Block);
-// Quill.register(Div);
+// register custom clipboard to handle bugs with the way the default one works
 const Clipboard = Quill.import('modules/clipboard');
 // https://github.com/quilljs/quill/issues/1374
 class CustomClipboard extends Clipboard {
@@ -321,7 +312,7 @@ class QuillEditor extends Component {
   renderHeader = () => {
     // Only render the header if the editor is  expanded
     if (this.state.expanded === null && this.props.nodeData) {
-      return <NodeCardHeaderFull node={this.props.nodeData} />;
+      return <NodeCardHeaderFull />;
     }
   };
 
