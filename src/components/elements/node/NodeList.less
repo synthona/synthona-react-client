@@ -101,7 +101,7 @@ div.nodelist-options-buttons {
   }
 
   button:hover {
-    color: #eeeeee;
+    color: #cacaca;
     // color: #69ec7f;
     transition: 0.7s;
   }
@@ -148,8 +148,8 @@ div.nodelist-options-buttons {
 
 input.nodelist-item-title {
   outline: none;
-  color: #9e9e9e;
-  background-color: #272727;
+  color: #b9b9b9;
+  background-color: @node-card-background-color;
   border: none;
   font-size: 0.94rem;
   width: 15.3rem;
@@ -159,7 +159,7 @@ input.nodelist-item-title {
 }
 
 input.nodelist-item-title::selection {
-  background: #272727;
+  background: @node-card-background-color;
 }
 
 .nodelist-item p {

@@ -247,7 +247,7 @@ class NodeCardHeaderFull extends Component {
             </li>
           </Tooltip>
           <Tooltip
-            title={this.state.hidden ? 'hidden from home' : 'visible on home'}
+            title={this.state.hidden ? 'hidden from explore' : 'visible in explore'}
             mouseEnterDelay={1.1}
           >
             <li>

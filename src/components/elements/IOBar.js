@@ -216,14 +216,14 @@ class IOBar extends Component {
                 <Icon type={'deployment-unit'} theme='outlined' />
               </Link>
             </li>
-            <li className='nav-item io-sider-button' style={{ marginRight: '0.1rem' }}>
-              <Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
-                <Icon type={'pushpin'} theme='outlined' />
-              </Link>
-            </li>
             <li className='nav-item io-sider-button' style={{ marginRight: '0.5rem' }}>
               <Link type='default' to={`/`}>
                 <Icon type={'home'} theme='outlined' />
+              </Link>
+            </li>
+            <li className='nav-item io-sider-button' style={{ marginRight: '0.1rem' }}>
+              <Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
+                <Icon type={'pushpin'} theme='outlined' />
               </Link>
             </li>
             <li className='nav-item create-node-button'>

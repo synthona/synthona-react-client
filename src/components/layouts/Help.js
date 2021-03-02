@@ -54,12 +54,10 @@ class Help extends Component {
               <ul>
                 <li>CMD/CTRL+G - jump to the graph constellation browser</li>
                 <li>CMD/CTRL+H - jump to the home page</li>
-                <li>CMD/CTRL+P - jump to pins</li>
+                <li>CMD/CTRL+J - jump to pinboard</li>
                 <li>CMD/CTRL+OPTION/ALT+1 - save the current node to the quick menu</li>
                 <li>CMD/CTRL+1 - jump to #1 on the quick menu if you have saved something there</li>
-                <li>
-                  Quick-Menu - the quick menu will also work with the number keys 1-9, and with 0
-                </li>
+                <li>Quick-Menu - the quick menu will also work with the number keys 1-9</li>
               </ul>
               <h2>What are do all these icons mean?</h2>
               <p>
@@ -86,6 +84,21 @@ class Help extends Component {
                 much as you want and nothing bad will happen!
               </p>
               <Icon type={'bulb'} theme='outlined' className='help-icon' />
+              <h3>
+                Graph Icon <Icon type={'deployment-unit'} theme='outlined' />
+              </h3>
+              <p>This icon will take you to the graph constellation browser from that node.</p>
+              <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
+              <h3>
+                Pushpin <Icon type={'pushpin'} theme='outlined' />
+              </h3>
+              <p>
+                This button will allow you to pin a node to your pinboard! The Pinboard is a sort of
+                top-level root page, but you can think of it as one of those tackboards you would
+                use pushpins on in real life to hang sticky notes on! Store stuff on the pinboard
+                for a short time or a long time, it's up to you!
+              </p>
+              <Icon type={'pushpin'} theme='outlined' className='help-icon' />
               <h3>
                 Open In Browser <Icon type={'global'} theme='outlined' />
               </h3>
@@ -145,11 +158,6 @@ class Help extends Component {
                 associated with it, and their associations with each other.
               </p>
               <Icon type={'paper-clip'} theme='outlined' className='help-icon' />
-              <h3>
-                Graph Icon <Icon type={'deployment-unit'} theme='outlined' />
-              </h3>
-              <p>This icon will take you to the graph constellation browser from that node.</p>
-              <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
               <h2>What is Synthona?</h2>
               <p>
                 Synthona allows you to create, explore, and share networks made out of content! That
@@ -187,18 +195,20 @@ class Help extends Component {
                 two ideas, you understand Synthona! That's all there is to it, the rest is just
                 building on these two assumptions.
               </p>
-              <h2>How do I edit the name of a node?</h2>
-              <p>If you double click the title it should turn into an editable text field.</p>
               <h2>The Graph Constellation Browser</h2>
               <p>
-                The graph constellation browser is an alternate way of viewing all your data! You
-                can get there clicking the "graph" icon{' '}
-                <Icon type={'deployment-unit'} theme='outlined' /> on any node or clicking the
-                "graph" option from the options menu. If you click it from a specific node, you'll
-                see the associations for that node and their relationships to each other displayed.
-                Accessing it from the options menu instead, or via ctrl+G (cmd+G on mac) will
-                instead show a list of the most recently accessed nodes!
+                The Graph Browser, sometimes known as the Constellation browser, is one way to
+                browse through your nodes and associations! You can get there clicking the "graph"
+                icon <Icon type={'deployment-unit'} theme='outlined' /> on any node, on the IO bar,
+                or by clicking the "graph" option from the main menu. If you click it from a
+                specific node, you'll see the associations for that node and their relationships to
+                each other displayed. Accessing it from the IO bar or options menu will instead show
+                a list of the most recently accessed nodes! Once you are in the constellation
+                browser you can zoom in and out by scrolling up and down, jump to a node by double
+                clicking it, or jump through the graph browser by right clicking on a node.
               </p>
+              <h2>How do I edit the name of a node?</h2>
+              <p>If you double click the title it should turn into an editable text field.</p>
               <h2>Is my data being backed up anywhere?</h2>
               <p>
                 Only in the app database which is stored on your computer. If you want to save a

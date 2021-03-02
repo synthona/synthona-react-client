@@ -30,6 +30,7 @@ class GraphBrowser extends Component {
   }
 
   componentDidMount() {
+    document.title = 'graph';
     if (!this.state.initialized) {
       this.initializeFromUrlParams();
     }
@@ -118,6 +119,7 @@ class GraphBrowser extends Component {
     // width and height
     const height = window.innerHeight;
     const width = window.innerWidth;
+    const nodeScale = 17;
 
     // simulation
     const simulation = forceSimulation(nodeData)
@@ -129,14 +131,14 @@ class GraphBrowser extends Component {
             return d.id;
           })
       )
-      .force('charge', forceManyBody().strength(-100000 / nodeData.length))
+      .force('charge', forceManyBody().strength(-700000 / nodeData.length))
       .force('x', forceX())
       .force('y', forceY())
       .force('center', forceCenter());
     // initial zoom
     // var initialZoom = zoomIdentity.scale(0.55).translate(0, -15);
-    var initialZoom = zoomIdentity.scale(0.4).translate(0, -23);
-    const zoomData = zoom().scaleExtent([0.3, 1.7]).on('zoom', zoomed);
+    var initialZoom = zoomIdentity.scale(0.17).translate(0, -23);
+    const zoomData = zoom().scaleExtent([0.1, 1.7]).on('zoom', zoomed);
 
     const svg = select(this.node)
       .append('svg')
@@ -162,14 +164,15 @@ class GraphBrowser extends Component {
       .join('g')
       .call(this.drag(simulation))
       .append('circle')
-      .on('dblclick', (e, d) => {
+      .on('contextmenu', (e, d) => {
+        e.preventDefault();
         window.location.replace('/graph/' + d.uuid);
       })
       // .on('click', (e, d) => {
       //   e.preventDefault();
       //   this.props.showComponent('associationSider', d);
       // })
-      .on('contextmenu', (e, d) => {
+      .on('dblclick', (e, d) => {
         e.preventDefault();
         if (d.type === 'text') {
           window.location.replace('/edit/text/' + d.uuid);
@@ -179,7 +182,7 @@ class GraphBrowser extends Component {
           window.location.replace('/associations/' + d.uuid);
         }
       })
-      .attr('r', 10)
+      .attr('r', nodeScale)
       // .attr('cursor', 'grab')
       .attr('cursor', 'none')
       .attr('fill', '#16e998')
@@ -212,7 +215,7 @@ class GraphBrowser extends Component {
       // update node location values
       node.attr('cx', (d) => d.x).attr('cy', (d) => d.y);
       // update text location values
-      text.attr('x', (d) => d.x + 10).attr('y', (d) => d.y - 10);
+      text.attr('x', (d) => d.x + nodeScale).attr('y', (d) => d.y - nodeScale);
     });
 
     return svg.node();

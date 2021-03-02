@@ -5,12 +5,13 @@ import { Layout } from 'antd';
 import MainSider from '../elements/MainSider';
 import PinList from '../elements/node/PinList';
 import PinHeader from '../elements/PinHeader';
+// import IOBar from '../elements/IOBar';
 
 const { Content } = Layout;
 
 class Pins extends Component {
   componentDidMount() {
-    document.title = 'Pins';
+    document.title = 'pins';
     // temporary fix to undo whatever is setting overflow hidden on-login
     document.body.style.removeProperty('overflow');
     window.scrollTo({ top: 0, behavior: 'smooth' });

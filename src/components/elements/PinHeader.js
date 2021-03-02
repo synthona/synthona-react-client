@@ -66,21 +66,27 @@ class PinHeader extends Component {
     return (
       <div>
         <Header className='page-header'>
-          <ul className='nav-list'>
+          <ul
+            className='nav-list'
+            style={{ width: 'auto', justifyContent: 'left', marginLeft: '1.1rem' }}
+          >
             <li className='nav-item io-sider-button' style={{ marginRight: '0' }}>
               <Button type='default' shape='circle' onClick={(e) => this.toggleMainSider()}>
                 <Icon type={'bars'} theme='outlined' />
               </Button>
             </li>
             <li className='nav-item io-sider-button' style={{ marginRight: '0.5rem' }}>
+              <Link type='default' to={`/graph`}>
+                <Icon type={'deployment-unit'} theme='outlined' />
+              </Link>
+            </li>
+            <li className='nav-item io-sider-button'>
               <Link type='default' to={`/`}>
                 <Icon type={'home'} theme='outlined' />
               </Link>
             </li>
-            <li className='nav-item io-sider-button'>
-              <Link type='default' to={`/graph`}>
-                <Icon type={'deployment-unit'} theme='outlined' />
-              </Link>
+            <li className='nav-item'>
+              <p style={{ color: 'grey', paddingLeft: '0.7rem' }}>pinboard</p>
             </li>
           </ul>
         </Header>

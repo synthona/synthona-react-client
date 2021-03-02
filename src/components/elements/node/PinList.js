@@ -91,7 +91,7 @@ class PinList extends Component {
 
   render() {
     return (
-      <div className='nodelist-container' style={{ backgroundColor: 'black' }}>
+      <div className='nodelist-container'>
         <ul className='nodelist'>{this.renderPinList()}</ul>
         <AssociationSider />
       </div>
