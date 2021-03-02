@@ -169,7 +169,7 @@ class NodeCardHeaderFull extends Component {
           );
         } else {
           return (
-            <Tooltip title={'unpack synthona export'} mouseEnterDelay={1.1}>
+            <Tooltip title={'unpack'} mouseEnterDelay={1.1}>
               <li>
                 <button
                   onClick={(e) => {
@@ -177,7 +177,7 @@ class NodeCardHeaderFull extends Component {
                     this.props.unpackSynthonaImport(this.props.nodeData.uuid);
                   }}
                 >
-                  <Icon type={'appstore'} theme='outlined' className='full-card-button' />
+                  <Icon type={'gift'} theme='filled' className='full-card-button' />
                 </button>
               </li>
             </Tooltip>
@@ -199,7 +199,7 @@ class NodeCardHeaderFull extends Component {
                 this.props.generateExportByUUID(this.props.nodeData.uuid);
               }}
             >
-              <Icon type={'paper-clip'} theme='outlined' className='full-card-button' />
+              <Icon type={'gift'} theme='outlined' className='full-card-button' />
             </button>
           </li>
         </Tooltip>

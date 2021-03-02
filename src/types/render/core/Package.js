@@ -11,7 +11,7 @@ const Package = (props) => {
       <li className='nodelist-item'>
         <NodeCardHeader node={props.node} />
         <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
-          <Icon type={'deployment-unit'} theme='outlined' className='node-card-icon' />
+          <Icon type={'gift'} theme='outlined' className='node-card-icon' />
         </Link>
       </li>
     );
@@ -21,7 +21,7 @@ const Package = (props) => {
   const collectionPreview = () => {
     return (
       <Fragment>
-        <Icon type={'deployment-unit'} theme='outlined' className='node-card-icon' />
+        <Icon type={'gift'} theme='outlined' className='node-card-icon' />
       </Fragment>
     );
   };
@@ -37,7 +37,7 @@ const Package = (props) => {
           style={{ width: '100%' }}
         >
           <Icon
-            type={'deployment-unit'}
+            type={'gift'}
             theme='outlined'
             style={{
               fontSize: '5rem',

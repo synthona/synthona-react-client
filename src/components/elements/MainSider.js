@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Menu, Avatar, Modal, Drawer } from 'antd';
+import { Menu, Avatar, Modal, Drawer, Icon } from 'antd';
 import {
   signOut,
   hideComponent,
@@ -86,7 +86,7 @@ class MainSider extends Component {
             <Item className='sider-menu-item sider-title'>
               <Link to={`/profile/${this.props.user.username}`}>
                 {/*  <b>@{this.props.user.username}</b>*/}
-                <b>Profile</b>
+                <Icon type={'smile'} theme='outlined' style={{ margin: '0' }} /> <b>Profile</b>
               </Link>
             </Item>
             <Item className='sider-menu-item'>
@@ -107,7 +107,7 @@ class MainSider extends Component {
                   this.props.hideComponent('mainSider');
                 }}
               >
-                Graph
+                Constellation
               </Link>
             </Item>
             {/*<Item className='sider-menu-item'>

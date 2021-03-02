@@ -46,6 +46,19 @@ class Help extends Component {
                 things first, you are on the help page! It's a nice place to hang out. There's all
                 kinds of wonderful things you learn while you are here!
               </p>
+              <h2>What is Synthona?</h2>
+              <p>
+                Synthona allows you to create, explore, and share networks made out of content! That
+                might sound confusing but it's really not so bad once you get familiar.{' '}
+                <b>
+                  The good news is that you cannot really mess anything up, Synthona will not make
+                  any changes to any content outside itself{' '}
+                </b>
+                (at least not in this version). Even if you upload a file, Synthona will only make a
+                copy, the original file will still exist on your computer. The worst thing you can
+                do is delete something from Synthona, but that action is clearly marked by a garbage
+                can.
+              </p>
               <h2>Keyboard Shortcuts</h2>
               <p>
                 For now the main keyboard shortcuts, which currently only work in the core app (not
@@ -69,9 +82,9 @@ class Help extends Component {
                 Associations <Icon type={'branches'} theme='outlined' />
               </h3>
               <p>
-                This is the icon you'll see whenever associations are in-play. It mostly appears on
-                node cards in the node explorer. Clicking it will typically bring up a menu which
-                lists the associations for a given node and allows you to add new ones.
+                This is the associations icon. It mostly appears on node cards in the node explorer.
+                Clicking it will typically bring up a menu which lists the associations for a given
+                node and allows you to add new ones.
               </p>
               <Icon type={'branches'} theme='outlined' className='help-icon' />
               <h3>
@@ -80,14 +93,17 @@ class Help extends Component {
               <p>
                 The light bulb is the universal symbol for having a good idea, which is why it was
                 chosen as the "good idea" button. Whenever you click the light bulb icon the node in
-                question will be pushed to the top of the home page. You can click this button as
-                much as you want and nothing bad will happen!
+                question will be marked as viewed, bumped, jumped to the top of the page. You can
+                click this button as much as you want and nothing bad will happen!
               </p>
               <Icon type={'bulb'} theme='outlined' className='help-icon' />
               <h3>
                 Graph Icon <Icon type={'deployment-unit'} theme='outlined' />
               </h3>
-              <p>This icon will take you to the graph constellation browser from that node.</p>
+              <p>
+                This icon will take you to the graph constellation browser! I'll explain more about
+                that a little later.
+              </p>
               <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
               <h3>
                 Pushpin <Icon type={'pushpin'} theme='outlined' />
@@ -109,18 +125,6 @@ class Help extends Component {
                 to manage additional synthona tabs.
               </p>
               <Icon type={'global'} theme='outlined' className='help-icon' />
-              <h3>
-                Unpack Synthona Package <Icon type={'appstore'} theme='outlined' />
-              </h3>
-              <p>
-                If you have created or imported a Synthona package into your Synthona instance, you
-                will see this icon on the package page. Clicking it will "unpack" the package,
-                importing all the nodes and associations it contains into your profile. Once you
-                click this, it will be replaced by an "undo" <Icon type={'undo'} theme='outlined' />{' '}
-                icon which will allow you to "repack" the package. The undo option will delete all
-                the nodes which unpacking created, which makes unpacking a reversible operation.
-              </p>
-              <Icon type={'appstore'} theme='outlined' className='help-icon' />
               <h3>
                 Visible <Icon type={'eye'} theme='outlined' />
               </h3>
@@ -147,30 +151,35 @@ class Help extends Component {
               </p>
               <Icon type={'delete'} theme='outlined' className='help-icon' />
               <h3>
-                Synthona Package <Icon type={'paper-clip'} theme='outlined' />
+                Synthona Packages <Icon type={'gift'} theme='outlined' />
               </h3>
               <p>
                 Synthona packages allow you to share nodes and their associations between computers
                 as <i>.synth</i> files, which can be re-imported by anyone into any synthona
-                instance on any computer. These files are represented within synthona by this icon.
-                If you click this icon, it will generate an export package based on the node you
-                clicked it from. Synthona packages contain the node in question, all the nodes
-                associated with it, and their associations with each other.
+                instance on any computer. These files are represented within synthona by this{' '}
+                <Icon type={'gift'} theme='outlined' /> icon. If you click this icon on a
+                non-package node in your system, it will generate an export package based on the
+                node you clicked it from. Synthona packages contain the node in question, all the
+                nodes associated with it, and their associations with each other. More specificity
+                in exports is a planned feature for the future as well.
               </p>
-              <Icon type={'paper-clip'} theme='outlined' className='help-icon' />
-              <h2>What is Synthona?</h2>
               <p>
-                Synthona allows you to create, explore, and share networks made out of content! That
-                might sound confusing but it's really not so bad once you get familiar.
-                <b>
-                  The good news is that you cannot really mess anything up, Synthona will not make
-                  any changes to any content outside itself{' '}
-                </b>
-                (at least not in this version). Even if you upload a file, Synthona will only make a
-                copy, the original file will still exist on your computer. The worst thing you can
-                do is delete something from Synthona, but that action is clearly marked by a garbage
-                can.
+                If you have created or imported a Synthona package into your Synthona instance, you
+                will see this icon on the package page. Clicking it will "unpack" the package,
+                importing all the nodes and associations it contains into your profile. Once you
+                click this, it will be replaced by an "undo" <Icon type={'undo'} theme='outlined' />{' '}
+                icon which will allow you to "repack" the package. The undo option will delete all
+                the nodes which unpacking created, which makes unpacking a reversible operation. Be
+                warned however! If you have made changes to any of the nodes you imported they will
+                still be removed (at least that's how it works right now).
               </p>
+              <p>
+                Sythona packages are great for all kinds of things...sharing your thoughts with
+                others, sharing files for a project, sharing photo albums, and more! If you're a
+                developer, you may also be interested to know that these exports are largely just
+                JSON which means you could potentially integrate them with other software.
+              </p>
+              <Icon type={'gift'} theme='outlined' className='help-icon' />
               <h2>What should I do first?</h2>
               <p>
                 You can start by uploading or creating some content, you do this by clicking the
@@ -209,6 +218,18 @@ class Help extends Component {
               </p>
               <h2>How do I edit the name of a node?</h2>
               <p>If you double click the title it should turn into an editable text field.</p>
+              <h2>
+                Help! I hid a node from both search and the explore page. How do I find it again?
+              </h2>
+              <p>
+                No problem! The way to find your lost node is to set another node, preferably a
+                well-connected one, temporarily to <i>hidden from explore</i> by clicking the{' '}
+                <Icon type={'eye'} theme='outlined' /> icon so it toggles to{' '}
+                <Icon type={'eye-invisible'} theme='outlined' />. Now, from that well-connected node
+                which you've hidden from the explore page, go to add a new association. It is
+                possible to associate hidden nodes to other hidden nodes, and so you should be able
+                to associate to it and find it again that way.
+              </p>
               <h2>Is my data being backed up anywhere?</h2>
               <p>
                 Only in the app database which is stored on your computer. If you want to save a

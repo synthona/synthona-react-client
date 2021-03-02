@@ -30,7 +30,7 @@ class GraphBrowser extends Component {
   }
 
   componentDidMount() {
-    document.title = 'graph';
+    document.title = 'constellation';
     if (!this.state.initialized) {
       this.initializeFromUrlParams();
     }
