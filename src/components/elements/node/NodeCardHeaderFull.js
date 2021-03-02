@@ -18,9 +18,11 @@ class NodeCardHeaderFull extends Component {
     this.state = {
       name: this.props.nodeData.name,
       hidden: this.props.nodeData.hidden,
-      hiddenIcon: 'eye',
+      hiddenIcon: null,
       searchable: this.props.nodeData.searchable,
-      searchableIcon: 'search',
+      searchableIcon: null,
+      pinned: this.props.nodeData.pinned,
+      pinnedState: null,
       editable: false,
       showDeleteModal: null,
     };
@@ -38,6 +40,12 @@ class NodeCardHeaderFull extends Component {
       this.setState({ searchableIcon: 'search' });
     } else {
       this.setState({ searchableIcon: 'key' });
+    }
+    // set initial pinned state
+    if (this.props.nodeData.pinned) {
+      this.setState({ pinnedState: 'filled' });
+    } else {
+      this.setState({ pinnedState: 'outlined' });
     }
   }
 
@@ -83,6 +91,16 @@ class NodeCardHeaderFull extends Component {
     } else {
       this.setState({ searchable: true, searchableIcon: 'search' });
       this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, searchable: true });
+    }
+  };
+
+  togglePinned = () => {
+    if (this.state.pinned === true) {
+      this.setState({ pinned: false, pinnedState: 'outlined' });
+      this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, pinned: false });
+    } else {
+      this.setState({ pinned: true, pinnedState: 'filled' });
+      this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, pinned: true });
     }
   };
 
@@ -217,18 +235,19 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
-          <Tooltip title={'open in browser'} mouseEnterDelay={1.1}>
+          <Tooltip title={'pin'} mouseEnterDelay={1.1}>
             <li>
-              <button
-                onClick={(e) => window.open(`/associations/${this.props.nodeData.uuid}`, '_blank')}
-              >
-                <Icon type={'global'} theme='outlined' className='full-card-button' />
+              <button onClick={(e) => this.togglePinned()}>
+                <Icon
+                  type={'pushpin'}
+                  theme={this.state.pinnedState}
+                  className='full-card-button'
+                />
               </button>
             </li>
           </Tooltip>
-          {this.renderExportButton()}
           <Tooltip
-            title={this.state.hidden ? 'hidden from feed' : 'visible in feed'}
+            title={this.state.hidden ? 'hidden from home' : 'visible on home'}
             mouseEnterDelay={1.1}
           >
             <li>
@@ -251,6 +270,16 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
+          <Tooltip title={'open in browser'} mouseEnterDelay={1.1}>
+            <li>
+              <button
+                onClick={(e) => window.open(`/associations/${this.props.nodeData.uuid}`, '_blank')}
+              >
+                <Icon type={'global'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
+          {this.renderExportButton()}
           <Tooltip title={'delete'} mouseEnterDelay={1.1}>
             <li>
               <button onClick={(e) => this.toggleDeleteModal()}>

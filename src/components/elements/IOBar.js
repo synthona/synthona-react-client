@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Layout, Button, Input, Select, Icon, message } from 'antd';
 // custom code
 import { validUrl, isImageUrl } from '../../utils/inputValidation';
-import './IOBar.less';
+import './css/IOBar.less';
 import {
   signOut,
   createFileNode,
@@ -206,15 +206,25 @@ class IOBar extends Component {
       <div>
         <Header className='page-header'>
           <ul className='nav-list'>
-            <li className='nav-item io-sider-button'>
-              <Link type='default' to={`/`}>
-                <Icon type={'home'} theme='outlined' />
-              </Link>
-            </li>
-            <li className='nav-item io-sider-button'>
+            <li className='nav-item io-sider-button' style={{ marginRight: '0' }}>
               <Button type='default' shape='circle' onClick={(e) => this.toggleMainSider()}>
                 <Icon type={'bars'} theme='outlined' />
               </Button>
+            </li>
+            <li className='nav-item io-sider-button' style={{ marginRight: '0.4rem' }}>
+              <Link type='default' to={`/graph`}>
+                <Icon type={'deployment-unit'} theme='outlined' />
+              </Link>
+            </li>
+            <li className='nav-item io-sider-button' style={{ marginRight: '0.1rem' }}>
+              <Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
+                <Icon type={'pushpin'} theme='outlined' />
+              </Link>
+            </li>
+            <li className='nav-item io-sider-button' style={{ marginRight: '0.5rem' }}>
+              <Link type='default' to={`/`}>
+                <Icon type={'home'} theme='outlined' />
+              </Link>
             </li>
             <li className='nav-item create-node-button'>
               <Button type='default' shape='circle' onClick={(e) => this.toggleInputMode()}>
@@ -232,16 +242,6 @@ class IOBar extends Component {
                 addonBefore={this.renderSelectBefore()}
                 className='nav-search-input'
               />
-            </li>
-            <li className='nav-item'>
-              <Button
-                type='ghost'
-                shape='circle'
-                onClick={this.commandHandler}
-                className='io-enter-button'
-              >
-                <Icon type={this.state.modeIcon} theme='outlined' />
-              </Button>
             </li>
           </ul>
         </Header>

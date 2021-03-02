@@ -11,7 +11,7 @@ import {
 // images
 import defaultAvatar from '../../resources/synthona-logo.png';
 // custom code
-import './MainSider.less';
+import './css/MainSider.less';
 import Spinner from './Spinner';
 // destructure antd components
 const { Item } = Menu;
@@ -92,6 +92,11 @@ class MainSider extends Component {
             <Item className='sider-menu-item'>
               <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
                 Home
+              </Link>
+            </Item>
+            <Item className='sider-menu-item'>
+              <Link to={`/pins`} onClick={(e) => this.props.hideComponent('mainSider')}>
+                Pins
               </Link>
             </Item>
             <Item className='sider-menu-item'>

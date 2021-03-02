@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 // custom code
-import '../elements/Page.less';
+import '../elements/css/Page.less';
 import MainContent from '../elements/MainContent';
 import IOBar from '../elements/IOBar';
 // import MainSider from '../elements/MainSider';

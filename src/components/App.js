@@ -17,6 +17,7 @@ import CreateAccount from './layouts/CreateAccount';
 import AssociationBrowser from './layouts/AssociationBrowser';
 import GraphBrowser from './layouts/GraphBrowser';
 import Help from './layouts/Help';
+import Pins from './layouts/Pins';
 
 class App extends Component {
   componentDidMount() {
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path='/edit/profile' exact component={Options} />
           <Route path='/associations/:uuid' exact component={AssociationBrowser} />
           <Route path='/graph/:uuid?' exact component={GraphBrowser} />
+          <Route path='/pins' exact component={Pins} />
           <Route path='/help' exact component={Help} />
         </Switch>
       );

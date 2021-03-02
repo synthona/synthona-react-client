@@ -36,7 +36,12 @@ export const fetchNodes = (query) => async (dispatch) => {
   try {
     dispatch({ type: FETCH_NODES });
     const response = await instance.get('/node/search', {
-      params: { page: query.page, type: query.type, searchQuery: query.searchQuery },
+      params: {
+        page: query.page,
+        type: query.type,
+        searchQuery: query.searchQuery,
+        pinned: query.pinned,
+      },
     });
     dispatch({ type: FETCH_NODES_SUCCESS, payload: response.data, query });
   } catch (err) {
@@ -55,7 +60,12 @@ export const searchNodes = (query) => async (dispatch) => {
   try {
     dispatch({ type: SEARCH_NODES });
     const response = await instance.get('/node/search', {
-      params: { page: query.page, type: query.type, searchQuery: query.searchQuery },
+      params: {
+        page: query.page,
+        type: query.type,
+        searchQuery: query.searchQuery,
+        pinned: query.pinned,
+      },
     });
     dispatch({ type: SEARCH_NODES_SUCCESS, payload: response.data, query });
     history.push('/');
@@ -105,6 +115,7 @@ export const updateActiveNode = (node) => async (dispatch) => {
       searchable: node.searchable,
       name: node.name,
       preview: node.preview,
+      pinned: node.pinned,
     });
     dispatch({
       type: UPDATE_ACTIVE_NODE_SUCCESS,

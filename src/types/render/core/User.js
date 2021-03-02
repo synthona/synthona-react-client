@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import defaultHeader from '../../../resources/synthona-header.png';
+import defaultHeader from '../../../resources/cloud9.png';
 
 const User = (props) => {
   const nodeCard = () => {

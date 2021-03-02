@@ -1,0 +1,224 @@
+@header-color: #272727;
+@header-link: white;
+@header-border: #313131;
+@avatar-border: #fff;
+@io-enter-button: #fffca6;
+@io-hover-color: #16e998;
+// @header-color: rgb(221, 221, 221);
+// @header-link: black;
+// @header-border: #e4e4e4;
+// @avatar-border: #bebebe;
+// @io-enter-button: #969696;
+// @io-hover-color: #16e998;
+
+.page-header {
+  background-color: @header-color;
+  border-bottom: 0.1rem solid @header-border;
+  padding: 0;
+  margin: 0;
+  height: 3.1rem;
+  line-height: 2.9rem;
+  vertical-align: middle;
+  width: 100%;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.nav-search {
+  padding: 0.45rem 1rem 0 0.7rem;
+  border-radius: 1rem;
+}
+
+.nav-search-input {
+  min-width: 75rem;
+  padding: 0.07rem 0 0;
+  margin: 0;
+}
+
+.nav-search-input input {
+  background-color: #1b1b1b;
+  // color: #000000;
+  // outline: none;
+  color: #ffffff;
+  // border: 0.07rem solid #333333;
+  border: 0.07rem solid transparent;
+  border-left: 0.07rem solid #333333;
+}
+
+.nav-search-input input:hover {
+  border: 0.07rem solid #333333;
+}
+
+.nav-search-input .ant-select-search__field__wrap input:focus-within {
+  border: none;
+  outline: none;
+}
+
+.nav-search-input input:focus-within {
+  border: 0.07rem solid #16e998;
+}
+
+.ant-input-group-addon {
+  border: 0.1rem solid #272727;
+  border-left: none;
+}
+
+.ant-input-group-addon .ant-select-no-arrow {
+  background-color: #1b1b1b;
+  color: #ffffff;
+  outline: none;
+  border: 0.1rem solid #272727;
+}
+
+.ant-select-no-arrow {
+  width: 7rem;
+}
+
+.ant-select-dropdown-menu {
+  padding: 0;
+  border-radius: 0.1rem;
+
+  .ant-select-dropdown-menu-item {
+    background-color: #ffffff;
+    color: #272727;
+  }
+
+  .ant-select-dropdown-menu-item:hover {
+    background-color: #16e998;
+  }
+
+  .ant-select-dropdown-menu-item-active {
+    background-color: #16e998;
+  }
+
+  .ant-select-dropdown-menu-item-disabled {
+    height: 0;
+    padding: 0;
+    visibility: hidden;
+  }
+}
+
+ul.nav-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+}
+
+li.nav-item {
+  display: inline;
+  overflow: hidden;
+  font-size: 0.9rem;
+  padding: 0 0.3rem;
+}
+
+img.header-logo:hover {
+  outline: 0;
+}
+
+.mode-toggle {
+  padding-top: 0.1rem;
+}
+
+.create-node-button button.ant-btn {
+  // background: linear-gradient(90deg, #ff8fc3 0%, #f9f7bc 47%, #9eefff 100%);
+  background: linear-gradient(90deg, #b7ffcd 0%, #fcfcfc 47%, #9eefff 100%);
+  // border: 0.2rem solid @io-enter-button;
+  color: #272727;
+  transition-duration: 0.3s;
+}
+
+.create-node-button:hover button.ant-btn,
+.create-node-button:active button.ant-btn,
+.create-node-button:focus button.ant-btn {
+  // background: linear-gradient(90deg, #ff8fc3 0%, #f9f7bc 47%, #9eefff 100%);
+  background: linear-gradient(90deg, #b7ffcd 0%, #fcfcfc 47%, #9eefff 100%);
+  color: #47d0da;
+}
+
+.io-enter-button {
+  border: 0.04rem solid @header-link;
+  color: white;
+}
+
+.io-enter-button:hover {
+  color: @io-hover-color;
+  border: 0.02rem solid @io-hover-color;
+}
+
+a {
+  color: @header-link;
+}
+
+a:hover {
+  color: @io-hover-color;
+}
+
+.io-sider-button button.ant-btn {
+  background-color: @header-color;
+  border: none;
+  color: @header-link;
+  padding-bottom: 0.1rem;
+}
+
+.io-sider-button button.ant-btn:hover {
+  background-color: @header-color;
+  border: none;
+  color: @io-hover-color;
+}
+
+@media only screen and (max-width: 1400px) {
+  .nav-search-input {
+    min-width: 80vw;
+    padding: 0;
+    margin: 0;
+  }
+  .ant-select-no-arrow {
+    width: 7rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .nav-search-input {
+    min-width: 70vw;
+    padding: 0;
+    margin: 0;
+  }
+  .ant-select-no-arrow {
+    width: 7rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .nav-search-input {
+    max-width: 70vw;
+    padding: 0;
+    margin: 0;
+  }
+  .ant-select-no-arrow {
+    width: 7rem;
+  }
+  .nav-search {
+    padding: 0.45rem 0.1rem 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-search-input {
+    min-width: 40vw;
+  }
+  .ant-select-no-arrow {
+    width: 6rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .nav-search-input {
+    min-width: 30vw;
+  }
+  .ant-select-no-arrow {
+    width: 3rem;
+  }
+}

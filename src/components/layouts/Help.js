@@ -54,6 +54,7 @@ class Help extends Component {
               <ul>
                 <li>CMD/CTRL+G - jump to the graph constellation browser</li>
                 <li>CMD/CTRL+H - jump to the home page</li>
+                <li>CMD/CTRL+P - jump to pins</li>
                 <li>CMD/CTRL+OPTION/ALT+1 - save the current node to the quick menu</li>
                 <li>CMD/CTRL+1 - jump to #1 on the quick menu if you have saved something there</li>
                 <li>
