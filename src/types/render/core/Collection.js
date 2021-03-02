@@ -53,7 +53,7 @@ const Collection = (props) => {
               onClick={(e) => onCollectionClick(e)}
               onContextMenu={(e) => onCollectionContextMenu(e)}
             >
-              <Icon type={'branches'} theme='outlined' className='node-card-icon' />
+              <NodeRenderer type={preview[0].type} element={'preview'} node={preview[0]} />
             </Link>
           </li>
         );
