@@ -7,7 +7,6 @@ import {
   hideComponent,
   createAssociation,
   fetchAssociationLinkList,
-  fetchAssociations,
   associationAutocomplete,
 } from '../../../api/redux/actions';
 // custom code
@@ -129,6 +128,5 @@ export default connect(mapStateToProps, {
   hideComponent,
   createAssociation,
   fetchAssociationLinkList,
-  fetchAssociations,
   associationAutocomplete,
 })(AssociationSider);
