@@ -149,8 +149,8 @@ class GraphBrowser extends Component {
 
     const link = g
       .append('g')
-      .attr('stroke', 'grey')
-      .attr('stroke-opacity', 0.6)
+      .attr('stroke', 'white')
+      .attr('stroke-opacity', 0.7)
       .selectAll('line')
       .data(linkData)
       .join('line')
