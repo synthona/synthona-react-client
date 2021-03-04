@@ -49,7 +49,6 @@ export const unpackSynthonaImport = (uuid) => async (dispatch) => {
     const response = await instance.put('/port/import/', { uuid });
     if (response.status === 200) {
       message.success('generated import data!', 1);
-      // console.log('generated import data!');
       history.push('/');
     }
   } catch (err) {
@@ -63,8 +62,6 @@ export const removeSynthonaImportsByPackage = (uuid) => async (dispatch) => {
   try {
     const response = await instance.patch('/port/export/undo/', { uuid });
     if (response.status === 200) {
-      message.success('removed imports from this package!', 1);
-      // console.log('generated import data!');
       history.push('/');
     }
   } catch (err) {

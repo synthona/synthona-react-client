@@ -90,13 +90,13 @@ class MainSider extends Component {
               </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to={`/pins`} onClick={(e) => this.props.hideComponent('mainSider')}>
-                Pinboard
+              <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
+                Explore
               </Link>
             </Item>
             <Item className='sider-menu-item'>
-              <Link to={`/`} onClick={(e) => this.props.hideComponent('mainSider')}>
-                Explore
+              <Link to={`/pins`} onClick={(e) => this.props.hideComponent('mainSider')}>
+                Pinboard
               </Link>
             </Item>
             <Item className='sider-menu-item'>

@@ -134,7 +134,7 @@ class Options extends Component {
           <Form className='password-modal-form'>
             <p>
               Are you are you want to delete all nodes and associations for this user? This action
-              is not reversible, it is typically recommended that you make a backup.
+              is not reversible, it's recommended that u make a backup first.
             </p>
             <Field
               type='password'
@@ -349,9 +349,12 @@ class Options extends Component {
                     display: 'inline-block',
                     textAlign: 'center',
                   }}
-                  onClick={(e) => this.togglePasswordModal()}
+                  onClick={(e) => {
+                    window.location.replace(`/profile/${this.props.user.username}`);
+                    this.props.generateInstanceExport();
+                  }}
                 >
-                  change password
+                  export all user data
                 </Button>
                 <br />
                 <Button
@@ -364,12 +367,9 @@ class Options extends Component {
                     display: 'inline-block',
                     textAlign: 'center',
                   }}
-                  onClick={(e) => {
-                    window.location.replace(`/profile/${this.props.user.username}`);
-                    this.props.generateInstanceExport();
-                  }}
+                  onClick={(e) => this.togglePasswordModal()}
                 >
-                  export all user data
+                  change password
                 </Button>
                 <br />
                 <Button
@@ -402,7 +402,7 @@ class Options extends Component {
                   }}
                   onClick={(e) => this.toggleDeleteNodesModal()}
                 >
-                  delete all nodes
+                  delete all data
                 </Button>
                 <br />
                 {this.renderDisplayName()}
@@ -435,7 +435,7 @@ class Options extends Component {
                   {this.passwordModal()}
                 </Modal>
                 <Modal
-                  title='delete all nodes'
+                  title='delete all data'
                   visible={this.state.showDeleteNodesModal}
                   className='password-modal'
                   centered
