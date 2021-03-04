@@ -12,6 +12,7 @@ import {
   updateUsername,
   updateEmail,
   changePassword,
+  clearAllNodes,
   showComponent,
   generateInstanceExport,
   regenerateCollectionPreviews,
@@ -32,6 +33,7 @@ class Options extends Component {
     super(props);
     this.state = {
       showPasswordModal: false,
+      showDeleteNodesModal: false,
       initialized: false,
       username: '',
       email: '',
@@ -56,12 +58,27 @@ class Options extends Component {
     this.props.changePassword(values);
   };
 
+  handleClearNodes = (values, { setSubmitting }) => {
+    this.toggleDeleteNodesModal();
+    setSubmitting(false);
+    this.props.clearAllNodes(values);
+  };
+
   // show modal to confirm deletion
   togglePasswordModal = () => {
     if (this.state.showPasswordModal) {
       this.setState({ showPasswordModal: false });
     } else {
       this.setState({ showPasswordModal: true });
+    }
+  };
+
+  // show modal to confirm deletion
+  toggleDeleteNodesModal = () => {
+    if (this.state.showDeleteNodesModal) {
+      this.setState({ showDeleteNodesModal: false });
+    } else {
+      this.setState({ showDeleteNodesModal: true });
     }
   };
 
@@ -78,7 +95,6 @@ class Options extends Component {
             <Field
               type='password'
               name='oldPassword'
-              password
               placeholder='old password'
               className='password-modal-field'
             />
@@ -99,6 +115,47 @@ class Options extends Component {
             <ErrorMessage name='confirmNewPassword' component='div' />
             <button type='submit' disabled={isSubmitting}>
               change password
+            </button>
+          </Form>
+        )}
+      </Formik>
+    );
+  };
+
+  deleteAllNodesModal = () => {
+    return (
+      <Formik
+        initialValues={{ passwordValue: '', confirmPassword: '' }}
+        validationSchema={deleteNodesValidation}
+        onSubmit={this.handleClearNodes}
+        style={{ display: 'inline-block' }}
+      >
+        {({ isSubmitting }) => (
+          <Form className='password-modal-form'>
+            <p>
+              Are you are you want to delete all nodes and associations for this user? This action
+              is not reversible, it is typically recommended that you make a backup.
+            </p>
+            <Field
+              type='password'
+              name='passwordValue'
+              placeholder='password'
+              className='password-modal-field'
+            />
+            <ErrorMessage name='passwordValue' component='div' />
+            <Field
+              type='password'
+              name='confirmPassword'
+              placeholder='confirm password'
+              className='password-modal-field'
+            />
+            <ErrorMessage name='confirmPassword' component='div' />
+            <button
+              type='danger'
+              disabled={isSubmitting}
+              style={{ color: 'white', backgroundColor: 'red' }}
+            >
+              yes, i want to delete all my data
             </button>
           </Form>
         )}
@@ -333,6 +390,21 @@ class Options extends Component {
                   regenerate previews
                 </Button>
                 <br />
+                <Button
+                  type='danger'
+                  style={{
+                    margin: '0 0 10px',
+                    backgroundColor: 'red',
+                    width: '10rem',
+                    padding: '0.5rem',
+                    display: 'inline-block',
+                    textAlign: 'center',
+                  }}
+                  onClick={(e) => this.toggleDeleteNodesModal()}
+                >
+                  delete all nodes
+                </Button>
+                <br />
                 {this.renderDisplayName()}
                 {this.renderUsername()}
                 {this.renderEmail()}
@@ -355,11 +427,24 @@ class Options extends Component {
                   visible={this.state.showPasswordModal}
                   className='password-modal'
                   centered
+                  afterClose={() => document.body.style.removeProperty('overflow')}
                   footer={null}
                   closable={false}
                   onCancel={this.togglePasswordModal}
                 >
                   {this.passwordModal()}
+                </Modal>
+                <Modal
+                  title='delete all nodes'
+                  visible={this.state.showDeleteNodesModal}
+                  className='password-modal'
+                  centered
+                  afterClose={() => document.body.style.removeProperty('overflow')}
+                  footer={null}
+                  closable={false}
+                  onCancel={this.toggleDeleteNodesModal}
+                >
+                  {this.deleteAllNodesModal()}
                 </Modal>
               </div>
             </div>
@@ -381,6 +466,16 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref('newPassword')], "Your passwords don't match"),
 });
 
+const deleteNodesValidation = Yup.object().shape({
+  passwordValue: Yup.string()
+    .min(5, 'Password has to be longer than 6 characters!')
+    .required('password is required'),
+  confirmPassword: Yup.string()
+    .required('please confirm password')
+    .min(5, 'Password has to be longer than 6 characters!')
+    .oneOf([Yup.ref('passwordValue')], "Your passwords don't match"),
+});
+
 const mapStateToProps = (state) => {
   return { user: state.auth.user };
 };
@@ -392,6 +487,7 @@ export default connect(mapStateToProps, {
   updateUserHeader,
   updateUsername,
   updateEmail,
+  clearAllNodes,
   changePassword,
   showComponent,
   generateInstanceExport,

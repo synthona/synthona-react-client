@@ -215,7 +215,7 @@ export const setActiveNode = (uuid) => async (dispatch) => {
     dispatch({ type: SET_ACTIVE_NODE_SUCCESS, payload: response.data });
   } catch (err) {
     dispatch({ type: SET_ACTIVE_NODE_ERROR });
-    window.location.replace('/');
+    history.push('/');
     message.error('Could not retrieve values', 1);
   }
 };
@@ -248,5 +248,21 @@ export const regenerateCollectionPreviews = () => async (dispatch) => {
     await instance.patch(`/collection/regenerate`);
   } catch (err) {
     message.error('There was a problem regenerating the collection previews', 1);
+  }
+};
+
+// clear all nodes
+export const clearAllNodes = (formValues) => async (dispatch) => {
+  try {
+    const response = await instance.patch('/user/clear', {
+      password: formValues.passwordValue,
+    });
+    if (response.status === 200) {
+      history.push('/');
+      message.success('successfully deleted all your data :)', 3);
+    }
+  } catch (err) {
+    console.log(err);
+    message.error('There was a problem, please try again', 1);
   }
 };
