@@ -34,6 +34,7 @@ class Options extends Component {
     this.state = {
       showPasswordModal: false,
       showDeleteNodesModal: false,
+      showExportModal: false,
       initialized: false,
       username: '',
       email: '',
@@ -80,6 +81,21 @@ class Options extends Component {
     } else {
       this.setState({ showDeleteNodesModal: true });
     }
+  };
+
+  // show confirm export modal
+  toggleExportModal = () => {
+    if (this.state.showExportModal) {
+      this.setState({ showExportModal: false });
+    } else {
+      this.setState({ showExportModal: true });
+    }
+  };
+
+  // delete the node
+  exportHandler = async () => {
+    this.setState({ showExportModal: false });
+    await this.props.generateInstanceExport();
   };
 
   passwordModal = () => {
@@ -350,8 +366,8 @@ class Options extends Component {
                     textAlign: 'center',
                   }}
                   onClick={(e) => {
-                    window.location.replace(`/profile/${this.props.user.username}`);
-                    this.props.generateInstanceExport();
+                    this.toggleExportModal();
+                    // this.props.generateInstanceExport();
                   }}
                 >
                   export all user data
@@ -445,6 +461,24 @@ class Options extends Component {
                   onCancel={this.toggleDeleteNodesModal}
                 >
                   {this.deleteAllNodesModal()}
+                </Modal>
+                <Modal
+                  title='Confirm Export'
+                  visible={this.state.showExportModal}
+                  className='delete-modal'
+                  centered
+                  onOk={this.exportHandler}
+                  okText='Generate'
+                  closable={false}
+                  afterClose={() => document.body.style.removeProperty('overflow')}
+                  onCancel={this.toggleExportModal}
+                >
+                  <p>
+                    Generate export package from <b>{this.props.user.displayName || 'untitled'}</b>?
+                    The export will contain the profile picture, header, bio, along with all this
+                    user's nodes & associations, and appear in your pinboard when it is completed.
+                    This may take a few minutes.
+                  </p>
                 </Modal>
               </div>
             </div>

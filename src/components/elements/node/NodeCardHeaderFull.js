@@ -312,6 +312,7 @@ class NodeCardHeaderFull extends Component {
           className='delete-modal'
           centered
           onOk={this.deleteHandler}
+          afterClose={() => document.body.style.removeProperty('overflow')}
           okType='danger'
           okText='Delete'
           closable={false}
@@ -327,7 +328,7 @@ class NodeCardHeaderFull extends Component {
           className='delete-modal'
           centered
           onOk={this.exportHandler}
-          // okType='success'
+          afterClose={() => document.body.style.removeProperty('overflow')}
           okText='Generate'
           closable={false}
           onCancel={this.toggleExportModal}
