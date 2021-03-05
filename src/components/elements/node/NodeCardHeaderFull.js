@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { Icon, Modal, Tooltip } from 'antd';
@@ -25,6 +25,7 @@ class NodeCardHeaderFull extends Component {
       pinnedState: 'outlined',
       editable: false,
       showDeleteModal: null,
+      showExportModal: null,
     };
   }
 
@@ -72,6 +73,21 @@ class NodeCardHeaderFull extends Component {
     this.setState({ deleting: true });
     await this.props.deleteNode(this.props.nodeData.uuid);
     this.props.clearActiveNode();
+  };
+
+  // show confirm export modal
+  toggleExportModal = () => {
+    if (this.state.showExportModal) {
+      this.setState({ showExportModal: false });
+    } else {
+      this.setState({ showExportModal: true });
+    }
+  };
+
+  // delete the node
+  exportHandler = async () => {
+    this.setState({ showExportModal: false });
+    await this.props.generateExportByUUID(this.props.nodeData.uuid);
   };
 
   toggleHidden = () => {
@@ -152,7 +168,9 @@ class NodeCardHeaderFull extends Component {
   renderContextualButtons = () => {
     switch (this.props.nodeData.type) {
       case 'package':
-        if (this.props.nodeData.metadata && this.props.nodeData.metadata.expanded) {
+        if (this.props.nodeData.metadata && this.props.nodeData.metadata.importing) {
+          return <Fragment></Fragment>;
+        } else if (this.props.nodeData.metadata && this.props.nodeData.metadata.expanded) {
           return (
             <Tooltip title={'undo import'} mouseEnterDelay={1.1}>
               <li>
@@ -196,7 +214,7 @@ class NodeCardHeaderFull extends Component {
           <li>
             <button
               onClick={(e) => {
-                this.props.generateExportByUUID(this.props.nodeData.uuid);
+                this.toggleExportModal();
               }}
             >
               <Icon type={'gift'} theme='outlined' className='full-card-button' />
@@ -246,6 +264,7 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
+          {this.renderExportButton()}
           <Tooltip
             title={this.state.hidden ? 'hidden from explore' : 'visible in explore'}
             mouseEnterDelay={1.1}
@@ -279,7 +298,6 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
-          {this.renderExportButton()}
           <Tooltip title={'delete'} mouseEnterDelay={1.1}>
             <li>
               <button onClick={(e) => this.toggleDeleteModal()}>
@@ -301,6 +319,23 @@ class NodeCardHeaderFull extends Component {
         >
           <p>
             Are you sure you want to delete <b>{this.props.nodeData.name || 'untitled'}</b>?
+          </p>
+        </Modal>
+        <Modal
+          title='Confirm Export'
+          visible={this.state.showExportModal}
+          className='delete-modal'
+          centered
+          onOk={this.exportHandler}
+          // okType='success'
+          okText='Generate'
+          closable={false}
+          onCancel={this.toggleExportModal}
+        >
+          <p>
+            Generate export package from <b>{this.props.nodeData.name || 'untitled'}</b>? The export
+            will contain <b>{this.props.nodeData.name || 'untitled'}</b> along with all its
+            associations, and appear in your pinboard when it is completed.
           </p>
         </Modal>
       </div>
