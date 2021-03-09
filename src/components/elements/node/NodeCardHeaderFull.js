@@ -256,11 +256,7 @@ class NodeCardHeaderFull extends Component {
           <Tooltip title={'pin'} mouseEnterDelay={1.1}>
             <li>
               <button onClick={(e) => this.togglePinned()}>
-                <Icon
-                  type={'pushpin'}
-                  theme={this.state.pinnedState}
-                  className='full-card-button'
-                />
+                <Icon type={'heart'} theme={this.state.pinnedState} className='full-card-button' />
               </button>
             </li>
           </Tooltip>

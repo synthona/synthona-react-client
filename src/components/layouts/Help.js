@@ -106,7 +106,7 @@ class Help extends Component {
               </p>
               <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
               <h3>
-                Pushpin <Icon type={'pushpin'} theme='outlined' />
+                Pushpin <Icon type={'heart'} theme='outlined' />
               </h3>
               <p>
                 This button will allow you to pin a node to your pinboard! The Pinboard is a sort of
@@ -114,7 +114,7 @@ class Help extends Component {
                 use pushpins on in real life to hang sticky notes on! Store stuff on the pinboard
                 for a short time or a long time, it's up to you!
               </p>
-              <Icon type={'pushpin'} theme='outlined' className='help-icon' />
+              <Icon type={'heart'} theme='outlined' className='help-icon' />
               <h3>
                 Open In Browser <Icon type={'global'} theme='outlined' />
               </h3>

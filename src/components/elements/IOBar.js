@@ -223,7 +223,7 @@ class IOBar extends Component {
             </li>
             <li className='nav-item io-sider-button' style={{ marginRight: '0.1rem' }}>
               <Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
-                <Icon type={'pushpin'} theme='outlined' />
+                <Icon type={'heart'} theme='outlined' />
               </Link>
             </li>
             <li className='nav-item create-node-button'>
