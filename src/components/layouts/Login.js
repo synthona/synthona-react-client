@@ -13,7 +13,7 @@ const { Content, Footer } = Layout;
 
 class Login extends Component {
   componentDidMount() {
-    document.title = 'synthona';
+    document.title = 'SYNTHONA';
   }
 
   getUsername = () => {
@@ -23,7 +23,7 @@ class Login extends Component {
     // } else {
     //   return 'synthona';
     // }
-    return 'synthona';
+    return 'SYNTHONA';
   };
 
   onSubmit = (values, { setSubmitting }) => {
@@ -52,7 +52,7 @@ class Login extends Component {
                       {' '}
                       ✨
                     </span>
-                    synthona
+                    SYNTHONA
                     <span
                       role='img'
                       aria-label='jsx-a11y/accessible-emoji'
