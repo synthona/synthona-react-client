@@ -17,6 +17,7 @@ import './css/GraphBrowser.less';
 import MainSider from '../elements/MainSider';
 import AssociationSider from '../elements/association/AssociationSider';
 import AssociationList from '../elements/association/AssociationList';
+import IOBar from '../elements/IOBar';
 // destructure antd layout
 const { Content } = Layout;
 
@@ -258,6 +259,7 @@ class GraphBrowser extends Component {
             }}
           >
             {/*  <IOBar />*/}
+            <IOBar />
             <div
               className='graph-container'
               // style={this.renderBackgroundImage()}

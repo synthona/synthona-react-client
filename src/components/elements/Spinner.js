@@ -11,8 +11,8 @@ const Spinner = (props) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#272727',
         }}
+        className='loading-spinner'
         size='large'
       ></Spin>
     </Layout>

@@ -77,16 +77,24 @@ class PinHeader extends Component {
             </li>
             <li className='nav-item io-sider-button' style={{ marginRight: '0.5rem' }}>
               <Link type='default' to={`/graph`}>
-                <Icon type={'deployment-unit'} theme='outlined' />
+                <Icon
+                  type={'deployment-unit'}
+                  theme='outlined'
+                  // style={{ color: '#ec486c' }}
+                />
               </Link>
             </li>
             <li className='nav-item io-sider-button'>
               <Link type='default' to={`/`}>
-                <Icon type={'home'} theme='outlined' />
+                <Icon
+                  type={'home'}
+                  theme='outlined'
+                  // style={{ color: '#3ce458' }}
+                />
               </Link>
             </li>
             <li className='nav-item'>
-              <p style={{ color: 'grey', paddingLeft: '0.7rem' }}>pinboard</p>
+              <p style={{ color: 'grey', paddingLeft: '0.7rem' }}>starboard</p>
             </li>
           </ul>
         </Header>

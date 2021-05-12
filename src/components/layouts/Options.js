@@ -476,7 +476,7 @@ class Options extends Component {
                   <p>
                     Generate export package from <b>{this.props.user.displayName || 'untitled'}</b>?
                     The export will contain the profile picture, header, bio, along with all this
-                    user's nodes & associations, and appear in your pinboard when it is completed.
+                    user's nodes & associations, and appear in your starboard when it is completed.
                     This may take a few minutes.
                   </p>
                 </Modal>

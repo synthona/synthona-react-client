@@ -67,7 +67,7 @@ class Help extends Component {
               <ul>
                 <li>CMD/CTRL+G - jump to the graph constellation browser</li>
                 <li>CMD/CTRL+H - jump to the home page</li>
-                <li>CMD/CTRL+J - jump to pinboard</li>
+                <li>CMD/CTRL+J - jump to starboard</li>
                 <li>CMD/CTRL+OPTION/ALT+1 - save the current node to the quick menu</li>
                 <li>CMD/CTRL+1 - jump to #1 on the quick menu if you have saved something there</li>
                 <li>Quick-Menu - the quick menu will also work with the number keys 1-9</li>
@@ -106,15 +106,15 @@ class Help extends Component {
               </p>
               <Icon type={'deployment-unit'} theme='outlined' className='help-icon' />
               <h3>
-                Pushpin <Icon type={'heart'} theme='outlined' />
+                Star <Icon type={'star'} theme='outlined' />
               </h3>
               <p>
-                This button will allow you to pin a node to your pinboard! The Pinboard is a sort of
-                top-level root page, but you can think of it as one of those tackboards you would
-                use pushpins on in real life to hang sticky notes on! Store stuff on the pinboard
+                This button will allow you to pin a node to your starboard! The Starboard is a sort
+                of top-level root page, but you can think of it as one of those tackboards you would
+                use pushpins on in real life to hang sticky notes on! Store stuff on the starboard
                 for a short time or a long time, it's up to you!
               </p>
-              <Icon type={'heart'} theme='outlined' className='help-icon' />
+              <Icon type={'star'} theme='outlined' className='help-icon' />
               <h3>
                 Open In Browser <Icon type={'global'} theme='outlined' />
               </h3>
@@ -278,12 +278,8 @@ class Help extends Component {
                 >
                   patreon
                 </a>{' '}
-                you can contribute to, a{' '}
-                <a href='https://ko-fi.com/hyperpoints' target='_blank' rel='noopener noreferrer'>
-                  ko-fi
-                </a>{' '}
-                linked to my personal twitter, and I may add more options in the future, for example
-                I am considering creating an account on{' '}
+                and I may add more options in the future, for example I am considering creating an
+                account on{' '}
                 <a href='https://opencollective.com/' target='_blank' rel='noopener noreferrer'>
                   open-collective
                 </a>{' '}

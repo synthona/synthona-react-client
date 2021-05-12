@@ -11,7 +11,24 @@ const Audio = (props) => {
       <li className='nodelist-item'>
         <NodeCardHeader node={props.node} />
         <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
-          <Icon type={'sound'} theme='outlined' className='node-card-icon' />
+          {/*          <Icon
+            type={'sound'}
+            theme='outlined'
+            className='node-card-icon'
+            style={{ height: '11rem', paddingTop: '3rem' }}
+          /> */}
+          <div className='nodelist-item-audio'></div>
+          <audio
+            style={{
+              textAlign: 'center',
+              backgroundColor: 'white',
+              width: '100%',
+              borderRadius: '0',
+            }}
+            src={props.node.preview}
+            controls
+            type='audio/wav'
+          ></audio>
         </Link>
       </li>
     );
@@ -30,7 +47,19 @@ const Audio = (props) => {
     return (
       <div className='full-node-item'>
         <NodeCardHeaderFull />
-        <a
+        <audio
+          style={{
+            textAlign: 'center',
+            backgroundColor: 'white',
+            width: '100%',
+            borderRadius: '0',
+          }}
+          src={props.node.preview}
+          controls
+          type='audio/wav'
+        ></audio>
+        {/*         
+          <a
           href={props.node.preview}
           target='_blank'
           rel='noopener noreferrer'
@@ -47,7 +76,7 @@ const Audio = (props) => {
               padding: '3rem',
             }}
           />
-        </a>
+        </a>*/}
       </div>
     );
   };

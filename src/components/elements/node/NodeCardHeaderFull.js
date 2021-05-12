@@ -256,7 +256,7 @@ class NodeCardHeaderFull extends Component {
           <Tooltip title={'pin'} mouseEnterDelay={1.1}>
             <li>
               <button onClick={(e) => this.togglePinned()}>
-                <Icon type={'heart'} theme={this.state.pinnedState} className='full-card-button' />
+                <Icon type={'star'} theme={this.state.pinnedState} className='full-card-button' />
               </button>
             </li>
           </Tooltip>
@@ -332,7 +332,7 @@ class NodeCardHeaderFull extends Component {
           <p>
             Generate export package from <b>{this.props.nodeData.name || 'untitled'}</b>? The export
             will contain <b>{this.props.nodeData.name || 'untitled'}</b> along with all its
-            associations, and appear in your pinboard when it is completed.
+            associations, and appear in your starboard when it is completed.
           </p>
         </Modal>
       </div>

@@ -86,7 +86,7 @@ class MainSider extends Component {
             <Item className='sider-menu-item sider-title'>
               <Link to={`/profile/${this.props.user.username}`}>
                 {/*  <b>@{this.props.user.username}</b>*/}
-                <Icon type={'smile'} theme='outlined' style={{ margin: '0' }} /> <b>Profile</b>
+                <Icon type={'sketch'} theme='outlined' style={{ margin: '0' }} /> <b>Profile</b>
               </Link>
             </Item>
             <Item className='sider-menu-item'>

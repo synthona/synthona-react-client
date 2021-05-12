@@ -52,7 +52,7 @@ class Login extends Component {
                       {' '}
                       ✨
                     </span>
-                    SYNTHONA
+                    synthona
                     <span
                       role='img'
                       aria-label='jsx-a11y/accessible-emoji'

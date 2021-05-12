@@ -23,7 +23,7 @@ class IOBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: this.props.query.searchQuery || '',
+      input: '',
       nodeTypes: this.props.query.type || 'all',
       createType: null,
       queryType: null,
@@ -178,6 +178,7 @@ class IOBar extends Component {
           <Option value='all'>all</Option>
           <Option value='url'>urls</Option>
           <Option value='text'>text</Option>
+          <Option value='audio'>audio</Option>
           <Option value='file'>file</Option>
           <Option value='image'>images</Option>
           <Option value='collection'>collections</Option>
@@ -213,17 +214,29 @@ class IOBar extends Component {
             </li>
             <li className='nav-item io-sider-button' style={{ marginRight: '0.4rem' }}>
               <Link type='default' to={`/graph`}>
-                <Icon type={'deployment-unit'} theme='outlined' />
+                <Icon
+                  type={'deployment-unit'}
+                  theme='outlined'
+                  // style={{ color: '#ec486c' }}
+                />
               </Link>
             </li>
             <li className='nav-item io-sider-button' style={{ marginRight: '0.5rem' }}>
               <Link type='default' to={`/`}>
-                <Icon type={'home'} theme='outlined' />
+                <Icon
+                  type={'home'}
+                  theme='outlined'
+                  // style={{ color: '#3ce458' }}
+                />
               </Link>
             </li>
             <li className='nav-item io-sider-button' style={{ marginRight: '0.1rem' }}>
               <Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
-                <Icon type={'heart'} theme='outlined' />
+                <Icon
+                  type={'star'}
+                  theme='outlined'
+                  // style={{ color: 'yellow' }}
+                />
               </Link>
             </li>
             <li className='nav-item create-node-button'>
