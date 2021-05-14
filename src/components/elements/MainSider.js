@@ -96,7 +96,7 @@ class MainSider extends Component {
             </Item>
             <Item className='sider-menu-item'>
               <Link to={`/pins`} onClick={(e) => this.props.hideComponent('mainSider')}>
-                Pinboard
+                Starboard
               </Link>
             </Item>
             <Item className='sider-menu-item'>
