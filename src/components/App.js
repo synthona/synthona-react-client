@@ -6,6 +6,7 @@ import '../app.less';
 import { isAuthenticated } from '../api/redux/actions';
 // custom components
 import Login from './layouts/Login';
+import ForgotPassword from './layouts/ForgotPassword';
 import Home from './layouts/Home';
 import Profile from './layouts/Profile';
 import Options from './layouts/Options';
@@ -49,6 +50,7 @@ class App extends Component {
         <Switch>
           <Route path='/' exact component={Login} />
           <Route path='/create-account' exact component={CreateAccount} />
+          <Route path='/forgot-password' exact component={ForgotPassword} />
           <Route component={Login} />
         </Switch>
       );

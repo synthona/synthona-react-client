@@ -47,7 +47,7 @@ export const fetchNodes = (query) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: FETCH_NODES_ERROR });
     dispatch({ type: RESET_APP });
-    message.error('Could not fetch items', 1);
+    // message.error('Could not fetch items', 1);
     history.push('/');
   }
 };

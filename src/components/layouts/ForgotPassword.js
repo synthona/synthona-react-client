@@ -5,30 +5,20 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Layout, Card } from 'antd';
 // custom code
-import { signIn } from '../../api/redux/actions';
+import { forgotPassword } from '../../api/redux/actions';
 import './css/Login.less';
 
 // destructure antd
 const { Content, Footer } = Layout;
 
-class Login extends Component {
+class ForgotPassword extends Component {
   componentDidMount() {
-    document.title = 'synthona';
+    document.title = 'forgot password';
   }
-
-  getUsername = () => {
-    // const username = localStorage.getItem('displayName');
-    // if (username) {
-    //   return username;
-    // } else {
-    //   return 'synthona';
-    // }
-    return 'synthona';
-  };
 
   onSubmit = (values, { setSubmitting }) => {
     setSubmitting(false);
-    this.props.signIn(values);
+    this.props.forgotPassword(values);
   };
 
   render() {
@@ -44,6 +34,7 @@ class Login extends Component {
               {({ isSubmitting }) => (
                 <Form className='login-form'>
                   <h1 className='login-title'>
+                    {' '}
                     <span
                       role='img'
                       aria-label='jsx-a11y/accessible-emoji'
@@ -52,33 +43,37 @@ class Login extends Component {
                       {' '}
                       ✨
                     </span>
-                    synthona
+                    forgot password{' '}
                     <span
                       role='img'
                       aria-label='jsx-a11y/accessible-emoji'
                       style={{ paddingRight: '0.5rem' }}
                     >
-                      {'  '}✨
+                      {' '}
+                      ✨
                     </span>
                   </h1>
                   <Field type='email' name='email' placeholder='email' className='login-field' />
                   <ErrorMessage name='email' component='div' className='login-error' />
                   <Field
                     type='password'
-                    name='password'
-                    placeholder='password'
+                    name='newPassword'
+                    placeholder='new password'
                     className='login-field'
                   />
-                  <ErrorMessage name='password' component='div' className='login-error' />
-                  <ErrorMessage name='confirmPassword' component='div' className='login-error' />
+                  <ErrorMessage name='newPassword' component='div' className='login-error' />
+                  <Field
+                    type='password'
+                    name='confirmNewPassword'
+                    placeholder='confirm new password'
+                    className='login-field'
+                  />
+                  <ErrorMessage name='confirmNewPassword' component='div' className='login-error' />
                   <button type='submit' disabled={isSubmitting} className='login-submit'>
-                    login
+                    reset
                   </button>
-                  <Link to='/create-account' className='login-signup'>
-                    create account
-                  </Link>
-                  <Link to='/forgot-password' className='login-signup'>
-                    forgot password
+                  <Link to='/' className='login-signup'>
+                    back to login
                   </Link>
                 </Form>
               )}
@@ -93,11 +88,14 @@ class Login extends Component {
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email('E-mail is not valid!'),
-  password: Yup.string().required().min(5, 'Password has to be longer than 6 characters!'),
+  newPassword: Yup.string().required('new password is required'),
+  confirmNewPassword: Yup.string()
+    .required('please confirm new password')
+    .oneOf([Yup.ref('newPassword')], "Your passwords don't match"),
 });
 
 const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn };
 };
 
-export default connect(mapStateToProps, { signIn })(Login);
+export default connect(mapStateToProps, { forgotPassword })(ForgotPassword);

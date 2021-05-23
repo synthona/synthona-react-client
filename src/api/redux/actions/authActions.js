@@ -74,6 +74,21 @@ export const changePassword = (formValues) => async (dispatch) => {
   }
 };
 
+export const forgotPassword = (formValues) => async (dispatch) => {
+  try {
+    const response = await instance.put('/auth/forgot-password', {
+      email: formValues.email,
+      newPassword: formValues.newPassword,
+      confirmNewPassword: formValues.confirmNewPassword,
+    });
+    if (response.status === 200) {
+      window.location.replace('/');
+    }
+  } catch (err) {
+    message.error('something went wrong', 1);
+  }
+};
+
 export const isAuthenticated = () => async (dispatch) => {
   try {
     dispatch({ type: REFRESH_AUTH });
@@ -81,7 +96,5 @@ export const isAuthenticated = () => async (dispatch) => {
     dispatch({ type: REFRESH_AUTH_SUCCESS, payload: response.data });
   } catch (err) {
     dispatch({ type: REFRESH_AUTH_ERROR });
-    // send page redirect for the user
-    history.push('/');
   }
 };
