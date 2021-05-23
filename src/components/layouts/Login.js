@@ -77,12 +77,14 @@ class Login extends Component {
                   <Link to='/create-account' className='login-signup'>
                     create account
                   </Link>
-                  <Link to='/forgot-password' className='login-signup'>
-                    forgot password
-                  </Link>
                 </Form>
               )}
             </Formik>
+            <div className='login-after-card'>
+              <Link to='/forgot-password' className='login-forgot-password'>
+                lost password
+              </Link>
+            </div>
           </Card>
         </Content>
         <Footer />

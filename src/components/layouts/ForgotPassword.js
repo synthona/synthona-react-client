@@ -43,7 +43,7 @@ class ForgotPassword extends Component {
                       {' '}
                       ✨
                     </span>
-                    forgot password{' '}
+                    lost password{' '}
                     <span
                       role='img'
                       aria-label='jsx-a11y/accessible-emoji'
