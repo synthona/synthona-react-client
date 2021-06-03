@@ -18,8 +18,8 @@ const User = (props) => {
             window.location.replace(`/profile/${props.node.path}`);
           }}
           onContextMenu={(e) => {
-            e.preventDefault();
-            props.toggleHeader();
+            // e.preventDefault();
+            // props.toggleHeader();
           }}
         >
           <img

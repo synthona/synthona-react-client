@@ -8,7 +8,7 @@ import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeader
 
 const Collection = (props) => {
   const onCollectionContextMenu = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // props.toggleHeader();
   };
 
