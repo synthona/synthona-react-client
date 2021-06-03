@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Drawer, AutoComplete } from 'antd';
+import { Drawer, AutoComplete, Tooltip } from 'antd';
 import {
   signOut,
   hideComponent,
@@ -57,7 +57,13 @@ class AssociationSider extends Component {
         }),
       });
       const newValues = result.map((node) => {
-        return <Option key={node.uuid}>{node.name}</Option>;
+        return (
+          <Option key={node.uuid}>
+            <Tooltip title={node.name} mouseEnterDelay={0.7} placement={'left'}>
+              {node.name}
+            </Tooltip>
+          </Option>
+        );
       });
       this.setState({ autocompleteOptions: newValues });
     }

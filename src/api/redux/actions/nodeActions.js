@@ -77,7 +77,7 @@ export const searchNodes = (query) => async (dispatch) => {
   }
 };
 
-// edit node handler
+// update node handler
 export const updateNode = (node) => async (dispatch) => {
   dispatch({ type: UPDATE_NODE });
   try {

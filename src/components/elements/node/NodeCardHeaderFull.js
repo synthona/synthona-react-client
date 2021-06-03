@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-import { Icon, Modal, Tooltip } from 'antd';
+import { Icon, Modal, Tooltip, message } from 'antd';
+import { validUrl, isImageUrl } from '../../../utils/inputValidation';
 import {
   showComponent,
   unpackSynthonaImport,
@@ -17,6 +17,7 @@ class NodeCardHeaderFull extends Component {
     super(props);
     this.state = {
       name: this.props.nodeData.name,
+      preview: this.props.nodeData.preview,
       hidden: this.props.nodeData.hidden,
       hiddenIcon: 'eye-invisible',
       searchable: this.props.nodeData.searchable,
@@ -26,6 +27,7 @@ class NodeCardHeaderFull extends Component {
       editable: false,
       showDeleteModal: null,
       showExportModal: null,
+      showUrlPreviewImageModal: null,
     };
   }
 
@@ -88,6 +90,25 @@ class NodeCardHeaderFull extends Component {
   exportHandler = async () => {
     this.setState({ showExportModal: false });
     await this.props.generateExportByUUID(this.props.nodeData.uuid);
+  };
+
+  // show modal to confirm deletion
+  toggleUrlPreviewImageModal = () => {
+    if (this.state.showUrlPreviewImageModal) {
+      this.setState({ showUrlPreviewImageModal: false });
+    } else {
+      this.setState({ showUrlPreviewImageModal: true });
+    }
+  };
+
+  // select an image.
+  setUrlPreviewImage = (preview) => {
+    // update the URL
+    if (isImageUrl(preview) && validUrl(preview)) {
+      message.success('updated the preview image');
+      this.toggleUrlPreviewImageModal();
+      this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, preview: preview });
+    }
   };
 
   toggleHidden = () => {
@@ -201,6 +222,21 @@ class NodeCardHeaderFull extends Component {
             </Tooltip>
           );
         }
+      case 'url':
+        return (
+          <Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
+            <li>
+              <button
+                onClick={(e) => {
+                  // show the modal
+                  this.toggleUrlPreviewImageModal();
+                }}
+              >
+                <Icon type={'picture'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
+        );
       default:
         return;
     }
@@ -231,7 +267,6 @@ class NodeCardHeaderFull extends Component {
         {this.renderTitle()}
         {/* <p className='full-card-options-date'>{this.props.nodeData.updatedAt}</p> */}
         <ul className='full-card-buttons-list'>
-          {this.renderContextualButtons()}
           <Tooltip title={'associations'} mouseEnterDelay={1.1}>
             <li>
               <button
@@ -260,6 +295,7 @@ class NodeCardHeaderFull extends Component {
               </button>
             </li>
           </Tooltip>
+          {this.renderContextualButtons()}
           {this.renderExportButton()}
           <Tooltip
             title={this.state.hidden ? 'hidden from explore' : 'visible in explore'}
@@ -334,6 +370,36 @@ class NodeCardHeaderFull extends Component {
             will contain <b>{this.props.nodeData.name || 'untitled'}</b> along with all its
             associations, and appear in your starboard when it is completed.
           </p>
+        </Modal>
+        <Modal
+          title='Preview Image'
+          visible={this.state.showUrlPreviewImageModal}
+          className='full-card-modal'
+          centered
+          onOk={(e) => this.setUrlPreviewImage(this.state.preview)}
+          afterClose={() => {
+            document.body.style.removeProperty('overflow');
+          }}
+          okText='save'
+          closable={false}
+          onCancel={(e) => {
+            this.setState({ preview: this.props.nodeData.preview });
+            this.toggleUrlPreviewImageModal();
+            window.getSelection().removeAllRanges();
+          }}
+        >
+          <input
+            type='text'
+            className='full-card-modal-input'
+            autoFocus
+            maxLength='250'
+            onFocus={(e) => {
+              e.target.select();
+            }}
+            placeholder='image URL'
+            value={this.state.preview}
+            onChange={(e) => this.setState({ preview: e.target.value })}
+          ></input>
         </Modal>
       </div>
     );
