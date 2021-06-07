@@ -108,6 +108,8 @@ class NodeCardHeaderFull extends Component {
       message.success('updated the preview image');
       this.toggleUrlPreviewImageModal();
       this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, preview: preview });
+    } else {
+      message.error('there was a problem setting the preview image', 1);
     }
   };
 
@@ -397,7 +399,7 @@ class NodeCardHeaderFull extends Component {
               e.target.select();
             }}
             placeholder='image URL'
-            value={this.state.preview}
+            value={this.state.preview || ''}
             onChange={(e) => this.setState({ preview: e.target.value })}
           ></input>
         </Modal>

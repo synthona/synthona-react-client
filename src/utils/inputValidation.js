@@ -8,5 +8,5 @@ export const validUrl = (value) => {
 };
 
 export const isImageUrl = (url) => {
-  return url.match(/\..+(jpeg|jpg|gif|png)/) != null;
+  return url.match(/\..+(jpeg|jpg|gif|png|webp)/) != null;
 };

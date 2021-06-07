@@ -227,6 +227,8 @@ class GraphBrowser extends Component {
       // move the dragged item to the top
       var sel = select(this);
       sel.raise();
+      // hide cursor
+      document.body.style.cursor = 'none';
       // handle updating of coords
       if (!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
@@ -239,6 +241,8 @@ class GraphBrowser extends Component {
     }
 
     function dragended(event, d) {
+      // show cursor
+      document.body.style.cursor = 'auto';
       if (!event.active) simulation.alphaTarget(0);
       d.fx = null;
       d.fy = null;

@@ -6,6 +6,39 @@ import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeader
 const Url = (props) => {
   const urlIcon = 'bulb';
 
+  const renderFullCardPreview = () => {
+    // if the URL is a youtube embed, lets actually load the video here
+    if (props.node.path.includes('https://www.youtube.com/embed/')) {
+      return (
+        <iframe
+          title={props.node.name}
+          src={props.node.path}
+          style={{ width: '100%', height: '100vh', border: 'none' }}
+          allowFullScreen
+          sandbox={
+            props.node.path.includes('https://www.youtube.com/embed/')
+              ? 'allow-scripts allow-same-origin allow-popups'
+              : ''
+          }
+          id='node-card-iframe'
+        ></iframe>
+      );
+    }
+    // for anything else just display a link out to it
+    else {
+      return (
+        <a
+          href={props.node.path}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={{ width: '100%' }}
+        >
+          {renderPreview()}
+        </a>
+      );
+    }
+  };
+
   const renderPreview = () => {
     if (props.node.preview) {
       return (
@@ -44,9 +77,7 @@ const Url = (props) => {
         {props.renderHeader()}
         <a
           href={`/associations/${props.node.uuid}`}
-          // target='_blank'
           rel='noopener noreferrer'
-          // onClick={(e) => history.push(`/associations/${props.node.uuid}`)}
           onClick={(e) => {
             e.preventDefault();
             props.handleClick();
@@ -92,16 +123,8 @@ const Url = (props) => {
     return (
       <div className='full-node-item'>
         <NodeCardHeaderFull />
-        {/* <p>{props.node.preview}</p> */}
-        <a
-          href={props.node.path}
-          target='_blank'
-          rel='noopener noreferrer'
-          // onClick={(e) => props.markNodeView(props.node)}
-          style={{ width: '100%' }}
-        >
-          {renderPreview()}
-        </a>
+        {renderFullCardPreview()}
+        {/* <p>{props.node.comment}</p> */}
       </div>
     );
   };

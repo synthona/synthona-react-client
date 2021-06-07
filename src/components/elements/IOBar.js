@@ -158,6 +158,7 @@ class IOBar extends Component {
     // Listen for uploading local file, then save to server
     input.onchange = async () => {
       const file = input.files[0];
+      console.log(input.files);
       await this.props.createFileNode(file, this.state.input, linkedNode);
       // clear the input bar
       this.setState({ input: '' });
