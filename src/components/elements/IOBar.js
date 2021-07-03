@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import history from '../../utils/history';
+import { isElectron } from '../../utils/environment';
 import { Link } from 'react-router-dom';
 import { Layout, Button, Input, Select, Icon, message } from 'antd';
 // custom code
@@ -8,7 +9,7 @@ import { validUrl, isImageUrl } from '../../utils/inputValidation';
 import './css/IOBar.less';
 import {
   signOut,
-  createFileNode,
+  linkFileNodes,
   createUrlNode,
   createNode,
   searchNodes,
@@ -52,11 +53,16 @@ class IOBar extends Component {
   };
 
   toggleMainSider = async () => {
-    // await this.props.showComponent('mainSider');
     if (this.props.mainSider) {
       this.props.hideComponent('mainSider');
     } else {
       this.props.showComponent('mainSider');
+    }
+  };
+
+  renderCreateFileNodeOption = () => {
+    if (isElectron() === true) {
+      return <Option value='file'>files</Option>;
     }
   };
 
@@ -94,9 +100,6 @@ class IOBar extends Component {
         // redirect
         history.push('/');
         break;
-      // case 'image':
-      //   this.selectLocalImage(linkedNode);
-      //   break;
       case 'file':
         this.selectLocalFile(linkedNode);
         break;
@@ -154,12 +157,15 @@ class IOBar extends Component {
   selectLocalFile = (linkedNode) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
+    input.setAttribute('multiple', true);
     input.click();
     // Listen for uploading local file, then save to server
     input.onchange = async () => {
-      const file = input.files[0];
-      console.log(input.files);
-      await this.props.createFileNode(file, this.state.input, linkedNode);
+      let fileList = [];
+      for (let file of input.files) {
+        fileList.push({ name: file.name, path: file.path, type: file.type });
+      }
+      await this.props.linkFileNodes(fileList, linkedNode);
       // clear the input bar
       this.setState({ input: '' });
       history.push('/');
@@ -178,9 +184,8 @@ class IOBar extends Component {
         >
           <Option value='all'>all</Option>
           <Option value='url'>urls</Option>
-          <Option value='text'>text</Option>
-          <Option value='audio'>audio</Option>
           <Option value='file'>file</Option>
+          <Option value='text'>text</Option>
           <Option value='image'>images</Option>
           <Option value='collection'>collections</Option>
         </Select>
@@ -195,8 +200,8 @@ class IOBar extends Component {
           onChange={(value) => this.setState({ nodeTypes: value })}
         >
           <Option value='text'>text</Option>
+          {this.renderCreateFileNodeOption()}
           <Option value='url'>url</Option>
-          <Option value='file'>file</Option>
           <Option value='collection'>collection</Option>
         </Select>
       );
@@ -277,7 +282,7 @@ export default connect(mapStateToProps, {
   signOut,
   searchNodes,
   createNode,
-  createFileNode,
+  linkFileNodes,
   createUrlNode,
   showComponent,
   hideComponent,

@@ -1,7 +1,12 @@
 // import the default node configurations
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { updateLinkStrength, hideComponent } from '../../api/redux/actions';
+import {
+  updateLinkStrength,
+  hideComponent,
+  launchFileNode,
+  openFileInExplorer,
+} from '../../api/redux/actions';
 import { Text, Image, Url, File, Audio, Package, Zip, Collection, User } from './core/index';
 import NodeCardHeader from '../../components/elements/node/NodeCardHeader';
 
@@ -69,6 +74,8 @@ class NodeRenderer extends Component {
             handleAssociatonClick={this.handleAssociatonClick}
             toggleHeader={this.toggleHeader}
             renderHeader={this.renderHeader}
+            launchExplorer={this.props.openFileInExplorer}
+            launchFile={this.props.launchFileNode}
           />
         );
       case 'url':
@@ -89,6 +96,8 @@ class NodeRenderer extends Component {
             node={this.props.node}
             handleClick={this.handleNodeClick}
             handleAssociatonClick={this.handleAssociatonClick}
+            launchFile={this.props.launchFileNode}
+            launchExplorer={this.props.openFileInExplorer}
           />
         );
       case 'audio':
@@ -98,6 +107,7 @@ class NodeRenderer extends Component {
             node={this.props.node}
             handleClick={this.handleNodeClick}
             handleAssociatonClick={this.handleAssociatonClick}
+            launchFile={this.props.launchFileNode}
           />
         );
       case 'package':
@@ -107,6 +117,7 @@ class NodeRenderer extends Component {
             node={this.props.node}
             handleClick={this.handleNodeClick}
             handleAssociatonClick={this.handleAssociatonClick}
+            launchExplorer={this.props.openFileInExplorer}
           />
         );
       case 'zip':
@@ -150,4 +161,9 @@ class NodeRenderer extends Component {
   }
 }
 
-export default connect(null, { updateLinkStrength, hideComponent })(NodeRenderer);
+export default connect(null, {
+  updateLinkStrength,
+  hideComponent,
+  launchFileNode,
+  openFileInExplorer,
+})(NodeRenderer);

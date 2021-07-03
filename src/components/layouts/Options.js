@@ -40,8 +40,8 @@ class Options extends Component {
       email: '',
       displayName: '',
       bio: '',
-      avatar: '',
-      header: '',
+      avatar: null,
+      header: null,
     };
   }
 

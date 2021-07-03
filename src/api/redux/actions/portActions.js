@@ -5,11 +5,11 @@ import { message } from 'antd';
 
 // export the instance data and get the url of the file
 export const generateInstanceExport = () => async (dispatch) => {
+  message.success('generating export!', 2);
   try {
     dispatch({ type: GENERATE_EXPORT });
     const response = await instance.put('/port/export/all');
     if (response.status === 200) {
-      message.success('generating export!', 2);
       dispatch({ type: GENERATE_EXPORT_SUCCESS, payload: response.data });
       // redirect
       history.push('/');
@@ -23,11 +23,11 @@ export const generateInstanceExport = () => async (dispatch) => {
 
 // generate export based on a node
 export const generateExportByUUID = (uuid) => async (dispatch) => {
+  message.success('generating export!', 2);
   try {
     dispatch({ type: GENERATE_EXPORT });
     const response = await instance.put('/port/export/', { uuid });
     if (response.status === 200) {
-      message.success('generating export!', 2);
       dispatch({ type: GENERATE_EXPORT_SUCCESS, payload: response.data });
       // redirect
       history.push('/');

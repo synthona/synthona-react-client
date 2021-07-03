@@ -6,12 +6,46 @@ import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeader
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 
 const File = (props) => {
+  const renderPreview = () => {
+    if (props.node.preview) {
+      return (
+        <Fragment>
+          <img
+            src={props.node.preview}
+            alt={props.node.name}
+            style={{
+              objectFit: 'cover',
+              minHeight: '100%',
+              width: '100%',
+            }}
+          ></img>
+        </Fragment>
+      );
+    } else {
+      return (
+        <Icon
+          type={'thunderbolt'}
+          style={{ color: 'white' }}
+          theme='filled'
+          className='node-card-icon'
+        />
+      );
+    }
+  };
+
   const nodeCard = () => {
     return (
       <li className='nodelist-item'>
         <NodeCardHeader node={props.node} />
-        <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
-          <Icon type={'file'} theme='outlined' className='node-card-icon' />
+        <Link
+          to={`/associations/${props.node.uuid}`}
+          onClick={(e) => props.handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.launchFile(props.node.uuid);
+          }}
+        >
+          {renderPreview()}
         </Link>
       </li>
     );
@@ -30,24 +64,20 @@ const File = (props) => {
     return (
       <div className='full-node-item'>
         <NodeCardHeaderFull />
-        <a
-          href={props.node.preview}
-          target='_blank'
-          rel='noopener noreferrer'
-          style={{ width: '100%' }}
+        <Link
+          to={`/associations/${props.node.uuid}`}
+          onClick={(e) => {
+            e.preventDefault();
+            props.launchFile(props.node.uuid);
+          }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.launchExplorer(props.node.uuid);
+            // props.toggleHeader();
+          }}
         >
-          <Icon
-            type={'file'}
-            theme='outlined'
-            style={{
-              fontSize: '5rem',
-              color: '#b8b8b8',
-              display: 'block',
-              textAlign: 'center',
-              padding: '3rem',
-            }}
-          />
-        </a>
+          <Fragment>{renderPreview()}</Fragment>
+        </Link>
       </div>
     );
   };

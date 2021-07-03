@@ -10,7 +10,15 @@ const Audio = (props) => {
     return (
       <li className='nodelist-item'>
         <NodeCardHeader node={props.node} />
-        <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+        <Link
+          to={`/associations/${props.node.uuid}`}
+          onClick={(e) => props.handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.launchFile(props.node.uuid);
+            // props.toggleHeader();
+          }}
+        >
           {/*          <Icon
             type={'sound'}
             theme='outlined'

@@ -84,8 +84,9 @@ const Url = (props) => {
             window.location.replace(`/associations/${props.node.uuid}`);
           }}
           onContextMenu={(e) => {
-            // e.preventDefault();
+            e.preventDefault();
             // props.toggleHeader();
+            window.open(props.node.path, '_blank');
           }}
           style={{ width: '100%' }}
         >

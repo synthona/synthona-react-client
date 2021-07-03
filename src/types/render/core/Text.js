@@ -9,7 +9,15 @@ const Text = (props) => {
     return (
       <li className='nodelist-item'>
         <NodeCardHeader node={props.node} />
-        <Link to={`/edit/text/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
+        <Link
+          to={`/edit/text/${props.node.uuid}`}
+          onClick={(e) => props.handleClick()}
+          onContextMenu={(e) => {
+            // e.preventDefault();
+            // prevent the text from being selected
+            window.getSelection().removeAllRanges();
+          }}
+        >
           <p>{props.node.preview}</p>
         </Link>
       </li>

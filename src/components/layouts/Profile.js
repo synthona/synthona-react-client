@@ -26,8 +26,8 @@ class Profile extends Component {
       username: '',
       displayName: '',
       bio: '',
-      avatar: '',
-      header: '',
+      avatar: null,
+      header: null,
       avatarModal: false,
     };
   }

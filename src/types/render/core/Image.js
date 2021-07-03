@@ -16,7 +16,8 @@ const Image = (props) => {
             window.location.replace(`/associations/${props.node.uuid}`);
           }}
           onContextMenu={(e) => {
-            // e.preventDefault();
+            e.preventDefault();
+            props.launchFile(props.node.uuid);
             // props.toggleHeader();
           }}
         >
@@ -57,7 +58,15 @@ const Image = (props) => {
     return (
       <div className='full-node-item'>
         <NodeCardHeaderFull />
-        <img src={props.node.preview} alt={props.node.name}></img>
+        <img
+          src={props.node.preview}
+          alt={props.node.name}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.launchExplorer(props.node.uuid);
+            // props.toggleHeader();
+          }}
+        ></img>
       </div>
     );
   };

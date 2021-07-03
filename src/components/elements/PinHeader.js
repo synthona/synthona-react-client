@@ -6,7 +6,6 @@ import { Layout, Button, Select, Icon } from 'antd';
 import './css/IOBar.less';
 import {
   signOut,
-  createFileNode,
   createUrlNode,
   createNode,
   searchNodes,
@@ -27,7 +26,6 @@ class PinHeader extends Component {
   }
 
   toggleMainSider = async () => {
-    // await this.props.showComponent('mainSider');
     if (this.props.mainSider) {
       this.props.hideComponent('mainSider');
     } else {
@@ -116,7 +114,6 @@ export default connect(mapStateToProps, {
   signOut,
   searchNodes,
   createNode,
-  createFileNode,
   createUrlNode,
   showComponent,
   hideComponent,

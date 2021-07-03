@@ -35,6 +35,11 @@ const Package = (props) => {
           // target='_blank'
           rel='noopener noreferrer'
           style={{ width: '100%' }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.launchExplorer(props.node.uuid);
+            // props.toggleHeader();
+          }}
         >
           <Icon
             type={'gift'}

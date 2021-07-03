@@ -105,6 +105,21 @@ export const updateNode = (node) => async (dispatch) => {
   }
 };
 
+// update node handler
+export const clearNodePreview = (node) => async (dispatch) => {
+  dispatch({ type: UPDATE_ACTIVE_NODE });
+  try {
+    await instance.patch('/node/preview/clear', {
+      uuid: node.uuid,
+    });
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+    message.error('There was a problem saving your changes', 1);
+    history.push('/');
+  }
+};
+
 // special handler for updating the active node
 export const updateActiveNode = (node) => async (dispatch) => {
   dispatch({ type: UPDATE_ACTIVE_NODE });
@@ -179,7 +194,6 @@ export const createUrlNode = (node) => async (dispatch) => {
       content: node.content,
       linkedNode: node.linkedNode,
     });
-    console.log(response.data);
     dispatch({
       type: CREATE_NODE_SUCCESS,
       payload: response.data.node,

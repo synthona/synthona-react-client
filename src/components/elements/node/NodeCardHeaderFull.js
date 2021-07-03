@@ -6,6 +6,7 @@ import {
   showComponent,
   unpackSynthonaImport,
   updateActiveNode,
+  clearNodePreview,
   deleteNode,
   clearActiveNode,
   generateExportByUUID,
@@ -143,6 +144,23 @@ class NodeCardHeaderFull extends Component {
     }
   };
 
+  // select an image.
+  setPreviewToLocalFilePath = () => {
+    if (this.props.nodeData.preview === null) {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
+      input.click();
+      // Listen for uploading local file, then save to server
+      input.onchange = async () => {
+        const file = input.files[0];
+        this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, preview: file.path });
+      };
+    } else {
+      this.props.clearNodePreview(this.props.nodeData);
+    }
+  };
+
   // render the title
   renderTitle = () => {
     if (!this.state.editable) {
@@ -232,6 +250,21 @@ class NodeCardHeaderFull extends Component {
                 onClick={(e) => {
                   // show the modal
                   this.toggleUrlPreviewImageModal();
+                }}
+              >
+                <Icon type={'picture'} theme='outlined' className='full-card-button' />
+              </button>
+            </li>
+          </Tooltip>
+        );
+      case 'file':
+        return (
+          <Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
+            <li>
+              <button
+                onClick={(e) => {
+                  // show the modal
+                  this.setPreviewToLocalFilePath();
                 }}
               >
                 <Icon type={'picture'} theme='outlined' className='full-card-button' />
@@ -417,6 +450,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   showComponent,
   updateActiveNode,
+  clearNodePreview,
   unpackSynthonaImport,
   deleteNode,
   clearActiveNode,

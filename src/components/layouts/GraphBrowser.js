@@ -120,7 +120,7 @@ class GraphBrowser extends Component {
     // width and height
     const height = window.innerHeight;
     const width = window.innerWidth;
-    const nodeScale = 17;
+    const nodeScale = 23;
 
     // simulation
     const simulation = forceSimulation(nodeData)
@@ -236,16 +236,19 @@ class GraphBrowser extends Component {
     }
 
     function dragged(event, d) {
+      document.body.style.cursor = 'none';
       d.fx = event.x;
       d.fy = event.y;
     }
 
     function dragended(event, d) {
-      // show cursor
-      document.body.style.cursor = 'auto';
       if (!event.active) simulation.alphaTarget(0);
       d.fx = null;
       d.fy = null;
+      window.setTimeout(() => {
+        // show cursor
+        document.body.style.cursor = 'auto';
+      }, 333);
     }
 
     return drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);

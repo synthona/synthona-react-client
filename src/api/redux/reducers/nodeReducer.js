@@ -17,6 +17,9 @@ import {
   CREATE_FILE_NODE,
   CREATE_FILE_NODE_SUCCESS,
   CREATE_FILE_NODE_ERROR,
+  LINK_FILE_NODES,
+  LINK_FILE_NODES_ERROR,
+  LINK_FILE_NODES_SUCCESS,
   SEARCH_NODES,
   SEARCH_NODES_SUCCESS,
   SEARCH_NODES_ERROR,
@@ -177,6 +180,21 @@ export default (state = INITIAL_STATE, action) => {
       };
     case CREATE_FILE_NODE_ERROR:
       return { ...state, isSaving: null };
+    case LINK_FILE_NODES:
+      return { ...state, isSaving: true };
+    case LINK_FILE_NODES_SUCCESS:
+      var linkNodesArray = [];
+      // update the nodelist with the new values
+      action.nodes.forEach((node) => {
+        linkNodesArray.push(node);
+      });
+      return {
+        ...state,
+        isSaving: null,
+        nodeList: [...linkNodesArray, ...state.nodeList],
+      };
+    case LINK_FILE_NODES_ERROR:
+      return { ...state, isSaving: null };
     case CREATE_NODE:
       return { ...state, isSaving: true };
     case CREATE_NODE_SUCCESS:
@@ -243,8 +261,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSaving: null,
-        nodeList: [action.payload, ...state.nodeList],
-        // activeNode: action.payload.node,
       };
     default:
       return state;
