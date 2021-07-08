@@ -6,118 +6,86 @@ import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeader
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 
 const Audio = (props) => {
-  const nodeCard = () => {
-    return (
-      <li className='nodelist-item'>
-        <NodeCardHeader node={props.node} />
-        <Link
-          to={`/associations/${props.node.uuid}`}
-          onClick={(e) => props.handleClick()}
-          onContextMenu={(e) => {
-            e.preventDefault();
-            props.launchFile(props.node.uuid);
-            // props.toggleHeader();
-          }}
-        >
-          {/*          <Icon
-            type={'sound'}
-            theme='outlined'
-            className='node-card-icon'
-            style={{ height: '11rem', paddingTop: '3rem' }}
-          /> */}
-          <div className='nodelist-item-audio'></div>
-          <audio
-            style={{
-              textAlign: 'center',
-              backgroundColor: 'white',
-              width: '100%',
-              borderRadius: '0',
-            }}
-            src={props.node.preview}
-            controls
-            type='audio/wav'
-          ></audio>
-        </Link>
-      </li>
-    );
-  };
+	const renderPreview = () => {
+		return (
+			<Icon type={'sound'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
+		);
+	};
 
-  // how the node will appear in collections
-  const collectionPreview = () => {
-    return (
-      <Fragment>
-        <Icon type={'sound'} theme='outlined' className='node-card-icon' />
-      </Fragment>
-    );
-  };
+	const nodeCard = () => {
+		return (
+			<li className='nodelist-item'>
+				<NodeCardHeader node={props.node} />
+				<Link
+					to={`/associations/${props.node.uuid}`}
+					onClick={(e) => props.handleClick()}
+					onContextMenu={(e) => {
+						e.preventDefault();
+						props.launchFile(props.node.uuid);
+					}}
+				>
+					{renderPreview()}
+				</Link>
+			</li>
+		);
+	};
 
-  const fullNode = () => {
-    return (
-      <div className='full-node-item'>
-        <NodeCardHeaderFull />
-        <audio
-          style={{
-            textAlign: 'center',
-            backgroundColor: 'white',
-            width: '100%',
-            borderRadius: '0',
-          }}
-          src={props.node.preview}
-          controls
-          type='audio/wav'
-        ></audio>
-        {/*         
-          <a
-          href={props.node.preview}
-          target='_blank'
-          rel='noopener noreferrer'
-          style={{ width: '100%' }}
-        >
-          <Icon
-            type={'sound'}
-            theme='outlined'
-            style={{
-              fontSize: '5rem',
-              color: '#b8b8b8',
-              display: 'block',
-              textAlign: 'center',
-              padding: '3rem',
-            }}
-          />
-        </a>*/}
-      </div>
-    );
-  };
+	// how the node will appear in collections
+	const collectionPreview = () => {
+		return (
+			<Fragment>
+				<Icon type={'sound'} theme='outlined' className='node-card-icon' />
+			</Fragment>
+		);
+	};
 
-  const associationLink = () => {
-    return (
-      <Link
-        to={`/associations/${props.node.uuid}`}
-        onClick={(e) => this.handleLinkClick()}
-        // target='_blank'
-      >
-        {props.node.name}
-      </Link>
-    );
-  };
+	const fullNode = () => {
+		return (
+			<div className='full-node-item'>
+				<NodeCardHeaderFull />
+				<Link
+					to={`/associations/${props.node.uuid}`}
+					onClick={(e) => {
+						e.preventDefault();
+						props.handleClick();
+						props.launchFile(props.node.uuid);
+					}}
+				>
+					<Fragment>{renderPreview()}</Fragment>
+				</Link>
+			</div>
+		);
+	};
 
-  // render the requested element
-  const renderNode = () => {
-    switch (props.element) {
-      case 'card':
-        return <Fragment>{nodeCard()}</Fragment>;
-      case 'preview':
-        return <Fragment>{collectionPreview()}</Fragment>;
-      case 'full':
-        return <Fragment>{fullNode()}</Fragment>;
-      case 'association-link':
-        return <Fragment>{associationLink()}</Fragment>;
-      default:
-        return;
-    }
-  };
+	const associationLink = () => {
+		return (
+			<Link
+				to={`/associations/${props.node.uuid}`}
+				onClick={(e) => props.handleAssociatonClick()}
+				target='_blank'
+			>
+				{props.node.name}
+			</Link>
+		);
+	};
 
-  return <Fragment>{renderNode()}</Fragment>;
+	// render the requested element
+	const renderNode = () => {
+		switch (props.element) {
+			case 'card':
+				return <Fragment>{nodeCard()}</Fragment>;
+			case 'preview':
+				return <Fragment>{collectionPreview()}</Fragment>;
+			case 'full':
+				return <Fragment>{fullNode()}</Fragment>;
+			case 'association-link':
+				return <Fragment>{associationLink()}</Fragment>;
+			default:
+				return;
+		}
+	};
+
+	return <Fragment>{renderNode()}</Fragment>;
 };
 
 export { Audio };
