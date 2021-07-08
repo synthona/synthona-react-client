@@ -13,15 +13,15 @@ const Text = (props) => {
 					to={`/edit/text/${props.node.uuid}`}
 					onClick={(e) => {
 						e.preventDefault();
-						// prevent the text from being selected
-						window.getSelection().removeAllRanges();
-						window.location.replace(`/associations/${props.node.uuid}`);
-					}}
-					onContextMenu={(e) => {
-						e.preventDefault();
 						props.handleClick();
 						window.getSelection().removeAllRanges();
 						window.location.replace(`/edit/text/${props.node.uuid}`);
+					}}
+					onContextMenu={(e) => {
+						e.preventDefault();
+						// prevent the text from being selected
+						window.getSelection().removeAllRanges();
+						window.location.replace(`/associations/${props.node.uuid}`);
 					}}
 				>
 					<p>{props.node.preview}</p>
