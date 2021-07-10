@@ -17,11 +17,7 @@ const Image = (props) => {
 					}}
 					onContextMenu={(e) => {
 						e.preventDefault();
-						if (props.node.isFile) {
-							props.launchExplorer(props.node.uuid);
-						} else {
-							window.location.replace(`/associations/${props.node.uuid}`);
-						}
+						window.location.replace(`/associations/${props.node.uuid}`);
 					}}
 				>
 					<Fragment>

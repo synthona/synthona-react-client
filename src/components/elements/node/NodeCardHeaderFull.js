@@ -273,6 +273,21 @@ class NodeCardHeaderFull extends Component {
 						</li>
 					</Tooltip>
 				);
+			case 'audio':
+				return (
+					<Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
+						<li>
+							<button
+								onClick={(e) => {
+									// show the modal
+									this.setPreviewToLocalFilePath();
+								}}
+							>
+								<Icon type={'picture'} theme='outlined' className='full-card-button' />
+							</button>
+						</li>
+					</Tooltip>
+				);
 			default:
 				return;
 		}

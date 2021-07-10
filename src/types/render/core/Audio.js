@@ -7,9 +7,25 @@ import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 
 const Audio = (props) => {
 	const renderPreview = () => {
-		return (
-			<Icon type={'sound'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
-		);
+		if (props.node.preview) {
+			return (
+				<Fragment>
+					<img
+						src={props.node.preview}
+						alt={props.node.name}
+						style={{
+							objectFit: 'cover',
+							minHeight: '100%',
+							width: '100%',
+						}}
+					></img>
+				</Fragment>
+			);
+		} else {
+			return (
+				<Icon type={'sound'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
+			);
+		}
 	};
 
 	const nodeCard = () => {
