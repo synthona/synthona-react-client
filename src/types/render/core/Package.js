@@ -14,7 +14,6 @@ const Package = (props) => {
 	const selectLocalFile = (e) => {
 		const input = document.createElement('input');
 		input.setAttribute('type', 'file');
-		input.setAttribute('accept', ['application/zip']);
 		input.click();
 		// Listen for uploading local file, then save to server
 		input.onchange = async () => {
