@@ -1,24 +1,112 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
-// for now these are in-common between nodes
+// custom code
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
+import missingFileImage from '../../../resources/missing-file.png';
+import { isElectron } from '../../../utils/environment';
 
 const Zip = (props) => {
+	let fileLoadError = false;
+
+	// select a replacement file
+	const selectLocalFile = (e) => {
+		const input = document.createElement('input');
+		input.setAttribute('type', 'file');
+		input.setAttribute('accept', ['application/zip']);
+		input.click();
+		// Listen for uploading local file, then save to server
+		input.onchange = async () => {
+			let file = input.files[0];
+			await props.updateNode({ uuid: props.node.uuid, path: file.path });
+			window.location.reload();
+		};
+	};
+
+	const onClickAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
+
+	const onContextAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			props.launchExplorer(props.node.uuid);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
+
+	const onFullCardAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			props.launchExplorer(props.node.uuid);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
+
+	const renderPreview = () => {
+		if (props.node.path === null) {
+			fileLoadError = true;
+			props.node.preview = missingFileImage;
+		}
+		if (props.node.preview) {
+			return (
+				<Fragment>
+					<img
+						src={props.node.preview}
+						alt={props.node.name}
+						style={{
+							objectFit: 'cover',
+							minHeight: '100%',
+							width: '100%',
+						}}
+					></img>
+				</Fragment>
+			);
+		} else {
+			return (
+				<Icon
+					type={'file-zip'}
+					style={{ color: 'white' }}
+					theme='filled'
+					className='node-card-icon'
+				/>
+			);
+		}
+	};
+
 	const nodeCard = () => {
 		return (
 			<li className='nodelist-item'>
 				<NodeCardHeader node={props.node} />
 				<Link
 					to={`/associations/${props.node.uuid}`}
-					onClick={(e) => props.handleClick()}
-					onContextMenu={(e) => {
-						e.preventDefault();
-						props.launchExplorer(props.node.uuid);
-					}}
+					onClick={(e) => onClickAction(e)}
+					onContextMenu={(e) => onContextAction(e)}
 				>
-					<Icon type={'file-zip'} theme='outlined' className='node-card-icon' />
+					{renderPreview()}
 				</Link>
 			</li>
 		);
@@ -26,39 +114,16 @@ const Zip = (props) => {
 
 	// how the node will appear in collections
 	const collectionPreview = () => {
-		return (
-			<Fragment>
-				<Icon type={'file-zip'} theme='outlined' className='node-card-icon' />
-			</Fragment>
-		);
+		return <Fragment>{renderPreview()}</Fragment>;
 	};
 
 	const fullNode = () => {
 		return (
 			<div className='full-node-item'>
 				<NodeCardHeaderFull />
-				<a
-					href={props.node.preview}
-					target='_blank'
-					rel='noopener noreferrer'
-					style={{ width: '100%' }}
-					onClick={(e) => {
-						e.preventDefault();
-						props.launchExplorer(props.node.uuid);
-					}}
-				>
-					<Icon
-						type={'file-zip'}
-						theme='outlined'
-						style={{
-							fontSize: '5rem',
-							color: '#b8b8b8',
-							display: 'block',
-							textAlign: 'center',
-							padding: '3rem',
-						}}
-					/>
-				</a>
+				<Link to={`/associations/${props.node.uuid}`} onClick={(e) => onFullCardAction(e)}>
+					<Fragment>{renderPreview()}</Fragment>
+				</Link>
 			</div>
 		);
 	};
@@ -68,7 +133,7 @@ const Zip = (props) => {
 			<Link
 				to={`/associations/${props.node.uuid}`}
 				onClick={(e) => props.handleAssociatonClick()}
-				// target='_blank'
+				target='_blank'
 			>
 				{props.node.name}
 			</Link>

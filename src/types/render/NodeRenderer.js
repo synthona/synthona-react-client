@@ -6,6 +6,7 @@ import {
 	hideComponent,
 	launchFileNode,
 	openFileInExplorer,
+	updateNode,
 } from '../../api/redux/actions';
 import { Text, Image, Url, File, Audio, Package, Zip, Collection, User } from './core/index';
 import NodeCardHeader from '../../components/elements/node/NodeCardHeader';
@@ -72,6 +73,7 @@ class NodeRenderer extends Component {
 						node={this.props.node}
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
+						updateNode={this.props.updateNode}
 						toggleHeader={this.toggleHeader}
 						renderHeader={this.renderHeader}
 						launchExplorer={this.props.openFileInExplorer}
@@ -94,6 +96,7 @@ class NodeRenderer extends Component {
 					<File
 						element={this.props.element}
 						node={this.props.node}
+						updateNode={this.props.updateNode}
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchFile={this.props.launchFileNode}
@@ -105,6 +108,7 @@ class NodeRenderer extends Component {
 					<Audio
 						element={this.props.element}
 						node={this.props.node}
+						updateNode={this.props.updateNode}
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchFile={this.props.launchFileNode}
@@ -115,6 +119,7 @@ class NodeRenderer extends Component {
 					<Package
 						element={this.props.element}
 						node={this.props.node}
+						updateNode={this.props.updateNode}
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchExplorer={this.props.openFileInExplorer}
@@ -125,6 +130,7 @@ class NodeRenderer extends Component {
 					<Zip
 						element={this.props.element}
 						node={this.props.node}
+						updateNode={this.props.updateNode}
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchExplorer={this.props.openFileInExplorer}
@@ -167,4 +173,5 @@ export default connect(null, {
 	hideComponent,
 	launchFileNode,
 	openFileInExplorer,
+	updateNode,
 })(NodeRenderer);

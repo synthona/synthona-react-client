@@ -4,9 +4,72 @@ import { Icon } from 'antd';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
+import missingFileImage from '../../../resources/missing-file.png';
+import { isElectron } from '../../../utils/environment';
 
 const Audio = (props) => {
+	let fileLoadError = false;
+
+	// select a replacement file
+	const selectLocalFile = (e) => {
+		const input = document.createElement('input');
+		input.setAttribute('type', 'file');
+		input.click();
+		// Listen for uploading local file, then save to server
+		input.onchange = async () => {
+			let file = input.files[0];
+			await props.updateNode({ uuid: props.node.uuid, path: file.path });
+			window.location.reload();
+		};
+	};
+
+	const onClickAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
+
+	const onContextAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			props.launchFile(props.node.uuid);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
+
+	const onFullCardAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			props.launchFile(props.node.uuid);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
+
 	const renderPreview = () => {
+		if (props.node.path === null) {
+			fileLoadError = true;
+			props.node.preview = missingFileImage;
+		}
 		if (props.node.preview) {
 			return (
 				<Fragment>
@@ -34,11 +97,8 @@ const Audio = (props) => {
 				<NodeCardHeader node={props.node} />
 				<Link
 					to={`/associations/${props.node.uuid}`}
-					onClick={(e) => props.handleClick()}
-					onContextMenu={(e) => {
-						e.preventDefault();
-						props.launchFile(props.node.uuid);
-					}}
+					onClick={(e) => onClickAction(e)}
+					onContextMenu={(e) => onContextAction(e)}
 				>
 					{renderPreview()}
 				</Link>
@@ -48,25 +108,14 @@ const Audio = (props) => {
 
 	// how the node will appear in collections
 	const collectionPreview = () => {
-		return (
-			<Fragment>
-				<Icon type={'sound'} theme='outlined' className='node-card-icon' />
-			</Fragment>
-		);
+		return <Fragment>{renderPreview()}</Fragment>;
 	};
 
 	const fullNode = () => {
 		return (
 			<div className='full-node-item'>
 				<NodeCardHeaderFull />
-				<Link
-					to={`/associations/${props.node.uuid}`}
-					onClick={(e) => {
-						e.preventDefault();
-						props.handleClick();
-						props.launchFile(props.node.uuid);
-					}}
-				>
+				<Link to={`/associations/${props.node.uuid}`} onClick={(e) => onFullCardAction(e)}>
 					<Fragment>{renderPreview()}</Fragment>
 				</Link>
 			</div>

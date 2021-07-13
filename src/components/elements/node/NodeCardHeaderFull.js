@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Icon, Modal, Tooltip, message } from 'antd';
-import { validUrl, isImageUrl } from '../../../utils/inputValidation';
+import { validUrl, isImageUrl } from '../../../utils/validation';
 import {
 	showComponent,
 	unpackSynthonaImport,
@@ -274,6 +274,21 @@ class NodeCardHeaderFull extends Component {
 					</Tooltip>
 				);
 			case 'audio':
+				return (
+					<Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
+						<li>
+							<button
+								onClick={(e) => {
+									// show the modal
+									this.setPreviewToLocalFilePath();
+								}}
+							>
+								<Icon type={'picture'} theme='outlined' className='full-card-button' />
+							</button>
+						</li>
+					</Tooltip>
+				);
+			case 'zip':
 				return (
 					<Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
 						<li>

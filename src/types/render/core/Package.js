@@ -1,91 +1,157 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
-// for now these are in-common between nodes
+// custom code
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
 import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
+import missingFileImage from '../../../resources/missing-file.png';
+import { isElectron } from '../../../utils/environment';
 
 const Package = (props) => {
-  const nodeCard = () => {
-    return (
-      <li className='nodelist-item'>
-        <NodeCardHeader node={props.node} />
-        <Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleClick()}>
-          <Icon type={'gift'} theme='outlined' className='node-card-icon' />
-        </Link>
-      </li>
-    );
-  };
+	let fileLoadError = false;
 
-  // how the node will appear in collections
-  const collectionPreview = () => {
-    return (
-      <Fragment>
-        <Icon type={'gift'} theme='outlined' className='node-card-icon' />
-      </Fragment>
-    );
-  };
+	// select a replacement file
+	const selectLocalFile = (e) => {
+		const input = document.createElement('input');
+		input.setAttribute('type', 'file');
+		input.setAttribute('accept', ['application/zip']);
+		input.click();
+		// Listen for uploading local file, then save to server
+		input.onchange = async () => {
+			let file = input.files[0];
+			await props.updateNode({ uuid: props.node.uuid, path: file.path });
+			window.location.reload();
+		};
+	};
 
-  const fullNode = () => {
-    return (
-      <div className='full-node-item'>
-        <NodeCardHeaderFull />
-        <a
-          href={props.node.preview}
-          // target='_blank'
-          rel='noopener noreferrer'
-          style={{ width: '100%' }}
-          onContextMenu={(e) => {
-            e.preventDefault();
-            props.launchExplorer(props.node.uuid);
-            // props.toggleHeader();
-          }}
-        >
-          <Icon
-            type={'gift'}
-            theme='outlined'
-            style={{
-              fontSize: '5rem',
-              color: '#b8b8b8',
-              display: 'block',
-              textAlign: 'center',
-              padding: '3rem',
-            }}
-          />
-        </a>
-      </div>
-    );
-  };
+	const onClickAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
 
-  const associationLink = () => {
-    return (
-      <Link
-        to={`/associations/${props.node.uuid}`}
-        onClick={(e) => props.handleAssociatonClick()}
-        // target='_blank'
-      >
-        {props.node.name}
-      </Link>
-    );
-  };
+	const onContextAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			props.launchExplorer(props.node.uuid);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
 
-  // render the requested element
-  const renderNode = () => {
-    switch (props.element) {
-      case 'card':
-        return <Fragment>{nodeCard()}</Fragment>;
-      case 'preview':
-        return <Fragment>{collectionPreview()}</Fragment>;
-      case 'full':
-        return <Fragment>{fullNode()}</Fragment>;
-      case 'association-link':
-        return <Fragment>{associationLink()}</Fragment>;
-      default:
-        return;
-    }
-  };
+	const onFullCardAction = (e) => {
+		if (!fileLoadError) {
+			e.preventDefault();
+			props.handleClick();
+			props.launchExplorer(props.node.uuid);
+		} else if (isElectron()) {
+			e.preventDefault();
+			selectLocalFile(e);
+		} else {
+			e.preventDefault();
+			window.location.replace(`/associations/${props.node.uuid}`);
+		}
+	};
 
-  return <Fragment>{renderNode()}</Fragment>;
+	const renderPreview = () => {
+		if (props.node.path === null) {
+			fileLoadError = true;
+			props.node.preview = missingFileImage;
+		}
+		if (props.node.preview) {
+			return (
+				<Fragment>
+					<img
+						src={props.node.preview}
+						alt={props.node.name}
+						style={{
+							objectFit: 'cover',
+							minHeight: '100%',
+							width: '100%',
+						}}
+					></img>
+				</Fragment>
+			);
+		} else {
+			return (
+				<Icon type={'gift'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
+			);
+		}
+	};
+
+	const nodeCard = () => {
+		return (
+			<li className='nodelist-item'>
+				<NodeCardHeader node={props.node} />
+				<Link
+					to={`/associations/${props.node.uuid}`}
+					onClick={(e) => onClickAction(e)}
+					onContextMenu={(e) => onContextAction(e)}
+				>
+					{renderPreview()}
+				</Link>
+			</li>
+		);
+	};
+
+	// how the node will appear in collections
+	const collectionPreview = () => {
+		return <Fragment>{renderPreview()}</Fragment>;
+	};
+
+	const fullNode = () => {
+		return (
+			<div className='full-node-item'>
+				<NodeCardHeaderFull />
+				<Link to={`/associations/${props.node.uuid}`} onClick={(e) => onFullCardAction(e)}>
+					<Fragment>{renderPreview()}</Fragment>
+				</Link>
+			</div>
+		);
+	};
+
+	const associationLink = () => {
+		return (
+			<Link
+				to={`/associations/${props.node.uuid}`}
+				onClick={(e) => props.handleAssociatonClick()}
+				target='_blank'
+			>
+				{props.node.name}
+			</Link>
+		);
+	};
+
+	// render the requested element
+	const renderNode = () => {
+		switch (props.element) {
+			case 'card':
+				return <Fragment>{nodeCard()}</Fragment>;
+			case 'preview':
+				return <Fragment>{collectionPreview()}</Fragment>;
+			case 'full':
+				return <Fragment>{fullNode()}</Fragment>;
+			case 'association-link':
+				return <Fragment>{associationLink()}</Fragment>;
+			default:
+				return;
+		}
+	};
+
+	return <Fragment>{renderNode()}</Fragment>;
 };
 
 export { Package };
