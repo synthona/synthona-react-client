@@ -44,7 +44,7 @@ const Image = (props) => {
 	};
 
 	const onContextAction = (e) => {
-		if (!fileLoadError) {
+		if (!fileLoadError && props.node.isFile) {
 			e.preventDefault();
 			props.handleClick();
 			props.launchFile(props.node.uuid);
