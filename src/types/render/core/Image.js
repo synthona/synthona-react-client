@@ -49,7 +49,7 @@ const Image = (props) => {
 			props.handleClick();
 			props.launchFile(props.node.uuid);
 			// window.location.replace(`/associations/${props.node.uuid}`);
-		} else if (isElectron()) {
+		} else if (isElectron() && props.node.isFile) {
 			e.preventDefault();
 			selectLocalFile(e);
 		} else {
@@ -59,9 +59,9 @@ const Image = (props) => {
 	};
 
 	const onFullCardAction = (e) => {
-		if (!fileLoadError) {
+		if (!fileLoadError && props.node.isFile) {
 			e.preventDefault();
-		} else if (isElectron()) {
+		} else if (isElectron() && props.node.isFile) {
 			e.preventDefault();
 			selectLocalFile(e);
 		} else {
