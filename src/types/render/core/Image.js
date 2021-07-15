@@ -47,7 +47,8 @@ const Image = (props) => {
 		if (!fileLoadError) {
 			e.preventDefault();
 			props.handleClick();
-			window.location.replace(`/associations/${props.node.uuid}`);
+			props.launchFile(props.node.uuid);
+			// window.location.replace(`/associations/${props.node.uuid}`);
 		} else if (isElectron()) {
 			e.preventDefault();
 			selectLocalFile(e);

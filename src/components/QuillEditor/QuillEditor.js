@@ -178,6 +178,7 @@ class QuillEditor extends Component {
 			// process the text node
 			const content = editor.getText();
 			const preview = content.substring(0, previewLength);
+			this.props.nodeData.preview = preview;
 			// wait for preview to update before going back to homepage so it will be up to date
 			this.props.processTextNode({ uuid: this.state.uuid, preview });
 		}
@@ -366,7 +367,13 @@ class QuillEditor extends Component {
 						formats={this.allowedFormats}
 						scrollingContainer={'body'}
 						onBlur={(e) => {
-							e.target.focus();
+							if (e.target) {
+								e.target.focus();
+							}
+							// check to see if we should regenerate preview
+							if (this.props.nodeData.preview.length < 500) {
+								this.regeneratePreview();
+							}
 						}}
 					></ReactQuill>
 					<AssociationSider />

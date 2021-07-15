@@ -8,8 +8,8 @@ import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeader
 
 const Collection = (props) => {
 	const onCollectionContextMenu = (e) => {
-		e.preventDefault();
-		window.location.replace(`/associations/${props.node.uuid}`);
+		// e.preventDefault();
+		// window.location.replace(`/associations/${props.node.uuid}`);
 	};
 
 	const onCollectionClick = (e) => {
