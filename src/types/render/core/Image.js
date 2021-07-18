@@ -61,6 +61,8 @@ const Image = (props) => {
 	const onFullCardAction = (e) => {
 		if (!fileLoadError && props.node.isFile) {
 			e.preventDefault();
+			props.handleClick();
+			props.launchFile(props.node.uuid);
 		} else if (isElectron() && props.node.isFile) {
 			e.preventDefault();
 			selectLocalFile(e);
