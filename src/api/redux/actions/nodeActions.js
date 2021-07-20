@@ -177,7 +177,7 @@ export const createNode = (node, file) => async (dispatch) => {
 		}
 	} catch (err) {
 		dispatch({ type: CREATE_NODE_ERROR });
-		message.error('Could not create new item', 1);
+		message.error('There was a problem creating that node', 1);
 		history.push('/');
 	}
 };
@@ -201,7 +201,7 @@ export const createUrlNode = (node) => async (dispatch) => {
 		});
 	} catch (err) {
 		dispatch({ type: CREATE_NODE_ERROR });
-		message.error('Could not create new item', 1);
+		message.error('There was a problem adding that URL', 1);
 		history.push('/');
 	}
 };
