@@ -43,20 +43,20 @@ const Image = (props) => {
 		}
 	};
 
-	const onContextAction = (e) => {
-		if (!fileLoadError && props.node.isFile) {
-			e.preventDefault();
-			props.handleClick();
-			props.launchFile(props.node.uuid);
-			// window.location.replace(`/associations/${props.node.uuid}`);
-		} else if (isElectron() && props.node.isFile) {
-			e.preventDefault();
-			selectLocalFile(e);
-		} else {
-			e.preventDefault();
-			window.location.replace(`/associations/${props.node.uuid}`);
-		}
-	};
+	// const onContextAction = (e) => {
+	// 	if (!fileLoadError && props.node.isFile) {
+	// 		e.preventDefault();
+	// 		props.handleClick();
+	// 		props.launchFile(props.node.uuid);
+	// 		// window.location.replace(`/associations/${props.node.uuid}`);
+	// 	} else if (isElectron() && props.node.isFile) {
+	// 		e.preventDefault();
+	// 		selectLocalFile(e);
+	// 	} else {
+	// 		e.preventDefault();
+	// 		window.location.replace(`/associations/${props.node.uuid}`);
+	// 	}
+	// };
 
 	const onFullCardAction = (e) => {
 		if (!fileLoadError && props.node.isFile) {
@@ -86,9 +86,9 @@ const Image = (props) => {
 					onClick={(e) => {
 						onClickAction(e);
 					}}
-					onContextMenu={(e) => {
-						onContextAction(e);
-					}}
+					// onContextMenu={(e) => {
+					// 	// onContextAction(e);
+					// }}
 				>
 					<Fragment>
 						<img
@@ -141,6 +141,7 @@ const Image = (props) => {
 					src={props.node.preview}
 					alt={props.node.name}
 					onError={(e) => onFileLoadError(e)}
+					style={{ cursor: 'pointer' }}
 					onClick={(e) => {
 						onFullCardAction(e);
 					}}
