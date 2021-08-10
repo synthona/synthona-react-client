@@ -138,7 +138,7 @@ class GraphBrowser extends Component {
 			.force('center', forceCenter());
 		// initial zoom
 		// var initialZoom = zoomIdentity.scale(0.55).translate(0, -15);
-		var initialZoom = zoomIdentity.scale(0.17).translate(0, -23);
+		var initialZoom = zoomIdentity.scale(0.17).translate(0, -15);
 		const zoomData = zoom().scaleExtent([0.1, 1.7]).on('zoom', zoomed);
 
 		const svg = select(this.node)

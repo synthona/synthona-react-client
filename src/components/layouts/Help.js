@@ -81,8 +81,8 @@ class Help extends Component {
 							<h2>What should I do first?</h2>
 							<p>
 								You can start by uploading or creating some content, you do this by clicking the
-								blue button at the top of the page. This will transform it into a plus sign and put
-								the IO bar into <i>create-mode</i>.
+								white circular button at the top of the page. This will transform it into a plus
+								sign and put the IO bar into <i>create-mode</i>.
 							</p>
 							<p>
 								From there, to the left of the input field there is a dropdown menu which contains
