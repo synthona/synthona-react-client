@@ -335,6 +335,7 @@ class QuillEditor extends Component {
 				content: fullDelta,
 			});
 			this.setState({ text: content });
+			this.regeneratePreview();
 		}
 	}
 
