@@ -218,10 +218,24 @@ a:hover {
 }
 
 @media only screen and (max-width: 400px) {
+  .page-header {
+    height: 4rem;
+    padding-top: 0.6rem;
+  }
+
   .nav-search-input {
-    min-width: 30vw;
+    min-width: 73vw;
+    padding: 0 0.5rem;
   }
   .ant-select-no-arrow {
-    width: 3rem;
+    width: 5.3rem;
+  }
+
+  li.nav-item.io-sider-button {
+    display: none;
+  }
+
+  li.nav-item.io-sider-button.mobile-visible{
+    display: block;
   }
 }

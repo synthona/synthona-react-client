@@ -1,13 +1,5 @@
 .Profile {
   margin-bottom: 0.7rem;
-  margin-left: 12.5rem;
-}
-
-.profile-container {
-  li.nodelist-item {
-    width: 25rem;
-    height: 17rem;
-  }
 }
 
 .profile-modal {
@@ -43,7 +35,6 @@
   text-align: center;
   margin-top: -8rem;
   border-radius: 50%;
-  // cursor: default;
 }
 
 .Profile-avatar img {
@@ -57,18 +48,12 @@
   cursor: pointer;
 }
 
-// .ant-modal-content {
-//   margin-left: 12.5rem;
-// }
-
 .ant-modal-body {
   padding: 0;
 }
 
 .ant-modal.profile-modal {
-  // padding-left: 10rem;
   float: center;
-  left: 4rem;
 }
 
 .Profile-header {
@@ -135,64 +120,9 @@ svg.verified-sign {
   fill: #3bcc43;
 }
 
-// media queries for nodelist width
-
-@media only screen and (max-width: 1500px) {
-  .profile-container {
-    li.nodelist-item {
-      width: 27.3vw;
-    }
-
-    .nodelist-item-title {
-      width: 60%;
-    }
-  }
-}
-
-@media only screen and (max-width: 1350px) {
-  .profile-container {
-    li.nodelist-item {
-      width: 26.5vw;
-    }
-
-    .nodelist-item-title {
-      width: 60%;
-    }
-  }
-}
-
-@media only screen and (max-width: 1150px) {
-  .profile-container {
-    li.nodelist-item {
-      width: 37.5vw;
-    }
-
-    .nodelist-item-title {
-      width: 60%;
-    }
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .profile-container {
-    li.nodelist-item {
-      width: 34vw;
-    }
-
-    .nodelist-item-title {
-      width: 40%;
-    }
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  .profile-container {
-    li.nodelist-item {
-      width: 97%;
-    }
-
-    .nodelist-item-title {
-      width: 60%;
-    }
+// profile-specific media queries
+@media only screen and (max-width: 500px) {
+  .profile-modal {
+    max-width: 300px;
   }
 }

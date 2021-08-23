@@ -353,7 +353,7 @@ class NodeCardHeaderFull extends Component {
 				{/* <p className='full-card-options-date'>{this.props.nodeData.updatedAt}</p> */}
 				<ul className='full-card-buttons-list'>
 					<Tooltip title={'associations'} mouseEnterDelay={1.1}>
-						<li>
+						<li className='mobile-visible'>
 							<button
 								onClick={(e) => {
 									// show the modal
@@ -365,7 +365,7 @@ class NodeCardHeaderFull extends Component {
 						</li>
 					</Tooltip>
 					<Tooltip title={'graph'} mouseEnterDelay={1.1}>
-						<li>
+						<li className='mobile-visible'>
 							<button
 								onClick={(e) => window.location.replace(`/graph/${this.props.nodeData.uuid}`)}
 							>
@@ -374,7 +374,7 @@ class NodeCardHeaderFull extends Component {
 						</li>
 					</Tooltip>
 					<Tooltip title={'pin'} mouseEnterDelay={1.1}>
-						<li>
+						<li className='mobile-visible'>
 							<button onClick={(e) => this.togglePinned()}>
 								<Icon type={'star'} theme={this.state.pinnedState} className='full-card-button' />
 							</button>
@@ -417,7 +417,7 @@ class NodeCardHeaderFull extends Component {
 						</li>
 					</Tooltip>
 					<Tooltip title={'delete'} mouseEnterDelay={1.1}>
-						<li>
+						<li className='mobile-visible'>
 							<button onClick={(e) => this.toggleDeleteModal()}>
 								<Icon type={'delete'} theme='outlined' className='full-card-button delete' />
 							</button>

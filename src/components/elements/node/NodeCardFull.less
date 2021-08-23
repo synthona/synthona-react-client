@@ -142,7 +142,37 @@ input.full-card-title:focus-within {
 
 @media only screen and (max-width: 700px) {
   .full-card-title {
-    // width: 50%;
     width: auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .full-card-title {
+    width: 55%;
+  }
+
+  .full-card-options {
+    padding: 0.7rem 1rem 0.7rem 1.3rem;
+  }
+
+  .full-node-item img {
+    padding: 0;
+  }
+
+  ul.full-card-buttons-list {
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: none;
+    }
+
+    li.mobile-visible {
+      text-align: center;
+      width: 2.1rem;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+    }
   }
 }

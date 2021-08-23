@@ -213,7 +213,7 @@ class IOBar extends Component {
 			<div>
 				<Header className='page-header'>
 					<ul className='nav-list'>
-						<li className='nav-item io-sider-button' style={{ marginRight: '0' }}>
+						<li className='nav-item io-sider-button mobile-visible' style={{ marginRight: '0' }}>
 							<Button type='default' shape='circle' onClick={(e) => this.toggleMainSider()}>
 								<Icon type={'bars'} theme='outlined' />
 							</Button>

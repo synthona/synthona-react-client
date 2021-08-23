@@ -27,8 +27,6 @@
   background-image: url('../../../resources/cloud9.png');
   background-size: cover;
   border: 10px solid @graph-edge-color;
-  // border-top: none;
-  // border-bottom: none;
 }
 
 text.graph-text {
@@ -57,4 +55,10 @@ text.graph-text:hover {
 .graph-node:hover {
   fill: @node-hover-fill-color;
   stroke-width: 2px;
+}
+
+@media only screen and (max-width: 400px) {
+  .graph-container {
+    background-position-x: center;
+  }
 }

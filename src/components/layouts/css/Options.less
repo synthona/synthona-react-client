@@ -1,6 +1,5 @@
 .Options {
   margin-bottom: 0.7rem;
-  margin-left: 12.5rem;
 }
 
 .Options-card {
@@ -20,19 +19,11 @@
   }
 }
 
-.Options-container {
-  li.nodelist-item {
-    width: 25rem;
-    height: 17rem;
-  }
-}
-
 .Options-avatar {
   width: 100%;
   text-align: center;
   margin-top: -8rem;
   border-radius: 50%;
-  padding-right: 0.1rem;
 }
 
 .Options-avatar img {
@@ -59,7 +50,9 @@
 }
 
 .Options-header img {
-  width: 100%;
+  object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
   transition-duration: 0.5s;
   opacity: 0.8;
 }
@@ -76,11 +69,11 @@
 .Options-avatar-edit-icon {
   color: white;
   position: absolute;
-  width: 2rem;
+  width: 100%;
   text-align: center;
   z-index: 6;
-  top: 24.7rem;
-  right: 37.7rem;
+  top: 28rem;
+  right: 0;
 }
 
 .Options-header:hover .Options-header-edit-icon {
@@ -91,11 +84,11 @@
 .Options-header-edit-icon {
   color: white;
   position: absolute;
-  width: 2rem;
+  width: 100%;
   text-align: center;
   z-index: 6;
-  top: 12rem;
-  right: 38rem;
+  top: 15rem;
+  right: 0;
 }
 
 .Options-info {
@@ -191,4 +184,23 @@ input.password-modal-field {
   margin-bottom: 1rem;
   width: 100%;
   display: inline-block;
+}
+
+// profile-specific media queries
+@media only screen and (max-width: 500px) {
+  .profile-modal {
+    max-width: 300px;
+  }
+
+  .Options-info {
+    padding: 4rem 1rem 1rem;
+  }
+
+  .Options-display-name {
+    width: 80%;
+  }
+
+  .Options-standard-input {
+    width: 80%;
+  }
 }
