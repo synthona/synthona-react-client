@@ -23,7 +23,7 @@ class AssociationLinkList extends Component {
 		// go through the list of nodes and render them to the page
 		const list = this.props.associations;
 		if (this.props.isFetching) {
-			return <Spinner></Spinner>;
+			return <Spinner alignment='top'></Spinner>;
 		}
 		// if list exists render the links
 		if (list !== null) {
