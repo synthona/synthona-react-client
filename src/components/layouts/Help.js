@@ -204,30 +204,31 @@ class Help extends Component {
 							<p>This is the garbage can, it lets you put delete nodes from the system!</p>
 							<Icon type={'delete'} theme='outlined' className='help-icon' />
 							<h3>
-								Synthona Packages <Icon type={'gift'} theme='outlined' />
+								Synthona Virtual Discs <Icon type={'gift'} theme='outlined' />
 							</h3>
 							<p>
-								Synthona packages allow you to share nodes and their associations between computers
-								as <i>.synth</i> files, which can be re-imported by anyone into any synthona
-								instance on any computer. These files are represented within synthona by this{' '}
-								<Icon type={'gift'} theme='outlined' /> icon. If you click this icon on a
-								non-package node in your system, it will generate an export package based on the
-								node you clicked it from. Synthona packages contain the node in question, all the
-								nodes associated with it, and their associations with each other. More specificity
-								in exports is a planned feature for the future as well.
+								Synthona Virtual Discs allow you to share nodes and their associations between
+								computers as <i>.synth</i> files, which can be re-imported by anyone into any
+								synthona instance on any computer. These files are represented within synthona by
+								this <Icon type={'gift'} theme='outlined' /> icon. If you click this icon on a node
+								in your system, it will generate an export virtual disc based on the node you
+								clicked it from. Synthona Virtual Discs contain the node in question, all the nodes
+								associated with it, and their associations with each other. More specificity in
+								exports is a planned feature for the future as well.
 							</p>
 							<p>
-								If you have created or imported a Synthona package into your Synthona instance, you
-								will see this icon on the package page. Clicking it will "unpack" the package,
-								importing all the nodes and associations it contains into your profile. Once you
-								click this, it will be replaced by an "undo" <Icon type={'undo'} theme='outlined' />{' '}
-								icon which will allow you to "repack" the package. The undo option will delete all
-								the nodes which unpacking created, which makes unpacking a reversible operation. Be
-								warned however! If you have made changes to any of the nodes you imported they will
-								still be removed (at least that's how it works right now).
+								If you have created or imported a Synthona Virtual Discs into your Synthona
+								instance, you will see this icon on the Virtual Disc page. Clicking it will "unpack"
+								the Virtual Disc, importing all the nodes and associations it contains into your
+								profile. Once you click this, it will be replaced by an "undo"{' '}
+								<Icon type={'undo'} theme='outlined' /> icon which will allow you to "repack" the
+								Virtual Disc. The undo option will delete all the nodes which unpacking created,
+								which makes unpacking a reversible operation. Be warned however! If you have made
+								changes to any of the nodes you imported they will still be removed (at least that's
+								how it works right now).
 							</p>
 							<p>
-								Sythona packages are great for all kinds of things...sharing your thoughts with
+								Sythona Virtual Discs are great for all kinds of things...sharing your thoughts with
 								others, sharing files for a project, sharing photo albums, and more! If you're a
 								developer, you may also be interested to know that these exports are largely just
 								JSON which means you could potentially integrate them with other software.
@@ -248,9 +249,10 @@ class Help extends Component {
 							<p>
 								When you delete a file node, it will not delete the file itself, only the node in
 								Synthona. You should know however, that if you imported a node into Synthona from a
-								.synth package and delete the node, it WILL delete the file...Why this difference?
-								The idea is basically that Synthona cleans up after itself. If it creates a file, it
-								will delete it, but if YOU created the file, Synthona will not delete it.
+								.synth Virtual Disc and delete the node, it WILL delete the file...Why this
+								difference? The idea is basically that Synthona cleans up after itself. If it
+								creates a file, it will delete it, but if YOU created the file, Synthona will not
+								delete it.
 							</p>
 							<p>
 								In other words, Synthona will not mess with your stuff! If you want to keep imported
