@@ -204,13 +204,13 @@ class Help extends Component {
 							<p>This is the garbage can, it lets you put delete nodes from the system!</p>
 							<Icon type={'delete'} theme='outlined' className='help-icon' />
 							<h3>
-								Synthona Virtual Discs <Icon type={'gift'} theme='outlined' />
+								Synthona Virtual Discs <Icon type={'save'} theme='outlined' />
 							</h3>
 							<p>
 								Synthona Virtual Discs allow you to share nodes and their associations between
 								computers as <i>.synth</i> files, which can be re-imported by anyone into any
 								synthona instance on any computer. These files are represented within synthona by
-								this <Icon type={'gift'} theme='outlined' /> icon. If you click this icon on a node
+								this <Icon type={'save'} theme='outlined' /> icon. If you click this icon on a node
 								in your system, it will generate an export virtual disc based on the node you
 								clicked it from. Synthona Virtual Discs contain the node in question, all the nodes
 								associated with it, and their associations with each other. More specificity in
@@ -233,7 +233,7 @@ class Help extends Component {
 								developer, you may also be interested to know that these exports are largely just
 								JSON which means you could potentially integrate them with other software.
 							</p>
-							<Icon type={'gift'} theme='outlined' className='help-icon' />
+							<Icon type={'save'} theme='outlined' className='help-icon' />
 							<h2>How do I edit the name of a node?</h2>
 							<p>If you double click the title it should turn into an editable text field.</p>
 							<h2>How do files work starting in Synthona 1.2.3?</h2>
