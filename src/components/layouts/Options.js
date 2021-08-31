@@ -396,7 +396,7 @@ class Options extends Component {
 									change password
 								</Button>
 								<br />
-								{/* <Button
+								<Button
 									type='default'
 									style={{
 										margin: '0 0 10px',
@@ -413,7 +413,7 @@ class Options extends Component {
 								>
 									regenerate previews
 								</Button>
-								<br />*/}
+								<br />
 								<Button
 									type='danger'
 									style={{

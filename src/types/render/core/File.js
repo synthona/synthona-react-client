@@ -129,11 +129,7 @@ const File = (props) => {
 
 	const associationLink = () => {
 		return (
-			<Link
-				to={`/associations/${props.node.uuid}`}
-				onClick={(e) => props.handleAssociatonClick()}
-				target='_blank'
-			>
+			<Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleAssociatonClick()}>
 				{props.node.name}
 			</Link>
 		);

@@ -187,6 +187,7 @@ class IOBar extends Component {
 					<Option value='file'>file</Option>
 					<Option value='text'>text</Option>
 					<Option value='image'>images</Option>
+					<Option value='package'>discs</Option>
 					<Option value='collection'>collections</Option>
 				</Select>
 			);
@@ -231,7 +232,7 @@ class IOBar extends Component {
 							<Link type='default' to={`/`}>
 								<Icon
 									type={'home'}
-									theme='outlined'
+									theme='filled'
 									// style={{ color: '#3ce458' }}
 								/>
 							</Link>
@@ -240,7 +241,7 @@ class IOBar extends Component {
 							<Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
 								<Icon
 									type={'star'}
-									theme='outlined'
+									theme='filled'
 									// style={{ color: 'yellow' }}
 								/>
 							</Link>

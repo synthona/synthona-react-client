@@ -86,7 +86,7 @@ const Package = (props) => {
 			);
 		} else {
 			return (
-				<Icon type={'gift'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
+				<Icon type={'save'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
 			);
 		}
 	};
@@ -124,11 +124,7 @@ const Package = (props) => {
 
 	const associationLink = () => {
 		return (
-			<Link
-				to={`/associations/${props.node.uuid}`}
-				onClick={(e) => props.handleAssociatonClick()}
-				target='_blank'
-			>
+			<Link to={`/associations/${props.node.uuid}`} onClick={(e) => props.handleAssociatonClick()}>
 				{props.node.name}
 			</Link>
 		);

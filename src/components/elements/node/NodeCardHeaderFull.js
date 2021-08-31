@@ -214,7 +214,7 @@ class NodeCardHeaderFull extends Component {
 					return <Fragment></Fragment>;
 				} else if (this.props.nodeData.metadata && this.props.nodeData.metadata.expanded) {
 					return (
-						<Tooltip title={'undo import'} mouseEnterDelay={1.1}>
+						<Tooltip title={'restore'} mouseEnterDelay={1.1}>
 							<li>
 								<button
 									onClick={(e) => {
@@ -229,7 +229,7 @@ class NodeCardHeaderFull extends Component {
 					);
 				} else {
 					return (
-						<Tooltip title={'unpack'} mouseEnterDelay={1.1}>
+						<Tooltip title={'expand'} mouseEnterDelay={1.1}>
 							<li>
 								<button
 									onClick={(e) => {
@@ -237,7 +237,7 @@ class NodeCardHeaderFull extends Component {
 										this.props.unpackSynthonaImport(this.props.nodeData.uuid);
 									}}
 								>
-									<Icon type={'gift'} theme='filled' className='full-card-button' />
+									<Icon type={'save'} theme='filled' className='full-card-button' />
 								</button>
 							</li>
 						</Tooltip>
@@ -245,7 +245,7 @@ class NodeCardHeaderFull extends Component {
 				}
 			case 'url':
 				return (
-					<Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
+					<Tooltip title={'preview image'} mouseEnterDelay={1.1}>
 						<li>
 							<button
 								onClick={(e) => {
@@ -331,14 +331,14 @@ class NodeCardHeaderFull extends Component {
 	renderExportButton = () => {
 		if (this.props.nodeData.type !== 'package') {
 			return (
-				<Tooltip title={'generate export'} mouseEnterDelay={1.1}>
+				<Tooltip title={'generate virtual disc'} mouseEnterDelay={1.1}>
 					<li>
 						<button
 							onClick={(e) => {
 								this.toggleExportModal();
 							}}
 						>
-							<Icon type={'gift'} theme='outlined' className='full-card-button' />
+							<Icon type={'save'} theme='outlined' className='full-card-button' />
 						</button>
 					</li>
 				</Tooltip>
@@ -364,7 +364,7 @@ class NodeCardHeaderFull extends Component {
 							</button>
 						</li>
 					</Tooltip>
-					<Tooltip title={'graph'} mouseEnterDelay={1.1}>
+					<Tooltip title={'constellation'} mouseEnterDelay={1.1}>
 						<li className='mobile-visible'>
 							<button
 								onClick={(e) => window.location.replace(`/graph/${this.props.nodeData.uuid}`)}
@@ -373,7 +373,7 @@ class NodeCardHeaderFull extends Component {
 							</button>
 						</li>
 					</Tooltip>
-					<Tooltip title={'pin'} mouseEnterDelay={1.1}>
+					<Tooltip title={'star'} mouseEnterDelay={1.1}>
 						<li className='mobile-visible'>
 							<button onClick={(e) => this.togglePinned()}>
 								<Icon type={'star'} theme={this.state.pinnedState} className='full-card-button' />

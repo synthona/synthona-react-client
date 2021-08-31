@@ -86,7 +86,7 @@ class PinHeader extends Component {
 							<Link type='default' to={`/`}>
 								<Icon
 									type={'home'}
-									theme='outlined'
+									theme='filled'
 									// style={{ color: '#3ce458' }}
 								/>
 							</Link>
