@@ -452,9 +452,9 @@ class NodeCardHeaderFull extends Component {
 					onCancel={this.toggleExportModal}
 				>
 					<p>
-						Generate export package from <b>{this.props.nodeData.name || 'untitled'}</b>? The export
-						will contain <b>{this.props.nodeData.name || 'untitled'}</b> along with all its
-						associations, and appear in your starboard when it is completed.
+						Generate export from <b>{this.props.nodeData.name || 'untitled'}</b>? The export will
+						contain <b>{this.props.nodeData.name || 'untitled'}</b> along with all its associations,
+						and appear in the starboard when it is completed.
 					</p>
 				</Modal>
 				<Modal
