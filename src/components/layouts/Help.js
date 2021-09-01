@@ -5,7 +5,7 @@ import { Layout, Icon } from 'antd';
 import './css/Help.less';
 import MainSider from '../elements/MainSider';
 import IOBar from '../elements/IOBar';
-import defaultHeader from '../../resources/help.png';
+// import defaultHeader from '../../resources/help.png';
 
 const { Content } = Layout;
 
@@ -37,8 +37,8 @@ class Help extends Component {
 						<div style={{ position: 'fixed', width: '100%' }}>
 							<IOBar />
 						</div>
-						<img style={{ width: '100%' }} src={defaultHeader} alt='stars'></img>
-						<div className='help-container' style={{ padding: '1.3rem 17rem 1rem' }}>
+						{/* <img style={{ width: '100%' }} src={defaultHeader} alt='stars'></img>*/}
+						<div className='help-container' style={{ padding: '5.7rem 17rem 1rem' }}>
 							<h2 style={{ fontSize: '2rem' }}>Help Page</h2>
 							<p>
 								Hello there! Welcome to the help page! This is where you can get the help you need,
@@ -204,31 +204,30 @@ class Help extends Component {
 							<p>This is the garbage can, it lets you put delete nodes from the system!</p>
 							<Icon type={'delete'} theme='outlined' className='help-icon' />
 							<h3>
-								Synthona Virtual Discs <Icon type={'save'} theme='outlined' />
+								Exports <Icon type={'save'} theme='outlined' />
 							</h3>
 							<p>
-								Synthona Virtual Discs allow you to share nodes and their associations between
-								computers as <i>.synth</i> files, which can be re-imported by anyone into any
-								synthona instance on any computer. These files are represented within synthona by
-								this <Icon type={'save'} theme='outlined' /> icon. If you click this icon on a node
-								in your system, it will generate an export virtual disc based on the node you
-								clicked it from. Synthona Virtual Discs contain the node in question, all the nodes
-								associated with it, and their associations with each other. More specificity in
-								exports is a planned feature for the future as well.
+								Exports allow you to share nodes and their associations between computers as{' '}
+								<i>.synth</i> files, which can be re-imported by anyone into any synthona instance
+								on any computer. These files are represented within synthona by this{' '}
+								<Icon type={'save'} theme='outlined' /> icon. If you click this icon on a node in
+								your system, it will generate an export based on the node you clicked it from.
+								Exports contain the node in question, all the nodes associated with it, and their
+								associations with each other. More specificity in exports is a planned feature for
+								the future as well.
 							</p>
 							<p>
-								If you have created or imported a Synthona Virtual Discs into your Synthona
-								instance, you will see this icon on the Virtual Disc page. Clicking it will "unpack"
-								the Virtual Disc, importing all the nodes and associations it contains into your
-								profile. Once you click this, it will be replaced by an "undo"{' '}
-								<Icon type={'undo'} theme='outlined' /> icon which will allow you to "repack" the
-								Virtual Disc. The undo option will delete all the nodes which unpacking created,
-								which makes unpacking a reversible operation. Be warned however! If you have made
-								changes to any of the nodes you imported they will still be removed (at least that's
-								how it works right now).
+								If you have created or imported a Synthona export into your Synthona instance, you
+								will see this icon on the export page. Clicking it will "unpack" the export,
+								importing all the nodes and associations it contains into your profile. Once you
+								click this, it will be replaced by an "undo" <Icon type={'undo'} theme='outlined' />{' '}
+								icon which will allow you to "repack" the export. The undo option will delete all
+								the nodes which unpacking created, which makes unpacking a reversible operation. Be
+								warned however! If you have made changes to any of the nodes you imported they will
+								still be removed (at least that's how it works right now).
 							</p>
 							<p>
-								Sythona Virtual Discs are great for all kinds of things...sharing your thoughts with
+								Sythona Exports are great for all kinds of things...sharing your thoughts with
 								others, sharing files for a project, sharing photo albums, and more! If you're a
 								developer, you may also be interested to know that these exports are largely just
 								JSON which means you could potentially integrate them with other software.
@@ -249,10 +248,9 @@ class Help extends Component {
 							<p>
 								When you delete a file node, it will not delete the file itself, only the node in
 								Synthona. You should know however, that if you imported a node into Synthona from a
-								.synth Virtual Disc and delete the node, it WILL delete the file...Why this
-								difference? The idea is basically that Synthona cleans up after itself. If it
-								creates a file, it will delete it, but if YOU created the file, Synthona will not
-								delete it.
+								.synth export and delete the node, it WILL delete the file...Why this difference?
+								The idea is basically that Synthona cleans up after itself. If it creates a file, it
+								will delete it, but if YOU created the file, Synthona will not delete it.
 							</p>
 							<p>
 								In other words, Synthona will not mess with your stuff! If you want to keep imported

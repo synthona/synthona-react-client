@@ -331,7 +331,7 @@ class NodeCardHeaderFull extends Component {
 	renderExportButton = () => {
 		if (this.props.nodeData.type !== 'package') {
 			return (
-				<Tooltip title={'generate virtual disc'} mouseEnterDelay={1.1}>
+				<Tooltip title={'generate export'} mouseEnterDelay={1.1}>
 					<li>
 						<button
 							onClick={(e) => {
