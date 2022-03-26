@@ -54,6 +54,8 @@ class Help extends Component {
 							<ul>
 								<li>CMD/CTRL+G - jump to the graph constellation browser</li>
 								<li>CMD/CTRL+H - jump to the home page</li>
+								<li>CMD/CTRL+L - jump to the search bar</li>
+								<li>CMD/CTRL+F - activate in-page search</li>
 								<li>CMD/CTRL+J - jump to starboard</li>
 								<li>CMD/CTRL+OPTION/ALT+1 - save the current node to the quick menu</li>
 								<li>CMD/CTRL+1 - jump to #1 on the quick menu if you have saved something there</li>
@@ -156,7 +158,7 @@ class Help extends Component {
 								This button will open the active node in your default web browser! This is useful
 								for various reasons, like if you want to run the application in your browser as a
 								tab, if you wanted to save images or files into your downloads folder, or as a way
-								to manage additional synthona tabs.
+								to manage additional Synthona tabs.
 							</p>
 							<Icon type={'global'} theme='outlined' className='help-icon' />
 							<h3>
@@ -208,8 +210,8 @@ class Help extends Component {
 							</h3>
 							<p>
 								Exports allow you to share nodes and their associations between computers as{' '}
-								<i>.synth</i> files, which can be re-imported by anyone into any synthona instance
-								on any computer. These files are represented within synthona by this{' '}
+								<i>.synth</i> files, which can be re-imported by anyone into any Synthona instance
+								on any computer. These files are represented within Synthona by this{' '}
 								<Icon type={'save'} theme='outlined' /> icon. If you click this icon on a node in
 								your system, it will generate an export based on the node you clicked it from.
 								Exports contain the node in question, all the nodes associated with it, and their
@@ -318,7 +320,11 @@ class Help extends Component {
 								clear vision for where the app is headed, but suggestions are still welcome. The
 								goal here is to make something which benefits as many people as possible. If you're
 								interested in taking a look at the code feel free to check out the project on{' '}
-								<a href='https://www.github.com/synthona' target='_blank' rel='noopener noreferrer'>
+								<a
+									href='https://www.github.com/Yarnpoint'
+									target='_blank'
+									rel='noopener noreferrer'
+								>
 									github
 								</a>
 								!
@@ -327,11 +333,11 @@ class Help extends Component {
 							<p>
 								Easy! Just go to{' '}
 								<a
-									href='https://synthona.itch.io/synthona'
+									href='https://Yarnpoint.itch.io/Yarnpoint'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
-									synthona.itch.io
+									yarnpoint.itch.io
 								</a>
 								{', '}
 								download the latest version, and install it! All your data will carry over, all you
@@ -352,7 +358,7 @@ class Help extends Component {
 							<p>
 								There is a{' '}
 								<a
-									href='https://www.patreon.com/synthona'
+									href='https://www.patreon.com/yarnpoint'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
@@ -360,11 +366,11 @@ class Help extends Component {
 								</a>{' '}
 								or you can donate at{' '}
 								<a
-									href='https://synthona.itch.io/synthona'
+									href='https://yarnpoint.itch.io/yarnpoint'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
-									synthona.itch.io
+									yarnpoint.itch.io
 								</a>{' '}
 								where you downloaded the app originally, and I may add more options in the future.
 								We have a lot of ideas for improvements to this application including things like
@@ -384,7 +390,7 @@ class Help extends Component {
 								is on my long to-do list. If this sort of thing sounds interesting to you, feel free
 								to say something on{' '}
 								<a
-									href='https://www.twitter.com/synthona'
+									href='https://www.twitter.com/Yarnpoint'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
@@ -406,7 +412,7 @@ class Help extends Component {
 								</a>{' '}
 								or reach out on{' '}
 								<a
-									href='https://www.twitter.com/synthona'
+									href='https://www.twitter.com/yarnpoint'
 									target='_blank'
 									rel='noopener noreferrer'
 								>

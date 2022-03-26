@@ -2,16 +2,17 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Icon, Modal, Tooltip, message } from 'antd';
 import { validUrl, isImageUrl } from '../../../utils/validation';
+import { isElectron } from '../../../utils/environment';
 import {
 	showComponent,
-	unpackSynthonaImport,
+	unpackImport,
 	updateActiveNode,
 	clearNodePreview,
 	openFileInExplorer,
 	deleteNode,
 	clearActiveNode,
 	generateExportByUUID,
-	removeSynthonaImportsByPackage,
+	removeImportsByPackage,
 } from '../../../api/redux/actions';
 
 class NodeCardHeaderFull extends Component {
@@ -150,7 +151,13 @@ class NodeCardHeaderFull extends Component {
 		if (this.props.nodeData.preview === null) {
 			const input = document.createElement('input');
 			input.setAttribute('type', 'file');
-			input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
+			input.setAttribute('accept', [
+				'image/gif',
+				'image/jpg',
+				'image/jpeg',
+				'image/png',
+				'image/webp',
+			]);
 			input.click();
 			// Listen for uploading local file, then save to server
 			input.onchange = async () => {
@@ -219,7 +226,7 @@ class NodeCardHeaderFull extends Component {
 								<button
 									onClick={(e) => {
 										// show the modal
-										this.props.removeSynthonaImportsByPackage(this.props.nodeData.uuid);
+										this.props.removeImportsByPackage(this.props.nodeData.uuid);
 									}}
 								>
 									<Icon type={'undo'} theme='outlined' className='full-card-button' />
@@ -234,7 +241,7 @@ class NodeCardHeaderFull extends Component {
 								<button
 									onClick={(e) => {
 										// show the modal
-										this.props.unpackSynthonaImport(this.props.nodeData.uuid);
+										this.props.unpackImport(this.props.nodeData.uuid);
 									}}
 								>
 									<Icon type={'save'} theme='filled' className='full-card-button' />
@@ -259,20 +266,24 @@ class NodeCardHeaderFull extends Component {
 					</Tooltip>
 				);
 			case 'file':
-				return (
-					<Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
-						<li>
-							<button
-								onClick={(e) => {
-									// show the modal
-									this.setPreviewToLocalFilePath();
-								}}
-							>
-								<Icon type={'picture'} theme='outlined' className='full-card-button' />
-							</button>
-						</li>
-					</Tooltip>
-				);
+				if (isElectron()) {
+					return (
+						<Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
+							<li>
+								<button
+									onClick={(e) => {
+										// show the modal
+										this.setPreviewToLocalFilePath();
+									}}
+								>
+									<Icon type={'picture'} theme='outlined' className='full-card-button' />
+								</button>
+							</li>
+						</Tooltip>
+					);
+				} else {
+					return;
+				}
 			case 'audio':
 				return (
 					<Tooltip title={'replace preview image'} mouseEnterDelay={1.1}>
@@ -502,10 +513,10 @@ export default connect(mapStateToProps, {
 	showComponent,
 	updateActiveNode,
 	clearNodePreview,
-	unpackSynthonaImport,
+	unpackImport,
 	openFileInExplorer,
 	deleteNode,
 	clearActiveNode,
 	generateExportByUUID,
-	removeSynthonaImportsByPackage,
+	removeImportsByPackage,
 })(NodeCardHeaderFull);

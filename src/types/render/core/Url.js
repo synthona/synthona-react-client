@@ -3,6 +3,7 @@ import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 // for now these are in-common between nodes
 import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
+import missingFileImage from '../../../resources/missing-file.png';
 
 const Url = (props) => {
 	const urlIcon = 'bulb';
@@ -51,6 +52,7 @@ const Url = (props) => {
 						// minHeight: '100%',
 						width: '100%',
 					}}
+					onError={(e) => e.target.src = missingFileImage}
 				></img>
 			);
 		} else {

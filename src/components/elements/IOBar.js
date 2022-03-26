@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import history from '../../utils/history';
 import { isElectron } from '../../utils/environment';
 import { Link } from 'react-router-dom';
-import { Layout, Button, Input, Select, Icon, message } from 'antd';
+import { Layout, Button, Input, Select, Icon, message, Tooltip } from 'antd';
 // custom code
 import { validUrl, isImageUrl } from '../../utils/validation';
 import './css/IOBar.less';
@@ -24,8 +24,10 @@ class IOBar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			input: '',
+			input: this.props.query.searchQuery,
 			nodeTypes: this.props.query.type || 'all',
+			sortType: this.props.query.sortType,
+			sortOrder: this.props.query.sortOrder,
 			createType: null,
 			queryType: null,
 			inputMode: 'query',
@@ -60,6 +62,16 @@ class IOBar extends Component {
 		}
 	};
 
+	toggleSortOrder = () => {
+		if (this.state.sortOrder === 'ASC') {
+			this.setState({ sortOrder: 'DESC' });
+			localStorage.setItem('sortOrder', 'DESC');
+		} else {
+			this.setState({ sortOrder: 'ASC' });
+			localStorage.setItem('sortOrder', 'ASC');
+		}
+	};
+
 	renderCreateFileNodeOption = () => {
 		if (isElectron() === true) {
 			return <Option value='file'>files</Option>;
@@ -67,12 +79,15 @@ class IOBar extends Component {
 	};
 
 	// handle text input
-	commandHandler = () => {
+	commandHandler = (e) => {
+		e.target.blur();
 		switch (this.state.inputMode) {
 			case 'query':
 				return this.props.searchNodes({
 					searchQuery: this.state.input,
 					type: this.state.nodeTypes,
+					sortType: this.state.sortType,
+					sortOrder: this.state.sortOrder,
 				});
 			case 'create':
 				return this.createNodeHandler();
@@ -180,7 +195,9 @@ class IOBar extends Component {
 					showSearch
 					showArrow={false}
 					value={this.state.nodeTypes}
-					onChange={(value) => this.setState({ nodeTypes: value })}
+					onChange={(value) => {
+						this.setState({ nodeTypes: value });
+					}}
 				>
 					<Option value='all'>all</Option>
 					<Option value='url'>urls</Option>
@@ -198,7 +215,9 @@ class IOBar extends Component {
 					showSearch
 					showArrow={false}
 					value={this.state.nodeTypes}
-					onChange={(value) => this.setState({ nodeTypes: value })}
+					onChange={(value) => {
+						this.setState({ nodeTypes: value });
+					}}
 				>
 					<Option value='text'>text</Option>
 					{this.renderCreateFileNodeOption()}
@@ -209,10 +228,48 @@ class IOBar extends Component {
 		}
 	};
 
+	// we're going to render the far-right side of the input bar
+	// which includes all the sort selection variables and buttons
+	renderSelectAfter = () => {
+		return (
+			<div className='io-input-sort'>
+				<Input.Group>
+					<Select
+						showSearch
+						showArrow={false}
+						value={this.state.sortType}
+						onChange={(value) => {
+							this.setState({ sortType: value });
+							localStorage.setItem('sortType', value);
+						}}
+					>
+						<Option value='recent'>
+							<Icon type={'bulb'} theme='outlined' /> recent
+						</Option>
+						<Option value='views'>
+							<Icon type={'thunderbolt'} theme='outlined' /> views
+						</Option>
+						<Option value='created'>
+							<Icon type={'clock-circle'} theme='outlined' /> created
+						</Option>
+					</Select>
+					<Tooltip title={this.state.sortOrder === 'DESC' ? 'a-z' : 'z-a'} mouseEnterDelay={1.1}>
+						<Button className='io-input-button' onClick={() => this.toggleSortOrder()}>
+							<Icon
+								type={this.state.sortOrder === 'DESC' ? 'arrow-up' : 'arrow-down'}
+								theme='outlined'
+							/>
+						</Button>
+					</Tooltip>
+				</Input.Group>
+			</div>
+		);
+	};
+
 	render() {
 		return (
 			<div>
-				<Header className='page-header'>
+				<Header className='page-header' style={this.props.fixed ? { position: 'fixed' } : null}>
 					<ul className='nav-list'>
 						<li className='nav-item io-sider-button mobile-visible' style={{ marginRight: '0' }}>
 							<Button type='default' shape='circle' onClick={(e) => this.toggleMainSider()}>
@@ -253,14 +310,16 @@ class IOBar extends Component {
 						</li>
 						<li className='nav-search'>
 							<Input
-								onPressEnter={(value, event) => this.commandHandler()}
+								onPressEnter={(value, event) => this.commandHandler(value)}
 								maxLength={500}
 								value={this.state.input}
 								onChange={(e) => this.setState({ input: e.target.value })}
 								defaultValue={this.props.query.searchQuery || ''}
 								placeholder={this.state.placeholder}
 								addonBefore={this.renderSelectBefore()}
+								addonAfter={this.renderSelectAfter()}
 								className='nav-search-input'
+								id='nav-primary-search'
 							/>
 						</li>
 					</ul>

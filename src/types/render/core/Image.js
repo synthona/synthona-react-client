@@ -30,17 +30,9 @@ const Image = (props) => {
 	};
 
 	const onClickAction = (e) => {
-		if (!fileLoadError) {
-			e.preventDefault();
-			props.handleClick();
-			window.location.replace(`/associations/${props.node.uuid}`);
-		} else if (isElectron()) {
-			e.preventDefault();
-			selectLocalFile(e);
-		} else {
-			e.preventDefault();
-			window.location.replace(`/associations/${props.node.uuid}`);
-		}
+		e.preventDefault();
+		props.handleClick();
+		window.location.replace(`/associations/${props.node.uuid}`);
 	};
 
 	// const onContextAction = (e) => {

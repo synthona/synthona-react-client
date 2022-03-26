@@ -41,6 +41,8 @@ export const fetchNodes = (query) => async (dispatch) => {
 				type: query.type,
 				searchQuery: query.searchQuery,
 				pinned: query.pinned,
+				sortType: query.sortType,
+				sortOrder: query.sortOrder,
 			},
 		});
 		dispatch({ type: FETCH_NODES_SUCCESS, payload: response.data, query });
@@ -65,6 +67,8 @@ export const searchNodes = (query) => async (dispatch) => {
 				type: query.type,
 				searchQuery: query.searchQuery,
 				pinned: query.pinned,
+				sortType: query.sortType,
+				sortOrder: query.sortOrder,
 			},
 		});
 		dispatch({ type: SEARCH_NODES_SUCCESS, payload: response.data, query });

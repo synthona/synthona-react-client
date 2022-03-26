@@ -40,7 +40,7 @@ export const generateExportByUUID = (uuid) => async (dispatch) => {
 };
 
 // export the instance data and get the url of the file
-export const unpackSynthonaImport = (uuid) => async (dispatch) => {
+export const unpackImport = (uuid) => async (dispatch) => {
 	try {
 		const response = await instance.put('/port/import/', { uuid });
 		if (response.status === 200) {
@@ -53,7 +53,7 @@ export const unpackSynthonaImport = (uuid) => async (dispatch) => {
 	}
 };
 
-export const removeSynthonaImportsByPackage = (uuid) => async (dispatch) => {
+export const removeImportsByPackage = (uuid) => async (dispatch) => {
 	message.success('removing imports...', 1);
 	try {
 		const response = await instance.patch('/port/export/undo/', { uuid });

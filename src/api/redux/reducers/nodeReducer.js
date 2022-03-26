@@ -47,7 +47,11 @@ const INITIAL_STATE = {
 	isDeleting: null,
 	nodeList: [],
 	totalItems: null,
-	query: { page: 1 },
+	query: {
+		page: 1,
+		sortOrder: localStorage.getItem('sortOrder') || 'DESC',
+		sortType: localStorage.getItem('sortType') || 'recent',
+	},
 	activeNode: null,
 };
 
@@ -70,10 +74,10 @@ export default (state = INITIAL_STATE, action) => {
 					nodesArray.push(node);
 				}
 			});
-			if (nodesArray.length > 100) {
-				// if the length gets too long free up some memory
-				nodesArray.splice(0, action.payload.nodes.length);
-			}
+			// if (nodesArray.length > 100) {
+			// 	// if the length gets too long free up some memory
+			// 	nodesArray.splice(0, action.payload.nodes.length);
+			// }
 			return {
 				...state,
 				isFetching: null,
@@ -93,14 +97,20 @@ export default (state = INITIAL_STATE, action) => {
 					nodesArray.push(node);
 				}
 			});
-			if (nodesArray.length > 100) {
-				// if the length gets too long free up some memory
-				nodesArray.splice(0, action.payload.nodes.length);
-			}
+			// if (nodesArray.length > 100) {
+			// 	// if the length gets too long free up some memory
+			// 	nodesArray.splice(0, action.payload.nodes.length);
+			// }
 			return {
 				...state,
 				isFetching: null,
-				query: { page: 1, type: action.query.type, searchQuery: action.query.searchQuery },
+				query: {
+					page: 1,
+					type: action.query.type,
+					searchQuery: action.query.searchQuery,
+					sortType: action.query.sortType,
+					sortOrder: action.query.sortOrder,
+				},
 				totalItems: action.payload.totalItems,
 				nodeList: nodesArray,
 			};

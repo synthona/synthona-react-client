@@ -7,7 +7,6 @@ export const isElectron = () => {
 	) {
 		return true;
 	}
-
 	// Main process
 	if (
 		typeof process !== 'undefined' &&
@@ -16,7 +15,6 @@ export const isElectron = () => {
 	) {
 		return true;
 	}
-
 	// Detect the user agent when the `nodeIntegration` option is set to true
 	if (
 		typeof navigator === 'object' &&

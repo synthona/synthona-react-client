@@ -13,13 +13,13 @@
   background-color: #272727;
   // background-color: black;
   border-bottom: 0.07rem solid #000000;
+  height: 3rem;
+  overflow: hidden;
 }
 
 .full-node-item img {
-  padding-top: 0.02rem;
-  // max-width: 100%;
+  padding-top: 0;
   width: 100%;
-  // min-width: 70%;
   display: block;
   margin: 0 auto;
 }
@@ -114,7 +114,6 @@ input.full-card-title {
   background-color: #272727;
   border: none;
   font-size: 1rem;
-  // width: 15.3rem;
   width: auto;
   overflow: hidden;
   white-space: nowrap;
@@ -126,7 +125,6 @@ input.full-card-title::selection {
 }
 
 input.full-card-title:focus-within {
-  // width: 30rem;
   width: auto;
 }
 
@@ -141,14 +139,18 @@ input.full-card-title:focus-within {
 }
 
 @media only screen and (max-width: 700px) {
+  h3 {
+    width: auto;
+  }
+
   .full-card-title {
     width: auto;
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 550px) {
   .full-card-title {
-    width: 55%;
+    width: 50%;
   }
 
   .full-card-options {
@@ -160,9 +162,6 @@ input.full-card-title:focus-within {
   }
 
   ul.full-card-buttons-list {
-    padding: 0;
-    margin: 0;
-
     li {
       display: none;
     }

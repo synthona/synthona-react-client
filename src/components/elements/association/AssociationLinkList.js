@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // custom code
 import '../node/NodeList.less';
-import { searchNodes, fetchAssociationLinkList } from '../../../api/redux/actions';
+import { fetchAssociationLinkList } from '../../../api/redux/actions';
 // import NodeCard from './NodeCard';
 import Spinner from '../Spinner';
 import AssociationLink from './AssociationLink';
@@ -77,6 +77,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-	searchNodes,
 	fetchAssociationLinkList,
 })(AssociationLinkList);
