@@ -87,7 +87,7 @@ class AssociationList extends Component {
 	renderList = () => {
 		if (this.props.totalNodes > 0) {
 			return (
-				<ul style={{ backgroundColor: 'black' }} className='nodelist'>
+				<ul style={{ backgroundColor: 'none' }} className='nodelist'>
 					{this.renderNodes()}
 				</ul>
 			);
