@@ -30,7 +30,8 @@ const File = (props) => {
 			window.location.replace(`/associations/${props.node.uuid}`);
 		} else if (isElectron()) {
 			e.preventDefault();
-			selectLocalFile(e);
+			props.handleClick();
+			window.location.replace(`/associations/${props.node.uuid}`);
 		} else {
 			e.preventDefault();
 			window.location.replace(`/associations/${props.node.uuid}`);

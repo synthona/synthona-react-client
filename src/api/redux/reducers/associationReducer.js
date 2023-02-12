@@ -86,20 +86,23 @@ export default (state = INITIAL_STATE, action) => {
 		case CREATE_ASSOCIATION:
 			return { ...state, isSaving: true };
 		case CREATE_ASSOCIATION_SUCCESS:
+			var associatedNode;
+			// check whichever is the associated node to the list
+			if (action.nodeUUID && action.nodes.associated.uuid === action.nodeUUID) {
+				associatedNode = action.nodes.original;
+			} else {
+				associatedNode = action.nodes.associated;
+			}
 			// only add the node to the association list if one of the nodes is the activeNode
-			if (
-				state.activeNode &&
-				(action.associatedNode.uuid === state.activeNode.uuid ||
-					action.nodeUUID === state.activeNode.uuid)
-			) {
-				newAssociationList = [action.associatedNode, ...state.associationList];
+			if (state.activeNode && action.nodeUUID === state.activeNode.uuid) {
+				newAssociationList = [associatedNode, ...state.associationList];
 			} else {
 				newAssociationList = [...state.associationList];
 			}
 			return {
 				...state,
 				isFetching: null,
-				associationLinkList: [action.associatedNode, ...state.associationLinkList],
+				associationLinkList: [associatedNode, ...state.associationLinkList],
 				associationList: newAssociationList,
 				totalAssociationListItems: state.totalAssociationListItems + 1,
 			};

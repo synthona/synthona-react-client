@@ -61,23 +61,23 @@ class Help extends Component {
 								<li>CMD/CTRL+1 - jump to #1 on the quick menu if you have saved something there</li>
 								<li>Quick-Menu - the quick menu will also work with the number keys 1-9</li>
 							</ul>
-							<h2>What is Synthona?</h2>
+							<h2>What is synthona?</h2>
 							<p>
-								Synthona is a way of being & thinking. Synthona allows you to create, explore, and
-								share networks made out of content! You can use Synthona for whatever you want, some
+								synthona is a way of being & thinking. synthona allows you to create, explore, and
+								share networks made out of content! You can use synthona for whatever you want, some
 								ideas include "building a mind palace, storing URL bookmarks, exploring your
 								filesystem, thinking, note-taking, as a memory-expansion for your brain, for
 								world-building, planning, and so forth...there are few limits!" That might sound
-								overwhelming but it's really not so bad once you get familiar. Synthona tries its
+								overwhelming but it's really not so bad once you get familiar. synthona tries its
 								best not to make any changes to your computer outside of itself, so feel free to
 								click around & experiment, that is the best way to learn after all!
 							</p>
 							<h2>What are nodes and associations?</h2>
 							<p>
-								Synthona is premised on the idea that all content is a <i>node</i> which can be
+								synthona is premised on the idea that all content is a <i>node</i> which can be
 								associated, connected, related, to any other piece of content. A connection between
 								any two pieces of content is called an <i>association</i>. If you understand these
-								two ideas, you understand Synthona! That's all there is to it, the rest is just
+								two ideas, you understand synthona! That's all there is to it, the rest is just
 								building on these two assumptions.
 							</p>
 							<h2>What should I do first?</h2>
@@ -158,7 +158,7 @@ class Help extends Component {
 								This button will open the active node in your default web browser! This is useful
 								for various reasons, like if you want to run the application in your browser as a
 								tab, if you wanted to save images or files into your downloads folder, or as a way
-								to manage additional Synthona tabs.
+								to manage additional synthona tabs.
 							</p>
 							<Icon type={'global'} theme='outlined' className='help-icon' />
 							<h3>
@@ -184,7 +184,7 @@ class Help extends Component {
 							<p>
 								Clicking this is contextual, but has to do with picking or replacing an image on a
 								node. In URL nodes, you can replace the node's preview image with the URL of any
-								image from the internet or from elsewhere in Synthona (right click and "copy image
+								image from the internet or from elsewhere in synthona (right click and "copy image
 								address" to get replacement images). In File nodes, for the time being at least,
 								this icon will allow you to pick a file from your filesystem to use as the preview
 								image. LONG STORY SHORT...The Picture Icon has to do with customization of pictures
@@ -196,7 +196,7 @@ class Help extends Component {
 							</h3>
 							<p>
 								This icon appears on nodes which are files...Clicking it will show the file in the
-								folder! This is really handy because it means Synthona can be used to create
+								folder! This is really handy because it means synthona can be used to create
 								shortcuts to specific files in your filesystem.
 							</p>
 							<Icon type={'folder-open'} theme='outlined' className='help-icon' />
@@ -210,8 +210,8 @@ class Help extends Component {
 							</h3>
 							<p>
 								Exports allow you to share nodes and their associations between computers as{' '}
-								<i>.synth</i> files, which can be re-imported by anyone into any Synthona instance
-								on any computer. These files are represented within Synthona by this{' '}
+								<i>.synth</i> files, which can be re-imported by anyone into any synthona instance
+								on any computer. These files are represented within synthona by this{' '}
 								<Icon type={'save'} theme='outlined' /> icon. If you click this icon on a node in
 								your system, it will generate an export based on the node you clicked it from.
 								Exports contain the node in question, all the nodes associated with it, and their
@@ -219,7 +219,7 @@ class Help extends Component {
 								the future as well.
 							</p>
 							<p>
-								If you have created or imported a Synthona export into your Synthona instance, you
+								If you have created or imported a synthona export into your synthona instance, you
 								will see this icon on the export page. Clicking it will "unpack" the export,
 								importing all the nodes and associations it contains into your profile. Once you
 								click this, it will be replaced by an "undo" <Icon type={'undo'} theme='outlined' />{' '}
@@ -237,29 +237,29 @@ class Help extends Component {
 							<Icon type={'save'} theme='outlined' className='help-icon' />
 							<h2>How do I edit the name of a node?</h2>
 							<p>If you double click the title it should turn into an editable text field.</p>
-							<h2>How do files work starting in Synthona 1.2.3?</h2>
+							<h2>How do files work starting in synthona 1.2.3?</h2>
 							<p>
 								Starting with version 1.2.3, it is possible to link files in your filesystem to
-								Synthona by creating file nodes. File nodes existed before, but they didn't do much.
+								synthona by creating file nodes. File nodes existed before, but they didn't do much.
 								Starting with version 1.2.3, it is possible to open certain file types (photoshop
 								projects, .txt files, word documents, images, .mp3s, .pdfs, 3D models, and so forth)
-								in their default program directly from Synthona! The way this works is pretty
+								in their default program directly from synthona! The way this works is pretty
 								straightforward...Once you create a file node you can either right click the node
 								card to launch the file, or click through to the landing page to launch.
 							</p>
 							<p>
 								When you delete a file node, it will not delete the file itself, only the node in
-								Synthona. You should know however, that if you imported a node into Synthona from a
+								synthona. You should know however, that if you imported a node into synthona from a
 								.synth export and delete the node, it WILL delete the file...Why this difference?
-								The idea is basically that Synthona cleans up after itself. If it creates a file, it
-								will delete it, but if YOU created the file, Synthona will not delete it.
+								The idea is basically that synthona cleans up after itself. If it creates a file, it
+								will delete it, but if YOU created the file, synthona will not delete it.
 							</p>
 							<p>
-								In other words, Synthona will not mess with your stuff! If you want to keep imported
+								In other words, synthona will not mess with your stuff! If you want to keep imported
 								files long-term it is recommended that you copy them out of the import-location into
 								a better place!
 							</p>
-							<h2>Context Actions starting in Synthona 1.2.3</h2>
+							<h2>Context Actions starting in synthona 1.2.3</h2>
 							<p>
 								Starting with version 1.2.3, certain node types now have special actions which are
 								automatically launched when you "right-click" a node. URLS will open in your browser
@@ -303,7 +303,7 @@ class Help extends Component {
 								really know what you are doing, as it is possible to break the app if you start to
 								mess with stuff in there!
 							</p>
-							<h2>Context Actions starting in Synthona 1.2.3</h2>
+							<h2>Context Actions starting in synthona 1.2.3</h2>
 							<p>
 								Starting with version 1.2.3, certain node types now have special actions which are
 								automatically launched when you "right-click" a node. URLS will open in your browser
@@ -313,18 +313,14 @@ class Help extends Component {
 							</p>
 							<h2>What is the license, do you accept pull requests?</h2>
 							<p>
-								Synthona is an open-source project and is licensed under GPLv3 which means if you
+								synthona is an open-source project and is licensed under GPLv3 which means if you
 								want to take things into your own hands you're free to fork the project, but I am
 								also more than willing to hear out your concerns and try to implement changes myself
 								if I can or accept pull requests if they fit the project roadmap! There is a very
 								clear vision for where the app is headed, but suggestions are still welcome. The
 								goal here is to make something which benefits as many people as possible. If you're
 								interested in taking a look at the code feel free to check out the project on{' '}
-								<a
-									href='https://www.github.com/Yarnpoint'
-									target='_blank'
-									rel='noopener noreferrer'
-								>
+								<a href='https://www.github.com/synthona' target='_blank' rel='noopener noreferrer'>
 									github
 								</a>
 								!
@@ -333,11 +329,11 @@ class Help extends Component {
 							<p>
 								Easy! Just go to{' '}
 								<a
-									href='https://Yarnpoint.itch.io/Yarnpoint'
+									href='https://synthona.itch.io/synthona'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
-									yarnpoint.itch.io
+									synthona.itch.io
 								</a>
 								{', '}
 								download the latest version, and install it! All your data will carry over, all you
@@ -358,7 +354,7 @@ class Help extends Component {
 							<p>
 								There is a{' '}
 								<a
-									href='https://www.patreon.com/yarnpoint'
+									href='https://www.patreon.com/synthona'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
@@ -366,11 +362,11 @@ class Help extends Component {
 								</a>{' '}
 								or you can donate at{' '}
 								<a
-									href='https://yarnpoint.itch.io/yarnpoint'
+									href='https://synthona.itch.io/synthona'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
-									yarnpoint.itch.io
+									synthona.itch.io
 								</a>{' '}
 								where you downloaded the app originally, and I may add more options in the future.
 								We have a lot of ideas for improvements to this application including things like
@@ -385,12 +381,12 @@ class Help extends Component {
 							</p>
 							<p>
 								I am also hoping to add some Patreon bonuses like a Discord, custom icons for
-								Synthona (other colors than yellow for example), and more, but you should know that
+								synthona (other colors than yellow for example), and more, but you should know that
 								I have just been so busy that this has fallen into the background...never fear! It
 								is on my long to-do list. If this sort of thing sounds interesting to you, feel free
 								to say something on{' '}
 								<a
-									href='https://www.twitter.com/Yarnpoint'
+									href='https://www.twitter.com/synthona'
 									target='_blank'
 									rel='noopener noreferrer'
 								>
@@ -412,7 +408,7 @@ class Help extends Component {
 								</a>{' '}
 								or reach out on{' '}
 								<a
-									href='https://www.twitter.com/yarnpoint'
+									href='https://www.twitter.com/synthona'
 									target='_blank'
 									rel='noopener noreferrer'
 								>

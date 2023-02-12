@@ -120,7 +120,8 @@ class GraphBrowser extends Component {
 		// width and height
 		const height = window.innerHeight;
 		const width = window.innerWidth;
-		const nodeScale = 23;
+		// const nodeScale = 23;
+		const nodeScale = 29;
 
 		// simulation
 		const simulation = forceSimulation(nodeData)

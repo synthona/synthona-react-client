@@ -92,7 +92,7 @@ class PinHeader extends Component {
 							</Link>
 						</li>
 						<li className='nav-item'>
-							<p style={{ color: 'grey', paddingLeft: '0.7rem' }}>starboard</p>
+							<p style={{ color: 'grey', paddingLeft: '0.7rem' }}>favorites</p>
 						</li>
 					</ul>
 				</Header>

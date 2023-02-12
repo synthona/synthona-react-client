@@ -20,6 +20,7 @@ import AssociationBrowser from './layouts/AssociationBrowser';
 import GraphBrowser from './layouts/GraphBrowser';
 import Help from './layouts/Help';
 import Pins from './layouts/Pins';
+import RandomRedirect from './layouts/RandomRedirect';
 // special
 import ElectronMessage from './electron/ElectronMessage';
 
@@ -59,6 +60,7 @@ class App extends Component {
 					<Route path='/graph/:uuid?' exact component={GraphBrowser} />
 					<Route path='/pins' exact component={Pins} />
 					<Route path='/help' exact component={Help} />
+					<Route path='/random' exact component={RandomRedirect} />
 				</Switch>
 			);
 		} else if (this.props.isFetchingAuth) {

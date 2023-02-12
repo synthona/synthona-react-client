@@ -47,7 +47,6 @@ export const linkFileNodes = (fileList, linkedNode) => async (dispatch) => {
 			fileList: JSON.stringify(fileList),
 			linkedNode: linkedNode,
 		});
-		console.log(response.data.nodes);
 		// if it's sucessful dispatch the success action
 		if (response.status === 200) {
 			dispatch({ type: LINK_FILE_NODES_SUCCESS, nodes: response.data.nodes });

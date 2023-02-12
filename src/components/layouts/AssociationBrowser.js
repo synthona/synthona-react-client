@@ -117,6 +117,7 @@ class AssociationBrowser extends Component {
 					<Content
 						style={{
 							paddingTop: '0',
+							backgroundColor: 'black',
 							minHeight: '100vh',
 						}}
 					>

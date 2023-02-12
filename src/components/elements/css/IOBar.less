@@ -14,7 +14,7 @@
 .page-header {
   background-color: @header-color;
   border-bottom: 0.1rem solid @header-border;
-  padding: 0;
+  padding: 0 0.7rem;
   margin: 0;
   height: 3.1rem;
   line-height: 2.9rem;
@@ -25,12 +25,12 @@
 }
 
 .nav-search {
-  padding: 0.45rem 1rem 0 0.7rem;
+  padding: 0.45rem 0.1rem 0 0.7rem;
   border-radius: 1rem;
 }
 
 .nav-search-input {
-  min-width: 75rem;
+  min-width: 93rem;
   padding: 0.07rem 0 0;
   margin: 0;
 }
@@ -63,6 +63,7 @@ span.ant-input-group-addon {
   border: none;
   border-left: none;
   background: none;
+  padding-right: 0.3rem;
 }
 
 .ant-input-group-addon .ant-select-no-arrow {
@@ -194,14 +195,17 @@ a:hover {
   color: @io-hover-color;
 }
 
+@media only screen and (max-width: 1700px) {
+  .nav-search-input {
+    min-width: 83vw;
+  }
+}
+
 @media only screen and (max-width: 1400px) {
   .nav-search-input {
-    min-width: 80vw;
+    min-width: 77vw;
     padding: 0;
     margin: 0;
-  }
-  .ant-select-no-arrow {
-    width: 7rem;
   }
 }
 
@@ -211,22 +215,23 @@ a:hover {
     padding: 0;
     margin: 0;
   }
-  .ant-select-no-arrow {
-    width: 7rem;
-  }
 }
 
 @media only screen and (max-width: 800px) {
   .nav-search-input {
-    max-width: 70vw;
+    min-width: 60vw;
     padding: 0;
     margin: 0;
   }
-  .ant-select-no-arrow {
-    width: 7rem;
-  }
   .nav-search {
     padding: 0.45rem 0.1rem 0;
+  }
+  .io-input-sort {
+    display: none;
+  }
+
+  span.ant-input-group-addon {
+    padding-right: 0;
   }
 }
 
@@ -237,18 +242,9 @@ a:hover {
   .ant-select-no-arrow {
     width: 6rem;
   }
-
-  .io-input-sort {
-    display: none;
-  }
 }
 
-@media only screen and (max-width: 400px) {
-  // .page-header {
-    // height: 4rem;
-    // padding-top: 0.6rem;
-  // }
-
+@media only screen and (max-width: 450px) {
   .nav-search-input {
     min-width: 73vw;
     padding: 0 0.5rem;
@@ -257,11 +253,19 @@ a:hover {
     width: 5.3rem;
   }
 
+  span.nav-search-input {
+    padding-left: 0.2rem;
+  }
+
   li.nav-item.io-sider-button {
     display: none;
   }
 
   li.nav-item.io-sider-button.mobile-visible{
     display: block;
+  }
+
+  .mobile-hidden {
+    display: none;
   }
 }

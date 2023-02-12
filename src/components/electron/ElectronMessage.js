@@ -43,6 +43,9 @@ class ElectronMessage extends Component {
 					case 'latest-version':
 						message.success('Synthona Is Up To Date', 2);
 						return;
+					case 'load-backend-config':
+						window.localStorage.setItem('backend-config', JSON.stringify(data.config));
+						return;
 					default:
 						break;
 				}
@@ -60,17 +63,17 @@ class ElectronMessage extends Component {
 		if (this.props.updateAvailable && this.props.updateAvailable.visible) {
 			return (
 				<Modal
-					title={'A New Version of Synthona Is Available!'}
+					title={'A New Version Is Available!'}
 					visible={true}
 					className='signout-modal'
 					centered
-					onOk={(e) => window.open('http://www.yarnpoint.net', '_blank')}
+					onOk={(e) => window.open('http://www.synthona.net', '_blank')}
 					okType='primary'
 					okText='Yes!'
 					closable={false}
 					onCancel={() => this.props.hideComponent('updateAvailable')}
 				>
-					<p>An upgrade is available. Do you want to know more?</p>
+					<p>An upgrade for Synthona is available. Do you want to know more?</p>
 				</Modal>
 			);
 		}

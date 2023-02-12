@@ -33,7 +33,7 @@ const Url = (props) => {
 					href={props.node.path}
 					target='_blank'
 					rel='noopener noreferrer'
-					style={{ width: '100%' }}
+					// style={{ width: '100%' }}
 				>
 					{renderPreview()}
 				</a>
@@ -50,9 +50,9 @@ const Url = (props) => {
 					style={{
 						objectFit: 'cover',
 						// minHeight: '100%',
-						width: '100%',
+						// width: '100%',
 					}}
-					onError={(e) => e.target.src = missingFileImage}
+					onError={(e) => (e.target.src = missingFileImage)}
 				></img>
 			);
 		} else {
