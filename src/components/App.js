@@ -18,7 +18,6 @@ import Spinner from './elements/Spinner';
 import CreateAccount from './layouts/CreateAccount';
 import AssociationBrowser from './layouts/AssociationBrowser';
 import GraphBrowser from './layouts/GraphBrowser';
-import Help from './layouts/Help';
 import Pins from './layouts/Pins';
 import RandomRedirect from './layouts/RandomRedirect';
 // special
@@ -59,7 +58,6 @@ class App extends Component {
 					<Route path='/associations/:uuid' exact component={AssociationBrowser} />
 					<Route path='/graph/:uuid?' exact component={GraphBrowser} />
 					<Route path='/pins' exact component={Pins} />
-					<Route path='/help' exact component={Help} />
 					<Route path='/random' exact component={RandomRedirect} />
 				</Switch>
 			);

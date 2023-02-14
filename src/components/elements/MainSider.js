@@ -142,7 +142,17 @@ class MainSider extends Component {
 							</Link>
 						</Item>
 						<Item className='sider-menu-item'>
-							<Link to='/help' onClick={(e) => this.props.hideComponent('mainSider')}>
+							<Link
+								to='/help'
+								onClick={(e) => {
+									e.preventDefault();
+									window.open(
+										'https://github.com/synthona/synthona-help/blob/main/README.md',
+										'_blank'
+									);
+									this.props.hideComponent('mainSider');
+								}}
+							>
 								Help
 							</Link>
 						</Item>
