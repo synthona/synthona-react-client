@@ -357,6 +357,13 @@ class QuillEditor extends Component {
 		}
 	};
 
+	renderClassName = () => {
+		let documentWidth = JSON.parse(localStorage.getItem('quill-document-width')).value;
+		let documentClass = 'quill-' + documentWidth.replace(' ', '-');
+		// return the classname
+		return documentClass;
+	};
+
 	componentWillUnmount() {
 		// clear styles
 		document.body.style.overflow = null;
@@ -387,6 +394,7 @@ class QuillEditor extends Component {
 					{this.renderHeader()}
 					<ReactQuill
 						value={this.state.text}
+						className={this.renderClassName()}
 						onChange={this.handleChange}
 						modules={this.modules}
 						ref={this.ref}

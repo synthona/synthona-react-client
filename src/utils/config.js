@@ -16,6 +16,13 @@ let clientConfig = [
 		value: 'classic',
 	},
 	{
+		storageKey: 'quill-document-width',
+		name: 'Document Page Width',
+		type: 'dropdown',
+		options: ['classic', 'full width'],
+		value: 'full width',
+	},
+	{
 		storageKey: 'graph-render-limit',
 		name: 'Graph Render Limit',
 		type: 'number',
