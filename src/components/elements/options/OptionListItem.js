@@ -15,7 +15,6 @@ const OptionListItem = (props) => {
 						style={{ float: 'right', margin: 0, padding: 0 }}
 						onBlur={() => {
 							props.onChange(props.keyName, props.value);
-							// setInput(!props.value);
 						}}
 					></input>
 				);
@@ -29,7 +28,6 @@ const OptionListItem = (props) => {
 						style={{ float: 'right', margin: 0, padding: 0 }}
 						onBlur={(e) => {
 							props.onChange(props.keyName, !props.value);
-							// setInput(!props.value);
 						}}
 					/>
 				);
@@ -41,7 +39,6 @@ const OptionListItem = (props) => {
 						style={{ float: 'right', margin: 0, padding: 0 }}
 						onBlur={(e) => {
 							props.onChange(props.keyName, parseInt(e.target.value));
-							// setInput(!props.value);
 						}}
 					></input>
 				);
@@ -63,7 +60,6 @@ const OptionListItem = (props) => {
 						style={{ float: 'right', margin: 0, padding: 0 }}
 						onChange={(e) => {
 							props.onChange(props.keyName, e.target.value);
-							// setInput(!props.value);
 						}}
 					>
 						{options}

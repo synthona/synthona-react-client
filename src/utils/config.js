@@ -1,27 +1,56 @@
-exports.clientConfig = {
-	CONFIG_VERSION: {
-		name: 'Config Version',
-		value: 1.0,
-	},
-	THEME: {
-		type: 'dropdown',
+let clientConfigVersion = 1.0;
+
+let clientConfig = [
+	{
+		storageKey: 'theme',
 		name: 'Theme',
+		type: 'dropdown',
 		options: ['classic', 'light'],
 		value: 'classic',
 	},
-	IMAGE_SIZING: {
-		type: 'dropdown',
+	{
+		storageKey: 'image-sizing',
 		name: 'Image Sizing',
-		options: ['classic', 'actual size'],
+		type: 'dropdown',
+		options: ['classic', 'actual size', 'fit-vertically'],
 		value: 'classic',
 	},
-	GRAPH_RENDER_LIMIT: {
-		type: 'number',
+	{
+		storageKey: 'graph-render-limit',
 		name: 'Graph Render Limit',
+		type: 'number',
 		value: 100,
 	},
+];
+
+exports.loadClientConfig = () => {
+	console.log('loading the client config from our special new function');
+	// return new Promise((resolve) => {
+	let localConfigVersion = localStorage.getItem('client-config-version');
+	let configArray;
+	// check to see if our version is up to date or not
+	if (clientConfigVersion <= localConfigVersion) {
+		// we're going to loop through our 'config array' definitions and load them from localstorage
+		configArray = clientConfig.map((item) => {
+			let configItem = JSON.parse(localStorage.getItem(item.storageKey));
+			return configItem;
+		});
+	} else {
+		// loop through clientConfig definitions and store the default values into local storage
+		configArray = clientConfig.map((item) => {
+			let key = item.storageKey;
+			// store in local storage
+			localStorage.setItem(key, JSON.stringify(item));
+			// return value to array
+			return item;
+		});
+		// update the client-config-version to the latest
+		localStorage.setItem('client-config-version', clientConfigVersion);
+	}
+	return configArray;
 };
 
+// some mappings for backend config stuff
 exports.backendConfigMap = {
 	FULLSCREEN: {
 		type: 'boolean',

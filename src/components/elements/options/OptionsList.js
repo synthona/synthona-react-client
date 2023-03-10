@@ -5,7 +5,7 @@ import { fetchNodes } from '../../../api/redux/actions';
 import OptionListItem from './OptionListItem';
 import { isElectron } from '../../../utils/environment';
 import { Modal } from 'antd';
-import { clientConfig, backendConfigMap, backendConfigFilter } from '../../../utils/config.js';
+import { backendConfigMap, backendConfigFilter, loadClientConfig } from '../../../utils/config.js';
 
 class OptionsList extends Component {
 	constructor(props) {
@@ -18,49 +18,12 @@ class OptionsList extends Component {
 		};
 	}
 
-	loadClientConfig = () => {
-		return new Promise((resolve) => {
-			let localClientConfig = JSON.parse(localStorage.getItem('client-config'));
-			let localClientConfigVersion = localClientConfig
-				? localClientConfig.CONFIG_VERSION.value
-				: null;
-
-			// if there is a new config version we are going to need to update it
-			if (localClientConfigVersion === null) {
-				// load default client config into state
-				this.setState({ clientConfig });
-				// if there's no config in local storage we will store the defaults there
-				let clientConfigString = JSON.stringify(clientConfig);
-				localStorage.setItem('client-config', clientConfigString);
-			}
-			// if there's an updated config we have to update it
-			else if (clientConfig.CONFIG_VERSION.value > localClientConfigVersion) {
-				// copy existing settings into new object,
-				// update config_version, add new values
-				let newClientConfig = {
-					...clientConfig,
-					...localClientConfig,
-					CONFIG_VERSION: clientConfig.CONFIG_VERSION,
-				};
-				// update local state with the new config object
-				this.setState({ clientConfig: newClientConfig });
-				// stringify and save to localstorage
-				let clientConfigString = JSON.stringify(newClientConfig);
-				localStorage.setItem('client-config', clientConfigString);
-			}
-			// if config already exists and is up to date we will simply load it up
-			else {
-				// config already exists, load it into state
-				this.setState({ clientConfig: localClientConfig });
-			}
-			resolve();
-		});
-	};
 	// if this is the host device (is-electron) we'll get the backend config & client config
 	// otherwise we'll only load the client config. if there's no client config in localstorage
 	// we need to generate it with default values to make it available
-	loadOptions = async () => {
-		await this.loadClientConfig();
+	loadOptions = () => {
+		let clientConfigValues = loadClientConfig();
+		this.setState({ clientConfig: clientConfigValues });
 		if (isElectron) {
 			// load backend config
 			this.setState({
@@ -81,15 +44,18 @@ class OptionsList extends Component {
 	// a function to update the config values to be passed into each
 	updateClientConfigValue = (keyName, newValue) => {
 		let existingClientConfig = this.state.clientConfig;
-		let newConfig = {
-			...existingClientConfig,
-			[keyName]: {
-				...existingClientConfig[keyName],
-				value: newValue,
-			},
-		};
+		// loop through existing config to update it
+		let newConfig = existingClientConfig.map((item) => {
+			// when we find our value lets update it in localstorage and in our live rendered UI config object
+			if (keyName === item.storageKey) {
+				// update the value in this particular config object
+				item.value = newValue;
+				// copy it to localstorage as well
+				localStorage.setItem(keyName, JSON.stringify(item));
+			}
+			return item;
+		});
 		this.setState({ clientConfig: newConfig });
-		window.localStorage.setItem('client-config', JSON.stringify(newConfig));
 	};
 
 	// a function to update the config values to be passed into each
@@ -120,45 +86,47 @@ class OptionsList extends Component {
 	};
 
 	renderOptionsList = () => {
-		// prepare the options lists
-		let configList = [];
-		let backendConfig = this.state.backendConfig;
-		let clientConfig = this.state.clientConfig;
-		// let's go ahead and load all this up
-		if (!!backendConfig) {
-			// load backend config values
-			for (var backendKey in backendConfig) {
-				if (!backendConfigFilter.includes(backendKey)) {
+		if (this.state.clientConfig) {
+			// prepare the options lists
+			let configList = [];
+			let backendConfig = this.state.backendConfig;
+			let clientConfig = this.state.clientConfig;
+			// let's go ahead and load all this up
+			if (!!backendConfig) {
+				// load backend config values
+				for (var backendKey in backendConfig) {
+					if (!backendConfigFilter.includes(backendKey)) {
+						configList.push(
+							<OptionListItem
+								key={backendConfigMap[backendKey].name}
+								keyName={backendKey}
+								type={backendConfigMap[backendKey].type}
+								name={backendConfigMap[backendKey].name}
+								value={backendConfig[backendKey]}
+								onChange={this.updateBackendConfigValue}
+							/>
+						);
+					}
+				}
+			}
+			// add client config values
+			for (var clientKey in clientConfig) {
+				if (clientKey !== 'CONFIG_VERSION') {
 					configList.push(
 						<OptionListItem
-							key={backendConfigMap[backendKey].name}
-							keyName={backendKey}
-							type={backendConfigMap[backendKey].type}
-							name={backendConfigMap[backendKey].name}
-							value={backendConfig[backendKey]}
-							onChange={this.updateBackendConfigValue}
+							key={clientConfig[clientKey].name}
+							keyName={clientConfig[clientKey].storageKey}
+							name={clientConfig[clientKey].name}
+							value={clientConfig[clientKey].value}
+							type={clientConfig[clientKey].type}
+							optionObject={clientConfig[clientKey]}
+							onChange={this.updateClientConfigValue}
 						/>
 					);
 				}
 			}
+			return configList;
 		}
-		// add client config values
-		for (var clientKey in clientConfig) {
-			if (clientKey !== 'CONFIG_VERSION') {
-				configList.push(
-					<OptionListItem
-						key={clientConfig[clientKey].name}
-						keyName={clientKey}
-						name={clientConfig[clientKey].name}
-						value={clientConfig[clientKey].value}
-						type={clientConfig[clientKey].type}
-						optionObject={clientConfig[clientKey]}
-						onChange={this.updateClientConfigValue}
-					/>
-				);
-			}
-		}
-		return configList;
 	};
 
 	render() {

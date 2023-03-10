@@ -10,11 +10,12 @@ import { message } from 'antd';
 
 // fetch a list of nodes
 export const fetchGraphData = (query) => async (dispatch) => {
-	let localClientConfig = JSON.parse(localStorage.getItem('client-config'));
-	let graphRenderLimit = 100;
-	if (localClientConfig) {
-		graphRenderLimit = localClientConfig.GRAPH_RENDER_LIMIT.value;
+	let graphRenderLimit = JSON.parse(localStorage.getItem('graph-render-limit')).value;
+	// default to 100 if there's no value
+	if (!graphRenderLimit) {
+		graphRenderLimit = 100;
 	}
+	// lets make our request now
 	try {
 		dispatch({ type: FETCH_GRAPH_DATA });
 		const response = await instance.get('/node/graph', {

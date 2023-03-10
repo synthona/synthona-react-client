@@ -124,8 +124,10 @@ const Url = (props) => {
 	};
 
 	const fullNode = () => {
+		let imageScale = JSON.parse(localStorage.getItem('image-sizing')).value || 'classic';
+		let imageClass = 'img-' + imageScale.replace(' ', '-');
 		return (
-			<div className='full-node-item'>
+			<div className={'full-node-item ' + imageClass}>
 				<NodeCardHeaderFull />
 				{renderFullCardPreview()}
 				{/* <p>{props.node.comment}</p> */}
