@@ -40,6 +40,12 @@ exports.loadClientConfig = () => {
 		// we're going to loop through our 'config array' definitions and load them from localstorage
 		configArray = clientConfig.map((item) => {
 			let configItem = JSON.parse(localStorage.getItem(item.storageKey));
+			// handle case where a config item is missing
+			if (!configItem) {
+				// if the config has been tampered with we are going to run the 'update' case
+				localStorage.clear('client-config-version');
+				window.location.reload();
+			}
 			return configItem;
 		});
 	} else {

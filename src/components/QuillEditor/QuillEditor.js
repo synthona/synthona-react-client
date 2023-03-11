@@ -358,7 +358,7 @@ class QuillEditor extends Component {
 	};
 
 	renderClassName = () => {
-		let documentWidth = JSON.parse(localStorage.getItem('quill-document-width')).value;
+		let documentWidth = JSON.parse(localStorage.getItem('quill-document-width')).value || '';
 		let documentClass = 'quill-' + documentWidth.replace(' ', '-');
 		// return the classname
 		return documentClass;

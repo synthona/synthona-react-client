@@ -201,7 +201,7 @@ class NodeCardHeaderFull extends Component {
 										this.props.unpackImport(this.props.nodeData.uuid);
 									}}
 								>
-									<Icon type={'save'} theme='filled' className='full-card-button' />
+									<Icon type={'gift'} theme='filled' className='full-card-button' />
 								</button>
 							</li>
 						</Tooltip>
@@ -306,7 +306,7 @@ class NodeCardHeaderFull extends Component {
 								this.toggleExportModal();
 							}}
 						>
-							<Icon type={'save'} theme='outlined' className='full-card-button' />
+							<Icon type={'gift'} theme='outlined' className='full-card-button' />
 						</button>
 					</li>
 				</Tooltip>

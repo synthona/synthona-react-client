@@ -86,7 +86,7 @@ const Package = (props) => {
 			);
 		} else {
 			return (
-				<Icon type={'save'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
+				<Icon type={'gift'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
 			);
 		}
 	};
