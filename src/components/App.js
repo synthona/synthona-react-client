@@ -6,6 +6,7 @@ import '../app.less';
 import { isElectron } from '../utils/environment';
 import { isAuthenticated } from '../api/redux/actions';
 // custom components
+import Theme from './Theme';
 import Login from './layouts/Login';
 import ForgotPassword from './layouts/ForgotPassword';
 import Home from './layouts/Home';
@@ -48,18 +49,20 @@ class App extends Component {
 		let routes;
 		if (this.props.isAuth) {
 			routes = (
-				<Switch>
-					<Route path='/' exact component={Home} />
-					<Route path='/profile/:username' exact component={Profile} />
-					<Route path='/activity' exact component={Activity} />
-					<Route path='/collections' exact component={Collections} />
-					<Route path='/edit/text/:uuid' exact component={QuillEditor} />
-					<Route path='/edit/profile' exact component={Options} />
-					<Route path='/associations/:uuid' exact component={AssociationBrowser} />
-					<Route path='/graph/:uuid?' exact component={GraphBrowser} />
-					<Route path='/pins' exact component={Pins} />
-					<Route path='/random' exact component={RandomRedirect} />
-				</Switch>
+				<Theme>
+					<Switch>
+						<Route path='/' exact component={Home} />
+						<Route path='/profile/:username' exact component={Profile} />
+						<Route path='/activity' exact component={Activity} />
+						<Route path='/collections' exact component={Collections} />
+						<Route path='/edit/text/:uuid' exact component={QuillEditor} />
+						<Route path='/edit/profile' exact component={Options} />
+						<Route path='/associations/:uuid' exact component={AssociationBrowser} />
+						<Route path='/graph/:uuid?' exact component={GraphBrowser} />
+						<Route path='/pins' exact component={Pins} />
+						<Route path='/random' exact component={RandomRedirect} />
+					</Switch>
+				</Theme>
 			);
 		} else if (this.props.isFetchingAuth) {
 			routes = <Spinner />;
@@ -74,10 +77,10 @@ class App extends Component {
 			);
 		}
 		return (
-			<div>
+			<>
 				{this.renderElectronMessage()}
 				{routes}
-			</div>
+			</>
 		);
 	}
 }

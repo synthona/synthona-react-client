@@ -20,7 +20,7 @@ class NodeCardHeader extends Component {
 			return (
 				<h3
 					className='nodelist-item-title'
-					// style={{ color: 'Indigo' }}
+					style={{ color: this.props.theme.cardTitleColor }}
 					onDoubleClick={(e) => {
 						e.preventDefault();
 						this.setState({ editable: true });
@@ -35,6 +35,9 @@ class NodeCardHeader extends Component {
 				<input
 					type='text'
 					className='nodelist-item-title'
+					style={{
+						backgroundColor: this.props.theme.cardHeaderColor,
+					}}
 					onBlur={() => this.setState({ editable: null })}
 					maxLength='250'
 					autoFocus
@@ -71,9 +74,7 @@ class NodeCardHeader extends Component {
 			<div
 				className='nodelist-options'
 				style={{
-					display: 'flex',
-					width: '100%',
-					// backgroundColor: 'LightGreen',
+					backgroundColor: this.props.theme.cardHeaderColor,
 				}}
 			>
 				{this.renderTitle()}
@@ -87,6 +88,7 @@ class NodeCardHeader extends Component {
 								display: 'block',
 								textAlign: 'center',
 								padding: '0',
+								color: this.props.theme.cardButtonColor,
 							}}
 						/>
 					</button>
@@ -99,6 +101,7 @@ class NodeCardHeader extends Component {
 								display: 'block',
 								textAlign: 'center',
 								padding: '0',
+								color: this.props.theme.cardButtonColor,
 							}}
 						/>
 					</button>
@@ -117,6 +120,7 @@ class NodeCardHeader extends Component {
 								display: 'block',
 								textAlign: 'center',
 								padding: '0',
+								color: this.props.theme.cardButtonColor,
 							}}
 						/>
 					</button>
@@ -126,7 +130,13 @@ class NodeCardHeader extends Component {
 	}
 }
 
-export default connect(null, {
+const mapStateToProps = (state) => {
+	return {
+		theme: state.components.theme,
+	};
+};
+
+export default connect(mapStateToProps, {
 	markNodeView,
 	showComponent,
 	updateNode,

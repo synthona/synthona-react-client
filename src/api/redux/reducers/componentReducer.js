@@ -1,29 +1,34 @@
-import { SHOW_COMPONENT, HIDE_COMPONENT } from '../actions/types';
+import { SHOW_COMPONENT, HIDE_COMPONENT, LOAD_THEME } from '../actions/types';
 
 const INITIAL_STATE = {
-  componentList: {},
+	componentList: {},
 };
 
 // reducer for UI components which need to store redux state
 export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case SHOW_COMPONENT:
-      return {
-        ...state,
-        componentList: {
-          ...state.componentList,
-          [action.payload.type]: { content: action.payload.content, visible: true },
-        },
-      };
-    case HIDE_COMPONENT:
-      return {
-        ...state,
-        componentList: {
-          ...state.componentList,
-          [action.payload.type]: null,
-        },
-      };
-    default:
-      return state;
-  }
+	switch (action.type) {
+		case SHOW_COMPONENT:
+			return {
+				...state,
+				componentList: {
+					...state.componentList,
+					[action.payload.type]: { content: action.payload.content, visible: true },
+				},
+			};
+		case HIDE_COMPONENT:
+			return {
+				...state,
+				componentList: {
+					...state.componentList,
+					[action.payload.type]: null,
+				},
+			};
+		case LOAD_THEME:
+			return {
+				...state,
+				theme: action.payload.theme,
+			};
+		default:
+			return state;
+	}
 };

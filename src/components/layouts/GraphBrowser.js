@@ -121,7 +121,7 @@ class GraphBrowser extends Component {
 		const height = window.innerHeight;
 		const width = window.innerWidth;
 		// const nodeScale = 23;
-		const nodeScale = 29;
+		const nodeScale = 33;
 
 		// simulation
 		const simulation = forceSimulation(nodeData)
@@ -169,9 +169,19 @@ class GraphBrowser extends Component {
 			.join('g')
 			.call(this.drag(simulation))
 			.append('circle')
+			.attr('fill', this.props.theme.graphNodeColor)
+			.attr('stroke', this.props.theme.graphNodeBorderColor)
 			.on('contextmenu', (e, d) => {
 				e.preventDefault();
 				window.location.replace('/graph/' + d.uuid);
+			})
+			.on('mouseover', (e, d) => {
+				select(e.currentTarget).style('fill', this.props.theme.graphNodeHoverColor);
+				select(e.currentTarget).style('stroke', this.props.theme.graphNodeBorderHoverColor);
+			})
+			.on('mouseout', (e, d) => {
+				select(e.currentTarget).style('fill', this.props.theme.graphNodeColor);
+				select(e.currentTarget).style('stroke', this.props.theme.graphNodeBorderColor);
 			})
 			// .on('click', (e, d) => {
 			//   e.preventDefault();
@@ -190,7 +200,7 @@ class GraphBrowser extends Component {
 			.attr('r', nodeScale)
 			// .attr('cursor', 'grab')
 			.attr('cursor', 'none')
-			.attr('fill', '#16e998')
+			// .attr('fill', '#16e998')
 			.attr('class', 'graph-node');
 
 		const text = selectAll('g g g')
@@ -296,6 +306,7 @@ const mapStateToProps = (state) => {
 		nodeList: state.nodes.nodeList,
 		query: state.nodes.query,
 		isFetching: state.nodes.isFetching,
+		theme: state.components.theme,
 	};
 };
 

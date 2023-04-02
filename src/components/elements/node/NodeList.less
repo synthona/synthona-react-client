@@ -43,10 +43,11 @@ li.nodelist-item {
   // height: 16rem;
   height: 16rem;
   // width: 25rem;
-  width: 32.5vw;
+  // width: 26.3rem;
+  width: 24.3vw;
   overflow: hidden;
   // background: #fff;
-  background-color: @node-card-background-color;
+  // background-color: @node-card-background-color;
   margin: 0.25rem 0.25rem;
   color: #757575;
   // box-shadow: 0 0 5px 0 #ccc;
@@ -80,6 +81,8 @@ li.nodelist-item {
 // }
 
 .nodelist-options {
+  display: flex;
+  width: 100%;
   padding: 0.7rem 1.3rem 0.5rem;
   // background-color: #272727;
   border-bottom: 0.09rem solid @node-card-title-border;
@@ -127,8 +130,8 @@ div.nodelist-options-buttons {
 }
 
 .nodelist-item p:hover {
-  color: @node-card-paragraph-hover;
-  background: @node-card-paragraph-hover-bg;
+  // color: @node-card-paragraph-hover;
+  // background: @node-card-paragraph-hover-bg;
   // transition-duration: 1s;
   transition: all 1s ease-out;
 }
@@ -160,9 +163,10 @@ input.nodelist-item-title {
   text-overflow: ellipsis;
 }
 
-input.nodelist-item-title::selection {
-  background: @node-card-background-color;
-}
+// input.nodelist-item-title::selection {
+//   // background: @node-card-background-color;
+//   background: invert(100%);
+// }
 
 .nodelist-item-audio {
   // background-image: url('../../../resources/cloud9.png');
@@ -250,6 +254,11 @@ input.nodelist-item-title::selection {
 @media only screen and (max-width: 1650px) {
   li.nodelist-item {
     height: 16rem;
+    width: 24vw;
+  }
+
+  .nodelist-item-title {
+    width: 60%;
   }
 
   .nodelist-collection-grid li {
@@ -257,9 +266,9 @@ input.nodelist-item-title::selection {
   }
 }
 
-@media only screen and (max-width: 1400px) {
-  li.nodelist-item {
-    width: 32vw;
+@media only screen and (max-width: 1500px) {
+  .nodelist-item-title {
+    width: 65%;
   }
 }
 
@@ -269,49 +278,27 @@ input.nodelist-item-title::selection {
   }
 
   .nodelist-item-title {
-    width: 70%;
-  }
-}
-
-@media only screen and (max-width: 1150px) {
-  li.nodelist-item {
-    width: 48vw;
-  }
-
-  .nodelist-item-title {
-    width: 70%;
+    width: 61%;
   }
 }
 
 @media only screen and (max-width: 900px) {
   li.nodelist-item {
-    width: 48vw;
+    width: 47vw;
   }
 
   .nodelist-item-title {
-    width: 60%;
+    width: 65%;
   }
 }
 
 @media only screen and (max-width: 700px) {
   li.nodelist-item {
-    width: 98vw;
-  }
-
-  .nodelist-item-title {
-    width: 70%;
+    width: 96vw;
   }
 }
 
 @media only screen and (max-width: 400px) {
-  li.nodelist-item {
-    width: 95vw;
-  }
-
-  .nodelist-item-title {
-    width: 63%;
-  }
-
   div.nodelist-options-buttons {
     button {
       margin-left: 0.01rem;

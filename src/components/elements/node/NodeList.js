@@ -5,7 +5,6 @@ import './NodeList.less';
 import { fetchNodes } from '../../../api/redux/actions';
 import NodeCard from './NodeCard';
 import AssociationSider from '../association/AssociationSider';
-import Spinner from '../Spinner';
 // import NodeCardFull from '../node/NodeCardFull';
 
 class NodeList extends Component {
@@ -81,7 +80,7 @@ class NodeList extends Component {
 		// go through the list of nodes and render them to the page
 		const nodeList = this.props.nodes;
 		// if there are nodes go ahead and render
-		if (nodeList !== null) {
+		if (nodeList !== null && nodeList.length > 0) {
 			return nodeList.map((node) => {
 				if (node.uuid) {
 					// return <NodeCardFull key={node.uuid} node={node} />
@@ -90,8 +89,37 @@ class NodeList extends Component {
 					return <Fragment></Fragment>;
 				}
 			});
-		} else {
-			return <Spinner></Spinner>;
+		}
+		// adding a bit of a fallback search. more to come on this probably
+		else if (this.props.query.searchQuery && !this.props.isFetching) {
+			return (
+				<div
+					style={{
+						// height: '100vh',
+						marginTop: '1rem',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'top',
+						color: 'white',
+					}}
+				>
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href={`https://www.google.com/search?q=${encodeURIComponent(
+							this.props.query.searchQuery
+						)}`}
+						style={{
+							backgroundColor: '#272727',
+							color: 'white',
+							borderRadius: '3px',
+							padding: '0.5rem 1rem',
+						}}
+					>
+						no matches ~ search google instead?
+					</a>
+				</div>
+			);
 		}
 	};
 

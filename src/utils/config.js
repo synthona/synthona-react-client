@@ -5,7 +5,7 @@ let clientConfig = [
 		storageKey: 'theme',
 		name: 'Theme',
 		type: 'dropdown',
-		options: ['classic', 'light'],
+		options: ['classic', 'light', 'translucent'],
 		value: 'classic',
 	},
 	{
@@ -21,6 +21,13 @@ let clientConfig = [
 		type: 'dropdown',
 		options: ['classic', 'full width'],
 		value: 'full width',
+	},
+	{
+		storageKey: 'link-mode',
+		name: 'Link Mode',
+		type: 'dropdown',
+		options: ['unidirectional', 'bidirectional'],
+		value: 'unidirectional',
 	},
 	{
 		storageKey: 'graph-render-limit',

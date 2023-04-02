@@ -3,20 +3,21 @@ import React from 'react';
 import NodeRenderer from '../../../types/render/NodeRenderer';
 
 const NodeCard = (props) => {
-  const renderNodeCard = () => {
-    if (props.node) {
-      return (
-        <NodeRenderer
-          type={props.node.type}
-          element={'card'}
-          node={props.node}
-          activeNode={props.activeNode}
-        />
-      );
-    }
-  };
+	const renderNodeCard = () => {
+		if (props.node) {
+			return (
+				<NodeRenderer
+					type={props.node.type}
+					element={'card'}
+					node={props.node}
+					activeNode={props.activeNode}
+					theme={props.theme}
+				/>
+			);
+		}
+	};
 
-  return <div>{renderNodeCard()}</div>;
+	return <div>{renderNodeCard()}</div>;
 };
 
 export default NodeCard;

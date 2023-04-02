@@ -224,7 +224,7 @@ export default (state = INITIAL_STATE, action) => {
 		case MARK_NODE_VIEW_SUCCESS:
 			var newNodeList;
 			// only send the node back to the beginning if the user is at the top of the list
-			if (state.nodeList.length < 20) {
+			if (state.nodeList.length < 50) {
 				newNodeList = [
 					action.node,
 					...state.nodeList.filter((node) => node.uuid !== action.node.uuid),

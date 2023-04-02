@@ -240,9 +240,9 @@ class QuillEditor extends Component {
 				[
 					{
 						color: [
+							'',
 							'#fff',
 							'#bbbbbb',
-							'#272727',
 							'#df0000',
 							'#a80b44',
 							'#ff0062',
@@ -394,6 +394,10 @@ class QuillEditor extends Component {
 					{this.renderHeader()}
 					<ReactQuill
 						value={this.state.text}
+						style={{
+							backgroundColor: this.props.theme ? this.props.theme.textEditorBackground : null,
+							color: this.props.theme ? this.props.theme.textEditorText : null,
+						}}
 						className={this.renderClassName()}
 						onChange={this.handleChange}
 						modules={this.modules}
@@ -424,6 +428,7 @@ const mapStateToProps = (state) => {
 		nodeData: state.nodes.activeNode,
 		isLoading: state.nodes.isFetching,
 		mainSider: state.components.componentList['mainSider'],
+		theme: state.components.theme,
 	};
 };
 

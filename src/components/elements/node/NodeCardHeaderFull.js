@@ -133,6 +133,9 @@ class NodeCardHeaderFull extends Component {
 			return (
 				<h3
 					className='full-card-title'
+					style={{
+						color: this.props.theme.cardTitleColor,
+					}}
 					onDoubleClick={(e) => {
 						e.preventDefault();
 						this.setState({ editable: true });
@@ -316,7 +319,12 @@ class NodeCardHeaderFull extends Component {
 
 	render() {
 		return (
-			<div className='full-card-options'>
+			<div
+				className='full-card-options'
+				style={{
+					backgroundColor: this.props.theme.cardHeaderColor,
+				}}
+			>
 				{this.renderTitle()}
 				{/* <p className='full-card-options-date'>{this.props.nodeData.updatedAt}</p> */}
 				<ul className='full-card-buttons-list'>
@@ -451,6 +459,7 @@ class NodeCardHeaderFull extends Component {
 const mapStateToProps = (state) => {
 	return {
 		nodeData: state.nodes.activeNode,
+		theme: state.components.theme,
 	};
 };
 

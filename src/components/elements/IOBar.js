@@ -16,6 +16,7 @@ import {
 	showComponent,
 	hideComponent,
 	getRandomNode,
+	clearActiveNode,
 } from '../../api/redux/actions';
 // destructure antd components
 const { Header } = Layout;
@@ -290,7 +291,14 @@ class IOBar extends Component {
 						</li>
 						<li className='nav-item io-sider-button' style={{ marginRight: '-0.1rem' }}>
 							<Tooltip title={'graph'} mouseEnterDelay={1.1}>
-								<Link type='default' to={`/graph`}>
+								<Link
+									type='default'
+									to={`#`}
+									onClick={() => {
+										this.props.clearActiveNode();
+										window.location = '/graph';
+									}}
+								>
 									<Icon
 										type={'deployment-unit'}
 										theme='outlined'
@@ -372,4 +380,5 @@ export default connect(mapStateToProps, {
 	showComponent,
 	hideComponent,
 	getRandomNode,
+	clearActiveNode,
 })(IOBar);

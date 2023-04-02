@@ -68,6 +68,7 @@ const Url = (props) => {
 						textAlign: 'center',
 						padding: '4.3rem 3.3rem 3.3rem',
 						height: '100%',
+						backgroundColor: props.theme.cardBodyColor,
 					}}
 				/>
 			);
@@ -91,7 +92,10 @@ const Url = (props) => {
 						// props.toggleHeader();
 						window.open(props.node.path, '_blank');
 					}}
-					style={{ width: '100%' }}
+					style={{
+						width: '100%',
+						backgroundColor: props.theme.cardBodyColor,
+					}}
 				>
 					{renderPreview()}
 				</a>
