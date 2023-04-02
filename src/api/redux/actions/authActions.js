@@ -42,6 +42,8 @@ export const createAccount = (formValues) => async (dispatch) => {
 // Sign In Action handler
 export const signIn = (formValues) => async (dispatch) => {
 	dispatch({ type: SIGN_IN });
+	// lets also initialize some config values into storage/load them if they exist on this computer
+	loadClientConfig();
 	try {
 		const response = await instance.put('/auth/login', formValues);
 		localStorage.setItem('displayName', response.data.displayName);
