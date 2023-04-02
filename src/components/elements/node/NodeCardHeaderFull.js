@@ -274,6 +274,24 @@ class NodeCardHeaderFull extends Component {
 						</li>
 					</Tooltip>
 				);
+			case 'image':
+				return (
+					<Tooltip title={'set as app background'} mouseEnterDelay={1.1}>
+						<li>
+							<button
+								onClick={(e) => {
+									// set the app background to this image
+									localStorage.setItem('background-image', this.props.nodeData.preview);
+									message.success('set app background to ' + this.props.nodeData.name, () => {
+										window.location.reload();
+									});
+								}}
+							>
+								<Icon type={'layout'} className='full-card-button' />
+							</button>
+						</li>
+					</Tooltip>
+				);
 			default:
 				return;
 		}

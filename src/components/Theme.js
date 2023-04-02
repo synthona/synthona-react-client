@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadTheme } from '../api/redux/actions';
+import test from '../resources/nice-star.gif';
 
 // theme wrapper component
 const Theme = (props) => {
@@ -9,7 +10,20 @@ const Theme = (props) => {
 		props.loadTheme();
 	});
 
-	return <div>{props.children}</div>;
+	const loadBackground = () => {
+		let customImage = localStorage.getItem('background-image');
+		let bgImage = test;
+		if (customImage) {
+			bgImage = customImage;
+		}
+		return bgImage;
+	};
+
+	return (
+		<div style={{ backgroundImage: `url(${loadBackground()})`, backgroundSize: 'cover' }}>
+			{props.children}
+		</div>
+	);
 };
 
 export default connect(null, {

@@ -24,7 +24,6 @@ import { message } from 'antd';
 export const fetchAssociationLinkList = (query) => async (dispatch) => {
 	let linkMode = JSON.parse(localStorage.getItem('link-mode')).value;
 	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
-	console.log(bidirectional);
 	try {
 		if (!query.page) {
 			dispatch({ type: RESET_ASSOCIATION_LINK_LIST });
@@ -51,7 +50,6 @@ export const fetchAssociationLinkList = (query) => async (dispatch) => {
 export const fetchAssociations = (query) => async (dispatch) => {
 	let linkMode = JSON.parse(localStorage.getItem('link-mode')).value;
 	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
-	console.log(bidirectional);
 	try {
 		if (!query.page) {
 			dispatch({ type: RESET_ASSOCIATIONS });
@@ -98,7 +96,6 @@ export const createAssociation = (nodeUUID, linkedNodeUUID) => async (dispatch) 
 export const associationAutocomplete = (query) => async (dispatch) => {
 	let linkMode = JSON.parse(localStorage.getItem('link-mode')).value;
 	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
-	console.log(bidirectional);
 	try {
 		const response = await instance.get('/association/autocomplete', {
 			params: { searchQuery: query.searchQuery, nodeUUID: query.uuid, bidirectional },
@@ -114,7 +111,6 @@ export const associationAutocomplete = (query) => async (dispatch) => {
 export const deleteAssociationLink = (nodeA, nodeB) => async (dispatch) => {
 	let linkMode = JSON.parse(localStorage.getItem('link-mode')).value;
 	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
-	console.log(bidirectional);
 	dispatch({ type: DELETE_ASSOCIATION_LINK });
 	try {
 		const response = await instance.delete(`/association`, {
