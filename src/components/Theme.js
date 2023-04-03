@@ -24,7 +24,7 @@ const Theme = (props) => {
 			style={{
 				backgroundImage: `url(${loadBackground()})`,
 				backgroundColor: '#272727',
-				backgroundSize: '100vw',
+				backgroundSize: 'auto 104vh',
 				backgroundRepeat: 'repeat',
 			}}
 		>
