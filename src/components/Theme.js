@@ -20,7 +20,14 @@ const Theme = (props) => {
 	};
 
 	return (
-		<div style={{ backgroundImage: `url(${loadBackground()})`, backgroundSize: 'cover' }}>
+		<div
+			style={{
+				backgroundImage: `url(${loadBackground()})`,
+				backgroundColor: '#272727',
+				backgroundSize: '100vw',
+				backgroundRepeat: 'repeat',
+			}}
+		>
 			{props.children}
 		</div>
 	);

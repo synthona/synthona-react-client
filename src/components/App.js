@@ -77,10 +77,10 @@ class App extends Component {
 			);
 		}
 		return (
-			<>
+			<div style={{ backgroundColor: '#272727' }}>
 				{this.renderElectronMessage()}
 				{routes}
-			</>
+			</div>
 		);
 	}
 }
