@@ -150,6 +150,9 @@ class NodeCardHeaderFull extends Component {
 				<input
 					type='text'
 					className='full-card-title'
+					style={{
+						backgroundColor: 'transparent',
+					}}
 					onBlur={() => this.setState({ editable: null })}
 					maxLength='250'
 					autoFocus
