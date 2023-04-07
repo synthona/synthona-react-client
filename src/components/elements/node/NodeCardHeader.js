@@ -36,7 +36,7 @@ class NodeCardHeader extends Component {
 					type='text'
 					className='nodelist-item-title'
 					style={{
-						backgroundColor: this.props.theme.cardHeaderColor,
+						backgroundColor: 'transparent',
 					}}
 					onBlur={() => this.setState({ editable: null })}
 					maxLength='250'
