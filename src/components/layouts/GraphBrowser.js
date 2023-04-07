@@ -178,10 +178,16 @@ class GraphBrowser extends Component {
 			.on('mouseover', (e, d) => {
 				select(e.currentTarget).style('fill', this.props.theme.graphNodeHoverColor);
 				select(e.currentTarget).style('stroke', this.props.theme.graphNodeBorderHoverColor);
+
+				d.fx = null;
+				d.fy = null;
 			})
 			.on('mouseout', (e, d) => {
 				select(e.currentTarget).style('fill', this.props.theme.graphNodeColor);
 				select(e.currentTarget).style('stroke', this.props.theme.graphNodeBorderColor);
+
+				d.fx = null;
+				d.fy = null;
 			})
 			// .on('click', (e, d) => {
 			//   e.preventDefault();
@@ -257,8 +263,8 @@ class GraphBrowser extends Component {
 
 		function dragended(event, d) {
 			if (!event.active) simulation.alphaTarget(0);
-			d.fx = null;
-			d.fy = null;
+			// d.fx = null;
+			// d.fy = null;
 			window.setTimeout(() => {
 				// show cursor
 				document.body.style.cursor = 'auto';

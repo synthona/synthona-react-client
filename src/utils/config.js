@@ -5,7 +5,16 @@ let clientConfig = [
 		storageKey: 'theme',
 		name: 'Theme',
 		type: 'dropdown',
-		options: ['classic', 'light', 'translucent'],
+		options: [
+			'classic',
+			'light',
+			'translucent',
+			'translucent green',
+			'translucent blue',
+			'translucent red',
+			'translucent yellow',
+			'translucent orange',
+		],
 		value: 'classic',
 	},
 	{
