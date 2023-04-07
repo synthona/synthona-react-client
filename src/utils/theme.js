@@ -1,5 +1,5 @@
 export const setupTheme = () => {
-	let theme = JSON.parse(localStorage.getItem('theme')).value;
+	let theme = JSON.parse(localStorage.getItem('theme'));
 	let colors = {};
 	switch (theme) {
 		case 'classic':

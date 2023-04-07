@@ -10,7 +10,7 @@ import { message } from 'antd';
 
 // fetch a list of nodes
 export const fetchGraphData = (query) => async (dispatch) => {
-	let graphRenderLimit = JSON.parse(localStorage.getItem('graph-render-limit')).value;
+	let graphRenderLimit = JSON.parse(localStorage.getItem('graph-render-limit'));
 	// default to 100 if there's no value
 	if (!graphRenderLimit) {
 		graphRenderLimit = 100;

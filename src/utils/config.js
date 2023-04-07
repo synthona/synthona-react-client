@@ -46,21 +46,24 @@ exports.loadClientConfig = () => {
 	if (clientConfigVersion <= localConfigVersion) {
 		// we're going to loop through our 'config array' definitions and load them from localstorage
 		configArray = clientConfig.map((item) => {
-			let configItem = JSON.parse(localStorage.getItem(item.storageKey));
+			let configValue = JSON.parse(localStorage.getItem(item.storageKey));
 			// handle case where a config item is missing
-			if (!configItem) {
+			if (!configValue) {
 				// if the config has been tampered with we are going to run the 'update' case
 				localStorage.clear('client-config-version');
 				window.location.reload();
 			}
-			return configItem;
+			// load the configItem value into the render template
+			item.value = configValue;
+			// return the item
+			return item;
 		});
 	} else {
 		// loop through clientConfig definitions and store the default values into local storage
 		configArray = clientConfig.map((item) => {
 			let key = item.storageKey;
-			// store in local storage
-			localStorage.setItem(key, JSON.stringify(item));
+			// store the value in local storage
+			localStorage.setItem(key, JSON.stringify(item.value));
 			// return value to array
 			return item;
 		});

@@ -51,7 +51,7 @@ class OptionsList extends Component {
 				// update the value in this particular config object
 				item.value = newValue;
 				// copy it to localstorage as well
-				localStorage.setItem(keyName, JSON.stringify(item));
+				localStorage.setItem(keyName, JSON.stringify(newValue));
 			}
 			return item;
 		});

@@ -128,7 +128,7 @@ const Url = (props) => {
 	};
 
 	const fullNode = () => {
-		let imageScale = JSON.parse(localStorage.getItem('image-sizing')).value || 'classic';
+		let imageScale = JSON.parse(localStorage.getItem('image-sizing')) || 'classic';
 		let imageClass = 'img-' + imageScale.replace(' ', '-');
 		return (
 			<div className={'full-node-item ' + imageClass}>
