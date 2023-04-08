@@ -214,6 +214,11 @@ class GraphBrowser extends Component {
 			.text((d) => d.name.substring(0, 100))
 			.attr('font-size', '0.8rem')
 			.attr('cursor', 'grab')
+			// .on('mouseover', (e, d) => {
+			// 	// on mouseover without a click run simulation
+			// 	d.fx = null;
+			// 	d.fy = null;
+			// })
 			// .attr('cursor', 'none')
 			// .attr('stroke', 'white')
 			// .attr('stroke-width', 0.1)

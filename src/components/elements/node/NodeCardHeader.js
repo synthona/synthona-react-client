@@ -60,6 +60,29 @@ class NodeCardHeader extends Component {
 		}
 	};
 
+	// the jump to top icon is only available when sorting by most recent
+	renderLightbulbIcon = () => {
+		let sortType = localStorage.getItem('sortType');
+		console.log(window.location.href);
+		if (sortType === 'recent' || window.location.href.includes('associations')) {
+			return (
+				<button onClick={(e) => this.props.markNodeView(this.props.node)}>
+					<Icon
+						type={'bulb'}
+						theme='outlined'
+						style={{
+							fontSize: '0.9rem',
+							display: 'block',
+							textAlign: 'center',
+							padding: '0',
+							color: this.props.theme.cardButtonColor,
+						}}
+					/>
+				</button>
+			);
+		}
+	};
+
 	// update and save the document name
 	saveName = (name) => {
 		if (this.state.name !== name) {
@@ -92,19 +115,7 @@ class NodeCardHeader extends Component {
 							}}
 						/>
 					</button>
-					<button onClick={(e) => this.props.markNodeView(this.props.node)}>
-						<Icon
-							type={'bulb'}
-							theme='outlined'
-							style={{
-								fontSize: '0.9rem',
-								display: 'block',
-								textAlign: 'center',
-								padding: '0',
-								color: this.props.theme.cardButtonColor,
-							}}
-						/>
-					</button>
+					{this.renderLightbulbIcon()}
 					<button
 						onClick={(e) => {
 							// set the active node so the modal has the node data
