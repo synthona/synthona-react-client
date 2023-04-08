@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // custom code
-import { fetchNodes } from '../../../api/redux/actions';
+import { fetchNodes, loadTheme } from '../../../api/redux/actions';
 import OptionListItem from './OptionListItem';
 import { isElectron } from '../../../utils/environment';
 import { Modal } from 'antd';
@@ -52,6 +52,10 @@ class OptionsList extends Component {
 				item.value = newValue;
 				// copy it to localstorage as well
 				localStorage.setItem(keyName, JSON.stringify(newValue));
+				if (keyName === 'theme') {
+					// if we set the theme we should reload it in our redux state
+					this.props.loadTheme();
+				}
 			}
 			return item;
 		});
@@ -166,4 +170,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { fetchNodes })(OptionsList);
+export default connect(mapStateToProps, { fetchNodes, loadTheme })(OptionsList);

@@ -60,7 +60,7 @@ export const linkFileNodes = (fileList, linkedNode) => async (dispatch) => {
 };
 
 export const launchFileNode = (uuid) => async (dispatch) => {
-	message.success('loading...', 1);
+	// message.success('loading...', 1);
 	try {
 		// send the request
 		await instance.put('/file/launch', { uuid });
@@ -71,7 +71,7 @@ export const launchFileNode = (uuid) => async (dispatch) => {
 };
 
 export const openFileInExplorer = (uuid) => async (dispatch) => {
-	message.success('loading...', 1);
+	// message.success('loading...', 1);
 	try {
 		// send the request
 		await instance.put('/file/explorer', { uuid });

@@ -132,6 +132,7 @@ exports.backendConfigFilter = [
 	'CONFIG_VERSION',
 	'CLIENT_PORT',
 	'SERVER_PORT',
+	'ENABLE_HARDWARE_ACCELERATION',
 	'CLIENT_BASE',
 	'APP_NAME',
 	'DEBUG',
