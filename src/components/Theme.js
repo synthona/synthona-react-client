@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadTheme } from '../api/redux/actions';
-import test from '../resources/nice-star.gif';
+import test from '../resources/cloud9.png';
 import { loadClientConfig } from '../utils/config';
 
 // theme wrapper component
