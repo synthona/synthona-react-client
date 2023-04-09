@@ -73,6 +73,9 @@ exports.loadClientConfig = () => {
 			let key = item.storageKey;
 			// store the value in local storage
 			localStorage.setItem(key, JSON.stringify(item.value));
+			// lets set up the iobar default sort order item too
+			localStorage.setItem('sortOrder', 'DESC');
+			localStorage.setItem('sortType', 'recent');
 			// return value to array
 			return item;
 		});
