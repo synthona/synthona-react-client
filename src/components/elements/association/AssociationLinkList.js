@@ -15,7 +15,7 @@ class AssociationLinkList extends Component {
 	loadMore = () => {
 		this.props.fetchAssociationLinkList({
 			nodeUUID: this.props.nodeUUID,
-			page: this.props.page + 1,
+			page: parseInt(this.props.page) + 1,
 		});
 	};
 
@@ -38,7 +38,7 @@ class AssociationLinkList extends Component {
 	renderLoadMoreButton = () => {
 		var listLength = this.props.associations.length;
 		// if the total items is more than what is loaded show the load more button
-		if (this.props.totalItems > listLength + 1) {
+		if (this.props.totalItems > listLength) {
 			return (
 				<li style={{ listStyle: 'none', marginTop: '0.5rem', textAlign: 'center' }}>
 					<button
@@ -48,7 +48,7 @@ class AssociationLinkList extends Component {
 							backgroundColor: '#272727',
 							color: '#16e998',
 						}}
-						onClick={(e) => this.loadMore()}
+						onClick={this.loadMore}
 					>
 						load more
 					</button>
@@ -73,6 +73,7 @@ const mapStateToProps = (state) => {
 		page: state.associations.associationLinkListPage,
 		totalItems: state.associations.totalLinkListItems,
 		isFetching: state.associations.isFetching,
+		activeNode: state.nodes.activeNode,
 	};
 };
 

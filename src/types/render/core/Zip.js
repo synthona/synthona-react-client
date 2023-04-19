@@ -89,7 +89,7 @@ const Zip = (props) => {
 			return (
 				<Icon
 					type={'file-zip'}
-					style={{ color: 'white' }}
+					style={{ color: 'white', backgroundColor: props.theme.cardBodyColor, height: '100%' }}
 					theme='filled'
 					className='node-card-icon'
 				/>
@@ -105,6 +105,10 @@ const Zip = (props) => {
 					to={`/associations/${props.node.uuid}`}
 					onClick={(e) => onClickAction(e)}
 					onContextMenu={(e) => onContextAction(e)}
+					style={{
+						width: '100%',
+						backgroundColor: props.theme.cardBodyColor,
+					}}
 				>
 					{renderPreview()}
 				</Link>

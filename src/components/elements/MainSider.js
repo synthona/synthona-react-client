@@ -102,7 +102,7 @@ class MainSider extends Component {
 						</Item>
 						<Item className='sider-menu-item'>
 							<Link to={`/pins`} onClick={(e) => this.props.hideComponent('mainSider')}>
-								Starboard
+								Favorites
 							</Link>
 						</Item>
 						<Item className='sider-menu-item'>
@@ -114,6 +114,11 @@ class MainSider extends Component {
 								}}
 							>
 								Constellation
+							</Link>
+						</Item>
+						<Item className='sider-menu-item'>
+							<Link to={`/random`} onClick={(e) => this.props.hideComponent('mainSider')}>
+								Random
 							</Link>
 						</Item>
 						{/*<Item className='sider-menu-item'>
@@ -137,7 +142,17 @@ class MainSider extends Component {
 							</Link>
 						</Item>
 						<Item className='sider-menu-item'>
-							<Link to='/help' onClick={(e) => this.props.hideComponent('mainSider')}>
+							<Link
+								to='/help'
+								onClick={(e) => {
+									e.preventDefault();
+									window.open(
+										'https://github.com/synthona/synthona-help/blob/main/README.md',
+										'_blank'
+									);
+									this.props.hideComponent('mainSider');
+								}}
+							>
 								Help
 							</Link>
 						</Item>

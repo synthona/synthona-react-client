@@ -86,7 +86,12 @@ const Audio = (props) => {
 			);
 		} else {
 			return (
-				<Icon type={'sound'} style={{ color: 'white' }} theme='filled' className='node-card-icon' />
+				<Icon
+					type={'sound'}
+					style={{ color: 'white', backgroundColor: props.theme.cardBodyColor, height: '100%' }}
+					theme='filled'
+					className='node-card-icon'
+				/>
 			);
 		}
 	};
@@ -99,6 +104,10 @@ const Audio = (props) => {
 					to={`/associations/${props.node.uuid}`}
 					onClick={(e) => onClickAction(e)}
 					onContextMenu={(e) => onContextAction(e)}
+					style={{
+						width: '100%',
+						backgroundColor: props.theme.cardBodyColor,
+					}}
 				>
 					{renderPreview()}
 				</Link>

@@ -240,9 +240,9 @@ class QuillEditor extends Component {
 				[
 					{
 						color: [
+							'',
 							'#fff',
 							'#bbbbbb',
-							'#272727',
 							'#df0000',
 							'#a80b44',
 							'#ff0062',
@@ -357,6 +357,13 @@ class QuillEditor extends Component {
 		}
 	};
 
+	renderClassName = () => {
+		let documentWidth = JSON.parse(localStorage.getItem('quill-document-width')) || '';
+		let documentClass = 'quill-' + documentWidth.replace(' ', '-');
+		// return the classname
+		return documentClass;
+	};
+
 	componentWillUnmount() {
 		// clear styles
 		document.body.style.overflow = null;
@@ -387,6 +394,11 @@ class QuillEditor extends Component {
 					{this.renderHeader()}
 					<ReactQuill
 						value={this.state.text}
+						style={{
+							backgroundColor: this.props.theme ? this.props.theme.textEditorBackground : null,
+							color: this.props.theme ? this.props.theme.textEditorText : null,
+						}}
+						className={this.renderClassName()}
 						onChange={this.handleChange}
 						modules={this.modules}
 						ref={this.ref}
@@ -416,6 +428,7 @@ const mapStateToProps = (state) => {
 		nodeData: state.nodes.activeNode,
 		isLoading: state.nodes.isFetching,
 		mainSider: state.components.componentList['mainSider'],
+		theme: state.components.theme,
 	};
 };
 

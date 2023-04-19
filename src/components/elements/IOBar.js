@@ -15,6 +15,8 @@ import {
 	searchNodes,
 	showComponent,
 	hideComponent,
+	getRandomNode,
+	clearActiveNode,
 } from '../../api/redux/actions';
 // destructure antd components
 const { Header } = Layout;
@@ -204,7 +206,7 @@ class IOBar extends Component {
 					<Option value='file'>file</Option>
 					<Option value='text'>text</Option>
 					<Option value='image'>images</Option>
-					<Option value='package'>discs</Option>
+					<Option value='package'>packages</Option>
 					<Option value='collection'>collections</Option>
 				</Select>
 			);
@@ -247,7 +249,7 @@ class IOBar extends Component {
 							<Icon type={'bulb'} theme='outlined' /> recent
 						</Option>
 						<Option value='views'>
-							<Icon type={'thunderbolt'} theme='outlined' /> views
+							<Icon type={'thunderbolt'} theme='outlined' /> top
 						</Option>
 						<Option value='created'>
 							<Icon type={'clock-circle'} theme='outlined' /> created
@@ -276,32 +278,63 @@ class IOBar extends Component {
 								<Icon type={'bars'} theme='outlined' />
 							</Button>
 						</li>
-						<li className='nav-item io-sider-button' style={{ marginRight: '0.4rem' }}>
-							<Link type='default' to={`/graph`}>
-								<Icon
-									type={'deployment-unit'}
-									theme='outlined'
-									// style={{ color: '#ec486c' }}
-								/>
-							</Link>
+						<li className='nav-item io-sider-button' style={{ marginRight: '0.3rem' }}>
+							<Tooltip title={'home'} mouseEnterDelay={1.1}>
+								<Link type='default' to={`/`}>
+									<Icon
+										type={'home'}
+										theme='filled'
+										// style={{ color: '#3ce458' }}
+									/>
+								</Link>
+							</Tooltip>
 						</li>
-						<li className='nav-item io-sider-button' style={{ marginRight: '0.5rem' }}>
-							<Link type='default' to={`/`}>
-								<Icon
-									type={'home'}
-									theme='filled'
-									// style={{ color: '#3ce458' }}
-								/>
-							</Link>
+						<li className='nav-item io-sider-button' style={{ marginRight: '-0.1rem' }}>
+							<Tooltip title={'graph'} mouseEnterDelay={1.1}>
+								<Link
+									type='default'
+									to={`#`}
+									onClick={() => {
+										this.props.clearActiveNode();
+										window.location = '/graph';
+									}}
+								>
+									<Icon
+										type={'deployment-unit'}
+										theme='outlined'
+										// style={{ color: '#ec486c' }}
+									/>
+								</Link>
+							</Tooltip>
+						</li>
+						<li
+							className='nav-item io-sider-button mobile-hidden'
+							style={{ padding: '0', marginRight: '-0.1rem' }}
+						>
+							<Tooltip title={'random'} mouseEnterDelay={1.1}>
+								<Button
+									type='default'
+									shape='circle'
+									onClick={(e) => (window.location.href = '/random')}
+								>
+									<Icon
+										type={'thunderbolt'}
+										theme='filled'
+										// style={{ color: 'yellow' }}
+									/>
+								</Button>
+							</Tooltip>
 						</li>
 						<li className='nav-item io-sider-button' style={{ marginRight: '0.1rem' }}>
-							<Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
-								<Icon
-									type={'star'}
-									theme='filled'
-									// style={{ color: 'yellow' }}
-								/>
-							</Link>
+							<Tooltip title={'favorites'} mouseEnterDelay={1.1}>
+								<Link type='default' to={`/pins`} style={{ marginRight: '0.3rem' }}>
+									<Icon
+										type={'star'}
+										theme='filled'
+										// style={{ color: 'yellow' }}
+									/>
+								</Link>
+							</Tooltip>
 						</li>
 						<li className='nav-item create-node-button'>
 							<Button type='default' shape='circle' onClick={(e) => this.toggleInputMode()}>
@@ -346,4 +379,6 @@ export default connect(mapStateToProps, {
 	createUrlNode,
 	showComponent,
 	hideComponent,
+	getRandomNode,
+	clearActiveNode,
 })(IOBar);

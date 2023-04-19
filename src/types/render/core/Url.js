@@ -33,7 +33,7 @@ const Url = (props) => {
 					href={props.node.path}
 					target='_blank'
 					rel='noopener noreferrer'
-					style={{ width: '100%' }}
+					// style={{ width: '100%' }}
 				>
 					{renderPreview()}
 				</a>
@@ -50,9 +50,9 @@ const Url = (props) => {
 					style={{
 						objectFit: 'cover',
 						// minHeight: '100%',
-						width: '100%',
+						// width: '100%',
 					}}
-					onError={(e) => e.target.src = missingFileImage}
+					onError={(e) => (e.target.src = missingFileImage)}
 				></img>
 			);
 		} else {
@@ -68,6 +68,7 @@ const Url = (props) => {
 						textAlign: 'center',
 						padding: '4.3rem 3.3rem 3.3rem',
 						height: '100%',
+						backgroundColor: props.theme.cardBodyColor,
 					}}
 				/>
 			);
@@ -91,7 +92,10 @@ const Url = (props) => {
 						// props.toggleHeader();
 						window.open(props.node.path, '_blank');
 					}}
-					style={{ width: '100%' }}
+					style={{
+						width: '100%',
+						backgroundColor: props.theme.cardBodyColor,
+					}}
 				>
 					{renderPreview()}
 				</a>
@@ -124,8 +128,10 @@ const Url = (props) => {
 	};
 
 	const fullNode = () => {
+		let imageScale = JSON.parse(localStorage.getItem('image-sizing')) || 'classic';
+		let imageClass = 'img-' + imageScale.replace(' ', '-');
 		return (
-			<div className='full-node-item'>
+			<div className={'full-node-item ' + imageClass}>
 				<NodeCardHeaderFull />
 				{renderFullCardPreview()}
 				{/* <p>{props.node.comment}</p> */}

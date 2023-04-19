@@ -11,7 +11,6 @@ class ElectronSearch extends Component {
 	}
 
 	componentWillUnmount() {
-		console.log('search unmounting');
 		window.api.send('toMain', { action: 'hide-search' });
 	}
 

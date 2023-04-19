@@ -20,7 +20,8 @@ import {
 } from '../../api/redux/actions';
 import './css/Options.less';
 // import IOBar from '../elements/IOBar';
-import NodeList from '../elements/node/NodeList';
+// import NodeList from '../elements/node/NodeList';
+import OptionsList from '../elements/options/OptionsList';
 import MainSider from '../elements/MainSider';
 import IOBar from '../elements/IOBar';
 // import default images
@@ -395,7 +396,7 @@ class Options extends Component {
 								>
 									change password
 								</Button>
-								<br />
+								{/* <br />
 								<Button
 									type='default'
 									style={{
@@ -412,7 +413,7 @@ class Options extends Component {
 									}}
 								>
 									regenerate previews
-								</Button>
+								</Button> */}
 								<br />
 								<Button
 									type='danger'
@@ -484,13 +485,13 @@ class Options extends Component {
 									<p>
 										Generate export from <b>{this.props.user.displayName || 'untitled'}</b>? The
 										export will contain the profile picture, header, bio, along with all this user's
-										nodes & associations, and appear in your starboard when it is completed. This
+										nodes & associations, and appear in your favorites when it is completed. This
 										may take a few minutes.
 									</p>
 								</Modal>
 							</div>
 						</div>
-						<NodeList />
+						<OptionsList />
 					</Content>
 				</Layout>
 			</Layout>

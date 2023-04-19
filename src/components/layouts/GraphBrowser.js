@@ -120,7 +120,8 @@ class GraphBrowser extends Component {
 		// width and height
 		const height = window.innerHeight;
 		const width = window.innerWidth;
-		const nodeScale = 23;
+		// const nodeScale = 23;
+		const nodeScale = 33;
 
 		// simulation
 		const simulation = forceSimulation(nodeData)
@@ -168,9 +169,25 @@ class GraphBrowser extends Component {
 			.join('g')
 			.call(this.drag(simulation))
 			.append('circle')
+			.attr('fill', this.props.theme.graphNodeColor)
+			.attr('stroke', this.props.theme.graphNodeBorderColor)
 			.on('contextmenu', (e, d) => {
 				e.preventDefault();
 				window.location.replace('/graph/' + d.uuid);
+			})
+			.on('mouseover', (e, d) => {
+				select(e.currentTarget).style('fill', this.props.theme.graphNodeHoverColor);
+				select(e.currentTarget).style('stroke', this.props.theme.graphNodeBorderHoverColor);
+
+				d.fx = null;
+				d.fy = null;
+			})
+			.on('mouseout', (e, d) => {
+				select(e.currentTarget).style('fill', this.props.theme.graphNodeColor);
+				select(e.currentTarget).style('stroke', this.props.theme.graphNodeBorderColor);
+
+				d.fx = null;
+				d.fy = null;
 			})
 			// .on('click', (e, d) => {
 			//   e.preventDefault();
@@ -189,7 +206,7 @@ class GraphBrowser extends Component {
 			.attr('r', nodeScale)
 			// .attr('cursor', 'grab')
 			.attr('cursor', 'none')
-			.attr('fill', '#16e998')
+			// .attr('fill', '#16e998')
 			.attr('class', 'graph-node');
 
 		const text = selectAll('g g g')
@@ -197,6 +214,11 @@ class GraphBrowser extends Component {
 			.text((d) => d.name.substring(0, 100))
 			.attr('font-size', '0.8rem')
 			.attr('cursor', 'grab')
+			// .on('mouseover', (e, d) => {
+			// 	// on mouseover without a click run simulation
+			// 	d.fx = null;
+			// 	d.fy = null;
+			// })
 			// .attr('cursor', 'none')
 			// .attr('stroke', 'white')
 			// .attr('stroke-width', 0.1)
@@ -246,8 +268,8 @@ class GraphBrowser extends Component {
 
 		function dragended(event, d) {
 			if (!event.active) simulation.alphaTarget(0);
-			d.fx = null;
-			d.fy = null;
+			// d.fx = null;
+			// d.fy = null;
 			window.setTimeout(() => {
 				// show cursor
 				document.body.style.cursor = 'auto';
@@ -295,6 +317,7 @@ const mapStateToProps = (state) => {
 		nodeList: state.nodes.nodeList,
 		query: state.nodes.query,
 		isFetching: state.nodes.isFetching,
+		theme: state.components.theme,
 	};
 };
 

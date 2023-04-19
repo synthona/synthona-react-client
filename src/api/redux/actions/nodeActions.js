@@ -87,8 +87,6 @@ export const updateNode = (node) => async (dispatch) => {
 	try {
 		const result = await instance.patch('/node', {
 			uuid: node.uuid,
-			hidden: node.hidden,
-			searchable: node.searchable,
 			name: node.name,
 			preview: node.preview,
 			path: node.path,
@@ -98,12 +96,7 @@ export const updateNode = (node) => async (dispatch) => {
 			uuid: node.uuid,
 			result: result.data.node,
 		});
-		// if the node has been hidden remove it from the nodelist
-		if (node.hidden === true) {
-			dispatch({ type: DELETE_NODE_SUCCESS, uuid: node.uuid });
-		}
 	} catch (err) {
-		console.log(err);
 		dispatch({ type: UPDATE_NODE_ERROR });
 		message.error('There was a problem saving your changes', 1);
 		history.push('/');
@@ -119,7 +112,6 @@ export const clearNodePreview = (node) => async (dispatch) => {
 		});
 		window.location.reload();
 	} catch (err) {
-		console.log(err);
 		message.error('There was a problem saving your changes', 1);
 		history.push('/');
 	}
@@ -131,8 +123,6 @@ export const updateActiveNode = (node) => async (dispatch) => {
 	try {
 		const result = await instance.patch('/node', {
 			uuid: node.uuid,
-			hidden: node.hidden,
-			searchable: node.searchable,
 			name: node.name,
 			preview: node.preview,
 			pinned: node.pinned,
@@ -142,12 +132,7 @@ export const updateActiveNode = (node) => async (dispatch) => {
 			uuid: node.uuid,
 			result: result.data.node,
 		});
-		// if the node has been hidden remove it from the nodelist
-		if (node.hidden === true) {
-			dispatch({ type: DELETE_NODE_SUCCESS, uuid: node.uuid });
-		}
 	} catch (err) {
-		console.log(err);
 		dispatch({ type: UPDATE_ACTIVE_NODE_ERROR });
 		message.error('There was a problem saving your changes', 1);
 		history.push('/');
@@ -187,7 +172,6 @@ export const createNode = (node, file) => async (dispatch) => {
 };
 
 export const createUrlNode = (node) => async (dispatch) => {
-	console.log('create url node');
 	dispatch({ type: CREATE_NODE });
 	try {
 		const response = await instance.put('/url', {
@@ -239,6 +223,20 @@ export const setActiveNode = (uuid) => async (dispatch) => {
 	}
 };
 
+// get random node
+export const getRandomNode = () => async (dispatch) => {
+	dispatch({ type: SET_ACTIVE_NODE });
+	try {
+		const response = await instance.get('/node/random');
+		dispatch({ type: SET_ACTIVE_NODE_SUCCESS, payload: response.data });
+		window.location.replace(`/associations/${response.data.node.uuid}`);
+	} catch (err) {
+		dispatch({ type: SET_ACTIVE_NODE_ERROR });
+		history.push('/');
+		message.error('Could not retrieve values', 1);
+	}
+};
+
 export const clearActiveNode = () => {
 	return {
 		type: CLEAR_ACTIVE_NODE,
@@ -281,7 +279,6 @@ export const clearAllNodes = (formValues) => async (dispatch) => {
 			message.success('successfully deleted all your data :)', 3);
 		}
 	} catch (err) {
-		console.log(err);
 		message.error('There was a problem, please try again', 1);
 	}
 };

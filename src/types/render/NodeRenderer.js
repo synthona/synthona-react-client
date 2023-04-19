@@ -64,6 +64,7 @@ class NodeRenderer extends Component {
 						node={this.props.node}
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
+						theme={this.props.theme}
 					/>
 				);
 			case 'image':
@@ -89,6 +90,7 @@ class NodeRenderer extends Component {
 						handleAssociatonClick={this.handleAssociatonClick}
 						toggleHeader={this.toggleHeader}
 						renderHeader={this.renderHeader}
+						theme={this.props.theme}
 					/>
 				);
 			case 'file':
@@ -101,6 +103,7 @@ class NodeRenderer extends Component {
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchFile={this.props.launchFileNode}
 						launchExplorer={this.props.openFileInExplorer}
+						theme={this.props.theme}
 					/>
 				);
 			case 'audio':
@@ -112,6 +115,7 @@ class NodeRenderer extends Component {
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchFile={this.props.launchFileNode}
+						theme={this.props.theme}
 					/>
 				);
 			case 'package':
@@ -123,6 +127,7 @@ class NodeRenderer extends Component {
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchExplorer={this.props.openFileInExplorer}
+						theme={this.props.theme}
 					/>
 				);
 			case 'zip':
@@ -134,6 +139,7 @@ class NodeRenderer extends Component {
 						handleClick={this.handleNodeClick}
 						handleAssociatonClick={this.handleAssociatonClick}
 						launchExplorer={this.props.openFileInExplorer}
+						theme={this.props.theme}
 					/>
 				);
 			case 'collection':
@@ -168,7 +174,13 @@ class NodeRenderer extends Component {
 	}
 }
 
-export default connect(null, {
+const mapStateToProps = (state) => {
+	return {
+		theme: state.components.theme,
+	};
+};
+
+export default connect(mapStateToProps, {
 	updateLinkStrength,
 	hideComponent,
 	launchFileNode,

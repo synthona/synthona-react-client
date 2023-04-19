@@ -30,7 +30,8 @@ const File = (props) => {
 			window.location.replace(`/associations/${props.node.uuid}`);
 		} else if (isElectron()) {
 			e.preventDefault();
-			selectLocalFile(e);
+			props.handleClick();
+			window.location.replace(`/associations/${props.node.uuid}`);
 		} else {
 			e.preventDefault();
 			window.location.replace(`/associations/${props.node.uuid}`);
@@ -88,7 +89,7 @@ const File = (props) => {
 			return (
 				<Icon
 					type={'thunderbolt'}
-					style={{ color: 'white' }}
+					style={{ color: 'white', backgroundColor: props.theme.cardBodyColor, height: '100%' }}
 					theme='filled'
 					className='node-card-icon'
 				/>
@@ -104,6 +105,10 @@ const File = (props) => {
 					to={`/associations/${props.node.uuid}`}
 					onClick={(e) => onClickAction(e)}
 					onContextMenu={(e) => onContextAction(e)}
+					style={{
+						width: '100%',
+						backgroundColor: props.theme.cardBodyColor,
+					}}
 				>
 					{renderPreview()}
 				</Link>

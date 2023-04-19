@@ -33,6 +33,10 @@ div.quill {
       font-size: 0.7rem;
     }
 
+    s {
+      color: inherit;
+    }
+
     // ul indent 1
     li.ql-indent-1::before {
       content: '\25CB';
@@ -82,7 +86,8 @@ div.quill {
 
 .ql-container.ql-snow {
   // background-color: #2c2c2c;
-  background-color: @document-background-color;
+  // background-color: @document-background-color;
+  background-color: transparent;
   margin: 0 auto;
   border: none;
 }
@@ -110,11 +115,18 @@ div.quill {
   margin: 0 auto;
   padding: 8rem 7rem 11rem 6rem;
   // padding: 8rem 27rem 11rem 26rem;
-  border: 0.01rem solid #dfdfdf;
-  color: #272727;
-  background-color: white;
+  // color: #272727;
+  // background-color: white;
   overscroll-behavior: none;
-  min-height: 1000px;
+  min-height: 100vh;
+
+  h2 {
+    color: inherit;
+  }
+
+  s {
+    color: inherit;
+  }
 
   ::selection {
     background: #ffb7b7; /* WebKit/Blink Browsers */
@@ -210,6 +222,16 @@ span:focus {
 
 .delete-modal .ant-modal-content {
   margin: 0;
+}
+
+// quill editor width options
+.quill-full-width {
+  .ql-editor {
+    width: 100%;
+    padding-bottom: 5rem;
+    padding-right: 16rem;
+    padding-left: 14.7rem;
+  }
 }
 
 // MEDIA QUERIES

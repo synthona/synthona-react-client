@@ -3,7 +3,9 @@ const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 
 export default axios.create({
-	baseURL: 'http://' + window.location.hostname + ':9000',
+	baseURL: process.env.REACT_APP_SERVER_PORT
+		? 'http://' + window.location.hostname + ':' + process.env.REACT_APP_SERVER_PORT
+		: 'http://' + window.location.hostname + ':' + window.location.port,
 	withCredentials: true,
 	cancelToken: source.token,
 });

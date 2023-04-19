@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 // custom code
 import '../node/NodeList.less';
-import { fetchAssociations } from '../../../api/redux/actions';
+import { fetchAssociations, getRandomNode } from '../../../api/redux/actions';
 import NodeCard from '../node/NodeCard';
 import AssociationSider from './AssociationSider';
 import Spinner from '../Spinner';
@@ -12,16 +12,48 @@ class AssociationList extends Component {
 		super(props);
 		this.state = {
 			topOfPage: false,
+			// redirectInterval: setInterval(this.advanceToRandomNode, 333),
 		};
 	}
 
 	componentDidMount() {
 		window.addEventListener('scroll', this.infiniteScroll);
+		// window.addEventListener('mousemove', this.resetAdvanceCounter);
+		// this.advanceToRandomNode();
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.infiniteScroll);
 	}
+
+	// resetAdvanceCounter = () => {
+	// 	console.log('removing interval');
+	// 	console.log(this.state.redirectInterval);
+	// 	if (this.state.redirectInterval) {
+	// 		clearInterval(this.state.redirectInterval);
+	// 		this.setState({ redirectInterval: setInterval(this.advanceToRandomNode, 10000) });
+	// 	}
+	// };
+
+	// commenting this out for now.
+	// was experimenting with random automated wandering, screensaver style
+	// maybe will revisit this
+	// advanceToRandomNode = () => {
+	// 	let flash = localStorage.getItem('flash');
+	// 	console.log(flash);
+	// 	if (flash) {
+	// 		window.location.replace(`/flash`);
+	// 		return;
+	// 	}
+	// 	let maxNumber = Math.floor(Math.random() * this.props.associations.length + 1);
+	// 	if (this.props.associations.length > 0) {
+	// 		let uuid = this.props.associations[this.props.associations.length - maxNumber].uuid;
+	// 		window.location.replace(`/associations/${uuid}`);
+	// 	} else {
+	// 		this.props.getRandomNode();
+	// 	}
+	// 	localStorage.setItem('flash', true);
+	// };
 
 	infiniteScroll = (e) => {
 		var currentListLength = this.props.associations.length;
@@ -87,7 +119,7 @@ class AssociationList extends Component {
 	renderList = () => {
 		if (this.props.totalNodes > 0) {
 			return (
-				<ul style={{ backgroundColor: 'none' }} className='nodelist'>
+				<ul style={{ backgroundColor: 'black' }} className='nodelist'>
 					{this.renderNodes()}
 				</ul>
 			);
@@ -116,4 +148,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { fetchAssociations })(AssociationList);
+export default connect(mapStateToProps, { fetchAssociations, getRandomNode })(AssociationList);

@@ -21,32 +21,16 @@ class NodeCardHeaderFull extends Component {
 		this.state = {
 			name: this.props.nodeData.name,
 			preview: this.props.nodeData.preview,
-			hidden: this.props.nodeData.hidden,
-			hiddenIcon: 'eye-invisible',
-			searchable: this.props.nodeData.searchable,
-			searchableIcon: 'search',
 			pinned: this.props.nodeData.pinned,
 			pinnedState: 'outlined',
 			editable: false,
 			showDeleteModal: null,
 			showExportModal: null,
-			showUrlPreviewImageModal: null,
+			showUrlPreviewImageModal: false,
 		};
 	}
 
 	componentDidMount() {
-		// set initial hiddens state
-		if (this.props.nodeData.hidden) {
-			this.setState({ hiddenIcon: 'eye-invisible' });
-		} else {
-			this.setState({ hiddenIcon: 'eye' });
-		}
-		// set initial searchable state
-		if (this.props.nodeData.searchable) {
-			this.setState({ searchableIcon: 'search' });
-		} else {
-			this.setState({ searchableIcon: 'key' });
-		}
 		// set initial pinned state
 		if (this.props.nodeData.pinned) {
 			this.setState({ pinnedState: 'filled' });
@@ -95,44 +79,17 @@ class NodeCardHeaderFull extends Component {
 		await this.props.generateExportByUUID(this.props.nodeData.uuid);
 	};
 
-	// show modal to confirm deletion
-	toggleUrlPreviewImageModal = () => {
-		if (this.state.showUrlPreviewImageModal) {
-			this.setState({ showUrlPreviewImageModal: false });
-		} else {
-			this.setState({ showUrlPreviewImageModal: true });
-		}
-	};
-
 	// select an image.
 	setUrlPreviewImage = (preview) => {
 		// update the URL
 		if (isImageUrl(preview) && validUrl(preview)) {
 			message.success('updated the preview image');
-			this.toggleUrlPreviewImageModal();
 			this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, preview: preview });
+		} else if (preview === '') {
+			message.success('removed the preview image');
+			this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, preview: '' });
 		} else {
 			message.error('there was a problem setting the preview image', 1);
-		}
-	};
-
-	toggleHidden = () => {
-		if (this.state.hidden === true) {
-			this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, hidden: false });
-			this.setState({ hidden: false, hiddenIcon: 'eye' });
-		} else {
-			this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, hidden: true });
-			this.setState({ hidden: true, hiddenIcon: 'eye-invisible' });
-		}
-	};
-
-	toggleSearchable = () => {
-		if (this.state.searchable === true) {
-			this.setState({ searchable: false, searchableIcon: 'key' });
-			this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, searchable: false });
-		} else {
-			this.setState({ searchable: true, searchableIcon: 'search' });
-			this.props.updateActiveNode({ uuid: this.props.nodeData.uuid, searchable: true });
 		}
 	};
 
@@ -176,6 +133,9 @@ class NodeCardHeaderFull extends Component {
 			return (
 				<h3
 					className='full-card-title'
+					style={{
+						color: this.props.theme.cardTitleColor,
+					}}
 					onDoubleClick={(e) => {
 						e.preventDefault();
 						this.setState({ editable: true });
@@ -190,6 +150,9 @@ class NodeCardHeaderFull extends Component {
 				<input
 					type='text'
 					className='full-card-title'
+					style={{
+						backgroundColor: 'transparent',
+					}}
 					onBlur={() => this.setState({ editable: null })}
 					maxLength='250'
 					autoFocus
@@ -244,7 +207,7 @@ class NodeCardHeaderFull extends Component {
 										this.props.unpackImport(this.props.nodeData.uuid);
 									}}
 								>
-									<Icon type={'save'} theme='filled' className='full-card-button' />
+									<Icon type={'gift'} theme='filled' className='full-card-button' />
 								</button>
 							</li>
 						</Tooltip>
@@ -257,7 +220,7 @@ class NodeCardHeaderFull extends Component {
 							<button
 								onClick={(e) => {
 									// show the modal
-									this.toggleUrlPreviewImageModal();
+									this.setState({ showUrlPreviewImageModal: true });
 								}}
 							>
 								<Icon type={'picture'} theme='outlined' className='full-card-button' />
@@ -314,6 +277,22 @@ class NodeCardHeaderFull extends Component {
 						</li>
 					</Tooltip>
 				);
+			case 'image':
+				return (
+					<Tooltip title={'set as app background'} mouseEnterDelay={1.1}>
+						<li>
+							<button
+								onClick={(e) => {
+									// set the app background to this image
+									localStorage.setItem('background-image', this.props.nodeData.preview);
+									window.location.reload();
+								}}
+							>
+								<Icon type={'layout'} className='full-card-button' />
+							</button>
+						</li>
+					</Tooltip>
+				);
 			default:
 				return;
 		}
@@ -349,7 +328,7 @@ class NodeCardHeaderFull extends Component {
 								this.toggleExportModal();
 							}}
 						>
-							<Icon type={'save'} theme='outlined' className='full-card-button' />
+							<Icon type={'gift'} theme='outlined' className='full-card-button' />
 						</button>
 					</li>
 				</Tooltip>
@@ -359,7 +338,12 @@ class NodeCardHeaderFull extends Component {
 
 	render() {
 		return (
-			<div className='full-card-options'>
+			<div
+				className='full-card-options'
+				style={{
+					backgroundColor: this.props.theme.cardHeaderColor,
+				}}
+			>
 				{this.renderTitle()}
 				{/* <p className='full-card-options-date'>{this.props.nodeData.updatedAt}</p> */}
 				<ul className='full-card-buttons-list'>
@@ -394,30 +378,6 @@ class NodeCardHeaderFull extends Component {
 					{this.renderContextualButtons()}
 					{this.renderExportButton()}
 					{this.renderRevealInExplorerButton()}
-					<Tooltip
-						title={this.state.hidden ? 'hidden from explore' : 'visible in explore'}
-						mouseEnterDelay={1.1}
-					>
-						<li>
-							<button onClick={(e) => this.toggleHidden()}>
-								<Icon type={this.state.hiddenIcon} theme='outlined' className='full-card-button' />
-							</button>
-						</li>
-					</Tooltip>
-					<Tooltip
-						title={this.state.searchable ? 'searchable' : 'hidden from search'}
-						mouseEnterDelay={1.1}
-					>
-						<li>
-							<button onClick={(e) => this.toggleSearchable()}>
-								<Icon
-									type={this.state.searchableIcon}
-									theme='outlined'
-									className='full-card-button'
-								/>
-							</button>
-						</li>
-					</Tooltip>
 					<Tooltip title={'open in browser'} mouseEnterDelay={1.1}>
 						<li>
 							<button
@@ -465,7 +425,7 @@ class NodeCardHeaderFull extends Component {
 					<p>
 						Generate export from <b>{this.props.nodeData.name || 'untitled'}</b>? The export will
 						contain <b>{this.props.nodeData.name || 'untitled'}</b> along with all its associations,
-						and appear in the starboard when it is completed.
+						and appear in the favorites when it is completed.
 					</p>
 				</Modal>
 				<Modal
@@ -473,15 +433,20 @@ class NodeCardHeaderFull extends Component {
 					visible={this.state.showUrlPreviewImageModal}
 					className='full-card-modal'
 					centered
-					onOk={(e) => this.setUrlPreviewImage(this.state.preview)}
+					onOk={(e) => {
+						this.setState({ showUrlPreviewImageModal: false });
+						this.setUrlPreviewImage(this.state.preview);
+					}}
 					afterClose={() => {
 						document.body.style.removeProperty('overflow');
 					}}
 					okText='save'
 					closable={false}
 					onCancel={(e) => {
-						this.setState({ preview: this.props.nodeData.preview });
-						this.toggleUrlPreviewImageModal();
+						this.setState({
+							preview: this.props.nodeData.preview,
+							showUrlPreviewImageModal: false,
+						});
 						window.getSelection().removeAllRanges();
 					}}
 				>
@@ -495,6 +460,13 @@ class NodeCardHeaderFull extends Component {
 						}}
 						placeholder='image URL'
 						value={this.state.preview || ''}
+						onKeyDown={(e) => {
+							if (e.key === 'Enter') {
+								e.preventDefault();
+								this.setState({ showUrlPreviewImageModal: false });
+								this.setUrlPreviewImage(this.state.preview);
+							}
+						}}
 						onChange={(e) => this.setState({ preview: e.target.value })}
 					></input>
 				</Modal>
@@ -506,6 +478,7 @@ class NodeCardHeaderFull extends Component {
 const mapStateToProps = (state) => {
 	return {
 		nodeData: state.nodes.activeNode,
+		theme: state.components.theme,
 	};
 };
 

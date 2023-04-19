@@ -24,7 +24,14 @@ const Text = (props) => {
 						window.location.replace(`/edit/text/${props.node.uuid}`);
 					}}
 				>
-					<p>{props.node.preview}</p>
+					<p
+						style={{
+							color: props.theme.cardTextColor,
+							backgroundColor: props.theme.cardBodyColor,
+						}}
+					>
+						{props.node.preview}
+					</p>
 				</Link>
 			</li>
 		);
@@ -49,7 +56,7 @@ const Text = (props) => {
 						window.getSelection().removeAllRanges();
 					}} /*target='_blank' */
 				>
-					<p>{props.node.preview}</p>
+					<p style={{ backgroundColor: props.theme.cardBodyColor }}>{props.node.preview}</p>
 				</Link>
 			</div>
 		);

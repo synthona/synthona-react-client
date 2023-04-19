@@ -47,7 +47,6 @@ export const linkFileNodes = (fileList, linkedNode) => async (dispatch) => {
 			fileList: JSON.stringify(fileList),
 			linkedNode: linkedNode,
 		});
-		console.log(response.data.nodes);
 		// if it's sucessful dispatch the success action
 		if (response.status === 200) {
 			dispatch({ type: LINK_FILE_NODES_SUCCESS, nodes: response.data.nodes });
@@ -61,7 +60,7 @@ export const linkFileNodes = (fileList, linkedNode) => async (dispatch) => {
 };
 
 export const launchFileNode = (uuid) => async (dispatch) => {
-	message.success('loading...', 1);
+	// message.success('loading...', 1);
 	try {
 		// send the request
 		await instance.put('/file/launch', { uuid });
@@ -72,7 +71,7 @@ export const launchFileNode = (uuid) => async (dispatch) => {
 };
 
 export const openFileInExplorer = (uuid) => async (dispatch) => {
-	message.success('loading...', 1);
+	// message.success('loading...', 1);
 	try {
 		// send the request
 		await instance.put('/file/explorer', { uuid });
