@@ -236,9 +236,12 @@ span:focus {
 
 // MEDIA QUERIES
 @media only screen and (max-width: 1200px) {
+  .ql-container .ql-editor {
+    padding: 8rem 5rem 7rem 4rem;
+  }
+
   .ql-editor {
     margin: 0 auto;
-    padding: 10rem 3rem 7rem 2rem;
     width: 100%;
   }
 
@@ -248,6 +251,12 @@ span:focus {
 
   .ql-toolbar.ql-snow .ql-formats {
     margin: 0 0.2rem;
+  }
+
+  .expanded {
+    .ql-container .ql-editor {
+      padding: 6rem 5rem 7rem 4rem;
+    }
   }
 }
 
@@ -259,12 +268,16 @@ span:focus {
     }
   }
 
+  .ql-container .ql-editor {
+    padding: 9rem 5rem 7rem 4rem;
+  }
+
   .expanded {
     .ql-toolbar {
       margin: 0;
     }
 
-    .ql-editor {
+    .ql-container .ql-editor {
       padding: 7rem 5rem 7rem 4rem;
       margin: 0 auto;
     }
@@ -281,8 +294,12 @@ span:focus {
 }
 
 @media only screen and (max-width: 700px) {
+  .ql-container .ql-editor {
+    padding: 10.5rem 2rem 7rem 1.3rem;
+  }
+
   .expanded {
-    .ql-editor {
+    .ql-container .ql-editor {
       padding: 7rem 3rem 7rem 2rem;
       margin: 0 auto;
       width: 100%;
@@ -295,14 +312,15 @@ span:focus {
     width: 55%;
   }
 
-  .ql-editor {
+  .ql-container .ql-editor {
     padding: 11.5rem 1.3rem 7rem 1.3rem;
     margin: 0 auto;
     width: 100%;
+    overscroll-behavior: auto;
   }
 
   .expanded {
-    .ql-editor {
+    .ql-container .ql-editor {
       padding: 9rem 1.3rem 7rem 1.3rem;
       margin: 0 auto;
       width: 100%;
