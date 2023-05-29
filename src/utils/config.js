@@ -32,6 +32,13 @@ let clientConfig = [
 		value: 'full width',
 	},
 	{
+		storageKey: 'fallback-search',
+		name: 'Fallback Search',
+		type: 'dropdown',
+		options: ['none', 'google'],
+		value: 'none',
+	},
+	{
 		storageKey: 'link-mode',
 		name: 'Link Mode',
 		type: 'dropdown',
@@ -55,13 +62,14 @@ exports.loadClientConfig = () => {
 	if (clientConfigVersion <= localConfigVersion) {
 		// we're going to loop through our 'config array' definitions and load them from localstorage
 		configArray = clientConfig.map((item) => {
-			let configValue = JSON.parse(localStorage.getItem(item.storageKey));
+			let localItem = localStorage.getItem(item.storageKey);
 			// handle case where a config item is missing
-			if (!configValue) {
+			if (!localItem) {
 				// if the config has been tampered with we are going to run the 'update' case
-				localStorage.clear('client-config-version');
+				localStorage.removeItem('client-config-version');
 				window.location.reload();
 			}
+			let configValue = JSON.parse(localItem);
 			// load the configItem value into the render template
 			item.value = configValue;
 			// return the item
