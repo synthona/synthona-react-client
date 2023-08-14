@@ -46,9 +46,7 @@ export default (state = INITIAL_STATE, action) => {
 			var associationLinkListArray = [...state.associationLinkList];
 			// update the association link list with the new values
 			Object.values(action.payload.associations).forEach((node) => {
-				if (!associationLinkListArray.some((item) => item.uuid === node.uuid)) {
-					associationLinkListArray.push(node);
-				}
+				associationLinkListArray.push(node);
 			});
 			return {
 				...state,
@@ -88,10 +86,10 @@ export default (state = INITIAL_STATE, action) => {
 		case CREATE_ASSOCIATION_SUCCESS:
 			var associatedNode;
 			// check whichever is the associated node to the list
-			if (action.nodeUUID && action.nodes.associated.uuid === action.nodeUUID) {
-				associatedNode = action.nodes.original;
+			if (action.nodeUUID && action.linkedNode.uuid === action.nodeUUID) {
+				associatedNode = action.node;
 			} else {
-				associatedNode = action.nodes.associated;
+				associatedNode = action.linkedNode;
 			}
 			// only add the node to the association list if one of the nodes is the activeNode
 			if (state.activeNode && action.nodeUUID === state.activeNode.uuid) {

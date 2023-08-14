@@ -54,7 +54,6 @@ let clientConfig = [
 ];
 
 exports.loadClientConfig = () => {
-	console.log('loading the client config from our special new function');
 	// return new Promise((resolve) => {
 	let localConfigVersion = localStorage.getItem('client-config-version');
 	let configArray;

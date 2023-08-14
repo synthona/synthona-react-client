@@ -82,7 +82,9 @@ export const createAssociation = (nodeUUID, linkedNodeUUID) => async (dispatch) 
 		});
 		dispatch({
 			type: CREATE_ASSOCIATION_SUCCESS,
-			nodes: response.data.association,
+			association: response.data.association,
+			node: response.data.node,
+			linkedNode: response.data.linkedNode,
 			nodeUUID,
 		});
 	} catch (err) {

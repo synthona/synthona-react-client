@@ -34,6 +34,13 @@ class AssociationLink extends Component {
 				activeNodeUUID === siderNodeUUID
 			) {
 				this.props.removeFromAssociationList(linkedNodeUUID);
+			} else if (
+				(pathname.includes('associations') || pathname.includes('/edit/text/')) &&
+				activeNodeUUID &&
+				activeNodeUUID === linkedNodeUUID
+			) {
+				this.props.removeFromAssociationList(siderNodeUUID);
+				this.props.hideComponent('associationSider');
 			}
 		}
 	};

@@ -116,7 +116,7 @@ class NodeList extends Component {
 							padding: '0.5rem 1rem',
 						}}
 					>
-						no matches ~ search google instead?
+						no matches ~ search online instead?
 					</a>
 				</div>
 			);
