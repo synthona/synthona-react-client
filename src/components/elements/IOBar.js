@@ -26,7 +26,7 @@ class IOBar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			input: this.props.query.searchQuery,
+			input: this.props.query.searchQuery || '',
 			nodeTypes: this.props.query.type || 'all',
 			sortType: this.props.query.sortType,
 			sortOrder: this.props.query.sortOrder,
@@ -86,7 +86,7 @@ class IOBar extends Component {
 		switch (this.state.inputMode) {
 			case 'query':
 				return this.props.searchNodes({
-					searchQuery: this.state.input,
+					searchQuery: this.state.input || '',
 					type: this.state.nodeTypes,
 					sortType: this.state.sortType,
 					sortOrder: this.state.sortOrder,
