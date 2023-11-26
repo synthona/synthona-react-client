@@ -8,7 +8,18 @@ import {
 	openFileInExplorer,
 	updateNode,
 } from '../../api/redux/actions';
-import { Text, Image, Url, File, Audio, Package, Zip, Collection, User } from './core/index';
+import {
+	Text,
+	Image,
+	Url,
+	File,
+	Folder,
+	Audio,
+	Package,
+	Zip,
+	Collection,
+	User,
+} from './core/index';
 import NodeCardHeader from '../../components/elements/node/NodeCardHeader';
 
 class NodeRenderer extends Component {
@@ -96,6 +107,19 @@ class NodeRenderer extends Component {
 			case 'file':
 				return (
 					<File
+						element={this.props.element}
+						node={this.props.node}
+						updateNode={this.props.updateNode}
+						handleClick={this.handleNodeClick}
+						handleAssociatonClick={this.handleAssociatonClick}
+						launchFile={this.props.launchFileNode}
+						launchExplorer={this.props.openFileInExplorer}
+						theme={this.props.theme}
+					/>
+				);
+			case 'folder':
+				return (
+					<Folder
 						element={this.props.element}
 						node={this.props.node}
 						updateNode={this.props.updateNode}

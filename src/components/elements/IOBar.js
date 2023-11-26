@@ -118,7 +118,16 @@ class IOBar extends Component {
 				history.push('/');
 				break;
 			case 'file':
-				this.selectLocalFile(linkedNode);
+				if (isElectron()) {
+					this.selectElectronFile();
+				} else {
+					this.selectLocalFile(linkedNode);
+				}
+				break;
+			case 'folder':
+				if (isElectron()) {
+					this.selectElectronFolder();
+				}
 				break;
 			case 'url':
 				// if the URL is an image add an image node
@@ -170,6 +179,18 @@ class IOBar extends Component {
 		}
 	};
 
+	selectElectronFile = () => {
+		if (window.api) {
+			window.api.send('toMain', { action: 'show-file-picker' });
+		}
+	};
+
+	selectElectronFolder = () => {
+		if (window.api) {
+			window.api.send('toMain', { action: 'show-folder-picker' });
+		}
+	};
+
 	// select an image.
 	selectLocalFile = (linkedNode) => {
 		const input = document.createElement('input');
@@ -180,13 +201,19 @@ class IOBar extends Component {
 		input.onchange = async () => {
 			let fileList = [];
 			for (let file of input.files) {
-				fileList.push({ name: file.name, path: file.path, type: file.type });
+				fileList.push({ name: file.name, path: file.path });
 			}
 			await this.props.linkFileNodes(fileList, linkedNode);
 			// clear the input bar
 			this.setState({ input: '' });
 			history.push('/');
 		};
+	};
+
+	renderCreateFolderOption = () => {
+		if (isElectron() === true) {
+			return <Option value='folder'>folders</Option>;
+		}
 	};
 
 	// include an "all" option for queries
@@ -204,6 +231,7 @@ class IOBar extends Component {
 					<Option value='all'>all</Option>
 					<Option value='url'>urls</Option>
 					<Option value='file'>file</Option>
+					<Option value='folder'>folder</Option>
 					<Option value='text'>text</Option>
 					<Option value='image'>images</Option>
 					<Option value='package'>packages</Option>
@@ -222,8 +250,9 @@ class IOBar extends Component {
 					}}
 				>
 					<Option value='text'>text</Option>
-					{this.renderCreateFileNodeOption()}
 					<Option value='url'>url</Option>
+					{this.renderCreateFileNodeOption()}
+					{this.renderCreateFolderOption()}
 					<Option value='collection'>collection</Option>
 				</Select>
 			);

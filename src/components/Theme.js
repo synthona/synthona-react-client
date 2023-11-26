@@ -26,14 +26,17 @@ const Theme = (props) => {
 	};
 
 	return (
-		<div
-			style={{
-				backgroundImage: `url(${loadBackground()}), url(${defaultBackground})`,
-				backgroundColor: '#272727',
-				backgroundSize: '100vw 107vh',
-				backgroundRepeat: 'repeat',
-			}}
-		>
+		<div>
+			<img
+				src={loadBackground() ? loadBackground() : defaultBackground}
+				alt='background'
+				style={{
+					width: '100vw',
+					height: '100vh',
+					position: 'fixed',
+					backgroundColor: '#272727',
+				}}
+			/>
 			{props.children}
 		</div>
 	);
