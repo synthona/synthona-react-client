@@ -15,7 +15,7 @@ import {
 	clearAllNodes,
 	showComponent,
 	generateInstanceExport,
-	// regenerateCollectionPreviews,
+	regenerateCollectionPreviews,
 	hideComponent,
 } from '../../api/redux/actions';
 import './css/Options.less';
@@ -396,7 +396,7 @@ class Options extends Component {
 								>
 									change password
 								</Button>
-								{/* <br />
+								<br />
 								<Button
 									type='default'
 									style={{
@@ -413,7 +413,7 @@ class Options extends Component {
 									}}
 								>
 									regenerate previews
-								</Button> */}
+								</Button>
 								<br />
 								<Button
 									type='danger'
@@ -534,6 +534,6 @@ export default connect(mapStateToProps, {
 	changePassword,
 	showComponent,
 	generateInstanceExport,
-	// regenerateCollectionPreviews,
+	regenerateCollectionPreviews,
 	hideComponent,
 })(Options);

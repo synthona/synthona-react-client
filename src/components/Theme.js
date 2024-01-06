@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadTheme } from '../api/redux/actions';
-import test from '../resources/cloud9.png';
+import defaultBackground from '../resources/cloud9.png';
 import { loadClientConfig } from '../utils/config';
 
 // theme wrapper component
@@ -18,7 +18,7 @@ const Theme = (props) => {
 
 	const loadBackground = () => {
 		let customImage = localStorage.getItem('background-image');
-		let bgImage = test;
+		let bgImage = defaultBackground;
 		if (customImage) {
 			bgImage = customImage;
 		}
@@ -26,14 +26,17 @@ const Theme = (props) => {
 	};
 
 	return (
-		<div
-			style={{
-				backgroundImage: `url(${loadBackground()})`,
-				backgroundColor: '#272727',
-				backgroundSize: '100vw 107vh',
-				backgroundRepeat: 'repeat',
-			}}
-		>
+		<div>
+			<img
+				src={loadBackground() ? loadBackground() : defaultBackground}
+				alt='background'
+				style={{
+					width: '100vw',
+					height: '100vh',
+					position: 'fixed',
+					backgroundColor: '#272727',
+				}}
+			/>
 			{props.children}
 		</div>
 	);

@@ -7,7 +7,7 @@ import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
 import missingFileImage from '../../../resources/missing-file.png';
 import { isElectron } from '../../../utils/environment';
 
-const File = (props) => {
+const Folder = (props) => {
 	let fileLoadError = false;
 
 	// select a replacement file
@@ -88,7 +88,7 @@ const File = (props) => {
 		} else {
 			return (
 				<Icon
-					type={'file'}
+					type={'folder'}
 					style={{ color: 'white', backgroundColor: props.theme.cardBodyColor, height: '100%' }}
 					theme='filled'
 					className='node-card-icon'
@@ -159,4 +159,4 @@ const File = (props) => {
 	return <Fragment>{renderNode()}</Fragment>;
 };
 
-export { File };
+export { Folder };

@@ -123,7 +123,7 @@ class AssociationList extends Component {
 					{this.renderNodes()}
 				</ul>
 			);
-		} else if (this.props.totalNodes < 0) {
+		} else {
 			return <Fragment></Fragment>;
 		}
 	};

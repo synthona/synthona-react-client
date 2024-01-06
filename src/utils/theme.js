@@ -64,12 +64,12 @@ export const setupTheme = () => {
 			break;
 		case 'translucent blue':
 			colors = {
-				cardTitleColor: '#34d5eb',
-				cardButtonColor: '#34d5eb',
+				cardTitleColor: '#7bf2e2',
+				cardButtonColor: '#7bf2a7',
 				cardHeaderColor: 'rgba(0, 0, 0, .6)',
 				cardBodyColor: 'rgba(0, 0, 0, .3)',
 				cardTextColor: '#e7e7e7',
-				graphNodeColor: '#34d5eb',
+				graphNodeColor: '#c3f9f2',
 				graphNodeBorderColor: '#3651ff',
 				graphNodeHoverColor: 'rgba(50, 66, 168, .5)',
 				graphNodeBorderHoverColor: 'rgba(50, 66, 168, .5)',
@@ -79,7 +79,7 @@ export const setupTheme = () => {
 			break;
 		case 'translucent red':
 			colors = {
-				cardTitleColor: '#ff3d78',
+				cardTitleColor: '#ff709b',
 				cardButtonColor: '#ff3d78',
 				cardHeaderColor: 'rgba(0, 0, 0, .6)',
 				cardBodyColor: 'rgba(0, 0, 0, .3)',

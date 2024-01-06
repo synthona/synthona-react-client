@@ -21,7 +21,6 @@ export const hideComponent = (type) => {
 };
 
 export const loadTheme = () => {
-	console.log('load theme called');
 	let theme = setupTheme();
 	return {
 		type: LOAD_THEME,

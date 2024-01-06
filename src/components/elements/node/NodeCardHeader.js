@@ -63,7 +63,6 @@ class NodeCardHeader extends Component {
 	// the jump to top icon is only available when sorting by most recent
 	renderLightbulbIcon = () => {
 		let sortType = localStorage.getItem('sortType');
-		console.log(window.location.href);
 		if (sortType === 'recent' || window.location.href.includes('associations')) {
 			return (
 				<button onClick={(e) => this.props.markNodeView(this.props.node)}>

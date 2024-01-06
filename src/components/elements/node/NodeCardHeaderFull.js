@@ -180,9 +180,22 @@ class NodeCardHeaderFull extends Component {
 	renderContextualButtons = () => {
 		switch (this.props.nodeData.type) {
 			case 'package':
-				if (this.props.nodeData.metadata && this.props.nodeData.metadata.importing) {
+				let nodeMetaData = null;
+				// unfortunately this is necessary due to something that changed on the backend
+				// but checking only on packages here is better than checking on every request on the server
+				if (this.props.nodeData.metadata) {
+					let metadataType = typeof this.props.nodeData.metadata;
+					// parse it into JSON if it's a string
+					if (metadataType === 'string') {
+						nodeMetaData = JSON.parse(this.props.nodeData.metadata);
+					} else {
+						nodeMetaData = this.props.nodeData.metadata;
+					}
+				}
+				// go ahead and render accordingly
+				if (nodeMetaData && nodeMetaData.importing) {
 					return <Fragment></Fragment>;
-				} else if (this.props.nodeData.metadata && this.props.nodeData.metadata.expanded) {
+				} else if (nodeMetaData && nodeMetaData.expanded) {
 					return (
 						<Tooltip title={'restore'} mouseEnterDelay={1.1}>
 							<li>
@@ -368,10 +381,10 @@ class NodeCardHeaderFull extends Component {
 							</button>
 						</li>
 					</Tooltip>
-					<Tooltip title={'star'} mouseEnterDelay={1.1}>
+					<Tooltip title={'heart'} mouseEnterDelay={1.1}>
 						<li className='mobile-visible'>
 							<button onClick={(e) => this.togglePinned()}>
-								<Icon type={'star'} theme={this.state.pinnedState} className='full-card-button' />
+								<Icon type={'heart'} theme={this.state.pinnedState} className='full-card-button' />
 							</button>
 						</li>
 					</Tooltip>

@@ -80,7 +80,7 @@ class AssociationBrowser extends Component {
 				// get the first 4 non-collection non-user associated nodes and add them to the new preview
 				while (i < associationList.length && preview.length < 4) {
 					node = associationList[i];
-					if (node.type !== 'collection' && node.type !== 'user') {
+					if (node.type === 'image' || node.type === 'url' || node.type === 'text') {
 						preview.push({
 							type: node.type,
 							preview: node.preview,
