@@ -20,7 +20,10 @@ import {
 	SET_ACTIVE_NODE,
 	SET_ACTIVE_NODE_ERROR,
 	SET_ACTIVE_NODE_SUCCESS,
-} from '../actions/types';
+	CONTEXTUAL_CREATE_NODE,
+	CONTEXTUAL_CREATE_NODE_ERROR,
+	CONTEXTUAL_CREATE_NODE_SUCCESS,
+} from "../actions/types";
 
 const INITIAL_STATE = {
 	isFetching: null,
@@ -46,7 +49,9 @@ export default (state = INITIAL_STATE, action) => {
 			var associationLinkListArray = [...state.associationLinkList];
 			// update the association link list with the new values
 			Object.values(action.payload.associations).forEach((node) => {
-				associationLinkListArray.push(node);
+				if (!associationLinkListArray.some((item) => item.uuid === node.uuid)) {
+					associationLinkListArray.push(node);
+				}
 			});
 			return {
 				...state,
@@ -106,6 +111,26 @@ export default (state = INITIAL_STATE, action) => {
 			};
 		case CREATE_ASSOCIATION_ERROR:
 			return { ...state, isSaving: null };
+		case CONTEXTUAL_CREATE_NODE:
+			return { ...state, isSaving: true };
+		case CONTEXTUAL_CREATE_NODE_ERROR:
+			return { ...state, isSaving: null };
+		case CONTEXTUAL_CREATE_NODE_SUCCESS:
+			// add new node to list and move to front of node order
+			return {
+				...state,
+				isFetching: null,
+				associationList: [
+					action.node,
+					...state.associationList.filter(
+						(association) =>
+							association.nodeUUID !== action.node.uuid &&
+							association.linkedNodeUUID !== action.node.uuid &&
+							association.uuid !== action.node.uuid
+					),
+				],
+				totalAssociationListItems: state.totalAssociationListItems + 1,
+			};
 		case MARK_NODE_VIEW:
 			return { ...state, isSaving: true };
 		case MARK_NODE_VIEW_SUCCESS:

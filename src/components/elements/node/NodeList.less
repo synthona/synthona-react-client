@@ -44,8 +44,8 @@ li.nodelist-item {
   height: 16rem;
   // width: 25rem;
   // width: 26.3rem;
+  // overflow: hidden;
   width: 24.3vw;
-  overflow: hidden;
   // background: #fff;
   // background-color: @node-card-background-color;
   margin: 0.25rem 0.25rem;
@@ -100,6 +100,8 @@ div.nodelist-options-buttons {
     // background: #272727;
     color: white;
     background-color: transparent;
+    // background-color: #4f4949;
+    padding: 0.3rem 0.3rem;
     border-radius: 0.3rem;
     border: none;
     cursor: pointer;
@@ -109,6 +111,15 @@ div.nodelist-options-buttons {
     color: #cacaca;
     // color: #69ec7f;
     transition: 0.7s;
+  }
+
+  button:active {
+    border: none;
+  }
+
+  button:focus {
+    outline: 2px solid grey; 
+    border-radius: 3px;
   }
 
   a {
@@ -151,13 +162,26 @@ div.nodelist-options-buttons {
   text-overflow: ellipsis;
 }
 
+h3.nodelist-item-title:focus {
+  outline: 2px solid grey;
+  border-radius: 3px;
+  transition-duration: 0.01s;
+}
+
+h3.nodelist-item-title:active {
+  outline: 2px solid grey;
+  border-radius: 3px;
+  transition-duration: 0.01s;
+}
+
 input.nodelist-item-title {
   outline: none;
   color: #b9b9b9;
   background-color: @node-card-background-color;
-  border: none;
+  // border: none;
+  outline: 2px solid grey; 
+  border-radius: 3px;
   font-size: 0.94rem;
-  width: 15.3rem;
   overflow: hidden;
   white-space: normal;
   text-overflow: ellipsis;
@@ -188,14 +212,17 @@ input.nodelist-item-title {
   // font-style: italic;
   // color: #b8b8b8;
   color: @node-card-paragraph-color;
-  min-height: 100%;
+  // min-height: 100%;
+  overflow: hidden;
+  height: 13.2rem;
   transition: 0.7s;
 }
 
 .nodelist-item img {
   // background-color: #5c5c5c;
   background: linear-gradient(90deg, #b7ffcd 0%, #fcfcfc 47%, #9eefff 100%);
-  min-height: 100%;
+  // min-height: 100%;
+  height: 13.2rem;
   width: 100%;
 }
 

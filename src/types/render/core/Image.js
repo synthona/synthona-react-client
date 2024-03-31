@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 // for now these are in-common between nodes
-import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import missingFileImage from '../../../resources/missing-file.png';
-import { isElectron } from '../../../utils/environment';
+import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
+import missingFileImage from "../../../resources/missing-file.png";
+import { isElectron } from "../../../utils/environment";
 
 const Image = (props) => {
 	let fileLoadError = false;
@@ -17,9 +17,9 @@ const Image = (props) => {
 
 	// select an image.
 	const selectLocalFile = (e) => {
-		const input = document.createElement('input');
-		input.setAttribute('type', 'file');
-		input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
+		const input = document.createElement("input");
+		input.setAttribute("type", "file");
+		input.setAttribute("accept", ["image/gif", "image/jpg", "image/jpeg", "image/png"]);
 		input.click();
 		// Listen for uploading local file, then save to server
 		input.onchange = async () => {
@@ -88,9 +88,9 @@ const Image = (props) => {
 							alt={props.node.name}
 							onError={(e) => onFileLoadError(e)}
 							style={{
-								objectFit: 'cover',
-								minHeight: '100%',
-								width: '100%',
+								objectFit: "cover",
+								width: "100%",
+								height: "13.2rem",
 							}}
 						></img>
 					</Fragment>
@@ -112,9 +112,9 @@ const Image = (props) => {
 					alt={props.node.name}
 					onError={(e) => onFileLoadError(e)}
 					style={{
-						objectFit: 'cover',
-						minHeight: '100%',
-						width: '100%',
+						objectFit: "cover",
+						height: "13.2rem",
+						width: "100%",
 					}}
 				></img>
 			</Fragment>
@@ -126,16 +126,16 @@ const Image = (props) => {
 			fileLoadError = true;
 			props.node.preview = missingFileImage;
 		}
-		let imageScale = JSON.parse(localStorage.getItem('image-sizing')) || 'classic';
-		let imageClass = 'img-' + imageScale.replace(' ', '-');
+		let imageScale = JSON.parse(localStorage.getItem("image-sizing")) || "classic";
+		let imageClass = "img-" + imageScale.replace(" ", "-");
 		return (
-			<div className={'full-node-item ' + imageClass}>
+			<div className={"full-node-item " + imageClass}>
 				<NodeCardHeaderFull />
 				<img
 					src={props.node.preview}
 					alt={props.node.name}
 					onError={(e) => onFileLoadError(e)}
-					style={{ cursor: 'pointer' }}
+					style={{ cursor: "pointer" }}
 					onClick={(e) => {
 						onFullCardAction(e);
 					}}
@@ -159,13 +159,13 @@ const Image = (props) => {
 	// render the requested element
 	const renderNode = () => {
 		switch (props.element) {
-			case 'card':
+			case "card":
 				return <Fragment>{nodeCard()}</Fragment>;
-			case 'preview':
+			case "preview":
 				return <Fragment>{collectionPreview()}</Fragment>;
-			case 'full':
+			case "full":
 				return <Fragment>{fullNode()}</Fragment>;
-			case 'association-link':
+			case "association-link":
 				return <Fragment>{associationLink()}</Fragment>;
 			default:
 				return;

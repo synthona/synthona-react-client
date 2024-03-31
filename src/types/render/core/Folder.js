@@ -1,19 +1,19 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { Icon } from "antd";
 // custom code
-import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
-import missingFileImage from '../../../resources/missing-file.png';
-import { isElectron } from '../../../utils/environment';
+import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
+import NodeCardHeader from "../../../components/elements/node/NodeCardHeader";
+import missingFileImage from "../../../resources/missing-file.png";
+import { isElectron } from "../../../utils/environment";
 
 const Folder = (props) => {
 	let fileLoadError = false;
 
 	// select a replacement file
 	const selectLocalFile = (e) => {
-		const input = document.createElement('input');
-		input.setAttribute('type', 'file');
+		const input = document.createElement("input");
+		input.setAttribute("type", "file");
 		input.click();
 		// Listen for uploading local file, then save to server
 		input.onchange = async () => {
@@ -78,9 +78,9 @@ const Folder = (props) => {
 						src={props.node.preview}
 						alt={props.node.name}
 						style={{
-							objectFit: 'cover',
-							minHeight: '100%',
-							width: '100%',
+							objectFit: "cover",
+							minHeight: "100%",
+							width: "100%",
 						}}
 					></img>
 				</Fragment>
@@ -88,8 +88,12 @@ const Folder = (props) => {
 		} else {
 			return (
 				<Icon
-					type={'folder'}
-					style={{ color: 'white', backgroundColor: props.theme.cardBodyColor, height: '100%' }}
+					type={"folder"}
+					style={{
+						color: "white",
+						backgroundColor: props.theme.cardBodyColor,
+						height: "13.2rem",
+					}}
 					theme='filled'
 					className='node-card-icon'
 				/>
@@ -106,7 +110,7 @@ const Folder = (props) => {
 					onClick={(e) => onClickAction(e)}
 					onContextMenu={(e) => onContextAction(e)}
 					style={{
-						width: '100%',
+						width: "100%",
 						backgroundColor: props.theme.cardBodyColor,
 					}}
 				>
@@ -143,13 +147,13 @@ const Folder = (props) => {
 	// render the requested element
 	const renderNode = () => {
 		switch (props.element) {
-			case 'card':
+			case "card":
 				return <Fragment>{nodeCard()}</Fragment>;
-			case 'preview':
+			case "preview":
 				return <Fragment>{collectionPreview()}</Fragment>;
-			case 'full':
+			case "full":
 				return <Fragment>{fullNode()}</Fragment>;
-			case 'association-link':
+			case "association-link":
 				return <Fragment>{associationLink()}</Fragment>;
 			default:
 				return;

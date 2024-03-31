@@ -17,6 +17,12 @@ const Text = (props) => {
 						window.getSelection().removeAllRanges();
 						window.location.replace(`/associations/${props.node.uuid}`);
 					}}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							window.location.replace(`/edit/text/${props.node.uuid}`);
+						}
+					}}
 					onContextMenu={(e) => {
 						e.preventDefault();
 						props.handleClick();

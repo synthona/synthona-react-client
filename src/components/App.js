@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 // custom code
-import '../app.less';
-import { isElectron } from '../utils/environment';
-import { isAuthenticated } from '../api/redux/actions';
+import "../app.less";
+import { isElectron } from "../utils/environment";
+import { isAuthenticated } from "../api/redux/actions";
 // custom components
-import Theme from './Theme';
-import Login from './layouts/Login';
-import ForgotPassword from './layouts/ForgotPassword';
-import Home from './layouts/Home';
-import Profile from './layouts/Profile';
-import Options from './layouts/Options';
-import Activity from './layouts/Activity';
-import QuillEditor from './QuillEditor/QuillEditor';
-import Collections from './layouts/Collections';
-import Spinner from './elements/Spinner';
-import CreateAccount from './layouts/CreateAccount';
-import AssociationBrowser from './layouts/AssociationBrowser';
-import GraphBrowser from './layouts/GraphBrowser';
-import Pins from './layouts/Pins';
-import RandomRedirect from './layouts/RandomRedirect';
+import Theme from "./Theme";
+import Login from "./layouts/Login";
+import ForgotPassword from "./layouts/ForgotPassword";
+import Home from "./layouts/Home";
+import Profile from "./layouts/Profile";
+import Options from "./layouts/Options";
+import Activity from "./layouts/Activity";
+import QuillEditor from "./QuillEditor/QuillEditor";
+import Collections from "./layouts/Collections";
+import Spinner from "./elements/Spinner";
+import CreateAccount from "./layouts/CreateAccount";
+import AssociationBrowser from "./layouts/AssociationBrowser";
+import GraphBrowser from "./layouts/GraphBrowser";
+import Pins from "./layouts/Pins";
+import RandomRedirect from "./layouts/RandomRedirect";
 // special
-import ElectronMessage from './electron/ElectronMessage';
+import ElectronMessage from "./electron/ElectronMessage";
 
 class App extends Component {
 	componentDidMount() {
@@ -51,16 +51,16 @@ class App extends Component {
 			routes = (
 				<Theme>
 					<Switch>
-						<Route path='/' exact component={Home} />
-						<Route path='/profile/:username' exact component={Profile} />
-						<Route path='/activity' exact component={Activity} />
-						<Route path='/collections' exact component={Collections} />
-						<Route path='/edit/text/:uuid' exact component={QuillEditor} />
-						<Route path='/edit/profile' exact component={Options} />
-						<Route path='/associations/:uuid' exact component={AssociationBrowser} />
-						<Route path='/graph/:uuid?' exact component={GraphBrowser} />
-						<Route path='/pins' exact component={Pins} />
-						<Route path='/random' exact component={RandomRedirect} />
+						<Route path="/" exact component={Home} />
+						<Route path="/profile/:username" exact component={Profile} />
+						<Route path="/activity" exact component={Activity} />
+						<Route path="/collections" exact component={Collections} />
+						<Route path="/edit/text/:uuid" exact component={QuillEditor} />
+						<Route path="/edit/profile" exact component={Options} />
+						<Route path="/associations/:uuid" exact component={AssociationBrowser} />
+						<Route path="/graph/:uuid?" exact component={GraphBrowser} />
+						<Route path="/pins" exact component={Pins} />
+						<Route path="/random" exact component={RandomRedirect} />
 					</Switch>
 				</Theme>
 			);
@@ -69,15 +69,15 @@ class App extends Component {
 		} else {
 			routes = (
 				<Switch>
-					<Route path='/' exact component={Login} />
-					<Route path='/create-account' exact component={CreateAccount} />
-					<Route path='/forgot-password' exact component={ForgotPassword} />
+					<Route path="/" exact component={Login} />
+					<Route path="/create-account" exact component={CreateAccount} />
+					<Route path="/forgot-password" exact component={ForgotPassword} />
 					<Route component={Login} />
 				</Switch>
 			);
 		}
 		return (
-			<div style={{ backgroundColor: '#272727' }}>
+			<div style={{ backgroundColor: "#272727" }}>
 				{this.renderElectronMessage()}
 				{routes}
 			</div>

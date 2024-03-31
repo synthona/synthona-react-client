@@ -6,7 +6,6 @@ import {
 	signOut,
 	hideComponent,
 	createAssociation,
-	fetchAssociationLinkList,
 	associationAutocomplete,
 } from '../../../api/redux/actions';
 // custom code
@@ -135,6 +134,5 @@ export default connect(mapStateToProps, {
 	signOut,
 	hideComponent,
 	createAssociation,
-	fetchAssociationLinkList,
 	associationAutocomplete,
 })(AssociationSider);

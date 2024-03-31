@@ -1,26 +1,26 @@
-import React, { Fragment } from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Icon } from "antd";
+import { Link } from "react-router-dom";
 // for now these are in-common between nodes
-import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import missingFileImage from '../../../resources/missing-file.png';
+import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
+import missingFileImage from "../../../resources/missing-file.png";
 
 const Url = (props) => {
-	const urlIcon = 'bulb';
+	const urlIcon = "bulb";
 
 	const renderFullCardPreview = () => {
 		// if the URL is a youtube embed, lets actually load the video here
-		if (props.node.path.includes('https://www.youtube.com/embed/')) {
+		if (props.node.path.includes("https://www.youtube.com/embed/")) {
 			return (
 				<iframe
 					title={props.node.name}
 					src={props.node.path}
-					style={{ width: '100%', height: '100vh', border: 'none' }}
+					style={{ width: "100%", height: "100vh", border: "none" }}
 					allowFullScreen
 					sandbox={
-						props.node.path.includes('https://www.youtube.com/embed/')
-							? 'allow-scripts allow-same-origin allow-popups'
-							: ''
+						props.node.path.includes("https://www.youtube.com/embed/")
+							? "allow-scripts allow-same-origin allow-popups"
+							: ""
 					}
 					id='node-card-iframe'
 				></iframe>
@@ -48,7 +48,7 @@ const Url = (props) => {
 					src={props.node.preview}
 					alt={props.node.name}
 					style={{
-						objectFit: 'cover',
+						objectFit: "cover",
 						// minHeight: '100%',
 						// width: '100%',
 					}}
@@ -62,12 +62,12 @@ const Url = (props) => {
 					// type={'star'}
 					theme='outlined'
 					style={{
-						fontSize: '5rem',
-						color: '#b8b8b8',
-						display: 'block',
-						textAlign: 'center',
-						padding: '4.3rem 3.3rem 3.3rem',
-						height: '100%',
+						fontSize: "5rem",
+						color: "#b8b8b8",
+						display: "block",
+						textAlign: "center",
+						padding: "4.3rem 3.3rem 3.3rem",
+						height: "13.2rem",
 						backgroundColor: props.theme.cardBodyColor,
 					}}
 				/>
@@ -90,10 +90,10 @@ const Url = (props) => {
 					onContextMenu={(e) => {
 						e.preventDefault();
 						// props.toggleHeader();
-						window.open(props.node.path, '_blank');
+						window.open(props.node.path, "_blank");
 					}}
 					style={{
-						width: '100%',
+						width: "100%",
 						backgroundColor: props.theme.cardBodyColor,
 					}}
 				>
@@ -112,8 +112,8 @@ const Url = (props) => {
 						src={props.node.preview}
 						alt={props.node.name}
 						style={{
-							objectFit: 'cover',
-							width: '100%',
+							objectFit: "cover",
+							width: "100%",
 						}}
 					></img>
 				</Fragment>
@@ -128,10 +128,10 @@ const Url = (props) => {
 	};
 
 	const fullNode = () => {
-		let imageScale = JSON.parse(localStorage.getItem('image-sizing')) || 'classic';
-		let imageClass = 'img-' + imageScale.replace(' ', '-');
+		let imageScale = JSON.parse(localStorage.getItem("image-sizing")) || "classic";
+		let imageClass = "img-" + imageScale.replace(" ", "-");
 		return (
-			<div className={'full-node-item ' + imageClass}>
+			<div className={"full-node-item " + imageClass}>
 				<NodeCardHeaderFull />
 				{renderFullCardPreview()}
 				{/* <p>{props.node.comment}</p> */}
@@ -150,13 +150,13 @@ const Url = (props) => {
 	// render the requested element
 	const renderNode = () => {
 		switch (props.element) {
-			case 'card':
+			case "card":
 				return <Fragment>{nodeCard()}</Fragment>;
-			case 'preview':
+			case "preview":
 				return <Fragment>{collectionPreview()}</Fragment>;
-			case 'full':
+			case "full":
 				return <Fragment>{fullNode()}</Fragment>;
-			case 'association-link':
+			case "association-link":
 				return <Fragment>{associationLink()}</Fragment>;
 			default:
 				return;

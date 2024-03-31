@@ -1,34 +1,35 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import ReactQuill, { Quill } from 'react-quill';
-import Delta from 'quill-delta';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import ReactQuill, { Quill } from "react-quill";
+import Delta from "quill-delta";
 // import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
-import { Layout, message } from 'antd';
-import 'react-quill/dist/quill.snow.css';
-import AssociationList from '../elements/association/AssociationList';
-import AssociationSider from '../elements/association/AssociationSider';
-import NodeCardHeaderFull from '../elements/node/NodeCardHeaderFull';
-import IOBar from '../elements/IOBar';
+import { Layout, message } from "antd";
+import "react-quill/dist/quill.snow.css";
+import AssociationList from "../elements/association/AssociationList";
+import AssociationSider from "../elements/association/AssociationSider";
+import NodeCardHeaderFull from "../elements/node/NodeCardHeaderFull";
+import IOBar from "../elements/IOBar";
 // custom components
-import Spinner from '../elements/Spinner';
+import Spinner from "../elements/Spinner";
 // redux handlers
 import {
 	editTextNode,
 	processTextNode,
 	createFileNode,
 	setActiveNode,
+	contextualCreate,
 	updateNode,
 	fetchAssociations,
 	markNodeView,
-} from '../../api/redux/actions';
+} from "../../api/redux/actions";
 // import custom editor css
-import './QuillEditor.less';
-import MainSider from '../elements/MainSider';
+import "./QuillEditor.less";
+import MainSider from "../elements/MainSider";
 // destructure antd components
 const { Content } = Layout;
 
 // register custom clipboard to handle bugs with the way the default one works
-const Clipboard = Quill.import('modules/clipboard');
+const Clipboard = Quill.import("modules/clipboard");
 // https://github.com/quilljs/quill/issues/1374
 class CustomClipboard extends Clipboard {
 	onPaste(e) {
@@ -45,7 +46,7 @@ class CustomClipboard extends Clipboard {
 				document.documentElement.scrollTop ||
 				document.body.scrollTop ||
 				0
-			).toString() + 'px';
+			).toString() + "px";
 		this.container.focus();
 		setTimeout(() => {
 			this.quill.selection.update(Quill.sources.SILENT);
@@ -61,15 +62,38 @@ class CustomClipboard extends Clipboard {
 	}
 }
 
-Quill.register('modules/clipboard', CustomClipboard, true);
+Quill.register("modules/clipboard", CustomClipboard, true);
+
+// register custom LINK
+var Link = Quill.import("formats/link");
+class CustomLink extends Link {
+	static create(value) {
+		let node = super.create(value);
+		// value = this.sanitize(value);
+		node.setAttribute("href", value);
+		node.removeAttribute("target");
+		node.addEventListener("click", function (e) {
+			if (e.shiftKey) {
+				if (value.includes(window.location.host)) {
+					window.location.replace(value);
+				} else {
+					window.open(value, "_blank");
+				}
+			}
+		});
+		return node;
+	}
+}
+
+Quill.register(CustomLink, true);
 
 class QuillEditor extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: '',
-			name: '',
-			expanded: localStorage.getItem('expanded'),
+			text: "",
+			name: "",
+			expanded: localStorage.getItem("expanded"),
 			uuid: null,
 			error: null,
 			initializing: false,
@@ -83,12 +107,12 @@ class QuillEditor extends Component {
 	};
 
 	componentDidMount() {
-		document.body.style.overflow = 'auto';
-		document.body.style.height = '100%';
-		document.documentElement.style.height = '100%';
+		document.body.style.overflow = "auto";
+		document.body.style.height = "100%";
+		document.documentElement.style.height = "100%";
 		// prevent quill from jumping to top
-		document.querySelectorAll('.ql-picker').forEach((tool) => {
-			tool.addEventListener('mousedown', function (event) {
+		document.querySelectorAll(".ql-picker").forEach((tool) => {
+			tool.addEventListener("mousedown", function (event) {
 				event.preventDefault();
 				event.stopPropagation();
 			});
@@ -99,8 +123,8 @@ class QuillEditor extends Component {
 
 	componentDidUpdate = async () => {
 		// prevent quill from jumping to top
-		document.querySelectorAll('.ql-picker').forEach((tool) => {
-			tool.addEventListener('mousedown', function (event) {
+		document.querySelectorAll(".ql-picker").forEach((tool) => {
+			tool.addEventListener("mousedown", function (event) {
 				event.preventDefault();
 				event.stopPropagation();
 			});
@@ -109,9 +133,9 @@ class QuillEditor extends Component {
 		var textUUID = this.props.match.params.uuid;
 		if (this.state.uuid !== textUUID && this.state.initializing === false) {
 			this.setState({
-				text: '',
-				name: '',
-				expanded: localStorage.getItem('expanded'),
+				text: "",
+				name: "",
+				expanded: localStorage.getItem("expanded"),
 				uuid: null,
 				error: null,
 				initializing: true,
@@ -133,7 +157,7 @@ class QuillEditor extends Component {
 		await this.props.setActiveNode(textUUID);
 		if (this.props.nodeData && this.props.nodeData.content) {
 			// if there is content set the local editor state equal to it
-			document.title = this.props.nodeData.name || 'Untitled';
+			document.title = this.props.nodeData.name || "Untitled";
 			var textValue = JSON.parse(this.props.nodeData.content);
 			this.setState({
 				text: textValue,
@@ -149,19 +173,20 @@ class QuillEditor extends Component {
 		} else {
 			// if there's no content return an error message
 			this.setState({ error: true });
-			this.props.history.push('/');
+			this.props.history.push("/");
 		}
 	};
 
 	// toggle fullscreen
 	expandHandler = () => {
 		if (this.state.expanded === null) {
-			this.setState({ expanded: 'expanded' });
-			localStorage.setItem('expanded', 'expanded');
+			this.setState({ expanded: "expanded" });
+			localStorage.setItem("expanded", "expanded");
 		} else {
 			this.setState({ expanded: null });
-			localStorage.removeItem('expanded');
+			localStorage.removeItem("expanded");
 		}
+		this.quill.getEditor().disable();
 	};
 
 	// exit the editor and return to the home screen
@@ -170,7 +195,7 @@ class QuillEditor extends Component {
 		// necessary to process the node
 		// TODO: alter this so it stores a condensed version of the document instead of plain text
 		this.regeneratePreview();
-		this.props.history.push('/');
+		this.props.history.push("/");
 	};
 
 	regeneratePreview = () => {
@@ -188,9 +213,9 @@ class QuillEditor extends Component {
 
 	// select an image.
 	selectLocalImage = () => {
-		const input = document.createElement('input');
-		input.setAttribute('type', 'file');
-		input.setAttribute('accept', ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']);
+		const input = document.createElement("input");
+		input.setAttribute("type", "file");
+		input.setAttribute("accept", ["image/gif", "image/jpg", "image/jpeg", "image/png"]);
 		input.click();
 
 		// Listen for uploading local image, then save to server
@@ -207,9 +232,9 @@ class QuillEditor extends Component {
 				);
 				// push image url to rich editor.
 				const range = this.quill.getEditor().getSelection();
-				this.quill.getEditor().insertEmbed(range.index, 'image', url);
+				this.quill.getEditor().insertEmbed(range.index, "image", url);
 			} else {
-				message.error('The file must be an image', 1);
+				message.error("The file must be an image", 1);
 			}
 		};
 	};
@@ -235,50 +260,50 @@ class QuillEditor extends Component {
 			container: [
 				[{ header: [1, 2, 3, 4, 5, false] }],
 				[{ font: [] }],
-				[{ indent: '-1' }, { indent: '+1' }],
-				['bold', 'italic', 'underline', 'strike'],
+				[{ indent: "-1" }, { indent: "+1" }],
+				["bold", "italic", "underline", "strike"],
 				[
 					{
 						color: [
-							'',
-							'#fff',
-							'#bbbbbb',
-							'#df0000',
-							'#a80b44',
-							'#ff0062',
-							'#df1f95',
-							'#9933ff',
-							'#c06be2',
-							'#c8f0ae',
-							'#7fba00',
-							'#45d458',
-							'#31d697',
-							'#00dfd3',
-							'#67edff',
-							'#00a4ef',
-							'#4178df',
-							'#4d2ff7',
-							'#000080',
-							'#56007a',
-							'#007c25',
-							'#e2d58a',
-							'#f8cc52',
-							'#fff12b',
-							'#eb875f',
-							'#ff4500',
-							'#f40000',
-							'#a0390d',
+							"",
+							"#fff",
+							"#bbbbbb",
+							"#df0000",
+							"#a80b44",
+							"#ff0062",
+							"#df1f95",
+							"#9933ff",
+							"#c06be2",
+							"#c8f0ae",
+							"#7fba00",
+							"#45d458",
+							"#31d697",
+							"#00dfd3",
+							"#67edff",
+							"#00a4ef",
+							"#4178df",
+							"#4d2ff7",
+							"#000080",
+							"#56007a",
+							"#007c25",
+							"#e2d58a",
+							"#f8cc52",
+							"#fff12b",
+							"#eb875f",
+							"#ff4500",
+							"#f40000",
+							"#a0390d",
 						],
 					},
 					{ background: [] },
 				],
-				[{ align: null }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
-				[{ list: 'ordered' }, { list: 'bullet' }],
-				[{ script: 'sub' }, { script: 'super' }], // superscript/subscript
-				['code-block', 'blockquote'],
-				['link', 'image', 'video'],
-				['clean'],
-				['expand', 'exit'],
+				[{ align: null }, { align: "center" }, { align: "right" }, { align: "justify" }],
+				[{ list: "ordered" }, { list: "bullet" }],
+				[{ script: "sub" }, { script: "super" }], // superscript/subscript
+				["code-block", "blockquote"],
+				["link", "image", "video"],
+				["clean"],
+				["expand", "exit"],
 			],
 			handlers: {
 				expand: this.expandHandler,
@@ -288,7 +313,31 @@ class QuillEditor extends Component {
 		},
 		clipboard: {
 			matchVisual: false,
-			matchers: [['img', this.matcherImageHandler]],
+			matchers: [["img", this.matcherImageHandler]],
+		},
+		keyboard: {
+			bindings: {
+				renderLinkEnter: {
+					key: "Enter",
+					// prefix: /(?<=\(\()[^)]*(?=\)\))/g,
+					prefix: /(?<=\[\[)[^)]*(?=\]\])/g,
+					handler: async (range, context) => {
+						// console.log("COSMIC TRIGGER ACTIVATED!");
+						await this.handleRenderlinking(context);
+						return;
+					},
+				},
+				renderLinkSpace: {
+					key: 32,
+					// prefix: /(?<=\(\()[^)]*(?=\)\))/g,
+					prefix: /(?<=\[\[)[^)]*(?=\]\])/g,
+					handler: async (range, context) => {
+						// console.log("COSMIC TRIGGER ACTIVATED!");
+						await this.handleRenderlinking(context);
+						return;
+					},
+				},
+			},
 		},
 		// blotFormatter: {
 		//   overlay: {
@@ -300,24 +349,81 @@ class QuillEditor extends Component {
 	};
 
 	allowedFormats = [
-		'header',
-		'font',
-		'indent',
-		'bold',
-		'italic',
-		'underline',
-		'strike',
-		'color',
-		'background',
-		'align',
-		'list',
-		'script',
-		'code-block',
-		'blockquote',
-		'link',
-		'image',
-		'video',
+		"header",
+		"font",
+		"indent",
+		"bold",
+		"italic",
+		"underline",
+		"strike",
+		"color",
+		"background",
+		"align",
+		"list",
+		"script",
+		"code-block",
+		"blockquote",
+		"link",
+		"image",
+		"video",
 	];
+
+	handleRenderlinking = async (context) => {
+		// let regex = /(?<=\(\()[^)]*(?=\)\))/g;
+		let regex = /(?<=\[\[)[^(?![))]*(?=\]\])/g;
+		let phraseLinks = [...context.prefix.match(regex)];
+		let linkedNodeUUID = this.props.nodeData.uuid;
+		const editor = this.quill.getEditor();
+		//============================================================================
+		// console.log(this.props.nodeData);
+		// console.log(phraseLinks);
+		for (let phrase of phraseLinks) {
+			let escapedPhraseString = phrase.replace(/[.*+?^${}()|[\]]/g, "\\$&");
+			let phraseRegex = new RegExp("\\[\\[" + escapedPhraseString + "\\]\\]", "g");
+			let duplicateList = [...editor.getText(0).matchAll(phraseRegex)];
+
+			// STOP THE PRESSES! stop right here and see if we even need to make a reqeust. if not, we dont
+			let name;
+			let url;
+			const currentFormat = editor.getFormat(duplicateList[0].index, phrase.length + 4);
+			// determine what the url link will be
+			if (currentFormat.link) {
+				// we already have a link
+				url = currentFormat.link;
+			} else {
+				// we have to make the request
+				let result = await this.props.contextualCreate(phrase, linkedNodeUUID);
+				// if we get a result back lets format it in the document
+				if (result) {
+					url = result.url;
+					name = result.name;
+				}
+			}
+			// now we're going to loop through to update the actual document
+			if (duplicateList.length === 1) {
+				// if theres only 1, we will also update the name contents
+				let phraseIndex = duplicateList[0].index;
+				if (name && url) {
+					editor.updateContents(
+						new Delta()
+							.retain(phraseIndex)
+							.delete(phrase.length + 4)
+							.insert("[[" + name + "]]", { link: url })
+					);
+				}
+			} else {
+				// if theres a lot of duplicates all we can do is set the links correctly
+				// we're not going to replace any text in this case because it will mess up the indexes
+				// and cause a whole bunch of problems. its not necessary anyways
+				if (url) {
+					duplicateList.forEach((value) => {
+						editor.formatText(value.index, phrase.length + 4, "link", url);
+					});
+				}
+			}
+		}
+		return;
+	};
 
 	// render the main navbar
 	renderHeader = () => {
@@ -328,7 +434,7 @@ class QuillEditor extends Component {
 					{/* <div style={{ height: '3rem' }}>
 						<IOBar fixed={true} />
 					</div>*/}
-					<div style={{ height: '3rem' }}>
+					<div style={{ height: "3rem" }}>
 						<IOBar fixed={true} />
 					</div>
 					<NodeCardHeaderFull />
@@ -358,8 +464,8 @@ class QuillEditor extends Component {
 	};
 
 	renderClassName = () => {
-		let documentWidth = JSON.parse(localStorage.getItem('quill-document-width')) || '';
-		let documentClass = 'quill-' + documentWidth.replace(' ', '-');
+		let documentWidth = JSON.parse(localStorage.getItem("quill-document-width")) || "";
+		let documentClass = "quill-" + documentWidth.replace(" ", "-");
 		// return the classname
 		return documentClass;
 	};
@@ -390,7 +496,7 @@ class QuillEditor extends Component {
 		return (
 			<Layout className='page-layout'>
 				{this.renderMainSider()}
-				<Content className={'text-editor-content ' + this.state.expanded}>
+				<Content className={"text-editor-content " + this.state.expanded}>
 					{this.renderHeader()}
 					<ReactQuill
 						value={this.state.text}
@@ -404,11 +510,8 @@ class QuillEditor extends Component {
 						ref={this.ref}
 						readOnly={this.state.readOnly}
 						formats={this.allowedFormats}
-						scrollingContainer={'body'}
-						onBlur={(e) => {
-							if (e.target) {
-								e.target.focus();
-							}
+						scrollingContainer={"body"}
+						onBlur={() => {
 							// check to see if we should regenerate preview
 							if (this.props.nodeData.preview.length < 500) {
 								this.regeneratePreview();
@@ -427,7 +530,7 @@ const mapStateToProps = (state) => {
 	return {
 		nodeData: state.nodes.activeNode,
 		isLoading: state.nodes.isFetching,
-		mainSider: state.components.componentList['mainSider'],
+		mainSider: state.components.componentList["mainSider"],
 		theme: state.components.theme,
 	};
 };
@@ -436,6 +539,7 @@ export default connect(mapStateToProps, {
 	editTextNode,
 	processTextNode,
 	createFileNode,
+	contextualCreate,
 	updateNode,
 	setActiveNode,
 	fetchAssociations,
