@@ -1,4 +1,4 @@
-import { SHOW_COMPONENT, HIDE_COMPONENT, LOAD_THEME } from '../actions/types';
+import { SHOW_COMPONENT, HIDE_COMPONENT, LOAD_THEME } from "../actions/types";
 
 const INITIAL_STATE = {
 	componentList: {},
@@ -27,6 +27,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				theme: action.payload.theme,
+				editorTheme: action.payload.editorTheme,
 			};
 		default:
 			return state;

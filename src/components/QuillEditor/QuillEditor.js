@@ -482,7 +482,7 @@ class QuillEditor extends Component {
 	render() {
 		if (this.props.isLoading) {
 			return (
-				<Layout className='page-layout'>
+				<Layout className="page-layout">
 					<Layout>
 						<Layout>
 							{this.renderHeader()}
@@ -494,15 +494,17 @@ class QuillEditor extends Component {
 		}
 
 		return (
-			<Layout className='page-layout'>
+			<Layout className="page-layout">
 				{this.renderMainSider()}
 				<Content className={"text-editor-content " + this.state.expanded}>
 					{this.renderHeader()}
 					<ReactQuill
 						value={this.state.text}
 						style={{
-							backgroundColor: this.props.theme ? this.props.theme.textEditorBackground : null,
-							color: this.props.theme ? this.props.theme.textEditorText : null,
+							backgroundColor: this.props.editorTheme
+								? this.props.editorTheme.textEditorBackground
+								: null,
+							color: this.props.editorTheme ? this.props.editorTheme.textEditorText : null,
 						}}
 						className={this.renderClassName()}
 						onChange={this.handleChange}
@@ -531,7 +533,7 @@ const mapStateToProps = (state) => {
 		nodeData: state.nodes.activeNode,
 		isLoading: state.nodes.isFetching,
 		mainSider: state.components.componentList["mainSider"],
-		theme: state.components.theme,
+		editorTheme: state.components.editorTheme,
 	};
 };
 
