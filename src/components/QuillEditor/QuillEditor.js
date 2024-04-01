@@ -81,6 +81,14 @@ class CustomLink extends Link {
 				}
 			}
 		});
+		node.addEventListener("contextmenu", function (e) {
+			e.preventDefault();
+			if (value.includes(window.location.host)) {
+				window.location.replace(value);
+			} else {
+				window.open(value, "_blank");
+			}
+		});
 		return node;
 	}
 }
