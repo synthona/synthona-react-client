@@ -1,24 +1,29 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 // for now these are in-common between nodes
-import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
+import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
+import NodeCardHeader from "../../../components/elements/node/NodeCardHeader";
 
 const Text = (props) => {
 	const nodeCard = () => {
 		return (
-			<li className='nodelist-item'>
+			<li className="nodelist-item">
 				<NodeCardHeader node={props.node} />
 				<Link
 					to={`/edit/text/${props.node.uuid}`}
 					onClick={(e) => {
 						e.preventDefault();
-						// prevent the text from being selected
-						window.getSelection().removeAllRanges();
-						window.location.replace(`/associations/${props.node.uuid}`);
+						if (e.shiftKey) {
+							// prevent the text from being selected
+							window.getSelection().removeAllRanges();
+							window.location.replace(`/associations/${props.node.uuid}`);
+						} else {
+							e.preventDefault();
+							window.location.replace(`/edit/text/${props.node.uuid}`);
+						}
 					}}
 					onKeyDown={(e) => {
-						if (e.key === 'Enter') {
+						if (e.key === "Enter") {
 							e.preventDefault();
 							window.location.replace(`/edit/text/${props.node.uuid}`);
 						}
@@ -26,8 +31,9 @@ const Text = (props) => {
 					onContextMenu={(e) => {
 						e.preventDefault();
 						props.handleClick();
+						// prevent the text from being selected
 						window.getSelection().removeAllRanges();
-						window.location.replace(`/edit/text/${props.node.uuid}`);
+						window.location.replace(`/associations/${props.node.uuid}`);
 					}}
 				>
 					<p
@@ -54,7 +60,7 @@ const Text = (props) => {
 
 	const fullNode = () => {
 		return (
-			<div className='full-node-item'>
+			<div className="full-node-item">
 				<NodeCardHeaderFull />
 				<Link
 					to={`/edit/text/${props.node.uuid}`}
@@ -83,13 +89,13 @@ const Text = (props) => {
 	// render the requested element
 	const renderNode = () => {
 		switch (props.element) {
-			case 'card':
+			case "card":
 				return <Fragment>{nodeCard()}</Fragment>;
-			case 'preview':
+			case "preview":
 				return <Fragment>{collectionPreview()}</Fragment>;
-			case 'full':
+			case "full":
 				return <Fragment>{fullNode()}</Fragment>;
-			case 'association-link':
+			case "association-link":
 				return <Fragment>{associationLink()}</Fragment>;
 			default:
 				return;
