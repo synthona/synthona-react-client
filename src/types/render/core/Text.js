@@ -14,17 +14,20 @@ const Text = (props) => {
 					onClick={(e) => {
 						e.preventDefault();
 						if (e.shiftKey) {
+							props.handleClick();
 							// prevent the text from being selected
 							window.getSelection().removeAllRanges();
-							window.location.replace(`/associations/${props.node.uuid}`);
+							window.location.replace(`/edit/text/${props.node.uuid}`);
 						} else {
 							e.preventDefault();
-							window.location.replace(`/edit/text/${props.node.uuid}`);
+							props.handleClick();
+							window.location.replace(`/associations/${props.node.uuid}`);
 						}
 					}}
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							e.preventDefault();
+							props.handleClick();
 							window.location.replace(`/edit/text/${props.node.uuid}`);
 						}
 					}}
@@ -33,7 +36,7 @@ const Text = (props) => {
 						props.handleClick();
 						// prevent the text from being selected
 						window.getSelection().removeAllRanges();
-						window.location.replace(`/associations/${props.node.uuid}`);
+						window.location.replace(`/edit/text/${props.node.uuid}`);
 					}}
 				>
 					<p
