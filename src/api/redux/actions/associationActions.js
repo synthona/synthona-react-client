@@ -24,6 +24,7 @@ import { message } from "antd";
 export const fetchAssociationLinkList = (query) => async (dispatch) => {
 	let linkMode = JSON.parse(localStorage.getItem("link-mode"));
 	let bidirectional = linkMode === "bidirectional" ? "yes" : "no";
+	let sortOrder = JSON.parse(localStorage.getItem("association-sort")) || "last updated";
 	try {
 		if (!query.page) {
 			dispatch({ type: RESET_ASSOCIATION_LINK_LIST });
@@ -31,7 +32,7 @@ export const fetchAssociationLinkList = (query) => async (dispatch) => {
 		}
 		dispatch({ type: FETCH_ASSOCIATION_LINK_LIST });
 		const response = await instance.get("/association", {
-			params: { nodeUUID: query.nodeUUID, page: query.page, bidirectional },
+			params: { nodeUUID: query.nodeUUID, page: query.page, bidirectional, sortOrder },
 		});
 		dispatch({
 			type: FETCH_ASSOCIATION_LINK_LIST_SUCCESS,

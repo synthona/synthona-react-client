@@ -42,9 +42,11 @@ const File = (props) => {
 		if (!fileLoadError) {
 			e.preventDefault();
 			props.handleClick();
+			window.getSelection().removeAllRanges();
 			props.launchFile(props.node.uuid);
 		} else if (isElectron()) {
 			e.preventDefault();
+			window.getSelection().removeAllRanges();
 			selectLocalFile(e);
 		} else {
 			e.preventDefault();
