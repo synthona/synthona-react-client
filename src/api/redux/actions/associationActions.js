@@ -1,5 +1,5 @@
-import instance from '../../../api/instance';
-import history from '../../../utils/history';
+import instance from "../../../api/instance";
+import history from "../../../utils/history";
 import {
 	CREATE_ASSOCIATION,
 	CREATE_ASSOCIATION_ERROR,
@@ -17,20 +17,20 @@ import {
 	DELETE_ASSOCIATION_LINK_SUCCESS,
 	DELETE_ASSOCIATION_LINK_ERROR,
 	// RESET_APP
-} from './types';
-import { message } from 'antd';
+} from "./types";
+import { message } from "antd";
 
 // fetch associations for associationLinklist
 export const fetchAssociationLinkList = (query) => async (dispatch) => {
-	let linkMode = JSON.parse(localStorage.getItem('link-mode'));
-	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
+	let linkMode = JSON.parse(localStorage.getItem("link-mode"));
+	let bidirectional = linkMode === "bidirectional" ? "yes" : "no";
 	try {
 		if (!query.page) {
 			dispatch({ type: RESET_ASSOCIATION_LINK_LIST });
 			query.page = 1;
 		}
 		dispatch({ type: FETCH_ASSOCIATION_LINK_LIST });
-		const response = await instance.get('/association', {
+		const response = await instance.get("/association", {
 			params: { nodeUUID: query.nodeUUID, page: query.page, bidirectional },
 		});
 		dispatch({
@@ -41,23 +41,24 @@ export const fetchAssociationLinkList = (query) => async (dispatch) => {
 		});
 	} catch (err) {
 		dispatch({ type: FETCH_ASSOCIATION_LINK_LIST_ERROR });
-		message.error('Could not fetch items', 1);
-		history.push('/');
+		message.error("Could not fetch items", 1);
+		history.push("/");
 	}
 };
 
 // fetch associations for associationList
 export const fetchAssociations = (query) => async (dispatch) => {
-	let linkMode = JSON.parse(localStorage.getItem('link-mode'));
-	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
+	let linkMode = JSON.parse(localStorage.getItem("link-mode"));
+	let bidirectional = linkMode === "bidirectional" ? "yes" : "no";
+	let sortOrder = JSON.parse(localStorage.getItem("association-sort")) || "last updated";
 	try {
 		if (!query.page) {
 			dispatch({ type: RESET_ASSOCIATIONS });
 			query.page = 1;
 		}
 		dispatch({ type: FETCH_ASSOCIATIONS });
-		const response = await instance.get('/association', {
-			params: { nodeUUID: query.nodeUUID, page: query.page, bidirectional },
+		const response = await instance.get("/association", {
+			params: { nodeUUID: query.nodeUUID, page: query.page, bidirectional, sortOrder },
 		});
 		dispatch({
 			type: FETCH_ASSOCIATIONS_SUCCESS,
@@ -67,8 +68,8 @@ export const fetchAssociations = (query) => async (dispatch) => {
 		});
 	} catch (err) {
 		dispatch({ type: FETCH_ASSOCIATIONS_ERROR });
-		message.error('Could not fetch items', 1);
-		history.push('/');
+		message.error("Could not fetch items", 1);
+		history.push("/");
 	}
 };
 
@@ -76,7 +77,7 @@ export const fetchAssociations = (query) => async (dispatch) => {
 export const createAssociation = (nodeUUID, linkedNodeUUID) => async (dispatch) => {
 	try {
 		dispatch({ type: CREATE_ASSOCIATION });
-		const response = await instance.put('/association', {
+		const response = await instance.put("/association", {
 			nodeUUID,
 			linkedNodeUUID,
 		});
@@ -89,30 +90,30 @@ export const createAssociation = (nodeUUID, linkedNodeUUID) => async (dispatch) 
 		});
 	} catch (err) {
 		dispatch({ type: CREATE_ASSOCIATION_ERROR });
-		message.error('Could not create association', 1);
-		history.push('/');
+		message.error("Could not create association", 1);
+		history.push("/");
 	}
 };
 
 // get autocomplete values for association creation
 export const associationAutocomplete = (query) => async (dispatch) => {
-	let linkMode = JSON.parse(localStorage.getItem('link-mode'));
-	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
+	let linkMode = JSON.parse(localStorage.getItem("link-mode"));
+	let bidirectional = linkMode === "bidirectional" ? "yes" : "no";
 	try {
-		const response = await instance.get('/association/autocomplete', {
+		const response = await instance.get("/association/autocomplete", {
 			params: { searchQuery: query.searchQuery, nodeUUID: query.uuid, bidirectional },
 		});
 		return response.data.nodes;
 	} catch (err) {
-		message.error('Could not search nodes', 1);
-		history.push('/');
+		message.error("Could not search nodes", 1);
+		history.push("/");
 	}
 };
 
 // delete text node handler
 export const deleteAssociationLink = (nodeA, nodeB) => async (dispatch) => {
-	let linkMode = JSON.parse(localStorage.getItem('link-mode'));
-	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
+	let linkMode = JSON.parse(localStorage.getItem("link-mode"));
+	let bidirectional = linkMode === "bidirectional" ? "yes" : "no";
 	dispatch({ type: DELETE_ASSOCIATION_LINK });
 	try {
 		const response = await instance.delete(`/association`, {
@@ -123,7 +124,7 @@ export const deleteAssociationLink = (nodeA, nodeB) => async (dispatch) => {
 		}
 	} catch (err) {
 		dispatch({ type: DELETE_ASSOCIATION_LINK_ERROR });
-		message.error('There was a problem deleting the node', 1);
+		message.error("There was a problem deleting the node", 1);
 	}
 };
 
@@ -138,11 +139,11 @@ export const removeFromAssociationList = (uuid) => {
 // update the linkStrength for an association
 export const updateLinkStrength = (nodeA, nodeB) => async (dispatch) => {
 	try {
-		await instance.put('/association/linkstrength', {
+		await instance.put("/association/linkstrength", {
 			nodeA,
 			nodeB,
 		});
 	} catch (err) {
-		message.error('There was a problem with your request', 1);
+		message.error("There was a problem with your request", 1);
 	}
 };

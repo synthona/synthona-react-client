@@ -40,6 +40,13 @@ let clientConfig = [
 		value: "classic",
 	},
 	{
+		storageKey: "association-sort",
+		name: "Association Sort",
+		type: "dropdown",
+		options: ["last accessed", "link strength", "created at"],
+		value: "last updated",
+	},
+	{
 		storageKey: "quill-document-width",
 		name: "Document Page Width",
 		type: "dropdown",
