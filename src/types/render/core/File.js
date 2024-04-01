@@ -66,7 +66,7 @@ const File = (props) => {
 		}
 	};
 
-	const renderPreview = () => {
+	const renderPreview = (full) => {
 		if (props.node.path === null) {
 			fileLoadError = true;
 			props.node.preview = missingFileImage;
@@ -79,7 +79,7 @@ const File = (props) => {
 						alt={props.node.name}
 						style={{
 							objectFit: "cover",
-							height: "13.2rem",
+							height: full ? "100%" : "13.2rem",
 							width: "100%",
 						}}
 					></img>
@@ -89,9 +89,13 @@ const File = (props) => {
 			return (
 				<Icon
 					type={"file"}
-					style={{ color: "white", backgroundColor: props.theme.cardBodyColor, height: "13.2rem" }}
-					theme='filled'
-					className='node-card-icon'
+					style={{
+						color: "white",
+						backgroundColor: props.theme.cardBodyColor,
+						height: full ? "100%" : "13.2rem",
+					}}
+					theme="filled"
+					className="node-card-icon"
 				/>
 			);
 		}
@@ -99,7 +103,7 @@ const File = (props) => {
 
 	const nodeCard = () => {
 		return (
-			<li className='nodelist-item'>
+			<li className="nodelist-item">
 				<NodeCardHeader node={props.node} />
 				<Link
 					to={`/associations/${props.node.uuid}`}
@@ -123,10 +127,10 @@ const File = (props) => {
 
 	const fullNode = () => {
 		return (
-			<div className='full-node-item'>
+			<div className="full-node-item">
 				<NodeCardHeaderFull />
 				<Link to={`/associations/${props.node.uuid}`} onClick={(e) => onFullCardAction(e)}>
-					<Fragment>{renderPreview()}</Fragment>
+					<Fragment>{renderPreview(true)}</Fragment>
 				</Link>
 			</div>
 		);
