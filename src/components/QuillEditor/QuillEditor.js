@@ -152,6 +152,8 @@ class QuillEditor extends Component {
 			this.regeneratePreview();
 			this.initializeFromUrlParams();
 		}
+		let quillScrollY = localStorage.getItem("quillScrollY");
+		window.scrollTo({ top: quillScrollY });
 	};
 
 	// load the text node and set the local id state.
@@ -479,6 +481,7 @@ class QuillEditor extends Component {
 	};
 
 	componentWillUnmount() {
+		localStorage.removeItem("quillScrollY");
 		// clear styles
 		document.body.style.overflow = null;
 		document.body.style.height = null;
@@ -522,6 +525,9 @@ class QuillEditor extends Component {
 						formats={this.allowedFormats}
 						scrollingContainer={"body"}
 						onBlur={() => {
+							localStorage.setItem("quillScrollY", window.scrollY);
+							console.log(window.scrollY);
+							window.scrollTo({ top: window.scrollY });
 							// check to see if we should regenerate preview
 							if (this.props.nodeData.preview.length < 500) {
 								this.regeneratePreview();
