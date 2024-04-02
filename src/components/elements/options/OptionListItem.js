@@ -13,8 +13,8 @@ const OptionListItem = (props) => {
 						type="text"
 						defaultValue={props.value}
 						style={{ float: "right", margin: 0, padding: 0 }}
-						onBlur={() => {
-							props.onChange(props.keyName, props.value);
+						onBlur={(e) => {
+							props.onChange(props.keyName, e.target.value);
 						}}
 					></input>
 				);

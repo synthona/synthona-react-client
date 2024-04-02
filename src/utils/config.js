@@ -1,4 +1,4 @@
-let clientConfigVersion = 1.0;
+let clientConfigVersion = 1.1;
 
 let clientConfig = [
 	{
@@ -64,8 +64,8 @@ let clientConfig = [
 		storageKey: "link-mode",
 		name: "Link Mode",
 		type: "dropdown",
-		options: ["unidirectional", "bidirectional"],
-		value: "unidirectional",
+		options: ["bidirectional", "unidirectional"],
+		value: "bidirectional",
 	},
 	{
 		storageKey: "graph-render-limit",
@@ -155,6 +155,11 @@ exports.backendConfigMap = {
 	APP_NAME: {
 		type: "string",
 		name: "App Name",
+	},
+	SUMMONING_KEY: {
+		type: "dropdown",
+		options: [";", "y", "'", ".", ",", "[", "]", "-", "=", "none"],
+		name: "Summoning Key",
 	},
 };
 
