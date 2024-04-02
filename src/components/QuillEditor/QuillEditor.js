@@ -75,6 +75,16 @@ class CustomLink extends Link {
 		node.addEventListener("click", function (e) {
 			if (e.shiftKey) {
 				if (value.includes(window.location.host)) {
+					let uuid = window.location.pathname.substring(
+						window.location.pathname.lastIndexOf("/") + 1
+					);
+					localStorage.setItem(
+						"quillScrollY",
+						JSON.stringify({
+							uuid: uuid,
+							scroll: window.scrollY,
+						})
+					);
 					window.location.replace(value);
 				} else {
 					window.open(value, "_blank");
@@ -84,6 +94,16 @@ class CustomLink extends Link {
 		node.addEventListener("contextmenu", function (e) {
 			e.preventDefault();
 			if (value.includes(window.location.host)) {
+				let uuid = window.location.pathname.substring(
+					window.location.pathname.lastIndexOf("/") + 1
+				);
+				localStorage.setItem(
+					"quillScrollY",
+					JSON.stringify({
+						uuid: uuid,
+						scroll: window.scrollY,
+					})
+				);
 				window.location.replace(value);
 			} else {
 				window.open(value, "_blank");
@@ -152,14 +172,17 @@ class QuillEditor extends Component {
 			this.regeneratePreview();
 			this.initializeFromUrlParams();
 		}
-		let quillScrollY = localStorage.getItem("quillScrollY");
-		window.scrollTo({ top: quillScrollY });
+		let quillScrollY = JSON.parse(localStorage.getItem("quillScrollY"));
+		if (quillScrollY && quillScrollY.uuid === this.state.uuid) {
+			window.scrollTo({ top: quillScrollY.scroll });
+		} else {
+			localStorage.removeItem("quillScrollY");
+			window.scrollTo({ top: 0 });
+		}
 	};
 
 	// load the text node and set the local id state.
 	initializeFromUrlParams = async () => {
-		// scroll to top
-		window.scrollTo({ top: 0 });
 		// check url params
 		var textUUID = this.props.match.params.uuid;
 		// set the local state id equal to the value in the url
@@ -332,7 +355,6 @@ class QuillEditor extends Component {
 					// prefix: /(?<=\(\()[^)]*(?=\)\))/g,
 					prefix: /(?<=\[\[)[^)]*(?=\]\])/g,
 					handler: async (range, context) => {
-						// console.log("COSMIC TRIGGER ACTIVATED!");
 						await this.handleRenderlinking(context);
 						return;
 					},
@@ -342,7 +364,6 @@ class QuillEditor extends Component {
 					// prefix: /(?<=\(\()[^)]*(?=\)\))/g,
 					prefix: /(?<=\[\[)[^)]*(?=\]\])/g,
 					handler: async (range, context) => {
-						// console.log("COSMIC TRIGGER ACTIVATED!");
 						await this.handleRenderlinking(context);
 						return;
 					},
@@ -385,8 +406,6 @@ class QuillEditor extends Component {
 		let linkedNodeUUID = this.props.nodeData.uuid;
 		const editor = this.quill.getEditor();
 		//============================================================================
-		// console.log(this.props.nodeData);
-		// console.log(phraseLinks);
 		for (let phrase of phraseLinks) {
 			let escapedPhraseString = phrase.replace(/[.*+?^${}()|[\]]/g, "\\$&");
 			let phraseRegex = new RegExp("\\[\\[" + escapedPhraseString + "\\]\\]", "g");
@@ -481,7 +500,6 @@ class QuillEditor extends Component {
 	};
 
 	componentWillUnmount() {
-		localStorage.removeItem("quillScrollY");
 		// clear styles
 		document.body.style.overflow = null;
 		document.body.style.height = null;
@@ -524,10 +542,23 @@ class QuillEditor extends Component {
 						readOnly={this.state.readOnly}
 						formats={this.allowedFormats}
 						scrollingContainer={"body"}
+						onKeyDown={(e) => {
+							localStorage.setItem(
+								"quillScrollY",
+								JSON.stringify({
+									uuid: this.state.uuid,
+									scroll: window.scrollY,
+								})
+							);
+						}}
 						onBlur={() => {
-							localStorage.setItem("quillScrollY", window.scrollY);
-							console.log(window.scrollY);
-							window.scrollTo({ top: window.scrollY });
+							localStorage.setItem(
+								"quillScrollY",
+								JSON.stringify({
+									uuid: this.state.uuid,
+									scroll: window.scrollY,
+								})
+							);
 							// check to see if we should regenerate preview
 							if (this.props.nodeData.preview.length < 500) {
 								this.regeneratePreview();
