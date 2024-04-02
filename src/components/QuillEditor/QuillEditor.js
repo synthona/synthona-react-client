@@ -177,7 +177,7 @@ class QuillEditor extends Component {
 			window.scrollTo({ top: quillScrollY.scroll });
 		} else {
 			localStorage.removeItem("quillScrollY");
-			window.scrollTo({ top: 0 });
+			// window.scrollTo({ top: 0 });
 		}
 	};
 
