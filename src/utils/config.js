@@ -41,10 +41,17 @@ let clientConfig = [
 	},
 	{
 		storageKey: "association-sort",
-		name: "Association Sort",
+		name: "Association Sort Type",
 		type: "dropdown",
 		options: ["last accessed", "link strength", "created at"],
 		value: "last updated",
+	},
+	{
+		storageKey: "association-sort-order",
+		name: "Association Sort Order",
+		type: "dropdown",
+		options: ["desc", "asc"],
+		value: "desc",
 	},
 	{
 		storageKey: "quill-document-width",

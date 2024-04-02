@@ -22,7 +22,7 @@ const Url = (props) => {
 							? "allow-scripts allow-same-origin allow-popups"
 							: ""
 					}
-					id='node-card-iframe'
+					id="node-card-iframe"
 				></iframe>
 			);
 		}
@@ -31,8 +31,8 @@ const Url = (props) => {
 			return (
 				<a
 					href={props.node.path}
-					target='_blank'
-					rel='noopener noreferrer'
+					target="_blank"
+					rel="noopener noreferrer"
 					// style={{ width: '100%' }}
 				>
 					{renderPreview()}
@@ -60,7 +60,7 @@ const Url = (props) => {
 				<Icon
 					type={urlIcon}
 					// type={'star'}
-					theme='outlined'
+					theme="outlined"
 					style={{
 						fontSize: "5rem",
 						color: "#b8b8b8",
@@ -77,11 +77,11 @@ const Url = (props) => {
 
 	const nodeCard = () => {
 		return (
-			<li className='nodelist-item'>
+			<li className="nodelist-item">
 				{props.renderHeader()}
 				<a
 					href={`/associations/${props.node.uuid}`}
-					rel='noopener noreferrer'
+					rel="noopener noreferrer"
 					onClick={(e) => {
 						e.preventDefault();
 						props.handleClick();
@@ -89,6 +89,7 @@ const Url = (props) => {
 					}}
 					onContextMenu={(e) => {
 						e.preventDefault();
+						window.getSelection().removeAllRanges();
 						// props.toggleHeader();
 						window.open(props.node.path, "_blank");
 					}}
@@ -121,7 +122,7 @@ const Url = (props) => {
 		} else {
 			return (
 				<Fragment>
-					<Icon type={urlIcon} theme='outlined' className='node-card-icon' />
+					<Icon type={urlIcon} theme="outlined" className="node-card-icon" />
 				</Fragment>
 			);
 		}

@@ -34,8 +34,8 @@ const Clipboard = Quill.import("modules/clipboard");
 class CustomClipboard extends Clipboard {
 	onPaste(e) {
 		// get current page offset before paste
-		const top = window.pageYOffset;
-		const left = window.pageXOffset;
+		const top = window.scrollY;
+		const left = window.scrollX;
 
 		if (e.defaultPrevented || !this.quill.isEnabled()) return;
 		let range = this.quill.getSelection();
@@ -175,6 +175,15 @@ class QuillEditor extends Component {
 		let quillScrollY = JSON.parse(localStorage.getItem("quillScrollY"));
 		if (quillScrollY && quillScrollY.uuid === this.state.uuid) {
 			window.scrollTo({ top: quillScrollY.scroll });
+			window.addEventListener("scroll", () => {
+				localStorage.setItem(
+					"quillScrollY",
+					JSON.stringify({
+						uuid: this.state.uuid,
+						scroll: window.scrollY,
+					})
+				);
+			});
 		} else {
 			localStorage.removeItem("quillScrollY");
 			// window.scrollTo({ top: 0 });
@@ -543,13 +552,17 @@ class QuillEditor extends Component {
 						formats={this.allowedFormats}
 						scrollingContainer={"body"}
 						onKeyDown={(e) => {
-							localStorage.setItem(
-								"quillScrollY",
-								JSON.stringify({
-									uuid: this.state.uuid,
-									scroll: window.scrollY,
-								})
-							);
+							if (e.key !== "Enter") {
+								localStorage.setItem(
+									"quillScrollY",
+									JSON.stringify({
+										uuid: this.state.uuid,
+										scroll: window.scrollY,
+									})
+								);
+							} else {
+								window.scrollBy({ top: 20 });
+							}
 						}}
 						onBlur={() => {
 							localStorage.setItem(
