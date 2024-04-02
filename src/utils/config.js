@@ -54,13 +54,6 @@ let clientConfig = [
 		value: "desc",
 	},
 	{
-		storageKey: "quill-document-width",
-		name: "Document Page Width",
-		type: "dropdown",
-		options: ["classic", "full width"],
-		value: "full width",
-	},
-	{
 		storageKey: "fallback-search",
 		name: "Fallback Search",
 		type: "dropdown",

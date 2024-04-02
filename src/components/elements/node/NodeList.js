@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 // custom code
-import './NodeList.less';
-import { fetchNodes } from '../../../api/redux/actions';
-import NodeCard from './NodeCard';
-import AssociationSider from '../association/AssociationSider';
+import "./NodeList.less";
+import { fetchNodes } from "../../../api/redux/actions";
+import NodeCard from "./NodeCard";
+import AssociationSider from "../association/AssociationSider";
 // import NodeCardFull from '../node/NodeCardFull';
 
 class NodeList extends Component {
@@ -24,11 +24,11 @@ class NodeList extends Component {
 			sortType: this.props.query.sortType,
 			sortOrder: this.props.query.sortOrder,
 		});
-		window.addEventListener('scroll', this.infiniteScroll);
+		window.addEventListener("scroll", this.infiniteScroll);
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.infiniteScroll);
+		window.removeEventListener("scroll", this.infiniteScroll);
 	}
 
 	infiniteScroll = (e) => {
@@ -48,7 +48,7 @@ class NodeList extends Component {
 	endReached = () => {
 		// window calculations to tell when the user scrolls to the bottom
 		const windowHeight =
-			'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
+			"innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
 		const body = document.body;
 		const html = document.documentElement;
 		const docHeight = Math.max(
@@ -92,41 +92,44 @@ class NodeList extends Component {
 		}
 		// adding a bit of a fallback search. more to come on this probably
 		else if (this.props.query.searchQuery && !this.props.isFetching) {
-			return (
-				<div
-					style={{
-						// height: '100vh',
-						marginTop: '1rem',
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'top',
-						color: 'white',
-					}}
-				>
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href={`https://www.google.com/search?q=${encodeURIComponent(
-							this.props.query.searchQuery
-						)}`}
+			let fallbackOption = JSON.parse(localStorage.getItem("fallback-search"));
+			if (fallbackOption !== "none") {
+				return (
+					<div
 						style={{
-							backgroundColor: '#272727',
-							color: 'white',
-							borderRadius: '3px',
-							padding: '0.5rem 1rem',
+							// height: '100vh',
+							marginTop: "1rem",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "top",
+							color: "white",
 						}}
 					>
-						no matches ~ search online instead?
-					</a>
-				</div>
-			);
+						<a
+							target="_blank"
+							rel="noopener noreferrer"
+							href={`https://www.google.com/search?q=${encodeURIComponent(
+								this.props.query.searchQuery
+							)}`}
+							style={{
+								backgroundColor: "#272727",
+								color: "white",
+								borderRadius: "3px",
+								padding: "0.5rem 1rem",
+							}}
+						>
+							no matches ~ search online instead?
+						</a>
+					</div>
+				);
+			}
 		}
 	};
 
 	render() {
 		return (
-			<div className='nodelist-container'>
-				<ul className='nodelist'>{this.renderNodeList()}</ul>
+			<div className="nodelist-container">
+				<ul className="nodelist">{this.renderNodeList()}</ul>
 				<AssociationSider />
 			</div>
 		);
