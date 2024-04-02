@@ -131,7 +131,11 @@ const File = (props) => {
 		return (
 			<div className="full-node-item">
 				<NodeCardHeaderFull />
-				<Link to={`/associations/${props.node.uuid}`} onClick={(e) => onFullCardAction(e)}>
+				<Link
+					to={`/associations/${props.node.uuid}`}
+					onClick={(e) => onFullCardAction(e)}
+					onContextMenu={(e) => onContextAction(e)}
+				>
 					<Fragment>{renderPreview(true)}</Fragment>
 				</Link>
 			</div>

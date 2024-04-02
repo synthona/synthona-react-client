@@ -54,7 +54,7 @@ const Image = (props) => {
 		if (!fileLoadError && props.node.isFile) {
 			e.preventDefault();
 			props.handleClick();
-			props.launchFile(props.node.uuid);
+			props.launchExplorer(props.node.uuid);
 		} else if (isElectron() && props.node.isFile) {
 			e.preventDefault();
 			selectLocalFile(e);
@@ -70,10 +70,10 @@ const Image = (props) => {
 			props.node.preview = missingFileImage;
 		}
 		return (
-			<li className='nodelist-item'>
+			<li className="nodelist-item">
 				{props.renderHeader()}
 				<Link
-					id='image-node-card-link'
+					id="image-node-card-link"
 					to={`/associations/${props.node.uuid}`}
 					onClick={(e) => {
 						onClickAction(e);
