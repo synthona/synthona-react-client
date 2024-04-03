@@ -1,6 +1,6 @@
 export const renderlink = (renderlink) => {
-	let type = renderlink.split("/")[3];
-	let uuid = renderlink.split("/")[4];
+	let type = renderlink.split("/")[4];
+	let uuid = renderlink.split("/")[5];
 
 	switch (type) {
 		case "text":

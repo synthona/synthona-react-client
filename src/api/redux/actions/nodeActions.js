@@ -194,7 +194,7 @@ export const contextualCreate = (phrase, linkedNodeUUID) => async (dispatch) => 
 			// url links should open the actual node's URL
 			url = response.data.node.content;
 		} else if (response.data && response.data.node.uuid) {
-			url = `${window.location.origin}/${response.data.node.type}/${response.data.node.uuid}`;
+			url = `${window.location.origin}/renderlink/${response.data.node.type}/${response.data.node.uuid}`;
 		}
 		dispatch({
 			type: CONTEXTUAL_CREATE_NODE_SUCCESS,

@@ -75,7 +75,7 @@ class CustomLink extends Link {
 		node.removeAttribute("target");
 		node.addEventListener("click", function (e) {
 			if (e.shiftKey) {
-				if (value.includes("localhost")) {
+				if (value.includes("renderlink")) {
 					renderlink(value);
 				} else {
 					window.open(value, "_blank");
@@ -84,7 +84,7 @@ class CustomLink extends Link {
 		});
 		node.addEventListener("contextmenu", function (e) {
 			e.preventDefault();
-			if (value.includes("localhost")) {
+			if (value.includes("renderlink")) {
 				renderlink(value);
 			} else {
 				window.open(value, "_blank");
@@ -339,8 +339,7 @@ class QuillEditor extends Component {
 			bindings: {
 				renderLinkEnter: {
 					key: "Enter",
-					// prefix: /(?<=\(\()[^)]*(?=\)\))/g,
-					prefix: /(?<=\[\[)[^)]*(?=\]\])/g,
+					prefix: /\[\[.*?\]\]/g,
 					handler: async (range, context) => {
 						await this.handleRenderlinking(context);
 						return;
@@ -348,8 +347,7 @@ class QuillEditor extends Component {
 				},
 				renderLinkSpace: {
 					key: 32,
-					// prefix: /(?<=\(\()[^)]*(?=\)\))/g,
-					prefix: /(?<=\[\[)[^)]*(?=\]\])/g,
+					prefix: /\[\[.*?\]\]/g,
 					handler: async (range, context) => {
 						await this.handleRenderlinking(context);
 						return;
@@ -387,22 +385,21 @@ class QuillEditor extends Component {
 	];
 
 	handleRenderlinking = async (context) => {
-		// let regex = /(?<=\(\()[^)]*(?=\)\))/g;
-		let regex = /(?<=\[\[)[^(?![))]*(?=\]\])/g;
-		let phraseLinks = [...context.prefix.match(regex)];
+		let regex = /\[\[.*?\]\]/g;
+		let phraseLinks = [...context.prefix.matchAll(regex)];
 		let linkedNodeUUID = this.props.nodeData.uuid;
 		const editor = this.quill.getEditor();
 		//============================================================================
 		for (let phrase of phraseLinks) {
-			let escapedPhraseString = phrase.replace(/[.*+?^${}()|[\]]/g, "\\$&");
+			let phraseBase = phrase[0].substring(2, phrase[0].length - 2);
+			let escapedPhraseString = phraseBase.replace(/[.*+?^${}()|[\]]/g, "\\$&");
 			let phraseRegex = new RegExp("\\[\\[" + escapedPhraseString + "\\]\\]", "g");
 			let duplicateList = [...editor.getText(0).matchAll(phraseRegex)];
-
 			// STOP THE PRESSES! stop right here and see if we even need to make a reqeust. if not, we dont
 			let name;
 			let renderlinkUrl;
 			// we have to make the request
-			let result = await this.props.contextualCreate(phrase, linkedNodeUUID);
+			let result = await this.props.contextualCreate(phraseBase, linkedNodeUUID);
 			// if we get a result back lets format it in the document
 			if (result) {
 				renderlinkUrl = result.url;
@@ -416,17 +413,17 @@ class QuillEditor extends Component {
 						editor.updateContents(
 							new Delta()
 								.retain(phraseIndex)
-								.delete(phrase.length + 4)
+								.delete(phraseBase.length + 4)
 								.insert("[[" + name + "]]", { link: renderlinkUrl })
 						);
 					}
-				} else {
+				} else if (duplicateList.length > 1) {
 					// if theres a lot of duplicates all we can do is set the links correctly
 					// we're not going to replace any text in this case because it will mess up the indexes
 					// and cause a whole bunch of problems. its not necessary anyways
 					if (renderlinkUrl) {
 						duplicateList.forEach((value) => {
-							editor.formatText(value.index, phrase.length + 4, "link", renderlinkUrl);
+							editor.formatText(value.index, phraseBase.length + 4, "link", renderlinkUrl);
 						});
 					}
 				}
