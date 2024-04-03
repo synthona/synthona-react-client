@@ -75,7 +75,7 @@ class CustomLink extends Link {
 		node.removeAttribute("target");
 		node.addEventListener("click", function (e) {
 			if (e.shiftKey) {
-				if (value.includes(window.location.origin)) {
+				if (value.includes("localhost")) {
 					renderlink(value);
 				} else {
 					window.open(value, "_blank");
@@ -84,7 +84,7 @@ class CustomLink extends Link {
 		});
 		node.addEventListener("contextmenu", function (e) {
 			e.preventDefault();
-			if (value.includes(window.location.origin)) {
+			if (value.includes("localhost")) {
 				renderlink(value);
 			} else {
 				window.open(value, "_blank");

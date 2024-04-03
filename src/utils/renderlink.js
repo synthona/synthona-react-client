@@ -9,6 +9,9 @@ export const renderlink = (renderlink) => {
 		case "file":
 			window.location.replace(`/launch-file/${uuid}`);
 			break;
+		case "audio":
+			window.location.replace(`/launch-file/${uuid}`);
+			break;
 		case "folder":
 			window.location.replace(`/launch-file/${uuid}`);
 			break;
@@ -18,8 +21,17 @@ export const renderlink = (renderlink) => {
 		case "collection":
 			window.location.replace(`/associations/${uuid}`);
 			break;
-		default:
+		case "zip":
 			window.location.replace(`/associations/${uuid}`);
+			break;
+		case "package":
+			window.location.replace(`/associations/${uuid}`);
+			break;
+		case "user":
+			window.location.replace(`/associations/${uuid}`);
+			break;
+		default:
+			window.open(renderlink, "_blank");
 			break;
 	}
 };
