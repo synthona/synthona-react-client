@@ -11,6 +11,7 @@ import NodeCardHeaderFull from "../elements/node/NodeCardHeaderFull";
 import IOBar from "../elements/IOBar";
 // custom components
 import Spinner from "../elements/Spinner";
+import { renderlink } from "../../utils/renderlink";
 // redux handlers
 import {
 	editTextNode,
@@ -74,18 +75,8 @@ class CustomLink extends Link {
 		node.removeAttribute("target");
 		node.addEventListener("click", function (e) {
 			if (e.shiftKey) {
-				if (value.includes(window.location.host)) {
-					let uuid = window.location.pathname.substring(
-						window.location.pathname.lastIndexOf("/") + 1
-					);
-					localStorage.setItem(
-						"quillScrollY",
-						JSON.stringify({
-							uuid: uuid,
-							scroll: window.scrollY,
-						})
-					);
-					window.location.replace(value);
+				if (value.includes(window.location.origin)) {
+					renderlink(value);
 				} else {
 					window.open(value, "_blank");
 				}
@@ -93,18 +84,8 @@ class CustomLink extends Link {
 		});
 		node.addEventListener("contextmenu", function (e) {
 			e.preventDefault();
-			if (value.includes(window.location.host)) {
-				let uuid = window.location.pathname.substring(
-					window.location.pathname.lastIndexOf("/") + 1
-				);
-				localStorage.setItem(
-					"quillScrollY",
-					JSON.stringify({
-						uuid: uuid,
-						scroll: window.scrollY,
-					})
-				);
-				window.location.replace(value);
+			if (value.includes(window.location.origin)) {
+				renderlink(value);
 			} else {
 				window.open(value, "_blank");
 			}
@@ -173,20 +154,8 @@ class QuillEditor extends Component {
 			this.initializeFromUrlParams();
 		}
 		let quillScrollY = JSON.parse(localStorage.getItem("quillScrollY"));
-		if (quillScrollY && quillScrollY.uuid === this.state.uuid) {
+		if (quillScrollY && quillScrollY.uuid === textUUID) {
 			window.scrollTo({ top: quillScrollY.scroll });
-			window.addEventListener("scroll", () => {
-				localStorage.setItem(
-					"quillScrollY",
-					JSON.stringify({
-						uuid: this.state.uuid,
-						scroll: window.scrollY,
-					})
-				);
-			});
-		} else {
-			localStorage.removeItem("quillScrollY");
-			// window.scrollTo({ top: 0 });
 		}
 	};
 
@@ -194,6 +163,15 @@ class QuillEditor extends Component {
 	initializeFromUrlParams = async () => {
 		// check url params
 		var textUUID = this.props.match.params.uuid;
+		window.addEventListener("scroll", () => {
+			localStorage.setItem(
+				"quillScrollY",
+				JSON.stringify({
+					uuid: textUUID,
+					scroll: window.scrollY,
+				})
+			);
+		});
 		// set the local state id equal to the value in the url
 		this.setState({ uuid: textUUID });
 		await this.props.setActiveNode(textUUID);
@@ -422,41 +400,35 @@ class QuillEditor extends Component {
 
 			// STOP THE PRESSES! stop right here and see if we even need to make a reqeust. if not, we dont
 			let name;
-			let url;
-			const currentFormat = editor.getFormat(duplicateList[0].index, phrase.length + 4);
-			// determine what the url link will be
-			if (currentFormat.link) {
-				// we already have a link
-				url = currentFormat.link;
-			} else {
-				// we have to make the request
-				let result = await this.props.contextualCreate(phrase, linkedNodeUUID);
-				// if we get a result back lets format it in the document
-				if (result) {
-					url = result.url;
-					name = result.name;
-				}
-			}
-			// now we're going to loop through to update the actual document
-			if (duplicateList.length === 1) {
-				// if theres only 1, we will also update the name contents
-				let phraseIndex = duplicateList[0].index;
-				if (name && url) {
-					editor.updateContents(
-						new Delta()
-							.retain(phraseIndex)
-							.delete(phrase.length + 4)
-							.insert("[[" + name + "]]", { link: url })
-					);
-				}
-			} else {
-				// if theres a lot of duplicates all we can do is set the links correctly
-				// we're not going to replace any text in this case because it will mess up the indexes
-				// and cause a whole bunch of problems. its not necessary anyways
-				if (url) {
-					duplicateList.forEach((value) => {
-						editor.formatText(value.index, phrase.length + 4, "link", url);
-					});
+			let renderlinkUrl;
+			// we have to make the request
+			let result = await this.props.contextualCreate(phrase, linkedNodeUUID);
+			// if we get a result back lets format it in the document
+			if (result) {
+				renderlinkUrl = result.url;
+				name = result.name;
+
+				// now we're going to loop through to update the actual document
+				if (duplicateList.length === 1) {
+					// if theres only 1, we will also update the name contents
+					let phraseIndex = duplicateList[0].index;
+					if (name && renderlinkUrl) {
+						editor.updateContents(
+							new Delta()
+								.retain(phraseIndex)
+								.delete(phrase.length + 4)
+								.insert("[[" + name + "]]", { link: renderlinkUrl })
+						);
+					}
+				} else {
+					// if theres a lot of duplicates all we can do is set the links correctly
+					// we're not going to replace any text in this case because it will mess up the indexes
+					// and cause a whole bunch of problems. its not necessary anyways
+					if (renderlinkUrl) {
+						duplicateList.forEach((value) => {
+							editor.formatText(value.index, phrase.length + 4, "link", renderlinkUrl);
+						});
+					}
 				}
 			}
 		}

@@ -190,20 +190,11 @@ export const contextualCreate = (phrase, linkedNodeUUID) => async (dispatch) => 
 			linkedNodeUUID: linkedNodeUUID,
 		});
 		let url = null;
-		if (response.data && response.data.node.uuid && response.data.node.type === "text") {
-			url = window.location.origin + "/edit/text/" + response.data.node.uuid;
-		} else if (
-			response.data &&
-			response.data.node.uuid &&
-			(response.data.node.type === "file" || response.data.node.type === "folder")
-		) {
-			// file links should launch the files
-			url = window.location.origin + `/launch-file/${response.data.node.uuid}`;
-		} else if (response.data && response.data.node.uuid && response.data.node.type === "url") {
+		if (response.data && response.data.node.uuid && response.data.node.type === "url") {
 			// url links should open the actual node's URL
 			url = response.data.node.content;
 		} else if (response.data && response.data.node.uuid) {
-			url = window.location.origin + `/associations/${response.data.node.uuid}`;
+			url = `${window.location.origin}/${response.data.node.type}/${response.data.node.uuid}`;
 		}
 		dispatch({
 			type: CONTEXTUAL_CREATE_NODE_SUCCESS,
