@@ -395,6 +395,8 @@ class QuillEditor extends Component {
 			let escapedPhraseString = phraseBase.replace(/[.*+?^${}()|[\]]/g, "\\$&");
 			let phraseRegex = new RegExp("\\[\\[" + escapedPhraseString + "\\]\\]", "g");
 			let duplicateList = [...editor.getText(0).matchAll(phraseRegex)];
+			// editor.getText(0) omits non-text chars so we need to know the diff for later
+			let lengthDiff = editor.getLength(0) - editor.getText(0).length;
 			// STOP THE PRESSES! stop right here and see if we even need to make a reqeust. if not, we dont
 			let name;
 			let renderlinkUrl;
@@ -412,7 +414,7 @@ class QuillEditor extends Component {
 					if (name && renderlinkUrl) {
 						editor.updateContents(
 							new Delta()
-								.retain(phraseIndex)
+								.retain(phraseIndex + lengthDiff)
 								.delete(phraseBase.length + 4)
 								.insert("[[" + name + "]]", { link: renderlinkUrl })
 						);
