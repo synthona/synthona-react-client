@@ -176,7 +176,7 @@ export const createNode = (node, file) => async (dispatch) => {
 };
 
 // final processing of text node after closing the editor
-export const contextualCreate = (phrase, linkedNodeUUID) => async (dispatch) => {
+export const contextualCreate = (phrase, linkedNodeUUID, exclusionList) => async (dispatch) => {
 	dispatch({ type: CONTEXTUAL_CREATE_NODE });
 	// set up initial delta
 	const delta = new Delta();
@@ -188,6 +188,7 @@ export const contextualCreate = (phrase, linkedNodeUUID) => async (dispatch) => 
 			name: phrase,
 			content: content,
 			linkedNodeUUID: linkedNodeUUID,
+			exclusionList,
 		});
 		let url = null;
 		if (response.data && response.data.node.uuid && response.data.node.type === "url") {
@@ -201,7 +202,7 @@ export const contextualCreate = (phrase, linkedNodeUUID) => async (dispatch) => 
 			node: response.data.node,
 			association: response.data.association,
 		});
-		return { url, name: response.data.node.name };
+		return { url, name: response.data.node.name, uuid: response.data.node.uuid };
 	} catch (err) {
 		console.error(err);
 		dispatch({ type: CONTEXTUAL_CREATE_NODE_ERROR });

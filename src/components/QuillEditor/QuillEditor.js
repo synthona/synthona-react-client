@@ -172,6 +172,8 @@ class QuillEditor extends Component {
 				})
 			);
 		});
+		// clear short term memory from last time
+		localStorage.removeItem("exclusionData");
 		// set the local state id equal to the value in the url
 		this.setState({ uuid: textUUID });
 		await this.props.setActiveNode(textUUID);
@@ -214,6 +216,7 @@ class QuillEditor extends Component {
 		// generate the preview and do whatever processing will be
 		// necessary to process the node
 		// TODO: alter this so it stores a condensed version of the document instead of plain text
+		localStorage.removeItem("exclusionData");
 		this.regeneratePreview();
 		this.props.history.push("/");
 	};
@@ -391,22 +394,36 @@ class QuillEditor extends Component {
 		const editor = this.quill.getEditor();
 		//============================================================================
 		for (let phrase of phraseLinks) {
+			let name;
+			let renderlinkUrl;
 			let phraseBase = phrase[0].substring(2, phrase[0].length - 2);
 			let escapedPhraseString = phraseBase.replace(/[.*+?^${}()|[\]]/g, "\\$&");
 			let phraseRegex = new RegExp("\\[\\[" + escapedPhraseString + "\\]\\]", "g");
 			let duplicateList = [...editor.getText(0).matchAll(phraseRegex)];
 			// editor.getText(0) omits non-text chars so we need to know the diff for later
 			let lengthDiff = editor.getLength(0) - editor.getText(0).length;
-			// STOP THE PRESSES! stop right here and see if we even need to make a reqeust. if not, we dont
-			let name;
-			let renderlinkUrl;
+			// variables for short term memory system
+			let exclusionData = localStorage.getItem("exclusionData")
+				? JSON.parse(localStorage.getItem("exclusionData"))
+				: null;
+			let lastCreatedPhrase = exclusionData ? exclusionData.name : null;
+			let exclusionList = [];
+			// we wanna clear short term memory if the user has typed a new phrase, or if
+			// there are duplicates of this same phrase already in the document
+			if (lastCreatedPhrase !== phraseBase || duplicateList.length > 1) {
+				localStorage.removeItem("exclusionData");
+				exclusionList = [];
+			} else if (exclusionData) {
+				// if we have typed the same phrase twice and yet there are no duplicates
+				// we will go ahead and keep our short term memory exclusion list going
+				exclusionList = [...exclusionData.list];
+			}
 			// we have to make the request
-			let result = await this.props.contextualCreate(phraseBase, linkedNodeUUID);
+			let result = await this.props.contextualCreate(phraseBase, linkedNodeUUID, exclusionList);
 			// if we get a result back lets format it in the document
 			if (result) {
 				renderlinkUrl = result.url;
 				name = result.name;
-
 				// now we're going to loop through to update the actual document
 				if (duplicateList.length === 1) {
 					// if theres only 1, we will also update the name contents
@@ -417,6 +434,7 @@ class QuillEditor extends Component {
 								.retain(phraseIndex + lengthDiff)
 								.delete(phraseBase.length + 4)
 								.insert("[[" + name + "]]", { link: renderlinkUrl })
+								.insert(" ")
 						);
 					}
 				} else if (duplicateList.length > 1) {
@@ -428,6 +446,17 @@ class QuillEditor extends Component {
 							editor.formatText(value.index, phraseBase.length + 4, "link", renderlinkUrl);
 						});
 					}
+				}
+				// update the exclusion data based on our latest result as long as
+				// the input phrase is not identical to the returned value from DB
+				if (name !== phraseBase) {
+					localStorage.setItem(
+						"exclusionData",
+						JSON.stringify({
+							list: [...exclusionList, result.uuid],
+							name: phraseBase,
+						})
+					);
 				}
 			}
 		}
@@ -485,6 +514,7 @@ class QuillEditor extends Component {
 		document.body.style.height = null;
 		document.documentElement.style.overflow = null;
 		document.documentElement.style.height = null;
+		localStorage.removeItem("exclusionData");
 		window.getSelection().removeAllRanges();
 	}
 
