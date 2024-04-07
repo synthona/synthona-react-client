@@ -400,6 +400,8 @@ class QuillEditor extends Component {
 			let escapedPhraseString = phraseBase.replace(/[.*+?^${}()|[\]]/g, "\\$&");
 			let phraseRegex = new RegExp("\\[\\[" + escapedPhraseString + "\\]\\]", "g");
 			let duplicateList = [...editor.getText(0).matchAll(phraseRegex)];
+			// only take the first 255 characters of the phrase for DB (just in case)
+			let shortenedPhraseBase = phraseBase.substring(0, 255);
 			// editor.getText(0) omits non-text chars so we need to know the diff for later
 			let lengthDiff = editor.getLength(0) - editor.getText(0).length;
 			// variables for short term memory system
@@ -419,7 +421,11 @@ class QuillEditor extends Component {
 				exclusionList = [...exclusionData.list];
 			}
 			// we have to make the request
-			let result = await this.props.contextualCreate(phraseBase, linkedNodeUUID, exclusionList);
+			let result = await this.props.contextualCreate(
+				shortenedPhraseBase,
+				linkedNodeUUID,
+				exclusionList
+			);
 			// if we get a result back lets format it in the document
 			if (result) {
 				renderlinkUrl = result.url;
