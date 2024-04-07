@@ -34,13 +34,13 @@ export const setupTheme = () => {
 			break;
 		case "translucent":
 			colors = {
-				cardTitleColor: "white",
+				cardTitleColor: "#03fc88",
 				cardButtonColor: "white",
 				cardHeaderColor: "rgba(0, 0, 0, .6)",
 				cardBodyColor: "rgba(0, 0, 0, .8)",
 				cardTextColor: "#e7e7e7",
-				graphNodeColor: "rgba(255, 255, 255, .7)",
-				graphNodeBorderColor: "#e7e7e7",
+				graphNodeColor: "#ffffff",
+				graphNodeBorderColor: "#fff019",
 				graphNodeHoverColor: "rgba(255, 255, 255, .4)",
 				graphNodeBorderHoverColor: "rgba(255, 255, 255, .4)",
 				textEditorBackground: "white",
