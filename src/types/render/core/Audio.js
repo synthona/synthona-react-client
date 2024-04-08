@@ -1,19 +1,19 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { Icon } from "antd";
 // for now these are in-common between nodes
-import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import NodeCardHeader from '../../../components/elements/node/NodeCardHeader';
-import missingFileImage from '../../../resources/missing-file.png';
-import { isElectron } from '../../../utils/environment';
+import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
+import NodeCardHeader from "../../../components/elements/node/NodeCardHeader";
+import missingFileImage from "../../../resources/missing-file.png";
+import { isElectron } from "../../../utils/environment";
 
 const Audio = (props) => {
 	let fileLoadError = false;
 
 	// select a replacement file
 	const selectLocalFile = (e) => {
-		const input = document.createElement('input');
-		input.setAttribute('type', 'file');
+		const input = document.createElement("input");
+		input.setAttribute("type", "file");
 		input.click();
 		// Listen for uploading local file, then save to server
 		input.onchange = async () => {
@@ -77,9 +77,9 @@ const Audio = (props) => {
 						src={props.node.preview}
 						alt={props.node.name}
 						style={{
-							objectFit: 'cover',
-							minHeight: '100%',
-							width: '100%',
+							objectFit: "cover",
+							height: "13.2rem",
+							width: "100%",
 						}}
 					></img>
 				</Fragment>
@@ -87,10 +87,10 @@ const Audio = (props) => {
 		} else {
 			return (
 				<Icon
-					type={'sound'}
-					style={{ color: 'white', backgroundColor: props.theme.cardBodyColor, height: '100%' }}
-					theme='filled'
-					className='node-card-icon'
+					type={"sound"}
+					style={{ color: "white", backgroundColor: props.theme.cardBodyColor, height: "13.2rem" }}
+					theme="filled"
+					className="node-card-icon"
 				/>
 			);
 		}
@@ -98,14 +98,14 @@ const Audio = (props) => {
 
 	const nodeCard = () => {
 		return (
-			<li className='nodelist-item'>
+			<li className="nodelist-item">
 				<NodeCardHeader node={props.node} />
 				<Link
 					to={`/associations/${props.node.uuid}`}
 					onClick={(e) => onClickAction(e)}
 					onContextMenu={(e) => onContextAction(e)}
 					style={{
-						width: '100%',
+						width: "100%",
 						backgroundColor: props.theme.cardBodyColor,
 					}}
 				>
@@ -122,7 +122,7 @@ const Audio = (props) => {
 
 	const fullNode = () => {
 		return (
-			<div className='full-node-item'>
+			<div className="full-node-item">
 				<NodeCardHeaderFull />
 				<Link to={`/associations/${props.node.uuid}`} onClick={(e) => onFullCardAction(e)}>
 					<Fragment>{renderPreview()}</Fragment>
@@ -142,13 +142,13 @@ const Audio = (props) => {
 	// render the requested element
 	const renderNode = () => {
 		switch (props.element) {
-			case 'card':
+			case "card":
 				return <Fragment>{nodeCard()}</Fragment>;
-			case 'preview':
+			case "preview":
 				return <Fragment>{collectionPreview()}</Fragment>;
-			case 'full':
+			case "full":
 				return <Fragment>{fullNode()}</Fragment>;
-			case 'association-link':
+			case "association-link":
 				return <Fragment>{associationLink()}</Fragment>;
 			default:
 				return;

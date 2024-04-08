@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 // for now these are in-common between nodes
-import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import defaultHeader from '../../../resources/cloud9.png';
+import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
+import defaultHeader from "../../../resources/cloud9.png";
 
 const User = (props) => {
 	const nodeCard = () => {
 		return (
-			<li className='nodelist-item'>
+			<li className="nodelist-item">
 				{props.renderHeader()}
 				<Link
 					to={`/profile/${props.node.path}`}
@@ -27,9 +27,9 @@ const User = (props) => {
 						src={props.node.preview || defaultHeader}
 						alt={props.node.name}
 						style={{
-							objectFit: 'cover',
-							minHeight: '100%',
-							width: '100%',
+							objectFit: "cover",
+							height: "13.2rem",
+							width: "100%",
 						}}
 					></img>
 				</Link>
@@ -45,9 +45,9 @@ const User = (props) => {
 					src={props.node.preview || defaultHeader}
 					alt={props.node.name}
 					style={{
-						objectFit: 'cover',
-						minHeight: '100%',
-						width: '100%',
+						objectFit: "cover",
+						minHeight: "100%",
+						width: "100%",
 					}}
 				></img>
 			</Fragment>
@@ -56,7 +56,7 @@ const User = (props) => {
 
 	const fullNode = () => {
 		return (
-			<div className='full-node-item'>
+			<div className="full-node-item">
 				<NodeCardHeaderFull />
 				<Link to={`/profile/${props.node.path}`} /*target='_blank' */>
 					<p>{props.node.name}</p>
@@ -80,13 +80,13 @@ const User = (props) => {
 	// render the requested element
 	const renderNode = () => {
 		switch (props.element) {
-			case 'card':
+			case "card":
 				return <Fragment>{nodeCard()}</Fragment>;
-			case 'preview':
+			case "preview":
 				return <Fragment>{collectionPreview()}</Fragment>;
-			case 'full':
+			case "full":
 				return <Fragment>{fullNode()}</Fragment>;
-			case 'association-link':
+			case "association-link":
 				return <Fragment>{associationLink()}</Fragment>;
 			default:
 				return;
