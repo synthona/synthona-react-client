@@ -1,54 +1,54 @@
 // SPECIAL COMPONENT
 // this is a special component to integrate with redux
 // while also sending & recieving messages from electron
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import ElectronSearch from './ElectronSearch';
-import { showComponent, hideComponent, linkFileNodes } from '../../api/redux/actions';
-import { message, Modal } from 'antd';
-import history from '../../utils/history';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import ElectronSearch from "./ElectronSearch";
+import { showComponent, hideComponent, linkFileNodes } from "../../api/redux/actions";
+import { message, Modal } from "antd";
+import history from "../../utils/history";
 
 // a place to send & recieve messages to & from electron
 class ElectronMessage extends Component {
 	componentDidMount() {
 		// load up window.api.recieve function
 		if (window.api) {
-			window.api.receive('fromMain', async (data) => {
+			window.api.receive("fromMain", async (data) => {
 				var linkedNode;
 
 				switch (data.message) {
-					case 'search':
+					case "search":
 						if (!this.props.electronSearchData) {
-							this.props.showComponent('electronSearch');
+							this.props.showComponent("electronSearch");
 						} else {
-							this.props.hideComponent('electronSearch');
+							this.props.hideComponent("electronSearch");
 						}
 						return;
-					case 'update-available':
+					case "update-available":
 						if (!this.props.updateAvailable) {
-							this.props.showComponent('updateAvailable');
+							this.props.showComponent("updateAvailable");
 						} else {
-							this.props.hideComponent('updateAvailable');
+							this.props.hideComponent("updateAvailable");
 						}
 						return;
-					case 'search-all':
+					case "search-all":
 						// autofocus on the search bar, if it is onscreen & not selected
-						if (document.getElementById('nav-primary-search')) {
+						if (document.getElementById("nav-primary-search")) {
 							window.scrollTo({ top: 0 });
-							document.getElementById('nav-primary-search').select();
+							document.getElementById("nav-primary-search").select();
 						} else {
-							history.push('/');
+							history.push("/");
 							window.scrollTo({ top: 0 });
-							document.getElementById('nav-primary-search').select();
+							document.getElementById("nav-primary-search").select();
 						}
 						return;
-					case 'latest-version':
-						message.success('Synthona Is Up To Date', 2);
+					case "latest-version":
+						message.success("Synthona Is Up To Date", 2);
 						return;
-					case 'load-backend-config':
-						window.localStorage.setItem('backend-config', JSON.stringify(data.config));
+					case "load-backend-config":
+						window.localStorage.setItem("backend-config", JSON.stringify(data.config));
 						return;
-					case 'file-pick-success':
+					case "file-pick-success":
 						if (this.props.activeNode) {
 							linkedNode = JSON.stringify(this.props.activeNode);
 						}
@@ -57,15 +57,17 @@ class ElectronMessage extends Component {
 						let fileList = [];
 						for (let file of data.files) {
 							// in order to get the fileName we have to replace windows backslashes \ with /
-							let simplifiedPath = file.replace(/\\/g, '/');
+							let simplifiedPath = file.replace(/\\/g, "/");
 							// get the filename out of the corrected paths
-							fileName = simplifiedPath.substring(simplifiedPath.lastIndexOf('/') + 1);
+							fileName = simplifiedPath.substring(simplifiedPath.lastIndexOf("/") + 1);
 							// add to the filelist, for the path, use whichever was provided by the system
 							fileList.push({ name: fileName, path: file });
 						}
 						await this.props.linkFileNodes(fileList, linkedNode);
+						// redirect to homepage
+						history.push("/");
 						return;
-					case 'folder-pick-success':
+					case "folder-pick-success":
 						if (this.props.activeNode) {
 							linkedNode = JSON.stringify(this.props.activeNode);
 						}
@@ -74,13 +76,15 @@ class ElectronMessage extends Component {
 						let folderList = [];
 						for (let folder of data.files) {
 							// in order to get the fileName we have to replace windows backslashes \ with /
-							let simplifiedPath = folder.replace(/\\/g, '/');
+							let simplifiedPath = folder.replace(/\\/g, "/");
 							// get the filename out of the corrected paths
-							folderName = simplifiedPath.substring(simplifiedPath.lastIndexOf('/') + 1);
+							folderName = simplifiedPath.substring(simplifiedPath.lastIndexOf("/") + 1);
 							// add to the filelist, for the path, use whichever was provided by the system
 							folderList.push({ name: folderName, path: folder });
 						}
 						await this.props.linkFileNodes(folderList, linkedNode);
+						// redirect to homepage
+						history.push("/");
 						return;
 					default:
 						break;
@@ -99,15 +103,15 @@ class ElectronMessage extends Component {
 		if (this.props.updateAvailable && this.props.updateAvailable.visible) {
 			return (
 				<Modal
-					title={'A New Version Is Available!'}
+					title={"A New Version Is Available!"}
 					visible={true}
-					className='signout-modal'
+					className="signout-modal"
 					centered
-					onOk={(e) => window.open('http://www.synthona.net', '_blank')}
-					okType='primary'
-					okText='Yes!'
+					onOk={(e) => window.open("http://www.synthona.net", "_blank")}
+					okType="primary"
+					okText="Yes!"
 					closable={false}
-					onCancel={() => this.props.hideComponent('updateAvailable')}
+					onCancel={() => this.props.hideComponent("updateAvailable")}
 				>
 					<p>An upgrade for Synthona is available. Do you want to know more?</p>
 				</Modal>
@@ -127,8 +131,8 @@ class ElectronMessage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		electronSearchData: state.components.componentList['electronSearch'],
-		updateAvailable: state.components.componentList['updateAvailable'],
+		electronSearchData: state.components.componentList["electronSearch"],
+		updateAvailable: state.components.componentList["updateAvailable"],
 		activeNode: state.nodes.activeNode,
 	};
 };

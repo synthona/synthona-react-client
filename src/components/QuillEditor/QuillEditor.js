@@ -74,6 +74,7 @@ class CustomLink extends Link {
 		node.setAttribute("href", value);
 		node.removeAttribute("target");
 		node.addEventListener("click", function (e) {
+			document.querySelector(".ql-tooltip").style.visibility = "visible";
 			if (e.shiftKey) {
 				if (value.includes("renderlink")) {
 					renderlink(value);
@@ -84,6 +85,7 @@ class CustomLink extends Link {
 		});
 		node.addEventListener("contextmenu", function (e) {
 			e.preventDefault();
+			document.querySelector(".ql-tooltip").style.visibility = "hidden";
 			if (value.includes("renderlink")) {
 				renderlink(value);
 			} else {
@@ -332,6 +334,20 @@ class QuillEditor extends Component {
 				expand: this.expandHandler,
 				exit: this.exitHandler,
 				image: this.selectLocalImage,
+				link: function (value) {
+					if (value) {
+						// let range = this.quill.getSelection();
+						// if (range == null || range.length == 0) return;
+						// let preview = this.quill.getText(range);
+						// if (/^\S+@\S+\.\S+$/.test(preview) && preview.indexOf("mailto:") !== 0) {
+						// 	preview = "mailto:" + preview;
+						// }
+						// let tooltip = this.quill.theme.tooltip;
+						// tooltip.edit("link", preview);
+					} else {
+						// this.quill.format("link", false);
+					}
+				},
 			},
 		},
 		clipboard: {
