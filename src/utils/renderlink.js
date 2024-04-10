@@ -1,5 +1,5 @@
 import { store } from "../api/instance";
-import { launchFileNode, markNodeView } from "../api/redux/actions";
+import { launchFileNode } from "../api/redux/actions";
 
 export const renderlink = (renderlink) => {
 	let type = renderlink.split("/")[4];
@@ -11,15 +11,12 @@ export const renderlink = (renderlink) => {
 			break;
 		case "file":
 			store.dispatch(launchFileNode(uuid));
-			store.dispatch(markNodeView({ uuid }));
 			break;
 		case "audio":
 			store.dispatch(launchFileNode(uuid));
-			store.dispatch(markNodeView({ uuid }));
 			break;
 		case "folder":
 			store.dispatch(launchFileNode(uuid));
-			store.dispatch(markNodeView({ uuid }));
 			break;
 		case "image":
 			window.location.replace(`/associations/${uuid}`);
