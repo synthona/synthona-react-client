@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "antd";
-// for now these are in-common between nodes
+// custom code
 import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
 import NodeCardHeader from "../../../components/elements/node/NodeCardHeader";
 import missingFileImage from "../../../resources/missing-file.png";
 import { isElectron } from "../../../utils/environment";
 
-const Audio = (props) => {
+const Folder = (props) => {
 	let fileLoadError = false;
 
 	// select a replacement file
@@ -30,7 +30,8 @@ const Audio = (props) => {
 			window.location.replace(`/associations/${props.node.uuid}`);
 		} else if (isElectron()) {
 			e.preventDefault();
-			selectLocalFile(e);
+			props.handleClick();
+			window.location.replace(`/associations/${props.node.uuid}`);
 		} else {
 			e.preventDefault();
 			window.location.replace(`/associations/${props.node.uuid}`);
@@ -78,7 +79,7 @@ const Audio = (props) => {
 						alt={props.node.name}
 						style={{
 							objectFit: "cover",
-							height: "13.2rem",
+							minHeight: "100%",
 							width: "100%",
 						}}
 					></img>
@@ -87,10 +88,14 @@ const Audio = (props) => {
 		} else {
 			return (
 				<Icon
-					type={"sound"}
-					style={{ color: "white", backgroundColor: props.theme.cardBodyColor, height: "13.2rem" }}
-					theme="filled"
-					className="node-card-icon"
+					type={"folder"}
+					style={{
+						color: "white",
+						backgroundColor: props.theme.cardBodyColor,
+						height: "13.2rem",
+					}}
+					theme='filled'
+					className='node-card-icon'
 				/>
 			);
 		}
@@ -98,7 +103,7 @@ const Audio = (props) => {
 
 	const nodeCard = () => {
 		return (
-			<li className="nodelist-item">
+			<li className='nodelist-item'>
 				<NodeCardHeader node={props.node} />
 				<Link
 					to={`/associations/${props.node.uuid}`}
@@ -122,7 +127,7 @@ const Audio = (props) => {
 
 	const fullNode = () => {
 		return (
-			<div className="full-node-item">
+			<div className='full-node-item'>
 				<NodeCardHeaderFull />
 				<Link to={`/associations/${props.node.uuid}`} onClick={(e) => onFullCardAction(e)}>
 					<Fragment>{renderPreview()}</Fragment>
@@ -158,4 +163,4 @@ const Audio = (props) => {
 	return <Fragment>{renderNode()}</Fragment>;
 };
 
-export { Audio };
+export { Folder };

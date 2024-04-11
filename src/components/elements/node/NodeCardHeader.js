@@ -20,7 +20,16 @@ class NodeCardHeader extends Component {
 			return (
 				<h3
 					className='nodelist-item-title'
-					style={{ color: this.props.theme.cardTitleColor }}
+					tabIndex={0}
+					onKeyPress={(e) => {
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							this.setState({ editable: true });
+						}
+					}}
+					style={{
+						color: this.props.theme.cardTitleColor,
+					}}
 					onDoubleClick={(e) => {
 						e.preventDefault();
 						this.setState({ editable: true });
@@ -63,7 +72,6 @@ class NodeCardHeader extends Component {
 	// the jump to top icon is only available when sorting by most recent
 	renderLightbulbIcon = () => {
 		let sortType = localStorage.getItem('sortType');
-		console.log(window.location.href);
 		if (sortType === 'recent' || window.location.href.includes('associations')) {
 			return (
 				<button onClick={(e) => this.props.markNodeView(this.props.node)}>
@@ -102,7 +110,10 @@ class NodeCardHeader extends Component {
 			>
 				{this.renderTitle()}
 				<div className='nodelist-options-buttons' style={{ marginLeft: 'auto' }}>
-					<button onClick={(e) => window.location.replace('/graph/' + this.props.node.uuid)}>
+					<button
+						tabIndex={0}
+						onClick={(e) => window.location.replace('/graph/' + this.props.node.uuid)}
+					>
 						<Icon
 							type={'deployment-unit'}
 							theme='outlined'

@@ -1,28 +1,28 @@
-import React, { Fragment } from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Icon } from "antd";
+import { Link } from "react-router-dom";
 // for now these are in-common between nodes
-import NodeCardHeaderFull from '../../../components/elements/node/NodeCardHeaderFull';
-import missingFileImage from '../../../resources/missing-file.png';
+import NodeCardHeaderFull from "../../../components/elements/node/NodeCardHeaderFull";
+import missingFileImage from "../../../resources/missing-file.png";
 
 const Url = (props) => {
-	const urlIcon = 'bulb';
+	const urlIcon = "bulb";
 
 	const renderFullCardPreview = () => {
 		// if the URL is a youtube embed, lets actually load the video here
-		if (props.node.path.includes('https://www.youtube.com/embed/')) {
+		if (props.node.path.includes("https://www.youtube.com/embed/")) {
 			return (
 				<iframe
 					title={props.node.name}
 					src={props.node.path}
-					style={{ width: '100%', height: '100vh', border: 'none' }}
+					style={{ width: "100%", height: "100vh", border: "none" }}
 					allowFullScreen
 					sandbox={
-						props.node.path.includes('https://www.youtube.com/embed/')
-							? 'allow-scripts allow-same-origin allow-popups'
-							: ''
+						props.node.path.includes("https://www.youtube.com/embed/")
+							? "allow-scripts allow-same-origin allow-popups"
+							: ""
 					}
-					id='node-card-iframe'
+					id="node-card-iframe"
 				></iframe>
 			);
 		}
@@ -31,8 +31,8 @@ const Url = (props) => {
 			return (
 				<a
 					href={props.node.path}
-					target='_blank'
-					rel='noopener noreferrer'
+					target="_blank"
+					rel="noopener noreferrer"
 					// style={{ width: '100%' }}
 				>
 					{renderPreview()}
@@ -48,7 +48,7 @@ const Url = (props) => {
 					src={props.node.preview}
 					alt={props.node.name}
 					style={{
-						objectFit: 'cover',
+						objectFit: "cover",
 						// minHeight: '100%',
 						// width: '100%',
 					}}
@@ -60,14 +60,14 @@ const Url = (props) => {
 				<Icon
 					type={urlIcon}
 					// type={'star'}
-					theme='outlined'
+					theme="outlined"
 					style={{
-						fontSize: '5rem',
-						color: '#b8b8b8',
-						display: 'block',
-						textAlign: 'center',
-						padding: '4.3rem 3.3rem 3.3rem',
-						height: '100%',
+						fontSize: "5rem",
+						color: "#b8b8b8",
+						display: "block",
+						textAlign: "center",
+						padding: "4.3rem 3.3rem 3.3rem",
+						height: "13.2rem",
 						backgroundColor: props.theme.cardBodyColor,
 					}}
 				/>
@@ -77,11 +77,11 @@ const Url = (props) => {
 
 	const nodeCard = () => {
 		return (
-			<li className='nodelist-item'>
+			<li className="nodelist-item">
 				{props.renderHeader()}
 				<a
 					href={`/associations/${props.node.uuid}`}
-					rel='noopener noreferrer'
+					rel="noopener noreferrer"
 					onClick={(e) => {
 						e.preventDefault();
 						props.handleClick();
@@ -89,11 +89,12 @@ const Url = (props) => {
 					}}
 					onContextMenu={(e) => {
 						e.preventDefault();
+						window.getSelection().removeAllRanges();
 						// props.toggleHeader();
-						window.open(props.node.path, '_blank');
+						window.open(props.node.path, "_blank");
 					}}
 					style={{
-						width: '100%',
+						width: "100%",
 						backgroundColor: props.theme.cardBodyColor,
 					}}
 				>
@@ -112,8 +113,8 @@ const Url = (props) => {
 						src={props.node.preview}
 						alt={props.node.name}
 						style={{
-							objectFit: 'cover',
-							width: '100%',
+							objectFit: "cover",
+							width: "100%",
 						}}
 					></img>
 				</Fragment>
@@ -121,17 +122,17 @@ const Url = (props) => {
 		} else {
 			return (
 				<Fragment>
-					<Icon type={urlIcon} theme='outlined' className='node-card-icon' />
+					<Icon type={urlIcon} theme="outlined" className="node-card-icon" />
 				</Fragment>
 			);
 		}
 	};
 
 	const fullNode = () => {
-		let imageScale = JSON.parse(localStorage.getItem('image-sizing')) || 'classic';
-		let imageClass = 'img-' + imageScale.replace(' ', '-');
+		let imageScale = JSON.parse(localStorage.getItem("image-sizing")) || "classic";
+		let imageClass = "img-" + imageScale.replace(" ", "-");
 		return (
-			<div className={'full-node-item ' + imageClass}>
+			<div className={"full-node-item " + imageClass}>
 				<NodeCardHeaderFull />
 				{renderFullCardPreview()}
 				{/* <p>{props.node.comment}</p> */}
@@ -150,13 +151,13 @@ const Url = (props) => {
 	// render the requested element
 	const renderNode = () => {
 		switch (props.element) {
-			case 'card':
+			case "card":
 				return <Fragment>{nodeCard()}</Fragment>;
-			case 'preview':
+			case "preview":
 				return <Fragment>{collectionPreview()}</Fragment>;
-			case 'full':
+			case "full":
 				return <Fragment>{fullNode()}</Fragment>;
-			case 'association-link':
+			case "association-link":
 				return <Fragment>{associationLink()}</Fragment>;
 			default:
 				return;

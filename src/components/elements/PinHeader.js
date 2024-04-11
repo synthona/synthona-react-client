@@ -7,7 +7,6 @@ import './css/IOBar.less';
 import {
 	signOut,
 	createUrlNode,
-	createNode,
 	searchNodes,
 	showComponent,
 	hideComponent,
@@ -113,7 +112,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
 	signOut,
 	searchNodes,
-	createNode,
 	createUrlNode,
 	showComponent,
 	hideComponent,

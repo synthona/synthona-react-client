@@ -10,6 +10,8 @@ import { message } from 'antd';
 
 // fetch a list of nodes
 export const fetchGraphData = (query) => async (dispatch) => {
+	let linkMode = JSON.parse(localStorage.getItem('link-mode'));
+	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
 	let graphRenderLimit = JSON.parse(localStorage.getItem('graph-render-limit'));
 	// default to 100 if there's no value
 	if (!graphRenderLimit) {
@@ -24,6 +26,7 @@ export const fetchGraphData = (query) => async (dispatch) => {
 				type: query.type,
 				searchQuery: query.searchQuery,
 				graphRenderLimit: graphRenderLimit,
+				bidirectional,
 			},
 		});
 		dispatch({ type: FETCH_GRAPH_DATA_SUCCESS, payload: response.data, query });

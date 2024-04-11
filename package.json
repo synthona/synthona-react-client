@@ -1,6 +1,6 @@
 {
 	"name": "synthona-react-client",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"private": true,
 	"license": "MIT",
 	"dependencies": {
@@ -27,8 +27,8 @@
 		"yup": "^0.27.0"
 	},
 	"scripts": {
-		"start": "react-app-rewired start",
-		"build": "react-app-rewired build",
+		"start": "NODE_OPTIONS=--openssl-legacy-provider PORT=3077 REACT_APP_SERVER_PORT=4000 react-app-rewired start",
+		"build": "NODE_OPTIONS=--openssl-legacy-provider react-app-rewired build",
 		"test": "react-app-rewired test",
 		"eject": "react-scripts eject"
 	},

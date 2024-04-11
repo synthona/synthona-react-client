@@ -1,5 +1,5 @@
-import { SHOW_COMPONENT, HIDE_COMPONENT, LOAD_THEME } from './types';
-import { setupTheme } from '../../../utils/theme';
+import { SHOW_COMPONENT, HIDE_COMPONENT, LOAD_THEME } from "./types";
+import { setupTheme, setupEditorTheme } from "../../../utils/theme";
 
 export const showComponent = (type, content) => {
 	return {
@@ -21,12 +21,13 @@ export const hideComponent = (type) => {
 };
 
 export const loadTheme = () => {
-	console.log('load theme called');
 	let theme = setupTheme();
+	let editorTheme = setupEditorTheme();
 	return {
 		type: LOAD_THEME,
 		payload: {
 			theme,
+			editorTheme,
 		},
 	};
 };

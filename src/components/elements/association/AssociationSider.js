@@ -6,7 +6,6 @@ import {
 	signOut,
 	hideComponent,
 	createAssociation,
-	fetchAssociationLinkList,
 	associationAutocomplete,
 } from '../../../api/redux/actions';
 // custom code
@@ -103,7 +102,7 @@ class AssociationSider extends Component {
 							style={{
 								width: 200,
 							}}
-							placeholder='link'
+							placeholder='associate'
 							value={this.state.inputText}
 							onSearch={(value) => this.renderAutocompleteValues(value)}
 							onFocus={(value) => this.renderAutocompleteValues(value)}
@@ -135,6 +134,5 @@ export default connect(mapStateToProps, {
 	signOut,
 	hideComponent,
 	createAssociation,
-	fetchAssociationLinkList,
 	associationAutocomplete,
 })(AssociationSider);

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 // custom code
-import '../node/NodeList.less';
-import { fetchAssociationLinkList } from '../../../api/redux/actions';
+import "../node/NodeList.less";
+import { fetchAssociationLinkList } from "../../../api/redux/actions";
 // import NodeCard from './NodeCard';
-import Spinner from '../Spinner';
-import AssociationLink from './AssociationLink';
+import Spinner from "../Spinner";
+import AssociationLink from "./AssociationLink";
 
 class AssociationLinkList extends Component {
 	componentDidMount() {
@@ -23,7 +23,7 @@ class AssociationLinkList extends Component {
 		// go through the list of nodes and render them to the page
 		const list = this.props.associations;
 		if (this.props.isFetching) {
-			return <Spinner alignment='top'></Spinner>;
+			return <Spinner alignment="top"></Spinner>;
 		}
 		// if list exists render the links
 		if (list !== null) {
@@ -40,13 +40,13 @@ class AssociationLinkList extends Component {
 		// if the total items is more than what is loaded show the load more button
 		if (this.props.totalItems > listLength) {
 			return (
-				<li style={{ listStyle: 'none', marginTop: '0.5rem', textAlign: 'center' }}>
+				<li style={{ listStyle: "none", marginTop: "0.5rem", textAlign: "center" }}>
 					<button
 						style={{
-							margin: '1rem 0',
-							width: '90%',
-							backgroundColor: '#272727',
-							color: '#16e998',
+							margin: "1rem 0",
+							width: "90%",
+							backgroundColor: "#272727",
+							color: "#16e998",
 						}}
 						onClick={this.loadMore}
 					>
@@ -59,7 +59,7 @@ class AssociationLinkList extends Component {
 
 	render() {
 		return (
-			<ul id='node-info-list' className='association-list'>
+			<ul id="node-info-list" className="association-list">
 				{this.renderAssociationLinkList()}
 				{this.renderLoadMoreButton()}
 			</ul>

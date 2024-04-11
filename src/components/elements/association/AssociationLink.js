@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
 	hideComponent,
 	deleteAssociationLink,
 	removeFromAssociationList,
 	updateLinkStrength,
-} from '../../../api/redux/actions';
-import { Button, Tooltip } from 'antd';
-import './AssociationLinkList.less';
+} from "../../../api/redux/actions";
+import { Button, Tooltip } from "antd";
+import "./AssociationLinkList.less";
 // node renderer
-import NodeRenderer from '../../../types/render/NodeRenderer';
+import NodeRenderer from "../../../types/render/NodeRenderer";
 
 class AssociationLink extends Component {
 	handleDeleteAssociation = () => {
 		// sider node is the the node the sider was opened from
 		var siderNodeUUID = this.props.siderNodeUUID;
 		// linked node is the node from the list, to be un-linked, un-associated
-		var linkedNodeUUID = this.props.association.uuid;
+		var linkedNodeUUID = this.props.association.uuid
+			? this.props.association.uuid
+			: this.props.association.linkedNodeUUID;
 		// active node is only set when viewing an /association page, the node of the page itself
 		if (this.props.activeNode) {
 			// store the active node
@@ -29,11 +31,18 @@ class AssociationLink extends Component {
 			var pathname = window.location.pathname;
 			// handle removal from association list page if on association page if an associated node was removed
 			if (
-				(pathname.includes('associations') || pathname.includes('/edit/text/')) &&
+				(pathname.includes("associations") || pathname.includes("/edit/text/")) &&
 				activeNodeUUID &&
 				activeNodeUUID === siderNodeUUID
 			) {
 				this.props.removeFromAssociationList(linkedNodeUUID);
+			} else if (
+				(pathname.includes("associations") || pathname.includes("/edit/text/")) &&
+				activeNodeUUID &&
+				activeNodeUUID === linkedNodeUUID
+			) {
+				this.props.removeFromAssociationList(siderNodeUUID);
+				this.props.hideComponent("associationSider");
 			}
 		}
 	};
@@ -41,17 +50,17 @@ class AssociationLink extends Component {
 	// render card types
 	renderAssociationLink = (association) => {
 		return (
-			<li className='association-list-item'>
+			<li className="association-list-item">
 				<Tooltip title={association.name} mouseLeaveDelay={0} mouseEnterDelay={0.3}>
 					<Button
-						icon='close'
-						shape='circle'
-						size='small'
+						icon="close"
+						shape="circle"
+						size="small"
 						onClick={(e) => this.handleDeleteAssociation()}
 					/>
 					<NodeRenderer
 						type={association.type}
-						element={'association-link'}
+						element={"association-link"}
 						node={association}
 						siderNodeUUID={this.props.siderNodeUUID}
 					></NodeRenderer>
@@ -67,7 +76,7 @@ class AssociationLink extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		siderNodeUUID: state.components.componentList['associationSider'].content.uuid,
+		siderNodeUUID: state.components.componentList["associationSider"].content.uuid,
 		activeNode: state.nodes.activeNode,
 	};
 };

@@ -23,10 +23,12 @@ export const generateInstanceExport = () => async (dispatch) => {
 
 // generate export based on a node
 export const generateExportByUUID = (uuid) => async (dispatch) => {
+	let linkMode = JSON.parse(localStorage.getItem('link-mode'));
+	let bidirectional = linkMode === 'bidirectional' ? 'yes' : 'no';
 	message.success('generating export!', 2);
 	try {
 		dispatch({ type: GENERATE_EXPORT });
-		const response = await instance.put('/port/export/', { uuid });
+		const response = await instance.put('/port/export/', { uuid, bidirectional });
 		if (response.status === 200) {
 			dispatch({ type: GENERATE_EXPORT_SUCCESS, payload: response.data });
 			// redirect

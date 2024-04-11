@@ -20,7 +20,10 @@ import {
 	SET_ACTIVE_NODE,
 	SET_ACTIVE_NODE_ERROR,
 	SET_ACTIVE_NODE_SUCCESS,
-} from '../actions/types';
+	CONTEXTUAL_CREATE_NODE,
+	CONTEXTUAL_CREATE_NODE_ERROR,
+	CONTEXTUAL_CREATE_NODE_SUCCESS,
+} from "../actions/types";
 
 const INITIAL_STATE = {
 	isFetching: null,
@@ -88,10 +91,10 @@ export default (state = INITIAL_STATE, action) => {
 		case CREATE_ASSOCIATION_SUCCESS:
 			var associatedNode;
 			// check whichever is the associated node to the list
-			if (action.nodeUUID && action.nodes.associated.uuid === action.nodeUUID) {
-				associatedNode = action.nodes.original;
+			if (action.nodeUUID && action.linkedNode.uuid === action.nodeUUID) {
+				associatedNode = action.node;
 			} else {
-				associatedNode = action.nodes.associated;
+				associatedNode = action.linkedNode;
 			}
 			// only add the node to the association list if one of the nodes is the activeNode
 			if (state.activeNode && action.nodeUUID === state.activeNode.uuid) {
@@ -108,6 +111,26 @@ export default (state = INITIAL_STATE, action) => {
 			};
 		case CREATE_ASSOCIATION_ERROR:
 			return { ...state, isSaving: null };
+		case CONTEXTUAL_CREATE_NODE:
+			return { ...state, isSaving: true };
+		case CONTEXTUAL_CREATE_NODE_ERROR:
+			return { ...state, isSaving: null };
+		case CONTEXTUAL_CREATE_NODE_SUCCESS:
+			// add new node to list and move to front of node order
+			return {
+				...state,
+				isFetching: null,
+				associationList: [
+					action.node,
+					...state.associationList.filter(
+						(association) =>
+							association.nodeUUID !== action.node.uuid &&
+							association.linkedNodeUUID !== action.node.uuid &&
+							association.uuid !== action.node.uuid
+					),
+				],
+				totalAssociationListItems: state.totalAssociationListItems + 1,
+			};
 		case MARK_NODE_VIEW:
 			return { ...state, isSaving: true };
 		case MARK_NODE_VIEW_SUCCESS:

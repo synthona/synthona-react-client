@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 // custom code
-import { fetchNodes, loadTheme } from '../../../api/redux/actions';
-import OptionListItem from './OptionListItem';
-import { isElectron } from '../../../utils/environment';
-import { Modal } from 'antd';
-import { backendConfigMap, backendConfigFilter, loadClientConfig } from '../../../utils/config.js';
+import { fetchNodes, loadTheme } from "../../../api/redux/actions";
+import OptionListItem from "./OptionListItem";
+import { isElectron } from "../../../utils/environment";
+import { Modal } from "antd";
+import { backendConfigMap, backendConfigFilter, loadClientConfig } from "../../../utils/config.js";
 
 class OptionsList extends Component {
 	constructor(props) {
@@ -27,7 +27,7 @@ class OptionsList extends Component {
 		if (isElectron) {
 			// load backend config
 			this.setState({
-				backendConfig: isElectron ? JSON.parse(localStorage.getItem('backend-config')) : null,
+				backendConfig: isElectron ? JSON.parse(localStorage.getItem("backend-config")) : null,
 			});
 		}
 	};
@@ -35,7 +35,7 @@ class OptionsList extends Component {
 	componentDidMount() {
 		// reload backend config
 		if (window.api) {
-			window.api.send('toMain', { action: 'get-backend-config' });
+			window.api.send("toMain", { action: "get-backend-config" });
 		}
 		// load everything else
 		this.loadOptions();
@@ -52,7 +52,7 @@ class OptionsList extends Component {
 				item.value = newValue;
 				// copy it to localstorage as well
 				localStorage.setItem(keyName, JSON.stringify(newValue));
-				if (keyName === 'theme') {
+				if (keyName === "theme") {
 					// if we set the theme we should reload it in our redux state
 					this.props.loadTheme();
 				}
@@ -71,11 +71,11 @@ class OptionsList extends Component {
 		};
 		this.setState({ backendConfig: newConfig, showRestartModal: true });
 		// update the values in local storage
-		window.localStorage.setItem('backend-config', JSON.stringify(newConfig));
+		window.localStorage.setItem("backend-config", JSON.stringify(newConfig));
 		// we also need to send the updated version to the backend app
 		if (window.api) {
-			window.api.send('toMain', {
-				action: 'update-backend-config',
+			window.api.send("toMain", {
+				action: "update-backend-config",
 				updates: newConfig,
 			});
 		}
@@ -83,8 +83,8 @@ class OptionsList extends Component {
 
 	restartHandler = () => {
 		if (window.api) {
-			window.api.send('toMain', {
-				action: 'restart-app',
+			window.api.send("toMain", {
+				action: "restart-app",
 			});
 		}
 	};
@@ -106,6 +106,7 @@ class OptionsList extends Component {
 								keyName={backendKey}
 								type={backendConfigMap[backendKey].type}
 								name={backendConfigMap[backendKey].name}
+								optionObject={backendConfigMap[backendKey]}
 								value={backendConfig[backendKey]}
 								onChange={this.updateBackendConfigValue}
 							/>
@@ -115,7 +116,7 @@ class OptionsList extends Component {
 			}
 			// add client config values
 			for (var clientKey in clientConfig) {
-				if (clientKey !== 'CONFIG_VERSION') {
+				if (clientKey !== "CONFIG_VERSION") {
 					configList.push(
 						<OptionListItem
 							key={clientConfig[clientKey].name}
@@ -135,20 +136,20 @@ class OptionsList extends Component {
 
 	render() {
 		return (
-			<div className='options-list-container'>
-				<ul className='options-list' style={{ padding: 0, margin: 0 }}>
+			<div className="options-list-container">
+				<ul className="options-list" style={{ padding: 0, margin: 0 }}>
 					{this.renderOptionsList()}
 				</ul>
 				<Modal
-					title='Restart Required'
+					title="Restart Required"
 					visible={this.state.showRestartModal}
-					className='delete-modal'
+					className="delete-modal"
 					centered
 					onOk={this.restartHandler}
-					afterClose={() => document.body.style.removeProperty('overflow')}
-					okType='danger'
-					okText='Restart'
-					cancelText='Wait'
+					afterClose={() => document.body.style.removeProperty("overflow")}
+					okType="danger"
+					okText="Restart"
+					cancelText="Wait"
 					closable={false}
 					onCancel={() => this.setState({ showRestartModal: false })}
 				>

@@ -39,7 +39,7 @@ import {
 	GENERATE_EXPORT,
 	GENERATE_EXPORT_ERROR,
 	GENERATE_EXPORT_SUCCESS,
-} from '../actions/types';
+} from "../actions/types";
 
 const INITIAL_STATE = {
 	isFetching: null,
@@ -49,8 +49,8 @@ const INITIAL_STATE = {
 	totalItems: null,
 	query: {
 		page: 1,
-		sortOrder: localStorage.getItem('sortOrder') || 'DESC',
-		sortType: localStorage.getItem('sortType') || 'recent',
+		sortOrder: localStorage.getItem("sortOrder") || "DESC",
+		sortType: localStorage.getItem("sortType") || "recent",
 	},
 	activeNode: null,
 };
