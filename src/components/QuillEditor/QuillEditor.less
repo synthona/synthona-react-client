@@ -131,9 +131,13 @@ div.quill {
   ::selection {
     background: #ffb7b7; /* WebKit/Blink Browsers */
   }
+  
+  li {
+    line-break: anywhere;
+  }
 
   li::before {
-    display: inline;
+    display: inline-block;
   }
 }
 
