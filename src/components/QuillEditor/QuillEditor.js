@@ -569,8 +569,6 @@ class QuillEditor extends Component {
 										scroll: window.scrollY,
 									})
 								);
-							} else {
-								window.scrollBy({ top: 20 });
 							}
 						}}
 						onBlur={() => {
