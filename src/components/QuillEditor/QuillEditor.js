@@ -211,7 +211,6 @@ class QuillEditor extends Component {
 			this.setState({ expanded: null });
 			localStorage.removeItem("expanded");
 		}
-		this.quill.getEditor().disable();
 	};
 
 	// exit the editor and return to the home screen
